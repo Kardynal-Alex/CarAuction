@@ -1,0 +1,175 @@
+* {
+    box-sizing: border-box;
+    outline:none;
+  }
+
+  .container {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .lot a {
+    text-decoration: none;
+    align-items: center;
+  }
+
+  .star,
+  .unstar {
+    position: static;
+    cursor: pointer;
+    background: black;
+    font-size: 25px;
+    border-radius: 50%;
+    padding: 1px 6px 2px 5px;
+    transition: transform .2s;
+  }  
+
+  .star {
+    color: yellow;
+  }
+  
+  .unstar {
+    color: white;
+  }
+  
+  .star a:hover,
+  .unstar a:hover {
+    opacity:1;
+  }
+  
+  .star:hover,
+  .unstar:hover {
+    transform: scale(1.5);
+  }
+
+  .lot {
+      width: 60%;
+      float: left;
+  }
+
+  h3 {
+      height: 10px;
+      font-weight: 600;
+      font-size: 26px;
+  }
+
+  h4 {
+      font-size: 16px;
+  }
+
+  .lot img {
+      width: 70%;
+      height: 600px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+  }
+
+  .flex-images {
+    display: flex;
+    flex-direction: column;
+    float: right;
+    width: 30%;
+  }
+
+  .flex-images img {
+    width: 300px;
+    height: 200px;
+    flex-direction: column;
+  }
+
+  .bid {
+      width: 98%;
+  }
+  
+  .show-more {
+    position: relative;
+  }
+
+  .show-more .back {
+    width: 91%;
+    height: 102%;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.7); 
+    position: absolute;
+    bottom: 0; 
+    border-radius: 20px;
+  }
+
+  .show-more .text {
+    font-size: 30px;
+    text-decoration: underline;
+    position: absolute;
+    text-align: center;
+    float: left;
+    font-weight: 600;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+
+  .show-more .text a:hover {
+    opacity: 1;
+  }
+
+  .bid p {
+      background-color: #262626;
+      border-radius: 20px;
+      width: auto;
+      font-size: 25px;
+      padding: 5px 12px;
+      float: left;
+      color: white;
+  }
+
+  .timer {
+    font-size: 30px;
+    background-color: black;
+  }
+  
+  .timer p {
+    height: auto;
+    font-size: 25px;
+    color: white;
+  }
+
+  .info{
+      background-color: #262626;
+      border-radius: 20px;
+      margin-top: 110px;
+      width: 98%;
+  }
+
+  .info p{
+    font-size: 25px;
+    padding: 5px 12px;
+    color: white;
+    text-align: center;
+  }
+
+  .bid button{
+      float: right;
+      font-size: 25px;
+      border-radius: 20px;
+      margin-top: 27px;
+      padding: 3px 14px;
+      background-color: green;
+      color: white;
+  }
+
+  button:hover, a:hover {
+    opacity: 0.7;
+  }
+
+.isSold button {
+  background: grey;
+}
+
+.images a {
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: underline;
+  position: absolute;
+  margin-left: 10px;
+  margin-top: 10px;
+}

@@ -1,0 +1,52 @@
+<div id="register-form" class="register">
+    <div class="register-content animate">
+        <form method="post" #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+            <div>
+                <span onclick="document.getElementById('register-form').style.display='none'" class="close" title="Close Modal">&times;</span>
+            </div>
+            <div class="container">
+                <p>Sign up</p>
+                <input type="hidden" id="role" name="role" value="user" ngModel>
+                <div>
+                    <input type="text" placeholder="Enter Email" id="email" name="email" ngModel #Email="ngModel" required email>
+                    <div class="error" *ngIf="Email.errors?.required && Email.touched">Required field</div>
+                    <div class="error" *ngIf="Email.errors?.email && Email.touched">Invalid email</div>
+                </div>
+                <div>
+                    <input type="password" placeholder="Enter Password" id="password" name="password"  
+                    pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
+                    minlength="6" #Password="ngModel" ngModel required>
+                    <div class="error" *ngIf="Password.errors?.required && Password.touched">Required field</div>
+                    <div class="error" *ngIf="Password.errors?.minlength && Password.touched">Min length 6</div>
+                    <div class="error" *ngIf="Password.errors?.pattern && Password.touched">At least one letter and one number</div>
+                </div>
+                <div>
+                    <input type="text" placeholder="Enter Name" id="name" name="name" ngModel
+                     required #Name="ngModel" pattern="[a-zA-Z]*">
+                     <div class="error" *ngIf="Name.errors?.required && Name.touched">Required field</div>
+                     <div class="error" *ngIf="Name.errors?.pattern && Name.touched">Only letters</div>
+                </div>
+                <div>
+                    <input type="text" placeholder="Enter Surname" id="surname" name="surname" 
+                    ngModel #Surname="ngModel" required pattern="[a-zA-Z]*">
+                    <div class="error" *ngIf="Surname.errors?.required && Surname.touched">Required field</div>
+                    <div class="error" *ngIf="Surname.errors?.pattern && Surname.touched">Only letters</div>
+                </div>
+                <button type="submit" [disabled]="Email.invalid || Password.invalid || 
+                Name.invalid || Surname.invalid">Register</button>
+            </div>
+        </form>
+        <div class="login-btn">
+            <p>Already have an account? <button (click)="showLoginForm()" class="underline"><p>Sign in here</p></button></p>
+        </div>
+    </div>
+  </div>
+
+<script>
+    var register = document.getElementById('register-form');
+    window.onclick = function(event) {
+        if (event.target == register) {
+            register.style.display = "none";
+        }
+    }
+</script>

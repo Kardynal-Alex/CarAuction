@@ -1,0 +1,14 @@
+<div class="lots">
+    <div class="text-line"><p>Sold lots</p></div>
+    <hr>
+    <div *ngFor="let lot of lots">
+        <div class="card">   
+            <img [src]="createImgPath(lot.image)" alt="profile picture">
+            <div class="main-block">    
+                <h1>{{lot.nameLot}}</h1>
+                <p class="title">{{lot.description}}</p>
+            </div>
+            <p><button routerLink="/lot/{{lot.id}}" >Sold for  {{lot.currentPrice | currency}}</button></p>
+          </div>
+    </div>
+</div>

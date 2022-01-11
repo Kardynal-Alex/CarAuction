@@ -1,0 +1,12 @@
+D:\EpamProject\FinalProject\Auction.DAL\bin\Debug\netcoreapp3.1\Auction.DAL.deps.json
+D:\EpamProject\FinalProject\Auction.DAL\bin\Debug\netcoreapp3.1\Auction.DAL.runtimeconfig.json
+D:\EpamProject\FinalProject\Auction.DAL\bin\Debug\netcoreapp3.1\Auction.DAL.runtimeconfig.dev.json
+D:\EpamProject\FinalProject\Auction.DAL\bin\Debug\netcoreapp3.1\Auction.DAL.dll
+D:\EpamProject\FinalProject\Auction.DAL\bin\Debug\netcoreapp3.1\Auction.DAL.pdb
+D:\EpamProject\FinalProject\Auction.DAL\obj\Debug\netcoreapp3.1\Auction.DAL.AssemblyInfoInputs.cache
+D:\EpamProject\FinalProject\Auction.DAL\obj\Debug\netcoreapp3.1\Auction.DAL.AssemblyInfo.cs
+D:\EpamProject\FinalProject\Auction.DAL\obj\Debug\netcoreapp3.1\Auction.DAL.csproj.CoreCompileInputs.cache
+D:\EpamProject\FinalProject\Auction.DAL\obj\Debug\netcoreapp3.1\Auction.DAL.dll
+D:\EpamProject\FinalProject\Auction.DAL\obj\Debug\netcoreapp3.1\Auction.DAL.pdb
+D:\EpamProject\FinalProject\Auction.DAL\obj\Debug\netcoreapp3.1\Auction.DAL.genruntimeconfig.cache
+D:\EpamProject\FinalProject\Auction.DAL\obj\Debug\netcoreapp3.1\Auction.DAL.GeneratedMSBuildEditorConfig.editorconfig

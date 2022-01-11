@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="list">
+    <div class="head-text">
+        <p>Admin pannel</p>
+    </div>
+    <hr>
+    <table>
+        <tr>
+            <th></th>
+            <th>FirstName</th>
+            <th>LastName</th> 
+            <th>Email</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let user of users; let i=index">
+            <th>{{(i+1)}}</th>
+            <td>{{user.name}}</td>
+            <td>{{user.surname}}</td>
+            <td>{{user.email}}</td>
+            <td><button (click)="deleteUser(user.id)"><i class="fa fa-trash"></i></button></td>
+        </tr>
+    </table>
+</div>

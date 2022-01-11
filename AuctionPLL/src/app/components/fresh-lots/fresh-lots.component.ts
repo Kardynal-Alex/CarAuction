@@ -1,0 +1,36 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
+import { Lot } from 'src/app/models/lot';
+import { LotService } from 'src/app/services/lot.service';
+
+@Component({
+  selector: 'app-fresh-lots',
+  templateUrl: './fresh-lots.component.html',
+  styleUrls: ['./fresh-lots.component.css']
+})
+export class FreshLotsComponent implements OnInit {
+
+  constructor(private lotService:LotService,
+              private router:Router) { }
+  @Input() lot:Lot;
+  lots:Lot[];
+  ngOnInit(){
+   this.getFreshLots(); 
+  }
+
+  getFreshLots(){
+    this.lotService.getFreshLots().pipe(tap(lots=>this.lots=lots)).subscribe();
+  }
+
+  public createImgPath(serverPath: string){
+    return this.lotService.createImgPath(serverPath);
+  }
+
+  redirectToNewLot(id:number){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/lot/'+id]);
+  }
+
+}

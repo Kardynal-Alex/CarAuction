@@ -1,0 +1,34 @@
+<div class="lots" *ngIf="lots.length>0; else empty">
+    <div *ngFor="let lot of lots">
+       <div class="card">
+            <img [src]="createImgPath(lot.image)" alt="profile picture">
+            <div class="timer">  
+                <p id="demo-{{lot.id}}"></p>
+              </div>
+            <div class="main-block">    
+                <h1>{{lot.nameLot}}</h1>
+                <p class="title">{{lot.description}}</p>
+            </div>
+            <div class="black">
+                <button routerLink="/userlots/updatelot/{{lot.id}}" *ngIf="!lot.isSold" >Update</button>
+                <button *ngIf="lot.isSold" >Is Sold</button>
+            </div>
+            <div class="delete">
+                <button (click)="deleteLot(lot.id)">Delete</button>
+            </div>
+            <div class="sold">
+                <button *ngIf="!lot.isSold" (click)="endBid(lot)" [disabled]="lot.startPrice===lot.currentPrice">
+                    End Bid {{lot.currentPrice | currency}}
+                </button>
+                <button *ngIf="lot.isSold">Sold for  {{lot.currentPrice | currency}}</button>
+                <button>Start price  {{lot.startPrice | currency}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #empty>
+    <div class="empty">
+        <p>Empty</p>
+    </div>
+</ng-template>

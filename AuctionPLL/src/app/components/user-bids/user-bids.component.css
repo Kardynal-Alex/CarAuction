@@ -1,0 +1,93 @@
+
+
+.container {
+    width:  60%;
+    margin: 100px auto;
+}
+
+.text-line {
+    font-size: 28px;
+    font-weight: 600;
+    text-align: left;
+    height: 30px;
+}
+
+hr{
+    border: none; 
+    background-color: black; 
+    color: black;
+    height: 4px; 
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    text-align: center;
+    width: 33.3%;
+    float: left;
+    border-radius: 20px;
+    height: 400px;
+    max-height: 400px;
+    overflow: hidden;
+    margin: 12px 15px;
+  }
+
+  .card h1{
+      font-size: 18px;
+  }
+
+  .card img {
+    width:100%;
+    max-height: 200px;
+    min-height: 200px;
+  }
+  
+  .title {
+    color: black;
+    font-size: 15px;
+    position: relative;
+  }
+  
+  button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 20px;
+    height: auto;
+    margin-top: 65px;
+  }
+  
+  .main-block {
+      height: 80px;
+  }
+
+  a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+  }
+  
+  button:hover, a:hover {
+    opacity: 0.7;
+  }
+
+  
+  .card::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+.red {
+    background-color: red;
+}
+
+.green {
+    background-color: green;
+}

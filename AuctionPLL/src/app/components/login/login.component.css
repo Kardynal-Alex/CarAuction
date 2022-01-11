@@ -1,0 +1,169 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    outline:none;
+  }
+.login {
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.login-btn button {
+    background-color: black;
+    border-radius: 30px;
+    width: auto;
+    padding: 0 30px;
+    height: 50px;
+    border:none;
+    color: white;
+    font-size: 30px;
+    float: right;
+    margin-right: 10%;
+    height: 60px;
+}
+
+.login input[type=text], input[type=password] {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px auto;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 30px;
+  font-size: 18px;
+}
+
+.login button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 80%;
+  font-size: 18px;
+  border-radius: 30px;
+}
+
+.login button:hover {
+  opacity: 0.8;
+  border-radius: 30px;
+}
+
+.login .container {
+  padding: 40px;
+  margin-top: 5%;
+}
+
+.login {
+  display: none; 
+  position: fixed; 
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+  padding-top: 60px;
+}
+
+.login-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; 
+  border: 1px solid #888;
+  width: 30%; 
+  border-radius: 40px;
+}
+
+.login .close {
+  position: relative;
+  float: right;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+  margin-top: -3%;
+  margin-right: 25px;
+}
+
+.login .close:hover,
+.login .close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+.login .animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+.regis-btn {
+    margin-top: -60px;
+    padding-top: 0;
+}
+
+.regis-btn button{
+    width: auto;
+    background: none;
+    color: black;
+    height: 70px;
+}
+
+.regis-btn button:hover{
+    width: auto;
+    background: none;
+    color: black;
+}
+
+.container p {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+.regis-btn p {
+  font-size: 18px;
+  margin-top: 25px;
+}
+
+.regis-btn .underline p{
+  text-decoration: underline;
+  font-size: 18px;
+}
+
+.error {
+    background-color: #04AA6D;
+    color: white;
+    font-weight: 600;
+    float: left;
+    width: 80%;
+    margin: 0 10%;
+    border-radius: 20px;
+    font-size: 18px;
+    text-align: center;
+}

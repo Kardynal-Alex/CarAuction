@@ -1,0 +1,13 @@
+D:\EpamProject\FinalProject\PDFGenerator\bin\Debug\netcoreapp3.1\PDFGenerator.deps.json
+D:\EpamProject\FinalProject\PDFGenerator\bin\Debug\netcoreapp3.1\PDFGenerator.dll
+D:\EpamProject\FinalProject\PDFGenerator\bin\Debug\netcoreapp3.1\PDFGenerator.pdb
+D:\EpamProject\FinalProject\PDFGenerator\bin\Debug\netcoreapp3.1\Auction.DAL.dll
+D:\EpamProject\FinalProject\PDFGenerator\bin\Debug\netcoreapp3.1\Auction.DAL.pdb
+D:\EpamProject\FinalProject\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.AssemblyInfoInputs.cache
+D:\EpamProject\FinalProject\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.AssemblyInfo.cs
+D:\EpamProject\FinalProject\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.csproj.CoreCompileInputs.cache
+D:\EpamProject\FinalProject\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.csproj.CopyComplete
+D:\EpamProject\FinalProject\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.dll
+D:\EpamProject\FinalProject\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.pdb
+D:\EpamProject\FinalProject\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.csproj.AssemblyReference.cache
+D:\EpamProject\FinalProject\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.GeneratedMSBuildEditorConfig.editorconfig
