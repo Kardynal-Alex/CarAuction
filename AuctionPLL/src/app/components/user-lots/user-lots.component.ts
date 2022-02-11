@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Lot } from 'src/app/models/lot';
 import { LotService } from 'src/app/services/lot.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { ConfirmationDialogService } from 'src/app/common/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-user-lots',
@@ -14,7 +15,9 @@ export class UserLotsComponent implements OnInit, OnDestroy {
   constructor(
     private toastrService: ToastrService,
     private lotService: LotService,
-    private localStorage: LocalStorageService) { }
+    private localStorage: LocalStorageService,
+    private confirmationDialogService: ConfirmationDialogService
+  ) { }
 
   public getUserId(): string {
     var payload = JSON.parse(window.atob(this.localStorage.get('token').split('.')[1]));
@@ -43,31 +46,39 @@ export class UserLotsComponent implements OnInit, OnDestroy {
   }
 
   public deleteLot(id: number) {
-    if (confirm("Are you sure?")) {
-      this.lotService.deleteLotById(id)
-        .subscribe(_ => {
-          this.lots = this.lots.filter(x => x['id'] != id);
-          clearInterval(this.str[id]);
-          this.toastrService.success("Lot is deleted!");
-        }, _ => {
-          this.toastrService.error("Something went wrong!");
-        });
-    }
+    this.confirmationDialogService.confirm('Please confirm', 'Do you really want to ... ?')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.lotService.deleteLotById(id)
+            .subscribe(_ => {
+              this.lots = this.lots.filter(x => x['id'] != id);
+              clearInterval(this.str[id]);
+              this.toastrService.success("Lot is deleted!");
+            }, _ => {
+              this.toastrService.error("Something went wrong!");
+            });
+        }
+      })
+      .catch();
   }
 
   public endBid(lotEnd: Lot) {
-    if (confirm("Are you sure?")) {
-      lotEnd.IsSold = true;
-      this.lotService.updateLot(lotEnd)
-        .subscribe(_ => {
-          lotEnd['isSold'] = true;
-          clearInterval(this.str[lotEnd['id']]);
-          document.getElementById('demo-' + lotEnd['id']).innerHTML = "Expired";
-          this.toastrService.success("Lot is closed!");
-        }, _ => {
-          this.toastrService.error("Something went wrong!");
-        });
-    }
+    this.confirmationDialogService.confirm('Please confirm', 'Do you really want to ... ?')
+      .then((confirmed) => {
+        if (confirmed) {
+          lotEnd.IsSold = true;
+          this.lotService.updateLot(lotEnd)
+            .subscribe(_ => {
+              lotEnd['isSold'] = true;
+              clearInterval(this.str[lotEnd['id']]);
+              document.getElementById('demo-' + lotEnd['id']).innerHTML = "Expired";
+              this.toastrService.success("Lot is closed!");
+            }, _ => {
+              this.toastrService.error("Something went wrong!");
+            });
+        }
+      })
+      .catch();
   }
 
   public createImgPath(serverPath: string) {

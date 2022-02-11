@@ -39,6 +39,9 @@ import { FreshLotsComponent } from './components/fresh-lots/fresh-lots.component
 import { FacebookLoginComponent } from './components/facebook-login/facebook-login.component';
 import { GoogleLoginComponent } from './components/google-login/google-login.component';
 import { TwoStepVerificationComponent } from './components/two-step-verification/two-step-verification.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationDialogComponent } from './common/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogService } from './common/confirmation-dialog/confirmation-dialog.service';
 
 const appRoutes: Routes = [
   { path: '', component: ShowLotsComponent },
@@ -88,6 +91,7 @@ export function tokenGetter() {
     GoogleLoginComponent,
     AskOwnerFormComponent,
     TwoStepVerificationComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,15 +109,18 @@ export function tokenGetter() {
         whitelistedDomains: ["localhost:4200"],
         blacklistedRoutes: []
       }
-    })
+    }),
+    NgbModule
   ],
   exports: [],
   providers: [
     SortPipe,
-    ExitAboutGuard
+    ExitAboutGuard,
+    ConfirmationDialogService
   ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [ConfirmationDialogComponent]
 })
 export class AppModule {
 }

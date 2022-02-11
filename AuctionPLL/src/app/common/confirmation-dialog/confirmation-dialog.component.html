@@ -1,0 +1,14 @@
+<div class="confirm-modal">
+    <span (click)="decline()" class="close" title="Close Modal">&times;</span>
+    <form class="modal-content">
+        <div class="container">
+            <h1>{{ title }}</h1>
+            <p>{{ message }}</p>
+
+            <div class="btn-group">
+                <a type="button" class="acceptbtn" (click)="accept()">{{ btnOkText }}</a>
+                <a type="button" class="cancelbtn" (click)="decline()">{{ btnCancelText }}</a>
+            </div>
+        </div>
+    </form>
+</div>
