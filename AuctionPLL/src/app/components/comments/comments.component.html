@@ -9,15 +9,18 @@
 <hr>
 <div class="comments">
     <form method="post" #createCommentForm="ngForm" (ngSubmit)="createComment(createCommentForm)">
-        <input type="text" name="Text" #Text="ngModel" ngModel required minlength="2" id="Text" placeholder="Add coment ...">
-        <button *ngIf="!lot.IsSold;else comDisab" [disabled]="Text.invalid" >&#8595;</button>
+        <input type="text" name="Text" #Text="ngModel" ngModel required minlength="2" id="Text"
+            placeholder="Add coment ...">
+        <button *ngIf="!lot.IsSold;else comDisab" [disabled]="Text.invalid">&#8595;</button>
         <ng-template #comDisab><button disabled style="background: grey;">&#8595;</button></ng-template>
     </form>
     <div *ngFor="let comment of filtredComments | sort : 'desc':'dateTime'">
         <div class="comment">
             <div class="head">
                 <p>{{comment.author}} {{comment.dateTime | date:'MMMM d, y'}}</p>
-                <div class="seller" *ngIf="comment.userId===lot.userId"><p>Seller</p></div>
+                <div class="seller" *ngIf="comment.userId===lot.userId">
+                    <p>Seller</p>
+                </div>
                 <div class="delete" *ngIf="comment.userId===userId && !comment.isBid">
                     <a (click)="deleteComment(comment.id)">&times;</a>
                 </div>
@@ -26,7 +29,7 @@
                 <div [ngClass]="{isBid:comment.isBid}">
                     <p>{{comment.text}}</p>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
     <div class="space"></div>

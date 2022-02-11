@@ -1,49 +1,47 @@
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="sort">
-    <div class="dropdown">
-        <button class="dropbtn">Sort by Price</button>
-        <div class="dropdown-content">
-          <button (click)="sortingData('','')">Remove filter</button>
-          <button (click)="sortingData('asc','currentPrice')">Ascending</button>
-          <button (click)="sortingData('desc','currentPrice')">Descending</button>
-        </div>
+  <div class="dropdown">
+    <button class="dropbtn">Sort by Price</button>
+    <div class="dropdown-content">
+      <button (click)="sortingData('','')">Remove filter</button>
+      <button (click)="sortingData('asc','currentPrice')">Ascending</button>
+      <button (click)="sortingData('desc','currentPrice')">Descending</button>
     </div>
-    <div class="dropdown">
-        <button class="dropbtn">Sort by Date</button>
-        <div class="dropdown-content">
-          <button (click)="sortingData('','')">Remove filter</button>
-          <button (click)="sortingData('asc','startDateTime')">Ascending</button>
-          <button (click)="sortingData('desc','startDateTime')">Descending</button>
-        </div>
-    </div> 
-    <div class="dropdown">
-        <button class="dropbtn">Sort by Year</button>
-        <div class="dropdown-content">
-          <button (click)="sortingData('','')">Remove filter</button>
-          <button (click)="sortingData('asc','year')">Ascending</button>
-          <button (click)="sortingData('desc','year')">Descending</button>
-        </div>
-    </div> 
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn">Sort by Date</button>
+    <div class="dropdown-content">
+      <button (click)="sortingData('','')">Remove filter</button>
+      <button (click)="sortingData('asc','startDateTime')">Ascending</button>
+      <button (click)="sortingData('desc','startDateTime')">Descending</button>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn">Sort by Year</button>
+    <div class="dropdown-content">
+      <button (click)="sortingData('','')">Remove filter</button>
+      <button (click)="sortingData('asc','year')">Ascending</button>
+      <button (click)="sortingData('desc','year')">Descending</button>
+    </div>
+  </div>
 </div>
 <div class="differ"></div>
 <div class="lots">
-    <hr>
-    <div *ngFor="let lot of lots | sort:sortMode:sortField">
-        <div class="card" *ngIf="!lot.isSold">   
-            <img [src]="createImgPath(lot.image)" alt="profile picture">
-            <div class="timer">  
-              <p id="demo-{{lot.id}}"></p>
-            </div>
-            <div class="favorite">
-              <a id="star-{{lot.id}}" class="unstar"
-              (click)="changeStar(lot.id)">&#9733;</a>
-            </div>
-            <div class="main-block">    
-                <h1>{{lot.nameLot}}</h1>
-                <p class="title">{{lot.description}}</p>
-            </div>
-            <p><button routerLink="/lot/{{lot.id}}" >Bid  {{lot.currentPrice | currency}}</button></p>
-          </div>
+  <hr>
+  <div *ngFor="let lot of lots | sort:sortMode:sortField">
+    <div class="card" *ngIf="!lot.isSold">
+      <img [src]="createImgPath(lot.image)" alt="profile picture">
+      <div class="timer">
+        <p id="demo-{{lot.id}}"></p>
+      </div>
+      <div class="favorite">
+        <a id="star-{{lot.id}}" class="unstar" (click)="changeStar(lot.id)">&#9733;</a>
+      </div>
+      <div class="main-block">
+        <h1>{{lot.nameLot}}</h1>
+        <p class="title">{{lot.description}}</p>
+      </div>
+      <p><button routerLink="/lot/{{lot.id}}">Bid {{lot.currentPrice | currency}}</button></p>
     </div>
+  </div>
 </div>

@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Comment } from '../models/comment';
+import { Observable } from 'rxjs';
+import { BaseUrl } from '../common/urls';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class CommentService {
-    apiUrl = 'https://localhost:44325/api/comment/';
-    constructor(private httpClient:HttpClient) { }
+    private apiUrl = BaseUrl.ApiURL + 'comment/';
+    constructor(private httpClient: HttpClient) { }
 
-    addComment(comment:Comment){
-        return this.httpClient.post(this.apiUrl,comment);
+    public addComment(comment: Comment): Observable<Object> {
+        return this.httpClient.post(this.apiUrl, comment);
     }
 
-    getCommentsByLotId(lotId:number){
-        return this.httpClient.get<Comment[]>(this.apiUrl+lotId);
+    public getCommentsByLotId(lotId: number): Observable<Comment[]> {
+        return this.httpClient.get<Comment[]>(this.apiUrl + lotId);
     }
 
-    deleteVommentById(commentId:string){
-        return this.httpClient.delete(this.apiUrl+commentId);
+    public deleteVommentById(commentId: string): Observable<Object> {
+        return this.httpClient.delete(this.apiUrl + commentId);
     }
 }

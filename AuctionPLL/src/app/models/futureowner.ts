@@ -1,4 +1,4 @@
-export class FutureOwner{
-    LotId:number;
-    OwnerId:string;
+export class FutureOwner {
+    LotId: number;
+    OwnerId: string;
 }

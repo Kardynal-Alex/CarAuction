@@ -2,16 +2,20 @@
     <div *ngIf="lots">
         <div class="lots">
             <div *ngFor="let lt of lots">
-                <div class="card" *ngIf="!lt.isSold && lt.id!==lot.id">  
-                    <div *ngIf="!lt.isSold" class="new"><p>new</p></div>
+                <div class="card" *ngIf="!lt.isSold && lt.id!==lot.id">
+                    <div *ngIf="!lt.isSold" class="new">
+                        <p>new</p>
+                    </div>
                     <img [src]="createImgPath(lt.image)" alt="profile picture">
-                    <div class="main-block">    
+                    <div class="main-block">
                         <h1>{{lt.nameLot}}</h1>
                         <p class="title">{{lt.description}}</p>
                     </div>
-                    <p><button *ngIf="!lt.isSold;else isSoldBut" (click)="redirectToNewLot(lt.id)" >Bid  {{lt.currentPrice | currency}}</button></p>
+                    <p><button *ngIf="!lt.isSold;else isSoldBut" (click)="redirectToNewLot(lt.id)">Bid {{lt.currentPrice
+                            | currency}}</button></p>
                     <ng-template #isSoldBut>
-                        <button class="isSold" style="background: grey;" (click)="redirectToNewLot(lt.id)">Is sold</button>
+                        <button class="isSold" style="background: grey;" (click)="redirectToNewLot(lt.id)">Is
+                            sold</button>
                     </ng-template>
                 </div>
             </div>

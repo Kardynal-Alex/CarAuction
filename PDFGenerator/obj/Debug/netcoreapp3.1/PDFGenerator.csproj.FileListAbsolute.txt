@@ -11,3 +11,16 @@ D:\EpamProject\FinalProject\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.dl
 D:\EpamProject\FinalProject\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.pdb
 D:\EpamProject\FinalProject\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.csproj.AssemblyReference.cache
 D:\EpamProject\FinalProject\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.GeneratedMSBuildEditorConfig.editorconfig
+D:\Asp.Net(project)\CarAuction\PDFGenerator\bin\Debug\netcoreapp3.1\PDFGenerator.deps.json
+D:\Asp.Net(project)\CarAuction\PDFGenerator\bin\Debug\netcoreapp3.1\PDFGenerator.dll
+D:\Asp.Net(project)\CarAuction\PDFGenerator\bin\Debug\netcoreapp3.1\PDFGenerator.pdb
+D:\Asp.Net(project)\CarAuction\PDFGenerator\bin\Debug\netcoreapp3.1\Auction.DAL.dll
+D:\Asp.Net(project)\CarAuction\PDFGenerator\bin\Debug\netcoreapp3.1\Auction.DAL.pdb
+D:\Asp.Net(project)\CarAuction\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.csproj.AssemblyReference.cache
+D:\Asp.Net(project)\CarAuction\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.GeneratedMSBuildEditorConfig.editorconfig
+D:\Asp.Net(project)\CarAuction\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.AssemblyInfoInputs.cache
+D:\Asp.Net(project)\CarAuction\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.AssemblyInfo.cs
+D:\Asp.Net(project)\CarAuction\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.csproj.CoreCompileInputs.cache
+D:\Asp.Net(project)\CarAuction\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.csproj.CopyComplete
+D:\Asp.Net(project)\CarAuction\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.dll
+D:\Asp.Net(project)\CarAuction\PDFGenerator\obj\Debug\netcoreapp3.1\PDFGenerator.pdb

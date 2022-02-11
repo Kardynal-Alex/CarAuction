@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "F6qtSqMVy6IZN+I2ZgHCAaWZwzLRJ8ER1hCuJ7v4SuZ2hXY2ktFrmLBfRsDXTp3VIme485YXnpcV9yxCk52OQw==",
+  "dgSpecHash": "512b/Np4PG1MNr3Z8b1b5r3ZsZP8H7DRNQPWf1jJ8bPNZwwnoRaRSfTxhKyh50Xdzwsz4OsYxU2lNgkCuD3dNQ==",
   "success": true,
   "projectFilePath": "D:\\Asp.Net(project)\\CarAuction\\PDFGenerator\\PDFGenerator.csproj",
   "expectedPackageFiles": [
@@ -151,7 +151,10 @@
     "C:\\Users\\Asus\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\Asus\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\Asus\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
   ],
   "logs": []
 }

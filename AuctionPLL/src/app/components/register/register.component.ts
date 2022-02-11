@@ -10,33 +10,34 @@ import { Register } from 'src/app/models/register';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  constructor(private authService:AuthService,
-              private toastrService:ToastrService) { }
+  constructor(
+    private authService: AuthService,
+    private toastrService: ToastrService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
-  register(form:NgForm){
-    const registerUser:Register={
-      Email:form.value.email,
-      Password:form.value.password,
-      Role:"user",
-      Name:form.value.name,
-      Surname:form.value.surname,
-      ClientURI:"https://localhost:4200/auction/emailconfirmation"
+  public register(form: NgForm) {
+    const registerUser: Register = {
+      Email: form.value.email,
+      Password: form.value.password,
+      Role: "user",
+      Name: form.value.name,
+      Surname: form.value.surname,
+      ClientURI: "https://localhost:4200/auction/emailconfirmation"
     }
-    this.authService.register(registerUser).subscribe(response=>{
+    this.authService.register(registerUser)
+      .subscribe(_ => {
         this.toastrService.info("You redirect to login page.");
-        document.getElementById('register-form').style.display='none';
-        document.getElementById('login-form').style.display='block';
-      },
-      responseError=>{
+        document.getElementById('register-form').style.display = 'none';
+        document.getElementById('login-form').style.display = 'block';
+      }, _ => {
         this.toastrService.error("Error");
       });
   }
 
-  showLoginForm(){
-    document.getElementById('login-form').style.display='block';
-    document.getElementById('register-form').style.display='none';
+  public showLoginForm() {
+    document.getElementById('login-form').style.display = 'block';
+    document.getElementById('register-form').style.display = 'none';
   }
 }

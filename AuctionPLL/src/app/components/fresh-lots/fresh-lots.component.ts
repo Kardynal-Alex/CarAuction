@@ -11,26 +11,29 @@ import { LotService } from 'src/app/services/lot.service';
 })
 export class FreshLotsComponent implements OnInit {
 
-  constructor(private lotService:LotService,
-              private router:Router) { }
-  @Input() lot:Lot;
-  lots:Lot[];
-  ngOnInit(){
-   this.getFreshLots(); 
+  constructor(
+    private lotService: LotService,
+    private router: Router) { }
+  @Input() lot: Lot;
+  public lots: Lot[];
+  public ngOnInit() {
+    this.getFreshLots();
   }
 
-  getFreshLots(){
-    this.lotService.getFreshLots().pipe(tap(lots=>this.lots=lots)).subscribe();
+  public getFreshLots() {
+    this.lotService.getFreshLots()
+      .pipe(tap(lots => this.lots = lots))
+      .subscribe();
   }
 
-  public createImgPath(serverPath: string){
+  public createImgPath(serverPath: string): string {
     return this.lotService.createImgPath(serverPath);
   }
 
-  redirectToNewLot(id:number){
+  public redirectToNewLot(id: number) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/lot/'+id]);
+    this.router.navigate(['/lot/' + id]);
   }
 
 }

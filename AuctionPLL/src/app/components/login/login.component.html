@@ -2,8 +2,8 @@
 
 <ng-template [ngIf]="isAuth===false">
     <div class="login-btn">
-        <button onclick="document.getElementById('login-form').style.display='block'" 
-        id="login-btn" style="width:auto;">Login</button>
+        <button onclick="document.getElementById('login-form').style.display='block'" id="login-btn"
+            style="width:auto;">Login</button>
     </div>
 </ng-template>
 
@@ -16,20 +16,22 @@
 
 <div id="login-form" class="login">
     <div class="login-content animate">
-        <form  method="post" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+        <form method="post" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
             <div>
-            <span onclick="document.getElementById('login-form').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <span onclick="document.getElementById('login-form').style.display='none'" class="close"
+                    title="Close Modal">&times;</span>
             </div>
             <div class="container">
                 <p>Sign in</p>
                 <div>
-                    <input type="text" placeholder="Enter Email" id="email" name="email" ngModel #Email="ngModel" required email>
+                    <input type="text" placeholder="Enter Email" id="email" name="email" ngModel #Email="ngModel"
+                        required email>
                     <div class="error" *ngIf="Email.errors?.required && Email.touched">Required field</div>
                     <div class="error" *ngIf="Email.errors?.email && Email.touched">Invalid email</div>
                 </div>
                 <div>
                     <input type="password" placeholder="Enter Password" id="password" name="password"
-                    #Password="ngModel" minlength="6" ngModel required> 
+                        #Password="ngModel" minlength="6" ngModel required>
                     <div class="error" *ngIf="Password.errors?.required && Password.touched">Required field</div>
                     <div class="error" *ngIf="Password.errors?.minlength && Password.touched">Min length 6</div>
                 </div>
@@ -37,14 +39,18 @@
             </div>
         </form>
         <div class="regis-btn">
-            <button (click)="showResetForm()" class="underline" ><p>Forgot password?</p></button>
+            <button (click)="showResetForm()" class="underline">
+                <p>Forgot password?</p>
+            </button>
         </div>
         <div class="center">
             <app-facebook-login></app-facebook-login>
             <app-google-login></app-google-login>
         </div>
         <div class="regis-btn">
-            <p>Need to create an account? <button (click)="showRegisterForm()" class="underline" ><p>Sign up here</p></button></p>
+            <p>Need to create an account? <button (click)="showRegisterForm()" class="underline">
+                    <p>Sign up here</p>
+                </button></p>
         </div>
     </div>
 </div>
@@ -52,7 +58,7 @@
 <app-forgot-password></app-forgot-password>
 <script>
     var login = document.getElementById('login-form');
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == login) {
             login.style.display = "none";
         }

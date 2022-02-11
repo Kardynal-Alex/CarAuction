@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "bc775506-676f-47e5-9be2-d51749cbaca3": {
+      "ProjectGuid": "bc775506-676f-47e5-9be2-d51749cbaca3",
+      "DisplayName": "Auction.WepApi",
+      "ColorIndex": 0
+    },
+    "57b8e0c8-bc84-40fd-a4f7-e593b7797c84": {
+      "ProjectGuid": "57b8e0c8-bc84-40fd-a4f7-e593b7797c84",
+      "DisplayName": "Auction.DAL",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

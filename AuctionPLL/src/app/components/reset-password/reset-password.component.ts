@@ -12,32 +12,33 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ResetPasswordComponent implements OnInit {
 
-  constructor(private toastrService:ToastrService,
-              private authService:AuthService,
-              private router:Router,
-              private acticeRoute: ActivatedRoute) { }
+  constructor(
+    private toastrService: ToastrService,
+    private authService: AuthService,
+    private router: Router,
+    private acticeRoute: ActivatedRoute) { }
   private token: string;
   private email: string;
-            
-  ngOnInit(): void {
+
+  public ngOnInit(): void {
     this.token = this.acticeRoute.snapshot.queryParams['token'];
     this.email = this.acticeRoute.snapshot.queryParams['email'];
   }
 
-  resetPassword(form:NgForm){
+  public resetPassword(form: NgForm) {
     const resetPass: ResetPassword = {
       Password: form.value.NewPassword,
       Token: this.token,
       Email: this.email
-    }
+    };
 
-    this.authService.resetPassword(resetPass).subscribe(response => {
-      this.toastrService.success("Password is updated!");
-      this.router.navigate(['']);
-    },
-    error => {
-      this.toastrService.error("Error!");
-      this.router.navigate(['']);
-    })
+    this.authService.resetPassword(resetPass)
+      .subscribe(_ => {
+        this.toastrService.success("Password is updated!");
+        this.router.navigate(['']);
+      }, _ => {
+        this.toastrService.error("Error!");
+        this.router.navigate(['']);
+      });
   }
 }

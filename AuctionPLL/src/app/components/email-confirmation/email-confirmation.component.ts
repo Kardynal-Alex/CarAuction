@@ -10,27 +10,27 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class EmailConfirmationComponent implements OnInit {
 
-  constructor(private authService: AuthService, 
-              private route: ActivatedRoute,
-              private toastrService: ToastrService,
-              private router:Router) { }
+  constructor(
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private toastrService: ToastrService,
+    private router: Router) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.confirmEmail();
   }
 
-  confirmEmail(){
+  public confirmEmail() {
     const token = this.route.snapshot.queryParams['token'];
     const email = this.route.snapshot.queryParams['email'];
 
     this.authService.confirmEmail('api/account/emailconfirmation', token, email)
-    .subscribe(response => {
-      this.toastrService.success("Succesfully confirmed");
-      this.router.navigate(['']);
-    },
-    error => {
-      this.toastrService.error("Need to confirm email");
-      this.router.navigate(['']);
-    });
+      .subscribe(_ => {
+        this.toastrService.success("Succesfully confirmed");
+        this.router.navigate(['']);
+      }, _ => {
+        this.toastrService.error("Need to confirm email");
+        this.router.navigate(['']);
+      });
   }
 }

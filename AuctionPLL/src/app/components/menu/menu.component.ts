@@ -1,4 +1,4 @@
-import { Component, OnInit , Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -8,15 +8,15 @@ import { AuthService } from '../../services/auth.service';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private authService:AuthService){} 
+  constructor(private authService: AuthService) { }
 
-  IsAuthenticated:boolean=false;
-  @Input() IsAdmin:boolean;
-  ngOnInit(){
-    this.IsAuthenticated=this.authService.isAuthenticated();
+  public IsAuthenticated: boolean = false;
+  @Input() IsAdmin: boolean;
+  public ngOnInit() {
+    this.IsAuthenticated = this.authService.isAuthenticated();
   }
-  
-  ngDoCheck() {
-    this.IsAuthenticated=this.authService.isAuthenticated();
+
+  public ngDoCheck() {
+    this.IsAuthenticated = this.authService.isAuthenticated();
   }
 }

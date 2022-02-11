@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Z9jv8WU4H+9UaD5AaxLs0aVeqRuwfv2fkDWkEXx+bQg9SkyuvKAvsUuHIFXuUhKyKUN7cKX5DdF6sugDx4GDwQ==",
+  "dgSpecHash": "0jXl4698yxG11q7meAyL6RyApOi9OpxsD8JJNk9Uq6qLp/9MJBvCqzI4k4bY4A9IYTlxcm6zMmUm+IwxYIldzA==",
   "success": true,
   "projectFilePath": "D:\\Asp.Net(project)\\CarAuction\\Auction.BLL\\Auction.BLL.csproj",
   "expectedPackageFiles": [
@@ -156,7 +156,10 @@
     "C:\\Users\\Asus\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\Asus\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\Asus\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
   ],
   "logs": []
 }

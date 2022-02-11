@@ -6,6 +6,7 @@ body {
     box-sizing: border-box;
     outline:none;
   }
+  
 .login {
     margin: 0 auto;
     justify-content: center;

@@ -10,17 +10,17 @@ import { LotService } from 'src/app/services/lot.service';
 })
 export class ShowLotImagesComponent implements OnInit {
 
-  constructor(private lotService:LotService) { }
-  ngOnInit() {
-    this.numbers=Array.from(Array(this.lotService.numbersOfImages).keys());
+  constructor(private lotService: LotService) { }
+  public ngOnInit() {
+    this.numbers = Array.from(Array(this.lotService.numbersOfImages).keys());
   }
-  numbers=[];
-  @Input() lot:Lot;
-  closeImages(){
-    document.getElementById('myNav').style.display="none";
+  public numbers = [];
+  @Input() lot: Lot;
+  public closeImages() {
+    document.getElementById('myNav').style.display = "none";
   }
 
-  public createImgPath(serverPath: string){
+  public createImgPath(serverPath: string): string {
     return this.lotService.createImgPath(serverPath);
   }
 }

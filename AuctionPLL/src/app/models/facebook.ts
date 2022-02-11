@@ -1,3 +1,3 @@
-export class Facebook{
-    accessToken:string;
+export class Facebook {
+    accessToken: string;
 }

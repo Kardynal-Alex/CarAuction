@@ -10,25 +10,28 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  users:User[];
-  constructor(private adminService:AdminService,
-    private toastrService:ToastrService) { }
+  public users: User[];
+  constructor(
+    private adminService: AdminService,
+    private toastrService: ToastrService) { }
 
-    getUsers(){
-      this.adminService.getUsersWithRoleUser().pipe(tap(users=>this.users=users)).subscribe();
-    }
-  
-  ngOnInit(): void {
-   this.getUsers();
+  public getUsers() {
+    this.adminService.getUsersWithRoleUser()
+      .pipe(tap(users => this.users = users))
+      .subscribe();
   }
-  
-  deleteUser(userId:string){
-    this.adminService.deleteUser(userId).subscribe(response=>{
-      this.toastrService.success("User is deleted!");
-      this.getUsers();
-    },
-    error=>{
-      this.toastrService.error("Error!");
-    });
+
+  public ngOnInit(): void {
+    this.getUsers();
+  }
+
+  public deleteUser(userId: string) {
+    this.adminService.deleteUser(userId)
+      .subscribe(_ => {
+        this.toastrService.success("User is deleted!");
+        this.getUsers();
+      }, _ => {
+        this.toastrService.error("Error!");
+      });
   }
 }

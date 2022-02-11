@@ -1,13 +1,12 @@
-
 <div id="2-step-form" class="two-step">
     <div class="two-step-content animate">
-        <form  method="post" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+        <form method="post" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
             <div class="container">
                 <h2>Two factor verification</h2>
                 <p>Two factor code</p>
                 <div>
-                    <input placeholder="Enter Generated Token" id="token" name="token" ngModel 
-                    #Token="ngModel" required maxlength="6" minlength="6" pattern="[0-9]*">
+                    <input placeholder="Enter Generated Token" id="token" name="token" ngModel #Token="ngModel" required
+                        maxlength="6" minlength="6" pattern="[0-9]*">
                     <div class="error" *ngIf="Token.errors?.required && Token.touched">Required field</div>
                     <div class="error" *ngIf="Token.errors?.minlength && Token.touched">Min length 6</div>
                     <div class="error" *ngIf="Token.errors?.maxlength && Token.touched">Max length 6</div>

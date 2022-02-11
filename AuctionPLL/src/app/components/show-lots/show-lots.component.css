@@ -11,10 +11,12 @@
   .sort .dropdown {
     overflow: hidden;
   }
+
   .sort .dropdown {
     width: auto;
     float: left;
   }
+  
   .sort .dropbtn button {
     width: 20%;
   }

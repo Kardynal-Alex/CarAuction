@@ -13,35 +13,36 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class TwoStepVerificationComponent implements OnInit {
 
-  constructor(private toastrService:ToastrService,
-              private route:ActivatedRoute,
-              private authService:AuthService,
-              private localStorage:LocalStorageService,
-              private router:Router) { }
+  constructor(
+    private toastrService: ToastrService,
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private localStorage: LocalStorageService,
+    private router: Router) { }
 
   private provider: string;
   private email: string;
-  ngOnInit(){
-    document.getElementById("2-step-form").style.display="block";
+  public ngOnInit() {
+    document.getElementById("2-step-form").style.display = "block";
   }
 
-  login(form:NgForm){
+  public login(form: NgForm) {
     this.provider = this.route.snapshot.queryParams['provider'];
     this.email = this.route.snapshot.queryParams['email'];
     let twoFactor: TwoFactor = {
       email: this.email,
       provider: this.provider,
       token: form.value.token
-    }
-    this.authService.twoSteplogin(twoFactor).subscribe(response=>{
-      this.toastrService.success("Login successfully.");
-      this.localStorage.set("token", response['token']);
-      this.router.navigate(['']);
-      document.getElementById("2-step-form").style.display="none";
-    }, 
-    error => {
-      this.toastrService.error("Something went wrong");
-    });
+    };
+    this.authService.twoSteplogin(twoFactor)
+      .subscribe(response => {
+        this.toastrService.success("Login successfully.");
+        this.localStorage.set("token", response['token']);
+        this.router.navigate(['']);
+        document.getElementById("2-step-form").style.display = "none";
+      }, _ => {
+        this.toastrService.error("Something went wrong");
+      });
   }
 
 }

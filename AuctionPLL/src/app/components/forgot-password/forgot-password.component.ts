@@ -11,28 +11,29 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  constructor(private authService:AuthService,
-              private toastrService:ToastrService) { }
+  constructor(
+    private authService: AuthService,
+    private toastrService: ToastrService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
-  showLoginForm(){
-    document.getElementById('forgot-pass-form').style.display='none';
-    document.getElementById('login-form').style.display='block';
+  public showLoginForm() {
+    document.getElementById('forgot-pass-form').style.display = 'none';
+    document.getElementById('login-form').style.display = 'block';
   }
 
-  resetPassForm(form:NgForm){
+  public resetPassForm(form: NgForm) {
     const forgotPass: ForgotPassword = {
       Email: form.value.Email,
       ClientURI: 'https://localhost:4200/auction/resetpassword'
     }
-      document.getElementById('forgot-pass-form').style.display='none';
-      this.authService.forgotPassword(forgotPass).subscribe(response => {
-      this.toastrService.success("Please check your email to reset your password","The link has been sent");
-    },
-    error => {
-      this.toastrService.error("Incorect email");
-    }) 
+    document.getElementById('forgot-pass-form').style.display = 'none';
+    this.authService.forgotPassword(forgotPass)
+      .subscribe(_ => {
+        this.toastrService.success("Please check your email to reset your password", "The link has been sent");
+      }, _ => {
+        this.toastrService.error("Incorect email");
+      });
   }
 }
