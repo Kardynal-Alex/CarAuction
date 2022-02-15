@@ -1,16 +1,19 @@
-* {
+:host {
+  * {
     box-sizing: border-box;
-    outline:none;
-}
-body { 
-  font-family: Roboto, "Helvetica Neue", sans-serif; 
-}
+    outline: none;
+  }
+
+  body {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
 
   .navbar {
     overflow: hidden;
-    background:none;
+    background: none;
     font-family: Arial;
     margin-top: 25px;
+    margin: 0 10%;
   }
 
   .navbar a {
@@ -21,7 +24,7 @@ body {
     padding: 14px 16px;
     text-decoration: none;
   }
-  
+
   .dropdown {
     float: left;
     overflow: hidden;
@@ -36,24 +39,24 @@ body {
     color: white;
     padding: 14px 16px;
     background-color: inherit;
-    font-family: inherit; 
+    font-family: inherit;
     margin: 0;
     border-radius: 30px;
     background-color: black;
     font-size: 30px;
   }
-  
-  
+
+
   .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     border-radius: 20px;
   }
-  
+
   .dropdown-content a {
     float: none;
     color: black;
@@ -63,35 +66,36 @@ body {
     text-align: left;
     border-radius: 20px;
   }
-  
+
   .dropdown-content a:hover {
     background-color: #ddd;
   }
-  
+
   .dropdown:hover .dropdown-content {
     display: block;
   }
 
- .navbar .main-page{
-   float: left;
-   background-color: black;
-   color: white;
-   margin-left: 10%;
-   border-radius: 30px;
-   height: 60px;
- }
+  .navbar .main-page {
+    float: left;
+    background-color: black;
+    color: white;
+    margin-left: 10%;
+    border-radius: 30px;
+    height: 60px;
+  }
 
- .main-page a {
-   justify-content: center;
-   text-align: center;
-   font-size: 30px;
- }
+  .main-page a {
+    justify-content: center;
+    text-align: center;
+    font-size: 30px;
+  }
 
- hr{
-  border: none; 
-  background-color: black; 
-  color: black;
-  height: 4px; 
-  width: 90%;
-  margin: 20px auto;
+  hr {
+    border: none;
+    background-color: black;
+    color: black;
+    height: 4px;
+    width: 90%;
+    margin: 20px auto;
+  }
 }

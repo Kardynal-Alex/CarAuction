@@ -10,11 +10,12 @@ import { Images } from 'src/app/models/images';
 import { ComponentCanDeactivate } from 'src/app/guards/exit.about.guard';
 import { Observable } from 'rxjs';
 import { BaseUrl } from 'src/app/common/urls';
+import { CommonConstants } from 'src/app/common/common-constants';
 
 @Component({
   selector: 'app-create-lot',
   templateUrl: './create-lot.component.html',
-  styleUrls: ['./create-lot.component.css']
+  styleUrls: ['./create-lot.component.less']
 })
 
 export class CreateLotComponent implements OnInit, ComponentCanDeactivate {
@@ -36,7 +37,7 @@ export class CreateLotComponent implements OnInit, ComponentCanDeactivate {
     this.checkIfAllImagesIsUploaded();
   }
   public getUserId(): string {
-    var payload = JSON.parse(window.atob(this.localStorage.get('token').split('.')[1]));
+    var payload = JSON.parse(window.atob(this.localStorage.get(CommonConstants.JWTToken).split('.')[1]));
     return payload.id;
   }
 

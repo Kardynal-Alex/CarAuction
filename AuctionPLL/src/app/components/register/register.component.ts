@@ -3,16 +3,22 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Register } from 'src/app/models/register';
+import { CommonConstants } from 'src/app/common/common-constants';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.less']
 })
 export class RegisterComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private toastrService: ToastrService) { }
+    private toastrService: ToastrService,
+    private modalService: NgbModal,
+    private activeModal: NgbActiveModal
+  ) { }
 
   public ngOnInit(): void {
   }
@@ -21,7 +27,7 @@ export class RegisterComponent implements OnInit {
     const registerUser: Register = {
       Email: form.value.email,
       Password: form.value.password,
-      Role: "user",
+      Role: CommonConstants.User,
       Name: form.value.name,
       Surname: form.value.surname,
       ClientURI: "https://localhost:4200/auction/emailconfirmation"
@@ -29,15 +35,18 @@ export class RegisterComponent implements OnInit {
     this.authService.register(registerUser)
       .subscribe(_ => {
         this.toastrService.info("You redirect to login page.");
-        document.getElementById('register-form').style.display = 'none';
-        document.getElementById('login-form').style.display = 'block';
+        this.openLoginForm();
       }, _ => {
         this.toastrService.error("Error");
       });
   }
 
-  public showLoginForm() {
-    document.getElementById('login-form').style.display = 'block';
-    document.getElementById('register-form').style.display = 'none';
+  public openLoginForm() {
+    this.activeModal.close();
+    this.modalService.open(LoginComponent);
+  }
+
+  public close() {
+    this.activeModal.close();
   }
 }

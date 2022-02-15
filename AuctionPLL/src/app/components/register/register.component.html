@@ -1,9 +1,8 @@
-<div id="register-form" class="register">
-    <div class="register-content animate">
+<div class="register-form">
+    <div class="register-content">
         <form method="post" #registerForm="ngForm" (ngSubmit)="register(registerForm)">
             <div>
-                <span onclick="document.getElementById('register-form').style.display='none'" class="close"
-                    title="Close Modal">&times;</span>
+                <span (click)="close()" class="close" title="Close Modal">&times;</span>
             </div>
             <div class="container">
                 <p>Sign up</p>
@@ -40,18 +39,9 @@
             </div>
         </form>
         <div class="login-btn">
-            <p>Already have an account? <button (click)="showLoginForm()" class="underline">
+            <p>Already have an account? <button (click)="openLoginForm()" class="underline">
                     <p>Sign in here</p>
                 </button></p>
         </div>
     </div>
 </div>
-
-<script>
-    var register = document.getElementById('register-form');
-    window.onclick = function (event) {
-        if (event.target == register) {
-            register.style.display = "none";
-        }
-    }
-</script>

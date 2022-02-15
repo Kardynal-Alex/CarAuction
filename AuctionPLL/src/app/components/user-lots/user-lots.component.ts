@@ -4,11 +4,12 @@ import { Lot } from 'src/app/models/lot';
 import { LotService } from 'src/app/services/lot.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ConfirmationDialogService } from 'src/app/common/confirmation-dialog/confirmation-dialog.service';
+import { CommonConstants } from 'src/app/common/common-constants';
 
 @Component({
   selector: 'app-user-lots',
   templateUrl: './user-lots.component.html',
-  styleUrls: ['./user-lots.component.css']
+  styleUrls: ['./user-lots.component.less']
 })
 export class UserLotsComponent implements OnInit, OnDestroy {
   public lots: Lot[];
@@ -20,7 +21,8 @@ export class UserLotsComponent implements OnInit, OnDestroy {
   ) { }
 
   public getUserId(): string {
-    var payload = JSON.parse(window.atob(this.localStorage.get('token').split('.')[1]));
+    //replace on function
+    var payload = JSON.parse(window.atob(this.localStorage.get(CommonConstants.JWTToken).split('.')[1]));
     return payload.id;
   }
 

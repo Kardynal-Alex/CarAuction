@@ -1,39 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { ForgotPassword } from 'src/app/models/forgot-password';
 import { AuthService } from 'src/app/services/auth.service';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css']
+  styleUrls: ['./forgot-password.component.less']
 })
 export class ForgotPasswordComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private toastrService: ToastrService) { }
+    private toastrService: ToastrService,
+    private modalService: NgbModal,
+    private activeModal: NgbActiveModal
+  ) { }
 
   public ngOnInit(): void {
   }
 
-  public showLoginForm() {
-    document.getElementById('forgot-pass-form').style.display = 'none';
-    document.getElementById('login-form').style.display = 'block';
+  public openLoginForm() {
+    this.activeModal.close();
+    this.modalService.open(LoginComponent);
   }
 
   public resetPassForm(form: NgForm) {
     const forgotPass: ForgotPassword = {
       Email: form.value.Email,
       ClientURI: 'https://localhost:4200/auction/resetpassword'
-    }
-    document.getElementById('forgot-pass-form').style.display = 'none';
+    };
+    this.activeModal.close();
     this.authService.forgotPassword(forgotPass)
       .subscribe(_ => {
         this.toastrService.success("Please check your email to reset your password", "The link has been sent");
       }, _ => {
         this.toastrService.error("Incorect email");
       });
+  }
+
+  public close() {
+    this.activeModal.close();
   }
 }

@@ -10,11 +10,12 @@ import { Comment } from 'src/app/models/comment';
 import { CommentService } from 'src/app/services/comment.service';
 import { Favorite } from 'src/app/models/favorite';
 import { FavoriteService } from 'src/app/services/favorite.service';
+import { CommonConstants } from 'src/app/common/common-constants';
 
 @Component({
   selector: 'app-show-lot-to-bid',
   templateUrl: './show-lot-to-bid.component.html',
-  styleUrls: ['./show-lot-to-bid.component.css']
+  styleUrls: ['./show-lot-to-bid.component.less']
 })
 export class ShowLotToBidComponent implements OnInit, AfterViewInit, OnDestroy {
   public id: number;
@@ -92,7 +93,7 @@ export class ShowLotToBidComponent implements OnInit, AfterViewInit, OnDestroy {
   public userName: string;
   public userSurname: string;
   public getUserId() {
-    var token = this.localStorage.get('token');
+    var token = this.localStorage.get(CommonConstants.JWTToken);
     if (token != null) {
       var payload = JSON.parse(window.atob(token.split('.')[1]));
       this.userId = payload.id;

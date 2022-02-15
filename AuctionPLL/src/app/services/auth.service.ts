@@ -13,6 +13,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { TwoFactor } from '../models/two-factor';
 import { Observable } from 'rxjs';
 import { BaseUrl } from '../common/urls';
+import { CommonConstants } from '../common/common-constants';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -40,7 +41,7 @@ export class AuthService {
   }
 
   public logout(): Observable<Object> {
-    this.localStorage.remove("token");
+    this.localStorage.remove(CommonConstants.JWTToken);
     return this.httpClient.post(this.apiUrl + "logout", null);
   }
 
@@ -69,7 +70,7 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    const token = this.localStorage.get("token");
+    const token = this.localStorage.get(CommonConstants.JWTToken);
     if (token && !this.jwtHelper.isTokenExpired(token)) {
       return true;
     } else {
@@ -77,21 +78,31 @@ export class AuthService {
     }
   }
 
+  public getToken(): string {
+    var token = this.localStorage.get(CommonConstants.JWTToken)?.split('.')[1];
+    return !!token ? token : null;
+  }
+
+  public getPayload(): any {
+    var token = this.getToken();
+    return !!token ? JSON.parse(window.atob(token)) : null;
+  }
+
   public CheckIfIsAdmin(): boolean {
-    var payload = JSON.parse(window.atob(this.localStorage.get('token')?.split('.')[1]));
-    if (payload.role.toLowerCase() === "admin") {
+    var payload = this.getPayload();
+    if (payload?.role.toLowerCase() === CommonConstants.Admin) {
       return true;
     }
     return false;
   }
 
   public getUserId(): string {
-    var payload = JSON.parse(window.atob(this.localStorage.get('token')?.split('.')[1]));
+    var payload = JSON.parse(window.atob(this.localStorage.get(CommonConstants.JWTToken)?.split('.')[1]));
     return payload?.id ?? null;
   }
 
   public getUserEmail(): string {
-    var payload = JSON.parse(window.atob(this.localStorage.get('token')?.split('.')[1]));
+    var payload = JSON.parse(window.atob(this.localStorage.get(CommonConstants.JWTToken)?.split('.')[1]));
     return payload?.email ?? null;
   }
 }

@@ -7,7 +7,7 @@ import { LotService } from 'src/app/services/lot.service';
 @Component({
   selector: 'app-fresh-lots',
   templateUrl: './fresh-lots.component.html',
-  styleUrls: ['./fresh-lots.component.css']
+  styleUrls: ['./fresh-lots.component.less']
 })
 export class FreshLotsComponent implements OnInit {
 

@@ -2,7 +2,10 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "types": ["gapi", "gapi.auth2"],
+    "types": [
+      "gapi",
+      "gapi.auth2"
+    ],
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -21,5 +24,9 @@
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false
   },
-  "paths": { "@angular/*": ["./node_modules/@angular/*"] }
+  "paths": {
+    "@angular/*": [
+      "./node_modules/@angular/*"
+    ]
+  }
 }

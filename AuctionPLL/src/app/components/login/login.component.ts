@@ -5,19 +5,27 @@ import { Login } from '../../models/login';
 import { AuthService } from '../../services/auth.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { ToastrService } from 'ngx-toastr';
+import { CommonConstants } from 'src/app/common/common-constants';
+import { NgbActiveModal, NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { RegisterComponent } from '../register/register.component';
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private toastrService: ToastrService,
     private router: Router,
-    private localStorage: LocalStorageService) { }
+    private localStorage: LocalStorageService,
+    private modalService: NgbModal,
+    private activeModal: NgbActiveModal
+  ) { }
 
+  modalOptions: NgbModalOptions;
   public ngOnInit() {
     this.isAuth = this.authService.isAuthenticated();
   }
@@ -47,13 +55,13 @@ export class LoginComponent implements OnInit {
           let errorMessage = response['errorMessage'];
           if (!!errorMessage) {
             this.toastrService.error(errorMessage);
-            document.getElementById('login-form').style.display = 'none';
-            document.getElementById("forgot-pass-form").style.display = "block";
+            this.activeModal.close();
+            this.modalService.open(ForgotPasswordComponent);
           } else {
             this.toastrService.success("Login successfully.");
-            document.getElementById('login-form').style.display = 'none';
+            this.activeModal.close();
             const token = (<any>response).token;
-            this.localStorage.set("token", JSON.stringify(token));
+            this.localStorage.set(CommonConstants.JWTToken, JSON.stringify(token));
             this.isAuth = true;
             window.location.reload();
           }
@@ -75,13 +83,17 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  public showRegisterForm() {
-    document.getElementById('login-form').style.display = 'none';
-    document.getElementById('register-form').style.display = 'block';
+  public openRegisterForm() {
+    this.activeModal.close();
+    this.modalService.open(RegisterComponent);
   }
 
-  public showResetForm() {
-    document.getElementById('login-form').style.display = 'none';
-    document.getElementById('forgot-pass-form').style.display = 'block';
+  public openResetForm() {
+    this.activeModal.close();
+    this.modalService.open(ForgotPasswordComponent);
+  }
+
+  public close() {
+    this.activeModal.close();
   }
 }

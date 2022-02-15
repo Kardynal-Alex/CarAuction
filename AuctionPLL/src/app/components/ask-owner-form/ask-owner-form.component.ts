@@ -8,7 +8,7 @@ import { LotService } from 'src/app/services/lot.service';
 @Component({
   selector: 'app-ask-owner-form',
   templateUrl: './ask-owner-form.component.html',
-  styleUrls: ['./ask-owner-form.component.css']
+  styleUrls: ['./ask-owner-form.component.less']
 })
 export class AskOwnerFormComponent implements OnInit {
 

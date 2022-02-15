@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
+import { CommonConstants } from 'src/app/common/common-constants';
 import { Lot } from 'src/app/models/lot';
 import { CommentService } from 'src/app/services/comment.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -12,7 +13,7 @@ import { Comment } from '../../models/comment';
 @Component({
   selector: 'app-comments',
   templateUrl: './comments.component.html',
-  styleUrls: ['./comments.component.css']
+  styleUrls: ['./comments.component.less']
 })
 export class CommentsComponent implements OnInit {
 
@@ -90,7 +91,7 @@ export class CommentsComponent implements OnInit {
   public userName: string;
   public userSurname: string;
   public getUserId() {
-    var token = this.localStorage.get('token');
+    var token = this.localStorage.get(CommonConstants.JWTToken);
     if (token != null) {
       var payload = JSON.parse(window.atob(token.split('.')[1]));
       this.userName = payload.name;

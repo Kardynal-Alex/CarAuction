@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-show-lots',
   templateUrl: './show-lots.component.html',
-  styleUrls: ['./show-lots.component.css']
+  styleUrls: ['./show-lots.component.less']
 })
 export class ShowLotsComponent implements OnInit, AfterViewInit, OnDestroy {
 

@@ -1,54 +1,52 @@
+:host {
+  * {
+    box-sizing: border-box;
+    outline: none;
+  }
 
 
-.container {
-    width:  60%;
-    margin: 100px auto;
-}
+  .fresh-lots {
+    width: 40%;
+    float: right;
+    margin: 5% auto;
+  }
 
-.text-line {
-    font-size: 28px;
-    font-weight: 600;
-    text-align: left;
-    height: 30px;
-}
+  .lots {
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    float: right;
+  }
 
-hr{
-    border: none; 
-    background-color: black; 
-    color: black;
-    height: 4px; 
-}
-
-.card {
+  .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 300px;
     text-align: center;
-    width: 33.3%;
+    width: 45%;
     float: left;
     border-radius: 20px;
-    height: 400px;
-    max-height: 400px;
+    height: 350px;
+    max-height: 350px;
     overflow: hidden;
     margin: 12px 15px;
   }
 
-  .card h1{
-      font-size: 18px;
+  .card h1 {
+    font-size: 18px;
   }
 
   .card img {
-    width:100%;
+    width: 100%;
     max-height: 200px;
     min-height: 200px;
   }
-  
+
   .title {
     color: black;
     font-size: 15px;
-    position: relative;
   }
-  
-  button {
+
+  .lots button {
     border: none;
     outline: 0;
     display: inline-block;
@@ -59,12 +57,11 @@ hr{
     cursor: pointer;
     width: 100%;
     font-size: 20px;
-    height: auto;
-    margin-top: 65px;
+    margin-bottom: auto;
   }
-  
+
   .main-block {
-      height: 80px;
+    height: 80px;
   }
 
   a {
@@ -72,22 +69,27 @@ hr{
     font-size: 22px;
     color: black;
   }
-  
-  button:hover, a:hover {
+
+  button:hover,
+  a:hover {
     opacity: 0.7;
   }
 
-  
+
   .card::after {
     content: "";
     clear: both;
     display: table;
   }
 
-.red {
-    background-color: red;
-}
-
-.green {
-    background-color: green;
+  .new p {
+    position: absolute;
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color: blueviolet;
+    color: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+  }
 }

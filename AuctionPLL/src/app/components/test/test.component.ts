@@ -8,7 +8,7 @@ import { LotService } from 'src/app/services/lot.service';
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  styleUrls: ['./test.component.less']
 })
 export class TestComponent implements OnInit {
 

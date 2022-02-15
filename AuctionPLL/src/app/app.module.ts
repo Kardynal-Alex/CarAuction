@@ -7,8 +7,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatButtonModule } from '@angular/material/button';
 import { JwtModule } from "@auth0/angular-jwt";
 
 import { LoginGuard } from './guards/login.guard';
@@ -42,6 +40,7 @@ import { TwoStepVerificationComponent } from './components/two-step-verification
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationDialogComponent } from './common/confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogService } from './common/confirmation-dialog/confirmation-dialog.service';
+import { CommonConstants } from './common/common-constants';
 
 const appRoutes: Routes = [
   { path: '', component: ShowLotsComponent },
@@ -62,7 +61,7 @@ const appRoutes: Routes = [
 ];
 
 export function tokenGetter() {
-  return localStorage.getItem("token");
+  return localStorage.getItem(CommonConstants.JWTToken);
 }
 @NgModule({
   declarations: [
@@ -100,8 +99,6 @@ export function tokenGetter() {
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MatTooltipModule,
-    MatButtonModule,
     ToastrModule.forRoot({ preventDuplicates: true }),
     JwtModule.forRoot({
       config: {

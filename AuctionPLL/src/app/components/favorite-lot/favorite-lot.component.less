@@ -1,30 +1,31 @@
-* {
+:host {
+  * {
     box-sizing: border-box;
-    outline:none;
+    outline: none;
   }
 
-.text-line {
+  .text-line {
     font-size: 28px;
     font-weight: 600;
     text-align: left;
     height: 30px;
-}
+  }
 
-hr{
-    border: none; 
-    background-color: black; 
+  hr {
+    border: none;
+    background-color: black;
     color: black;
-    height: 4px; 
-}
+    height: 4px;
+  }
 
-.lots {
+  .lots {
     margin: 80px 20%;
     width: 60%;
     justify-content: center;
     align-items: center;
-}
+  }
 
-.card {
+  .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 300px;
     text-align: center;
@@ -37,21 +38,22 @@ hr{
     margin: 12px 15px;
   }
 
-  .card h1{
-      font-size: 18px;
+  .card h1 {
+    font-size: 18px;
   }
+
   .card img {
-    width:100%;
+    width: 100%;
     max-height: 200px;
     min-height: 200px;
   }
-  
+
   .title {
     color: black;
     font-size: 15px;
   }
-  
- .lots button {
+
+  .lots button {
     border: none;
     outline: 0;
     display: inline-block;
@@ -64,9 +66,9 @@ hr{
     font-size: 20px;
     margin-bottom: auto;
   }
-  
+
   .main-block {
-      height: 80px;
+    height: 80px;
   }
 
   a {
@@ -74,35 +76,36 @@ hr{
     font-size: 22px;
     color: black;
   }
-  
-  button:hover, a:hover {
+
+  button:hover,
+  a:hover {
     opacity: 0.7;
   }
 
-  
+
   .card::after {
     content: "";
     clear: both;
     display: table;
-}
+  }
 
-.lots hr{
-  border: none; 
-  background-color: black; 
-  color: black;
-  height: 4px;
-}
+  .lots hr {
+    border: none;
+    background-color: black;
+    color: black;
+    height: 4px;
+  }
 
-.card h1 ,
-.card p {
-  height: auto;
-}
+  .card h1,
+  .card p {
+    height: auto;
+  }
 
-.favorite {
+  .favorite {
     position: relative;
-  }  
+  }
 
-.star {
+  .star {
     position: absolute;
     cursor: pointer;
     color: yellow;
@@ -117,7 +120,8 @@ hr{
     transition: transform .2s;
   }
 
-.star:hover {
-  opacity: 1;
-  transform: scale(1.5);
+  .star:hover {
+    opacity: 1;
+    transform: scale(1.5);
+  }
 }

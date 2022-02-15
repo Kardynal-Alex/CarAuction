@@ -6,7 +6,7 @@ import { LotService } from 'src/app/services/lot.service';
 @Component({
   selector: 'app-show-lot-images',
   templateUrl: './show-lot-images.component.html',
-  styleUrls: ['./show-lot-images.component.css']
+  styleUrls: ['./show-lot-images.component.less']
 })
 export class ShowLotImagesComponent implements OnInit {
 

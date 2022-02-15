@@ -3,11 +3,12 @@ import { Lot } from 'src/app/models/lot';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { LotService } from 'src/app/services/lot.service';
 import { tap } from "rxjs/operators";
+import { CommonConstants } from 'src/app/common/common-constants';
 
 @Component({
   selector: 'app-user-bids',
   templateUrl: './user-bids.component.html',
-  styleUrls: ['./user-bids.component.css']
+  styleUrls: ['./user-bids.component.less']
 })
 export class UserBidsComponent implements OnInit {
   public lots: Lot[];
@@ -16,7 +17,8 @@ export class UserBidsComponent implements OnInit {
     private localStorage: LocalStorageService) { }
 
   public getUserId(): string {
-    var payload = JSON.parse(window.atob(this.localStorage.get('token').split('.')[1]));
+    //replace on function
+    var payload = JSON.parse(window.atob(this.localStorage.get(CommonConstants.JWTToken).split('.')[1]));
     return payload.id;
   }
 

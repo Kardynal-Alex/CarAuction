@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CommonConstants } from 'src/app/common/common-constants';
 import { TwoFactor } from 'src/app/models/two-factor';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -9,7 +10,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 @Component({
   selector: 'app-two-step-verification',
   templateUrl: './two-step-verification.component.html',
-  styleUrls: ['./two-step-verification.component.css']
+  styleUrls: ['./two-step-verification.component.less']
 })
 export class TwoStepVerificationComponent implements OnInit {
 
@@ -37,7 +38,7 @@ export class TwoStepVerificationComponent implements OnInit {
     this.authService.twoSteplogin(twoFactor)
       .subscribe(response => {
         this.toastrService.success("Login successfully.");
-        this.localStorage.set("token", response['token']);
+        this.localStorage.set(CommonConstants.JWTToken, response['token']);
         this.router.navigate(['']);
         document.getElementById("2-step-form").style.display = "none";
       }, _ => {

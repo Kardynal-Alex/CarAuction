@@ -11,7 +11,7 @@ import { BaseUrl } from 'src/app/common/urls';
 @Component({
   selector: 'app-update-lot',
   templateUrl: './update-lot.component.html',
-  styleUrls: ['./update-lot.component.css']
+  styleUrls: ['./update-lot.component.less']
 })
 export class UpdateLotComponent implements OnInit, ComponentCanDeactivate {
   public lot: Lot;
