@@ -1,43 +1,48 @@
 <div class="register-form">
     <div class="register-content">
-        <form method="post" #registerForm="ngForm" (ngSubmit)="register(registerForm)">
-            <div>
-                <span (click)="close()" class="close" title="Close Modal">&times;</span>
+        <div>
+            <span (click)="close()" class="close" title="Close Modal">&times;</span>
+        </div>
+        <div class="container" [formGroup]="registerForm">
+            <p>Sign up</p>
+            <div class="has-tooltip">
+                <input type="text" placeholder="Enter Email" formControlName="Email" email>
+                <p class="tooltip"
+                    *ngIf="registerForm.controls.Email.errors?.required && registerForm.controls.Email.touched">
+                    Email is required</p>
+                <p class="tooltip"
+                    *ngIf="registerForm.controls.Email.errors?.email && registerForm.controls.Email.touched">
+                    Incorect email</p>
             </div>
-            <div class="container">
-                <p>Sign up</p>
-                <input type="hidden" id="role" name="role" value="user" ngModel>
-                <div>
-                    <input type="text" placeholder="Enter Email" id="email" name="email" ngModel #Email="ngModel"
-                        required email>
-                    <div class="error" *ngIf="Email.errors?.required && Email.touched">Required field</div>
-                    <div class="error" *ngIf="Email.errors?.email && Email.touched">Invalid email</div>
-                </div>
-                <div>
-                    <input type="password" placeholder="Enter Password" id="password" name="password"
-                        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" minlength="6" #Password="ngModel" ngModel
-                        required>
-                    <div class="error" *ngIf="Password.errors?.required && Password.touched">Required field</div>
-                    <div class="error" *ngIf="Password.errors?.minlength && Password.touched">Min length 6</div>
-                    <div class="error" *ngIf="Password.errors?.pattern && Password.touched">At least one letter and one
-                        number</div>
-                </div>
-                <div>
-                    <input type="text" placeholder="Enter Name" id="name" name="name" ngModel required #Name="ngModel"
-                        pattern="[a-zA-Z]*">
-                    <div class="error" *ngIf="Name.errors?.required && Name.touched">Required field</div>
-                    <div class="error" *ngIf="Name.errors?.pattern && Name.touched">Only letters</div>
-                </div>
-                <div>
-                    <input type="text" placeholder="Enter Surname" id="surname" name="surname" ngModel
-                        #Surname="ngModel" required pattern="[a-zA-Z]*">
-                    <div class="error" *ngIf="Surname.errors?.required && Surname.touched">Required field</div>
-                    <div class="error" *ngIf="Surname.errors?.pattern && Surname.touched">Only letters</div>
-                </div>
-                <button type="submit" [disabled]="Email.invalid || Password.invalid || 
-                Name.invalid || Surname.invalid">Register</button>
+            <div class="has-tooltip">
+                <input type="password" placeholder="Enter Password" formControlName="Password">
+                <p class="tooltip"
+                    *ngIf="registerForm.controls.Password.errors?.required && registerForm.controls.Password.touched">
+                    Password is required</p>
+                <p class="tooltip"
+                    *ngIf="registerForm.controls.Password.errors?.minlength && registerForm.controls.Password.touched">
+                    Min length 6</p>
             </div>
-        </form>
+            <div class="has-tooltip">
+                <input type="text" placeholder="Enter Name" formControlName="Name">
+                <p class="tooltip"
+                    *ngIf="registerForm.controls.Name.errors?.required && registerForm.controls.Name.touched">
+                    Name is required</p>
+                <p class="tooltip"
+                    *ngIf="registerForm.controls.Name.errors?.pattern && registerForm.controls.Name.touched">
+                    Only letters</p>
+            </div>
+            <div class="has-tooltip">
+                <input type="text" placeholder="Enter Surname" formControlName="Surname">
+                <p class="tooltip"
+                    *ngIf="registerForm.controls.Surname.errors?.required && registerForm.controls.Surname.touched">
+                    Surname is required</p>
+                <p class="tooltip"
+                    *ngIf="registerForm.controls.Surname.errors?.pattern && registerForm.controls.Surname.touched">
+                    Only letters</p>
+            </div>
+            <button (click)="register()" [disabled]="registerForm.invalid">Register</button>
+        </div>
         <div class="login-btn">
             <p>Already have an account? <button (click)="openLoginForm()" class="underline">
                     <p>Sign in here</p>

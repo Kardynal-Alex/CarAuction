@@ -22,9 +22,13 @@
   </div>
   <div>
     <div class="login-btn">
-      <button (click)="openLoginForm()">Login</button>
+      <div *ngIf="!IsAuthenticated">
+        <button (click)="openLoginForm()">Login</button>
+      </div>
+      <div *ngIf="!!IsAuthenticated">
+        <button (click)="logout()">Logout</button>
+      </div>
     </div>
-    <!-- <app-login></app-login> -->
   </div>
 </div>
 <hr>

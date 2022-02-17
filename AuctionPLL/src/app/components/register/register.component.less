@@ -1,3 +1,5 @@
+@import '../../common/tooltip.less';
+
 :host {
 
   body {
@@ -64,6 +66,14 @@
           display: inline-block;
           border: 1px solid #ccc;
           box-sizing: border-box;
+
+          &.ng-touched.ng-invalid {
+            border: solid red 2px;
+          }
+
+          &.ng-touched.ng-valid {
+            border: solid green 2px;
+          }
         }
 
         input[type=text],
@@ -73,6 +83,8 @@
           font-size: 18px;
           border-radius: 30px;
         }
+
+        #tooltip();
 
         button {
           background-color: #04AA6D;
@@ -110,18 +122,5 @@
         }
       }
     }
-  }
-
-  //refactor when change validation to tooltip
-  .error {
-    background-color: #04AA6D;
-    color: white;
-    font-weight: 600;
-    float: left;
-    width: 80%;
-    margin: 0 10%;
-    border-radius: 20px;
-    font-size: 18px;
-    text-align: center;
   }
 }

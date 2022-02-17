@@ -79,18 +79,6 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  public logout() {
-    this.authService.logout()
-      .subscribe(_ => {
-        this.isAuth = false;
-        this.router.navigate(['/']);
-        window.location.reload();
-        this.toastrService.success("Logout successfully.");
-      }, _ => {
-        this.toastrService.error("Error!");
-      });
-  }
-
   public openRegisterForm() {
     this.activeModal.close();
     this.modalService.open(RegisterComponent, { animation: false });

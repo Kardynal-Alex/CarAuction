@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Register } from 'src/app/models/register';
@@ -17,19 +17,33 @@ export class RegisterComponent implements OnInit {
     private authService: AuthService,
     private toastrService: ToastrService,
     private modalService: NgbModal,
-    private activeModal: NgbActiveModal
-  ) { }
+    private activeModal: NgbActiveModal,
+    private formBuilder: FormBuilder
+  ) {
+    this.initRegisterForm();
+  }
 
+  public registerForm: FormGroup;
   public ngOnInit(): void {
   }
 
-  public register(form: NgForm) {
+  private initRegisterForm() {
+    this.registerForm = this.formBuilder.group({
+      Email: [null, [Validators.required, Validators.email]],
+      Password: [null, [Validators.required, Validators.minLength(6)]],
+      Name: [null, [Validators.required, Validators.pattern('[a-zA-Z]*')]],
+      Surname: [null, [Validators.required, Validators.pattern('[a-zA-Z]*')]]
+    });
+  }
+
+  public register() {
+    console.log(this.registerForm.controls.Email.value)
     const registerUser: Register = {
-      Email: form.value.email,
-      Password: form.value.password,
+      Email: this.registerForm.controls.Email.value,
+      Password: this.registerForm.controls.Password.value,
       Role: CommonConstants.User,
-      Name: form.value.name,
-      Surname: form.value.surname,
+      Name: this.registerForm.controls.Name.value,
+      Surname: this.registerForm.controls.Surname.value,
       ClientURI: "https://localhost:4200/auction/emailconfirmation"
     }
     this.authService.register(registerUser)
