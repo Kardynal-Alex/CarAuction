@@ -8,27 +8,30 @@
 
 <div class="login-form">
     <div class="login-content">
-        <form method="post" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-            <div>
-                <span (click)="close()" class="close" title="Close Modal">&times;</span>
+        <div>
+            <span (click)="close()" class="close" title="Close Modal">&times;</span>
+        </div>
+        <div class="container" [formGroup]="loginForm">
+            <p>Sign in</p>
+            <div class="has-tooltip">
+                <input type="text" placeholder="Enter Email" name="email" formControlName="Email" email>
+                <p class="tooltip"
+                    *ngIf="loginForm.controls.Email.errors?.required && loginForm.controls.Email.touched">
+                    Email is required</p>
+                <p class="tooltip" *ngIf="loginForm.controls.Email.errors?.email && loginForm.controls.Email.touched">
+                    Incorect email</p>
             </div>
-            <div class="container">
-                <p>Sign in</p>
-                <div>
-                    <input type="text" placeholder="Enter Email" id="email" name="email" ngModel #Email="ngModel"
-                        required email>
-                    <div class="error" *ngIf="Email.errors?.required && Email.touched">Required field</div>
-                    <div class="error" *ngIf="Email.errors?.email && Email.touched">Invalid email</div>
-                </div>
-                <div>
-                    <input type="password" placeholder="Enter Password" id="password" name="password"
-                        #Password="ngModel" minlength="6" ngModel required>
-                    <div class="error" *ngIf="Password.errors?.required && Password.touched">Required field</div>
-                    <div class="error" *ngIf="Password.errors?.minlength && Password.touched">Min length 6</div>
-                </div>
-                <button [disabled]="Email.invalid || Password.invalid">Login</button>
+            <div class="has-tooltip">
+                <input type="password" placeholder="Enter Password" name="email" formControlName="Password">
+                <p class="tooltip"
+                    *ngIf="loginForm.controls.Password.errors?.required && loginForm.controls.Password.touched">
+                    Password is required</p>
+                <p class="tooltip"
+                    *ngIf="loginForm.controls.Password.errors?.minlength && loginForm.controls.Password.touched">
+                    Min length 6</p>
             </div>
-        </form>
+            <button (click)="login()" [disabled]="loginForm.invalid">Login</button>
+        </div>
         <div class="regis-btn">
             <button (click)="openResetForm()" class="underline">
                 <p>Forgot password?</p>
@@ -45,13 +48,3 @@
         </div>
     </div>
 </div>
-<!-- <app-register></app-register> -->
-<!-- <app-forgot-password></app-forgot-password> -->
-<!-- <script>
-    var login = document.getElementById('login-form');
-    window.onclick = function (event) {
-        if (event.target == login) {
-            login.style.display = "none";
-        }
-    }
-</script> -->

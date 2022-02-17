@@ -10,16 +10,10 @@ import { LoginComponent } from '../login/login.component';
 })
 export class MenuComponent implements OnInit {
 
-  private modalOptions: NgbModalOptions;
   constructor(
     private authService: AuthService,
     private modalService: NgbModal
-  ) {
-    this.modalOptions = {
-      // backdrop: 'static',
-      // backdropClass: 'menu-bar'
-    }
-  }
+  ) { }
 
   public IsAuthenticated: boolean = false;
   @Input() IsAdmin: boolean;
@@ -32,6 +26,6 @@ export class MenuComponent implements OnInit {
   }
 
   public openLoginForm() {
-    this.modalService.open(LoginComponent, this.modalOptions);
+    this.modalService.open(LoginComponent, { animation: false });
   }
 }

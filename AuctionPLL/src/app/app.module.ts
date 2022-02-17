@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from "@auth0/angular-jwt";
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { LoginGuard } from './guards/login.guard';
 import { AdminGuard } from './guards/admin.guard';
@@ -95,6 +96,7 @@ export function tokenGetter() {
   imports: [
     BrowserModule,
     FormsModule,
+    MatTooltipModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,

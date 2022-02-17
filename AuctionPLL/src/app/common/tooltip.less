@@ -1,0 +1,28 @@
+#tooltip() {
+    .has-tooltip {
+        position: relative;
+
+        .tooltip {
+            font-size: 16px;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+
+            background-color: grey;
+
+            color: white;
+
+            padding: 4px 6px 4px;
+            border-radius: 20px;
+            width: max-content;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        &:where(:hover, :focus-within)>.tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}

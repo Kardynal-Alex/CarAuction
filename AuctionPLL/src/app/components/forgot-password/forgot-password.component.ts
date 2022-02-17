@@ -25,7 +25,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   public openLoginForm() {
     this.activeModal.close();
-    this.modalService.open(LoginComponent);
+    this.modalService.open(LoginComponent, { animation: false });
   }
 
   public resetPassForm(form: NgForm) {

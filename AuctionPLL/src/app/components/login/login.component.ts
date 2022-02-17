@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Login } from '../../models/login';
 import { AuthService } from '../../services/auth.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { ToastrService } from 'ngx-toastr';
@@ -16,18 +15,30 @@ import { ForgotPasswordComponent } from '../forgot-password/forgot-password.comp
   styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
+
   constructor(
     private authService: AuthService,
     private toastrService: ToastrService,
     private router: Router,
     private localStorage: LocalStorageService,
     private modalService: NgbModal,
-    private activeModal: NgbActiveModal
-  ) { }
+    private activeModal: NgbActiveModal,
+    private formBuilder: FormBuilder
+  ) {
+    this.initLoginForm();
+  }
 
-  modalOptions: NgbModalOptions;
+  public modalOptions: NgbModalOptions;
+  public loginForm: FormGroup;
   public ngOnInit() {
     this.isAuth = this.authService.isAuthenticated();
+  }
+
+  private initLoginForm() {
+    this.loginForm = this.formBuilder.group({
+      Email: [null, [Validators.required, Validators.email]],
+      Password: [null, [Validators.required, Validators.minLength(6)]]
+    });
   }
 
   public ngDoCheck() {
@@ -35,11 +46,8 @@ export class LoginComponent implements OnInit {
   }
 
   public isAuth: boolean = false;
-  public login(form: NgForm) {
-    const loginUser: Login = {
-      Email: form.value.email,
-      Password: form.value.password
-    }
+  public login() {
+    const loginUser = this.loginForm.value;
     this.authService.login(loginUser)
       .subscribe(response => {
         if (response['is2StepVerificationRequired']) {
@@ -56,7 +64,7 @@ export class LoginComponent implements OnInit {
           if (!!errorMessage) {
             this.toastrService.error(errorMessage);
             this.activeModal.close();
-            this.modalService.open(ForgotPasswordComponent);
+            this.modalService.open(ForgotPasswordComponent, { animation: false });
           } else {
             this.toastrService.success("Login successfully.");
             this.activeModal.close();
@@ -85,12 +93,12 @@ export class LoginComponent implements OnInit {
 
   public openRegisterForm() {
     this.activeModal.close();
-    this.modalService.open(RegisterComponent);
+    this.modalService.open(RegisterComponent, { animation: false });
   }
 
   public openResetForm() {
     this.activeModal.close();
-    this.modalService.open(ForgotPasswordComponent);
+    this.modalService.open(ForgotPasswordComponent, { animation: false });
   }
 
   public close() {
