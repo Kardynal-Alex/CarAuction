@@ -3,23 +3,19 @@
   <div class="main-page">
     <a routerLink="">Cars & Bids</a>
   </div>
-  <div class="dropdown">
-    <button class="dropbtn">Auctions</button>
-    <div class="dropdown-content">
-      <a routerLink="">Live auctions</a>
-      <a routerLink="/sold-lots">Past Results</a>
-    </div>
-  </div>
-  <div class="dropdown" *ngIf="IsAuthenticated===true">
-    <button class="dropbtn">Cabinet</button>
-    <div class="dropdown-content">
-      <a routerLink="/userlots">My Lot</a>
-      <a routerLink="/createlot">Create Lot</a>
-      <a routerLink="/userbids">My Bid</a>
-      <a routerLink="/favorites">Favorite &#9733;</a>
-      <a routerLink="/admin" *ngIf="IsAdmin">Admin</a>
-    </div>
-  </div>
+  <button mat-button [matMenuTriggerFor]="menu1">Auctions</button>
+  <mat-menu #menu1="matMenu">
+    <button routerLink="" mat-menu-item>Live auctions</button>
+    <button routerLink="/sold-lots" mat-menu-item>Past Results</button>
+  </mat-menu>
+  <button mat-button [matMenuTriggerFor]="menu2" *ngIf="!!IsAuthenticated">Cabinet</button>
+  <mat-menu #menu2="matMenu">
+    <button routerLink="/userlots" mat-menu-item>My Lot</button>
+    <button routerLink="/createlot" mat-menu-item>Create Lot</button>
+    <button routerLink="/userbids" mat-menu-item>My Bid</button>
+    <button routerLink="/favorites" mat-menu-item>Favorite &#9733;</button>
+    <button routerLink="/admin" *ngIf="IsAdmin" mat-menu-item>Admin</button>
+  </mat-menu>
   <div>
     <div class="login-btn">
       <div *ngIf="!IsAuthenticated">

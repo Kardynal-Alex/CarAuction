@@ -9,6 +9,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from "@auth0/angular-jwt";
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { LoginGuard } from './guards/login.guard';
 import { AdminGuard } from './guards/admin.guard';
@@ -109,7 +110,8 @@ export function tokenGetter() {
         blacklistedRoutes: []
       }
     }),
-    NgbModule
+    NgbModule,
+    MatMenuModule
   ],
   exports: [],
   providers: [

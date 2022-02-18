@@ -1,29 +1,23 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="sort">
-  <div class="dropdown">
-    <button class="dropbtn">Sort by Price</button>
-    <div class="dropdown-content">
-      <button (click)="sortingData('','')">Remove filter</button>
-      <button (click)="sortingData('asc','currentPrice')">Ascending</button>
-      <button (click)="sortingData('desc','currentPrice')">Descending</button>
-    </div>
-  </div>
-  <div class="dropdown">
-    <button class="dropbtn">Sort by Date</button>
-    <div class="dropdown-content">
-      <button (click)="sortingData('','')">Remove filter</button>
-      <button (click)="sortingData('asc','startDateTime')">Ascending</button>
-      <button (click)="sortingData('desc','startDateTime')">Descending</button>
-    </div>
-  </div>
-  <div class="dropdown">
-    <button class="dropbtn">Sort by Year</button>
-    <div class="dropdown-content">
-      <button (click)="sortingData('','')">Remove filter</button>
-      <button (click)="sortingData('asc','year')">Ascending</button>
-      <button (click)="sortingData('desc','year')">Descending</button>
-    </div>
-  </div>
+  <button mat-button [matMenuTriggerFor]="sortprice">Sort By Price</button>
+  <mat-menu #sortprice="matMenu">
+    <button (click)="sortingData('','')" mat-menu-item>Remove filter</button>
+    <button (click)="sortingData('asc','currentPrice')" mat-menu-item>Ascending</button>
+    <button (click)="sortingData('desc','currentPrice')" mat-menu-item>Descending</button>
+  </mat-menu>
+  <button mat-button [matMenuTriggerFor]="sortdate">Sort by Date</button>
+  <mat-menu #sortdate="matMenu">
+    <button (click)="sortingData('','')" mat-menu-item>Remove filter</button>
+    <button (click)="sortingData('asc','startDateTime')" mat-menu-item>Ascending</button>
+    <button (click)="sortingData('desc','startDateTime')" mat-menu-item>Descending</button>
+  </mat-menu>
+  <button mat-button [matMenuTriggerFor]="sortyear">Sort by Date</button>
+  <mat-menu #sortyear="matMenu">
+    <button (click)="sortingData('','')" mat-menu-item>Remove filter</button>
+    <button (click)="sortingData('asc','year')" mat-menu-item>Ascending</button>
+    <button (click)="sortingData('desc','year')" mat-menu-item>Descending</button>
+  </mat-menu>
 </div>
 <div class="differ"></div>
 <div class="lots">
