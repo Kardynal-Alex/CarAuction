@@ -32,7 +32,7 @@ export class UserLotsComponent implements OnInit, OnDestroy {
       .subscribe(response => {
         this.lots = response;
         for (let lot of response) {
-          this.initTimer(lot['id'], lot['startDateTime']);
+          this.initTimer(lot.id, lot.startDateTime);
         }
       });
   }
@@ -43,7 +43,7 @@ export class UserLotsComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy() {
     for (let lot of this.lots) {
-      clearInterval(this.str[lot['id']]);
+      clearInterval(this.str[lot.id]);
     }
   }
 
@@ -53,7 +53,7 @@ export class UserLotsComponent implements OnInit, OnDestroy {
         if (confirmed) {
           this.lotService.deleteLotById(id)
             .subscribe(_ => {
-              this.lots = this.lots.filter(x => x['id'] != id);
+              this.lots = this.lots.filter(x => x.id != id);
               clearInterval(this.str[id]);
               this.toastrService.success("Lot is deleted!");
             }, _ => {
@@ -68,12 +68,12 @@ export class UserLotsComponent implements OnInit, OnDestroy {
     this.confirmationDialogService.confirm('Please confirm', 'Do you really want to ... ?')
       .then((confirmed) => {
         if (confirmed) {
-          lotEnd.IsSold = true;
+          lotEnd.isSold = true;
           this.lotService.updateLot(lotEnd)
             .subscribe(_ => {
-              lotEnd['isSold'] = true;
-              clearInterval(this.str[lotEnd['id']]);
-              document.getElementById('demo-' + lotEnd['id']).innerHTML = "Expired";
+              lotEnd.isSold = true;
+              clearInterval(this.str[lotEnd.id]);
+              document.getElementById('demo-' + lotEnd.id).innerHTML = "Expired";
               this.toastrService.success("Lot is closed!");
             }, _ => {
               this.toastrService.error("Something went wrong!");
@@ -111,14 +111,14 @@ export class UserLotsComponent implements OnInit, OnDestroy {
   }
 
   public checkLotIfTimerIsExpired(id: number) {
-    var index = this.lots.findIndex(x => x['id'] == id);
+    var index = this.lots.findIndex(x => x.id == id);
     var lot = this.lots[index];
 
-    if (parseFloat(lot['startPrice']) < parseFloat(lot['currentPrice'])) {
-      this.lots = this.lots.filter(x => x['id'] != id);
+    if (parseFloat(lot?.startPrice.toString()) < parseFloat(lot?.currentPrice.toString())) {
+      this.lots = this.lots.filter(x => x.id != id);
       return;
-    } else if (parseFloat(lot['startPrice']) === parseFloat(lot['currentPrice'])) {
-      this.initTimer(lot['id'], lot['startDateTime']);
+    } else if (parseFloat(lot?.startPrice.toString()) === parseFloat(lot?.currentPrice.toString())) {
+      this.initTimer(lot.id, lot.startDateTime);
       return;
     }
   }

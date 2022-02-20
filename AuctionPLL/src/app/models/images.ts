@@ -1,12 +1,12 @@
 export class Images {
-    Id: number;
-    Image1: string;
-    Image2: string;
-    Image3: string;
-    Image4: string;
-    Image5: string;
-    Image6: string;
-    Image7: string;
-    Image8: string;
-    Image9: string;
+    id: number;
+    image1: string;
+    image2: string;
+    image3: string;
+    image4: string;
+    image5: string;
+    image6: string;
+    image7: string;
+    image8: string;
+    image9: string;
 }

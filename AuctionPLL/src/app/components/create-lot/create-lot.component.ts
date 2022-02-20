@@ -31,7 +31,7 @@ export class CreateLotComponent implements OnInit, ComponentCanDeactivate {
     this.imagePath = '';
     this.photoIsEmpty = true;
     this.images = {
-      Image1: '', Image2: '', Image3: '', Image4: '', Image5: '', Image6: '', Image7: '', Image8: '', Image9: '', Id: 0
+      image1: '', image2: '', image3: '', image4: '', image5: '', image6: '', image7: '', image8: '', image9: '', id: 0
     };
     this.numbers = Array.from(Array(this.lotService.numbersOfImages).keys());
     this.checkIfAllImagesIsUploaded();
@@ -68,25 +68,25 @@ export class CreateLotComponent implements OnInit, ComponentCanDeactivate {
     if (this.photoIsEmpty == false && this.checkIfAllImagesIsUploaded()) {
       const userid = this.getUserId();
       const lot: Lot = {
-        Id: 0,
-        NameLot: form.value.NameLot,
-        StartPrice: form.value.StartPrice,
-        IsSold: false,
-        Image: this.imagePath,
-        Description: form.value.Description,
-        UserId: userid,
-        StartDateTime: new Date(Date.now()),
-        CurrentPrice: form.value.StartPrice,
-        Year: form.value.Year,
-        User: null,
-        LotState: {
-          Id: 0,
-          OwnerId: userid,
-          FutureOwnerId: userid,
-          CountBid: 0,
-          LotId: 0
+        id: 0,
+        nameLot: form.value.NameLot,
+        startPrice: form.value.StartPrice,
+        isSold: false,
+        image: this.imagePath,
+        description: form.value.Description,
+        userId: userid,
+        startDateTime: new Date(Date.now()),
+        currentPrice: form.value.StartPrice,
+        year: form.value.Year,
+        user: null,
+        lotState: {
+          id: 0,
+          ownerId: userid,
+          futureOwnerId: userid,
+          countBid: 0,
+          lotId: 0
         },
-        Images: this.images
+        images: this.images
       };
       this.lotService.createLot(lot)
         .subscribe(_ => {

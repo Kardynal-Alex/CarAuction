@@ -3,11 +3,11 @@
         <div class="lot" *ngIf="!!lot">
             <div class="header-text">
                 <p>
-                    {{lot['nameLot']}} <a class="unstar" id="star-{{lot.id}}" (click)="changeStar(lot.id)">&#9733;</a>
+                    {{lot?.nameLot}} <a class="unstar" id="star-{{lot.id}}" (click)="changeStar(lot.id)">&#9733;</a>
                 </p>
             </div>
             <div class="description-text">
-                <p>{{lot['description']}}</p>
+                <p>{{lot?.description}}</p>
             </div>
             <div class="images">
                 <div id="images">
@@ -33,8 +33,8 @@
                     </div>
                 </div>
                 <div class="bid-btn">
-                    <a *ngIf="!lot['isSold'];else isSoldBut" [disabled]="userId===lot?.userId"
-                        (click)="placeBid()">#Place Bid</a>
+                    <a *ngIf="!lot.isSold;else isSoldBut" [disabled]="userId===lot?.userId" (click)="placeBid()">#Place
+                        Bid</a>
                     <ng-template #isSoldBut><a disabled style="background: grey;">#Is sold</a></ng-template>
                 </div>
             </div>
@@ -46,19 +46,19 @@
                     </tr>
                     <tr>
                         <td>#Comments</td>
-                        <td>{{comments.length}}</td>
+                        <td>{{comments?.length}}</td>
                     </tr>
                     <tr>
                         <td>#Bids</td>
-                        <td>{{lot.lotState.countBid}}</td>
+                        <td>{{lot.lotState?.countBid}}</td>
                     </tr>
                     <tr>
                         <td>#Owner</td>
-                        <td>{{lot.user.name}} {{lot.user.surname}}</td>
+                        <td>{{lot.user?.name}} {{lot.user?.surname}}</td>
                     </tr>
                     <tr>
                         <td>#Email</td>
-                        <td>{{lot.user.email}}</td>
+                        <td>{{lot.user?.email}}</td>
                     </tr>
                 </table>
             </div>
@@ -70,5 +70,5 @@
         <app-fresh-lots [lot]="lot"></app-fresh-lots>
     </div>
 </div>
-<app-ask-owner-form [ownerEmail]="lot['user']['email']" *ngIf="userId!==lot['userId']">
+<app-ask-owner-form [ownerEmail]="lot?.user?.email" *ngIf="userId!==lot?.userId">
 </app-ask-owner-form>

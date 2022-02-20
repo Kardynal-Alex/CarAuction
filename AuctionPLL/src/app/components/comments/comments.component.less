@@ -4,37 +4,40 @@
     outline: none;
   }
 
+  .header-text {
+    margin-top: 40px;
+    font-size: 30px;
+    line-height: 0px;
+
+    p {
+      font-weight: 600;
+      float: left;
+    }
+
+    .filter-comm {
+      float: right;
+
+      a {
+        margin: 0 10px 0;
+        font-size: 20px;
+
+        &:hover {
+          cursor: pointer;
+          font-weight: 600;
+        }
+      }
+    }
+
+  }
+
   hr {
     border: none;
     background-color: black;
     color: black;
     height: 4px;
-    width: 90%;
+    width: 100%;
     float: left;
     margin-bottom: 20px;
-  }
-
-  .txt {
-    margin-top: 50px;
-  }
-
-  .txt p {
-    font-size: 30px;
-    font-weight: 600;
-    height: 10px;
-    float: left;
-  }
-
-  .filter-comm {
-    float: right;
-    margin-right: 10%;
-    margin-top: 40px;
-  }
-
-  .filter-comm a {
-    margin: 0 10px;
-    height: 10px;
-    font-size: 20px;
   }
 
   .text p {
@@ -44,107 +47,96 @@
     color: black;
   }
 
-  .comments {
-    width: 90%;
-  }
-
-  .comments input {
-    width: 95%;
-    font-size: 25px;
-    border-radius: 20px;
+  .comment-form {
     padding: 5px 5px;
-  }
-
-  .comments button {
-    width: 5%;
     font-size: 25px;
-    padding: 5px 5px 5px 5px;
-    border-radius: 50%;
-    background-color: green;
-    color: white;
+
+    input {
+      width: 95%;
+      border-radius: 20px 0 0 20px;
+      padding-left: 10px;
+    }
+
+    button {
+      width: 5%;
+      border-radius: 0 20px 20px 0;
+      background-color: green;
+      color: white;
+    }
   }
 
-  .comment {
-    margin-left: 4%;
-    width: 90%;
-    margin-bottom: 10px;
-  }
+  .comments {
+    .comment {
+      width: 90%;
+      line-height: 30px;
 
-  .comment .head {
-    margin-top: 0;
-    width: auto;
-    display: flex;
-  }
+      .head {
+        width: auto;
+        display: flex;
 
-  .comment .text {
-    margin-top: 0;
-  }
+        .author {
+          text-align: left;
+          padding: 0;
+        }
 
-  .comment .head p {
-    text-align: left;
-    font-size: 18px;
-    padding: 0;
-    font-weight: 600;
-    height: 5px;
-  }
+        .author,
+        .seller {
+          padding-top: 8px;
+          font-size: 18px;
+          font-weight: 600;
+        }
 
-  .comment .text p {
-    text-align: left;
-    padding: 0;
-    font-size: 20px;
-    height: auto;
-    margin-top: 0px;
-    font-weight: normal;
-  }
+        .seller {
+          margin-left: 10px;
+          position: relative;
+        }
 
-  .space {
-    width: 100%;
-  }
+        .seller,
+        .delete {
+          color: green;
+        }
 
-  .seller p {
-    color: green;
-    font-size: 20px;
-    margin-left: 10px;
-    position: relative;
-  }
+        .delete {
+          padding-top: 8px;
+          align-items: center;
 
-  .delete {
-    margin-top: 10px;
-  }
+          a {
+            margin-left: 10px;
+            font-size: 30px;
 
-  .delete a {
-    color: green;
-    font-size: 30px;
-    margin-left: 10px;
-    position: relative;
-  }
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
 
-  .comments input {
-    padding-left: 10px;
-  }
+      .comment-text {
+        font-size: 20px;
+        margin-top: 0px;
+        padding-bottom: 2px;
 
-  .isBid {
-    display: inline;
-    padding-bottom: 20px;
-  }
+        .isBid {
+          padding: 4px;
+          background-color: black;
+          color: white;
+          font-size: 20px;
+          text-indent: 10%;
+          border-radius: 20px;
+          display: inline;
 
-  .isBid p {
-    background-color: black;
-    color: white;
-    font-size: 20px;
-    text-indent: 10%;
-    border-radius: 20px;
-    display: inline;
-  }
+          &::after {
+            content: "   ";
+            white-space: pre;
+          }
 
-  .isBid p::after {
-    content: "   ";
-    white-space: pre;
-  }
+          &::before {
+            content: "   ";
+            white-space: pre;
+          }
+        }
+      }
 
-  .isBid p::before {
-    content: "   ";
-    white-space: pre;
+    }
   }
-
 }

@@ -41,7 +41,7 @@ export class FavoriteLotComponent implements OnInit {
       lotId: lotId
     }
     this.favoriteService.deleteFavoriteByUserIdAndLotId(favorite).subscribe(() => {
-      this.lots = this.lots.filter(x => x['id'] != lotId);
+      this.lots = this.lots.filter(x => x.id != lotId);
     });
   }
 

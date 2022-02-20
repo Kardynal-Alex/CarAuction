@@ -2,7 +2,7 @@
     <div *ngIf="lots">
         <div class="lots">
             <div *ngFor="let lt of lots">
-                <div class="card" *ngIf="!lt.isSold && lt.id!==lot.id">
+                <div class="card" *ngIf="!lt.isSold && lt.id!==lot?.id">
                     <div *ngIf="!lt.isSold" class="new">
                         <p>new</p>
                     </div>

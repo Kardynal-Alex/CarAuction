@@ -24,7 +24,7 @@ export class TestComponent implements OnInit {
   numbers = [1, 2, 3];
   ngOnInit() {
     this.images = {
-      Image1: '', Image2: '', Image3: '', Image4: '', Image5: '', Image6: '', Image7: '', Image8: '', Image9: '', Id: 0
+      image1: '', image2: '', image3: '', image4: '', image5: '', image6: '', image7: '', image8: '', image9: '', id: 0
     };
   }
   myForm: FormGroup;

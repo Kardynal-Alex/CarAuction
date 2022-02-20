@@ -25,7 +25,8 @@ export class ShowLotToBidComponent implements OnInit, AfterViewInit, OnDestroy {
     private lotService: LotService,
     private localStorage: LocalStorageService,
     private commentService: CommentService,
-    private favoriteService: FavoriteService) { }
+    private favoriteService: FavoriteService
+  ) { }
   public lot: Lot;
   public comments: Comment[];
   public filtredComments: Comment[];
@@ -34,8 +35,8 @@ export class ShowLotToBidComponent implements OnInit, AfterViewInit, OnDestroy {
     this.lotService.getLotById(this.id)
       .subscribe(response => {
         this.lot = response;
-        if (!!this.lot['isSold'])
-          this.initTimer(this.id, this.lot['startDateTime']);
+        if (!this.lot.isSold)
+          this.initTimer(this.id, this.lot.startDateTime);
         else {
           setTimeout(() => {
             document.getElementById('timer-' + this.lot['id']).innerHTML = "EXPIRED"
@@ -63,9 +64,9 @@ export class ShowLotToBidComponent implements OnInit, AfterViewInit, OnDestroy {
   public init() {
     if (this.userId.length > 0) {
       const favor: Favorite = {
-        id: "",
+        id: '',
         userId: this.userId,
-        lotId: this.lot['id']
+        lotId: this.lot?.id
       };
       this.favoriteService.getFavoriteByUserIdAndLotId(favor)
         .subscribe(response => {
@@ -108,10 +109,10 @@ export class ShowLotToBidComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public placeBid() {
     var bid = prompt("Place bid more than current");
-    if (parseFloat(bid) > this.lot['currentPrice'] && this.userId.length > 0) {
-      this.lot['currentPrice'] = parseFloat(bid);
-      this.lot['lotState']['futureOwnerId'] = this.userId;
-      this.lot['lotState']['countBid'] += 1;
+    if (parseFloat(bid) > this.lot.currentPrice && this.userId.length > 0) {
+      this.lot.currentPrice = parseFloat(bid);
+      this.lot.lotState.futureOwnerId = this.userId;
+      this.lot.lotState.countBid += 1;
       this.lotService.updateLot(this.lot)
         .subscribe(_ => {
           this.toastrService.success("Thanks for bid");
@@ -134,7 +135,7 @@ export class ShowLotToBidComponent implements OnInit, AfterViewInit, OnDestroy {
           this.toastrService.error("Error");
         });
     }
-    else if (parseFloat(bid) <= this.lot['currentPrice'] || !(typeof bid === "number")) {
+    else if (parseFloat(bid) <= this.lot.currentPrice || !(typeof bid === "number")) {
       this.toastrService.error("Incorrect input data", "Try again");
     }
     else if (this.userId.length > 0) {
@@ -200,12 +201,12 @@ export class ShowLotToBidComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public checkLotIfTimerIsExpired(id: number) {
-    if (this.lot['startPrice'] == this.lot['currentPrice']) {
-      this.lot['startDateTime'] = new Date(Date.now());
-      this.initTimer(this.lot['id'], this.lot['startDateTime']);
+    if (this.lot.startPrice == this.lot.currentPrice) {
+      this.lot.startDateTime = new Date(Date.now());
+      this.initTimer(this.lot.id, this.lot.startDateTime);
     }
-    else if (this.lot['startPrice'] < this.lot['currentPrice']) {
-      this.lot['isSold'] = true;
+    else if (this.lot.startPrice < this.lot.currentPrice) {
+      this.lot.isSold = true;
     }
   }
 

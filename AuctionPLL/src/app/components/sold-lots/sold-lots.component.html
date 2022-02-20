@@ -5,7 +5,7 @@
     <hr>
     <div *ngFor="let lot of lots">
         <div class="card">
-            <img [src]="createImgPath(lot.image)" alt="profile picture">
+            <img [src]="createImgPath(lot?.image)" alt="profile picture">
             <div class="main-block">
                 <h1>{{lot.nameLot}}</h1>
                 <p class="title">{{lot.description}}</p>

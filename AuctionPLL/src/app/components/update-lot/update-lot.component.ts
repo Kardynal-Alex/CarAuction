@@ -29,7 +29,7 @@ export class UpdateLotComponent implements OnInit, ComponentCanDeactivate {
     this.lotService.getLotById(this.id)
       .subscribe(resp => {
         this.lot = resp;
-        this.imagePath = this.lot.Image;
+        this.imagePath = this.lot.image;
       });
   }
 
@@ -39,7 +39,7 @@ export class UpdateLotComponent implements OnInit, ComponentCanDeactivate {
     this.lotService.getLotById(this.id)
       .subscribe(resp => {
         this.lot = resp;
-        this.imagePath = this.lot['image'];
+        this.imagePath = this.lot.image;
       });
     this.numbers = Array.from(Array(this.lotService.numbersOfImages).keys());
   }
@@ -55,9 +55,9 @@ export class UpdateLotComponent implements OnInit, ComponentCanDeactivate {
 
   public updateLot() {
     if (this.imagePath && this.checkIfAllImagesIsUploaded()) {
-      this.lot['image'] = this.imagePath;
-      this.lot['user'] = null;
-      this.lot['lotState'] = null;
+      this.lot.image = this.imagePath;
+      this.lot.user = null;
+      this.lot.lotState = null;
       this.lotService.updateLot(this.lot)
         .subscribe(_ => {
           this.toastrService.success("Lot is updated");

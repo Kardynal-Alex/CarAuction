@@ -1,7 +1,7 @@
 export class LotState {
-    Id: number;
-    OwnerId: string;
-    FutureOwnerId: string;
-    CountBid: number;
-    LotId: number;
+    id: number;
+    ownerId: string;
+    futureOwnerId: string;
+    countBid: number;
+    lotId: number;
 }

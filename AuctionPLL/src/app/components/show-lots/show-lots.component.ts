@@ -55,7 +55,7 @@ export class ShowLotsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.favorites = response;
         setTimeout(() => {
           for (let favorite of response) {
-            var x = document.getElementById("star-" + favorite['lotId']);
+            var x = document.getElementById("star-" + favorite.lotId);
             if (x != null)
               x.className = "star";
           }
@@ -68,7 +68,7 @@ export class ShowLotsComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(res => {
         this.lots = res;
         for (let lot of res) {
-          this.initTimer(lot['id'], lot['startDateTime']);
+          this.initTimer(lot.id, lot.startDateTime);
         }
       });
   }
@@ -106,11 +106,11 @@ export class ShowLotsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public removeFromFavorite(lotId: number) {
-    const index = this.favorites.findIndex(x => x['lotId'] == lotId);
-    const favoriteId = this.favorites[index]['id'];
+    const index = this.favorites.findIndex(x => x.lotId == lotId);
+    const favoriteId = this.favorites[index].id;
     this.favoriteService.deleteFavoriteById(favoriteId)
       .subscribe(_ => {
-        this.favorites = this.favorites.filter(x => x['id'] != favoriteId);
+        this.favorites = this.favorites.filter(x => x.id != favoriteId);
         document.getElementById('star-' + lotId).className = "unstar";
       });
   }
@@ -120,24 +120,24 @@ export class ShowLotsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public checkLotIfTimerIsExpired(id: number) {
-    var index = this.lots.findIndex(x => x['id'] == id);
+    var index = this.lots.findIndex(x => x.id == id);
     var lot = this.lots[index];
 
-    if (parseFloat(lot['startPrice']) < parseFloat(lot['currentPrice'])) {
-      lot['isSold'] = true;
+    if (parseFloat(lot.startPrice.toString()) < parseFloat(lot.currentPrice.toString())) {
+      lot.isSold = true;
       this.lotService.updateLotAfterClosing(lot)
         .subscribe(_ => {
-          this.lots = this.lots.filter(x => x['id'] != id);
+          this.lots = this.lots.filter(x => x.id != id);
         }, _ => { });
       return;
     } else
-      if (parseFloat(lot['startPrice']) === parseFloat(lot['currentPrice'])) {
+      if (parseFloat(lot.startPrice.toString()) === parseFloat(lot.currentPrice.toString())) {
         this.lotService.updateOnlyDateLot(lot)
           .subscribe(_ => {
             document.getElementById('demo-' + id).innerHTML = "Expired";
-            this.lots[index]['startDateTime'] = Date.now();
+            this.lots[index].startDateTime = new Date(Date.now());
           }, _ => { });
-        this.initTimer(lot['id'], this.lots[index]['startDateTime']);
+        this.initTimer(lot.id, this.lots[index].startDateTime);
         return;
       }
   }
