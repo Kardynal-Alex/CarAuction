@@ -2,21 +2,21 @@
 <div class="sort">
   <button mat-button [matMenuTriggerFor]="sortprice">Sort By Price</button>
   <mat-menu #sortprice="matMenu">
-    <button (click)="sortingData('','')" mat-menu-item>Remove filter</button>
-    <button (click)="sortingData('asc','currentPrice')" mat-menu-item>Ascending</button>
-    <button (click)="sortingData('desc','currentPrice')" mat-menu-item>Descending</button>
+    <button (click)="sortingData(null,'')" mat-menu-item>Remove filter</button>
+    <button (click)="sortingData(SortViewMode.asc,'currentPrice')" mat-menu-item>Ascending</button>
+    <button (click)="sortingData(SortViewMode.desc,'currentPrice')" mat-menu-item>Descending</button>
   </mat-menu>
   <button mat-button [matMenuTriggerFor]="sortdate">Sort by Date</button>
   <mat-menu #sortdate="matMenu">
-    <button (click)="sortingData('','')" mat-menu-item>Remove filter</button>
-    <button (click)="sortingData('asc','startDateTime')" mat-menu-item>Ascending</button>
-    <button (click)="sortingData('desc','startDateTime')" mat-menu-item>Descending</button>
+    <button (click)="sortingData(null,'')" mat-menu-item>Remove filter</button>
+    <button (click)="sortingData(SortViewMode.asc,'startDateTime')" mat-menu-item>Ascending</button>
+    <button (click)="sortingData(SortViewMode.desc,'startDateTime')" mat-menu-item>Descending</button>
   </mat-menu>
   <button mat-button [matMenuTriggerFor]="sortyear">Sort by Date</button>
   <mat-menu #sortyear="matMenu">
-    <button (click)="sortingData('','')" mat-menu-item>Remove filter</button>
-    <button (click)="sortingData('asc','year')" mat-menu-item>Ascending</button>
-    <button (click)="sortingData('desc','year')" mat-menu-item>Descending</button>
+    <button (click)="sortingData(null,'')" mat-menu-item>Remove filter</button>
+    <button (click)="sortingData(SortViewMode.asc,'year')" mat-menu-item>Ascending</button>
+    <button (click)="sortingData(SortViewMode.desc,'year')" mat-menu-item>Descending</button>
   </mat-menu>
 </div>
 <div class="differ"></div>

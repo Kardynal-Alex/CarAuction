@@ -195,3 +195,5 @@ D:\Asp.Net(project)\CarAuction\Auction.WepApi\obj\Debug\netcoreapp3.1\Auction.We
 D:\Asp.Net(project)\CarAuction\Auction.WepApi\obj\Debug\netcoreapp3.1\Auction.WepApi.dll
 D:\Asp.Net(project)\CarAuction\Auction.WepApi\obj\Debug\netcoreapp3.1\Auction.WepApi.pdb
 D:\Asp.Net(project)\CarAuction\Auction.WepApi\obj\Debug\netcoreapp3.1\Auction.WepApi.genruntimeconfig.cache
+D:\Asp.Net(project)\CarAuction\Auction.WepApi\bin\Debug\netcoreapp3.1\package-lock.json
+D:\Asp.Net(project)\CarAuction\Auction.WepApi\bin\Debug\netcoreapp3.1\package.json

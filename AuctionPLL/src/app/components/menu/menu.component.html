@@ -1,6 +1,6 @@
 <hr>
 <div class="navbar">
-  <div class="main-page">
+  <div class="logo-btn">
     <a routerLink="">Cars & Bids</a>
   </div>
   <button mat-button [matMenuTriggerFor]="menu1">Auctions</button>
@@ -16,14 +16,12 @@
     <button routerLink="/favorites" mat-menu-item>Favorite &#9733;</button>
     <button routerLink="/admin" *ngIf="IsAdmin" mat-menu-item>Admin</button>
   </mat-menu>
-  <div>
-    <div class="login-btn">
-      <div *ngIf="!IsAuthenticated">
-        <button (click)="openLoginForm()">Login</button>
-      </div>
-      <div *ngIf="!!IsAuthenticated">
-        <button (click)="logout()">Logout</button>
-      </div>
+  <div class="login-btn">
+    <div *ngIf="!IsAuthenticated">
+      <a (click)="openLoginForm()">Login</a>
+    </div>
+    <div *ngIf="!!IsAuthenticated">
+      <a (click)="logout()">Logout</a>
     </div>
   </div>
 </div>

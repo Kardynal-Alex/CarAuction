@@ -6,7 +6,7 @@ import { FavoriteService } from 'src/app/services/favorite.service';
 import { Favorite } from 'src/app/models/favorite';
 import { AuthService } from 'src/app/services/auth.service';
 import { Guid } from 'guid-typescript';
-import { ActivatedRoute, Router } from '@angular/router';
+import { SortMode } from 'src/app/common/sort-mode';
 
 @Component({
   selector: 'app-show-lots',
@@ -15,12 +15,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ShowLotsComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  public get SortViewMode(): typeof SortMode {
+    return SortMode;
+  }
+
   constructor(
     private toastrService: ToastrService,
     private lotService: LotService,
     private favoriteService: FavoriteService,
-    private authService: AuthService,
-    private route: ActivatedRoute) { }
+    private authService: AuthService
+  ) { }
 
   public str = {};
   public userId: string = '';
@@ -28,7 +32,7 @@ export class ShowLotsComponent implements OnInit, AfterViewInit, OnDestroy {
   public lots: Lot[];
   public ngOnInit() {
     this.sortField = '';
-    this.sortMode = '';
+    this.sortMode = null;
     this.isAuth = this.authService.isAuthenticated();
     if (this.isAuth) {
       this.userId = this.authService.getUserId();
@@ -69,9 +73,9 @@ export class ShowLotsComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
-  public sortMode: string;
+  public sortMode: SortMode;
   public sortField: string;
-  public sortingData(sortmode: string, sortfield: string) {
+  public sortingData(sortmode: SortMode, sortfield: string) {
     this.sortMode = sortmode;
     this.sortField = sortfield;
   }
