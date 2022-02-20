@@ -1,39 +1,74 @@
-<div class="container">
-    <div class="lot" *ngIf="lot!==null">
-        <h3>{{lot['nameLot']}} <a class="unstar" id="star-{{lot.id}}" (click)="changeStar(lot.id)">&#9733;</a></h3>
-        <h4>{{lot['description']}}</h4>
-        <div class="images">
-            <div id="images">
-                <app-show-lot-images [lot]="lot"></app-show-lot-images>
+<div class="row">
+    <div class="col-70">
+        <div class="lot" *ngIf="!!lot">
+            <div class="header-text">
+                <p>
+                    {{lot['nameLot']}} <a class="unstar" id="star-{{lot.id}}" (click)="changeStar(lot.id)">&#9733;</a>
+                </p>
             </div>
-        </div>
-        <img [src]="createImgPath(lot.image)" alt="lotpicture">
-        <div class="flex-images">
-            <img [src]="createImgPath(lot['images']['image1'])" alt="lotpicture">
-            <img [src]="createImgPath(lot['images']['image2'])" alt="lotpicture">
-            <div class="show-more">
-                <img [src]="createImgPath(lot['images']['image3'])" alt="lotpicture" />
-                <div class="back"></div>
-                <a (click)="showImages()" class="text">All Photos</a>
+            <div class="description-text">
+                <p>{{lot['description']}}</p>
             </div>
-        </div>
-        <div class="bid">
-            <p *ngIf="comments">#Current bid {{lot.currentPrice|currency}} #Comments {{comments.length}} #Bids
-                {{lot.lotState.countBid}} </p>
-            <div class="timer">
-                <p id="timer-{{lot.id}}"></p>
+            <div class="images">
+                <div id="images">
+                    <app-show-lot-images [lot]="lot"></app-show-lot-images>
+                </div>
             </div>
-            <button *ngIf="!lot['isSold'];else isSoldBut" [disabled]="userId===lot?.userId" (click)="placeBid()">#Place
-                Bid</button>
-            <ng-template #isSoldBut><button disabled style="background: grey;">#Is sold</button></ng-template>
+            <div class="collage">
+                <div class="main-img">
+                    <img [src]="createImgPath(lot.image)" alt="main-picture">
+                    <div class="timer">
+                        <p class="time" id="timer-{{lot.id}}"></p>
+                    </div>
+                </div>
+                <div class="flex-images">
+                    <div class="img-1">
+                        <img [src]="createImgPath(lot.images?.image1)" alt="lotpicture">
+                    </div>
+                    <div class="img-2">
+                        <img [src]="createImgPath(lot.images?.image2)" alt="lotpicture">
+                    </div>
+                    <div class="img-3">
+                        <img [src]="createImgPath(lot.images?.image3)" alt="lotpicture" (click)="showImages()" />
+                    </div>
+                </div>
+                <div class="bid-btn">
+                    <a *ngIf="!lot['isSold'];else isSoldBut" [disabled]="userId===lot?.userId"
+                        (click)="placeBid()">#Place Bid</a>
+                    <ng-template #isSoldBut><a disabled style="background: grey;">#Is sold</a></ng-template>
+                </div>
+            </div>
+            <div class="grid">
+                <table>
+                    <tr>
+                        <td>#Current bid</td>
+                        <td>{{lot.currentPrice|currency}}</td>
+                    </tr>
+                    <tr>
+                        <td>#Comments</td>
+                        <td>{{comments.length}}</td>
+                    </tr>
+                    <tr>
+                        <td>#Bids</td>
+                        <td>{{lot.lotState.countBid}}</td>
+                    </tr>
+                    <tr>
+                        <td>#Owner</td>
+                        <td>{{lot.user.name}} {{lot.user.surname}}</td>
+                    </tr>
+                    <tr>
+                        <td>#Email</td>
+                        <td>{{lot.user.email}}</td>
+                    </tr>
+                </table>
+            </div>
+            <app-comments [lot]="lot" [userId]="userId" [comments]="comments" [filtredComments]="filtredComments">
+            </app-comments>
         </div>
-        <div class="info">
-            <p>Owner: {{lot.user.name}} {{lot.user.surname}} Email: {{lot.user.email}}</p>
-        </div>
-        <app-comments [lot]="lot" [userId]="userId" [comments]="comments" [filtredComments]="filtredComments">
-        </app-comments>
     </div>
-    <app-fresh-lots [lot]="lot"></app-fresh-lots>
+    <div class="col-30">
+        <app-fresh-lots [lot]="lot"></app-fresh-lots>
+    </div>
 </div>
 <app-ask-owner-form [ownerEmail]="lot['user']['email']" *ngIf="userId!==lot['userId']">
 </app-ask-owner-form>

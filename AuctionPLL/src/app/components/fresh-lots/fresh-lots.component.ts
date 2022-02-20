@@ -13,7 +13,9 @@ export class FreshLotsComponent implements OnInit {
 
   constructor(
     private lotService: LotService,
-    private router: Router) { }
+    private router: Router
+  ) { }
+
   @Input() lot: Lot;
   public lots: Lot[];
   public ngOnInit() {

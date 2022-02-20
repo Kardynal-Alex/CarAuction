@@ -11,8 +11,8 @@
                         <h1>{{lt.nameLot}}</h1>
                         <p class="title">{{lt.description}}</p>
                     </div>
-                    <p><button *ngIf="!lt.isSold;else isSoldBut" (click)="redirectToNewLot(lt.id)">Bid {{lt.currentPrice
-                            | currency}}</button></p>
+                    <button *ngIf="!lt.isSold;else isSoldBut" (click)="redirectToNewLot(lt.id)">Bid {{lt.currentPrice
+                        | currency}}</button>
                     <ng-template #isSoldBut>
                         <button class="isSold" style="background: grey;" (click)="redirectToNewLot(lt.id)">Is
                             sold</button>
