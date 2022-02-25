@@ -1,7 +1,0 @@
-2022-02-20T21:37:57.8108398+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2022-02-20T21:37:57.8239258+02:00  [INF] Hosting environment: "Development" (c3307c92)
-2022-02-20T21:37:57.8242418+02:00  [INF] Content root path: "D:\Asp.Net(project)\CarAuction\Auction.WepApi" (b5d60022)
-2022-02-20T22:46:59.6402063+02:00 800001aa-0006-fc00-b63f-84710c7967bb [INF] Message: User is not founded (512c7bc5)
-2022-02-20T22:46:59.6453831+02:00 800001aa-0006-fc00-b63f-84710c7967bb [INF] In method: Void MoveNext() (9f7d37fa)
-2022-02-20T22:47:09.3954600+02:00 80000101-0004-fe00-b63f-84710c7967bb [INF] Message: User is not founded (512c7bc5)
-2022-02-20T22:47:09.3961166+02:00 80000101-0004-fe00-b63f-84710c7967bb [INF] In method: Void MoveNext() (9f7d37fa)

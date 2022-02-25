@@ -19,23 +19,22 @@
     <button (click)="sortingData(SortViewMode.desc,'year')" mat-menu-item>Descending</button>
   </mat-menu>
 </div>
-<div class="differ"></div>
+<hr>
 <div class="lots">
-  <hr>
   <div *ngFor="let lot of lots | sort:sortMode:sortField">
     <div class="card" *ngIf="!lot.isSold">
-      <img [src]="createImgPath(lot.image)" alt="profile picture">
-      <div class="timer">
+      <div class="timer" id="demo-{{lot.id}}">
         <p id="demo-{{lot.id}}"></p>
       </div>
+      <img [src]="createImgPath(lot.image)" alt="profile picture">
       <div class="favorite">
         <a id="star-{{lot.id}}" class="unstar" (click)="changeStar(lot.id)">&#9733;</a>
       </div>
       <div class="main-block">
-        <h1>{{lot.nameLot}}</h1>
-        <p class="title">{{lot.description}}</p>
+        <p>{{lot.nameLot}}</p>
+        <div class="title">{{lot.description}}</div>
       </div>
-      <p><button routerLink="/lot/{{lot.id}}">Bid {{lot.currentPrice | currency}}</button></p>
+      <button routerLink="/lot/{{lot.id}}">Bid {{lot.currentPrice | currency}}</button>
     </div>
   </div>
 </div>
