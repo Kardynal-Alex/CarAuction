@@ -1,27 +1,31 @@
 <div class="lots" *ngIf="!!lots?.length; else empty">
     <div *ngFor="let lot of lots">
         <div class="card">
+            <div class="timer" id="demo-{{lot.id}}"></div>
             <img [src]="createImgPath(lot.image)" alt="profile picture">
-            <div class="timer">
-                <p id="demo-{{lot.id}}"></p>
-            </div>
             <div class="main-block">
-                <h1>{{lot.nameLot}}</h1>
-                <p class="title">{{lot.description}}</p>
+                <div class="header">{{lot.nameLot}}</div>
+                <div class="title">{{lot.description}}</div>
             </div>
-            <div class="black">
-                <button routerLink="/userlots/updatelot/{{lot.id}}" *ngIf="!lot.isSold">Update</button>
-                <button *ngIf="lot.isSold">Is Sold</button>
-            </div>
-            <div class="delete">
-                <button (click)="deleteLot(lot.id)">Delete</button>
-            </div>
-            <div class="sold">
-                <button *ngIf="!lot.isSold" (click)="endBid(lot)" [disabled]="lot.startPrice===lot.currentPrice">
-                    End Bid {{lot.currentPrice | currency}}
+            <div class="row">
+                <button class="btn" routerLink="/userlots/updatelot/{{lot.id}}" [disabled]="lot.isSold">
+                    <i class="fa fa-edit"></i>
                 </button>
-                <button *ngIf="lot.isSold">Sold for {{lot.currentPrice | currency}}</button>
-                <button>Start price {{lot.startPrice | currency}}</button>
+                <button class="btn" (click)="deleteLot(lot.id)"><i class="fa fa-trash"></i></button>
+                <div class="has-tooltip">
+                    <button class="btn" (click)="endBid(lot)" [disbled]="lot.isSold">
+                        <i class="fa fa-close"></i></button>
+                    <div class="tooltip">
+                        <div *ngIf="!lot.isSold">
+                            <p>Close Bid</p>
+                            <p>Start price {{lot.startPrice | currency}}</p>
+                            <p>Current Bid {{lot.currentPrice | currency}}</p>
+                        </div>
+                        <div *ngIf="lot.isSold">
+                            <p>Sold for {{lot.currentPrice | currency}}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

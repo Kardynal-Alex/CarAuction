@@ -1,79 +1,72 @@
+@import '../../common/common-styles.less';
+@import '../../common/tooltip.less';
+
 :host {
   .lots {
     margin: 100px auto;
     width: 60%;
-  }
 
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 300px;
-    text-align: center;
-    width: 25%;
-    float: left;
-    border-radius: 20px;
-    height: auto;
-    max-height: 500px;
-    overflow: hidden;
-    margin: 12px 15px;
-    float: left;
-  }
+    .card {
+      border-radius: 20px;
+      box-shadow: @box-shadow;
+      max-width: 300px;
+      text-align: center;
+      width: 25%;
+      float: left;
+      border-radius: 20px;
+      height: auto;
+      max-height: 500px;
+      margin: 12px 15px;
 
-  .card h1 {
-    font-size: 18px;
-  }
+      .timer {
+        border-radius: 20px 20px 0 0;
+        background-color: black;
+        color: white;
+        opacity: 0.7;
+        padding: 5px;
 
-  .card img {
-    width: 100%;
-    max-height: 200px;
-    min-height: 200px;
-  }
+        p {
+          line-height: 10px;
+        }
+      }
 
-  .title {
-    color: black;
-    font-size: 15px;
-  }
+      img {
+        width: 100%;
+        max-height: 200px;
+        min-height: 200px;
+      }
 
-  .delete button {
-    border: none;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: red;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-    position: relative;
-  }
+      .main-block {
+        padding: 4px;
+        height: 100px;
 
-  .black button {
-    border: none;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: black;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-    position: inherit;
-  }
+        .title {
+          position: relative;
+          font-size: 20px;
+          align-items: center;
+          color: black;
+          font-size: 15px;
+        }
 
-  .sold button {
-    border: none;
-    display: inline-block;
-    color: white;
-    background-color: black;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    padding: 8px;
-    font-size: 18px;
-    position: inherite;
-  }
+        .header {
+          font-size: 18px;
+        }
+      }
 
-  .main-block {
-    height: 100px;
+      .row {
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+
+        button {
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
+
+        #tooltip();
+      }
+    }
   }
 
   a {
@@ -82,55 +75,15 @@
     color: black;
   }
 
-  button:hover,
-  a:hover {
-    opacity: 0.7;
-  }
-
-
-  .card::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-
   .empty {
     margin-top: 200px;
     text-align: center;
     font-size: 40px;
-  }
 
-  .empty p {
-    border: 1px solid black;
-    border-radius: 20px;
-    margin: 0 40%;
-  }
-
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-  }
-
-  .timer {
-    position: absolute;
-    background-color: black;
-    color: white;
-    border-radius: 20px;
-    margin-top: -29px;
-    height: auto;
-    margin-left: 5%;
-    float: right;
-    opacity: 0.8;
-  }
-
-  .timer p {
-    position: relative;
-    margin: 0 10px;
-    height: auto;
-    font-size: 20px;
-    align-items: center;
+    p {
+      border: 1px solid black;
+      border-radius: 20px;
+      margin: 0 40%;
+    }
   }
 }
