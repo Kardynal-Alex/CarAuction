@@ -1,45 +1,59 @@
-<div class="general">
-    <div class="lot-from">
-        <div class="text-line">
-            <p>Create Lot</p>
-        </div>
+<div class="lot-form">
+    <div class="lot-form__general">
+        <div class="text-line">Create Lot</div>
         <hr>
         <form method="post" #createLotForm="ngForm" (ngSubmit)="createLot(createLotForm)">
-            <div class="full">
-                <input type="text" placeholder="Enter name lot" name="NameLot" id="NameLot" minlength="5" ngModel
-                    #NameLot="ngModel" maxlength="35" required>
-                <div class="error" *ngIf="NameLot.errors?.required && NameLot.touched">Required field</div>
-                <div class="error" *ngIf="NameLot.errors?.minlength && NameLot.touched">Min length 5 is required</div>
+            <div class="full-width">
+                <div class="has-tooltip">
+                    <input type="text" placeholder="Enter name lot" name="NameLot" id="NameLot" minlength="5" ngModel
+                        #NameLot="ngModel" maxlength="35" required>
+                    <p class="tooltip" *ngIf="NameLot.errors?.required && NameLot.touched">
+                        Required field</p>
+                    <p class="tooltip" *ngIf="NameLot.errors?.minlength && NameLot.touched">
+                        Min length 5 is required</p>
+                </div>
             </div>
-            <div class="full">
-                <textarea placeholder="Enter description" name="Description" id="Description" #Description="ngModel"
-                    minlength="10" maxlength="70" ngModel required></textarea>
-                <div class="error" *ngIf="Description.errors?.required && Description.touched">Required field</div>
-                <div class="error" *ngIf="Description.errors?.minlength && Description.touched">Min length 10 is
-                    required</div>
+            <div class="full-width">
+                <div class="has-tooltip">
+                    <textarea placeholder="Enter description" name="Description" id="Description" #Description="ngModel"
+                        minlength="10" maxlength="70" ngModel required></textarea>
+                    <p class="tooltip" *ngIf="Description.errors?.required && Description.touched">
+                        Required field</p>
+                    <p class="tooltip" *ngIf="Description.errors?.minlength && Description.touched">
+                        Min length 10 is required</p>
+                </div>
             </div>
-            <div class="full">
-                <input type="number" placeholder="Enter price" name="StartPrice" id="StartPrice" #StartPrice="ngModel"
-                    min="1" ngModel required pattern="^(0*[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*)$">
-                <div class="error" *ngIf="StartPrice.errors?.required && StartPrice.touched">Required field</div>
-                <div class="error" *ngIf="StartPrice.errors?.pattern && StartPrice.touched">Min price 1</div>
+            <div class="full-width">
+                <div class="has-tooltip">
+                    <input type="number" placeholder="Enter price" name="StartPrice" id="StartPrice"
+                        #StartPrice="ngModel" min="1" ngModel required
+                        pattern="^(0*[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*)$">
+                    <p class="tooltip" *ngIf="StartPrice.errors?.required && StartPrice.touched">
+                        Required field</p>
+                    <p class="tooltip" *ngIf="StartPrice.errors?.pattern && StartPrice.touched">
+                        Min price 1</p>
+                </div>
             </div>
-            <div class="full">
-                <input type="number" placeholder="Enter year" name="Year" id="Year" ngModel min="1806" #Year="ngModel"
-                    minlength="4" maxlength="4" required pattern="[0-9]{4}">
-                <div class="error" *ngIf="Year.errors?.required && Year.touched">Required field</div>
-                <div class="error" *ngIf="Year.errors?.pattern && Year.touched">Enter correct year</div>
+            <div class="full-width">
+                <div class="has-tooltip">
+                    <input type="number" placeholder="Enter year" name="Year" id="Year" ngModel min="1806"
+                        #Year="ngModel" minlength="4" maxlength="4" required pattern="[0-9]{4}">
+                    <p class="tooltip" *ngIf="Year.errors?.required && Year.touched">
+                        Required field</p>
+                    <p class="tooltip" *ngIf="Year.errors?.pattern && Year.touched">
+                        Enter correct year</p>
+                </div>
             </div>
             <div class="image">
                 <button (click)="deleteMainPhoto()" *ngIf="imagePath!=''">Delete photo</button>
                 <img [src]="createImgPath(imagePath)" *ngIf="imagePath!=''">
                 <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)"
                     style="display:none;" multiple required>
-                <button type="button" class="btn btn-success" (click)="file.click()" *ngIf="photoIsEmpty">+</button>
+                <button class="btn btn-success" (click)="file.click()" *ngIf="photoIsEmpty">+</button>
             </div>
             <div class="mult-images">
                 <div *ngFor="let lot of numbers; let i=index">
-                    <div class="mul-img">
+                    <div class="mult-image">
                         <div class="cancel">
                             <button (click)="deletePhotoByPath(images['image'+(i+1)],'image'+(i+1))"
                                 *ngIf="images['image'+(i+1)]">x</button>
@@ -49,14 +63,13 @@
                             (change)="uploadFiles(file.files,'image'+(i+1),(i+1))" style="display:none;" multiple
                             required onclick="this.value=null" />
                         <div class="upload" *ngIf="!images['image'+(i+1)]">
-                            <button type="button" id="but-{{(i+1)}}" class="btn btn-success"
-                                (click)="file.click()">+</button>
+                            <button id="but-{{(i+1)}}" class="btn btn-success" (click)="file.click()">+</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="btn-submit">
-                <button type="submit" [disabled]="NameLot.invalid || Description.invalid || 
+                <button [disabled]="NameLot.invalid || Description.invalid || 
                 StartPrice.invalid || Year.invalid">Submit</button>
             </div>
         </form>

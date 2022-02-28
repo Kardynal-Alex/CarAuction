@@ -1,167 +1,166 @@
+@import '../../common/tooltip.less';
+
 :host {
+
     * {
         box-sizing: border-box;
         outline: none;
     }
 
-    body {
-        font-family: Roboto, "Helvetica Neue", sans-serif;
+    @transform: scale(1.05);
+
+    #hover-item() {
+        &:hover {
+            transform: @transform;
+            opacity: 0.7;
+        }
     }
 
-    .general {
+    .lot-form {
         margin-top: 100px;
         justify-content: center;
         align-items: center;
-    }
+        font-family: Roboto, "Helvetica Neue", sans-serif;
 
-    .lot-from {
-        width: 30%;
-        margin: 0 auto;
-        justify-content: center;
-        align-items: center;
-    }
+        &__general {
+            width: 30%;
+            margin: 0 auto;
+            justify-content: center;
+            align-items: center;
 
-    .general .full input {
-        width: 100%;
-        border-radius: 30px;
-        font-size: 20px;
-        height: 40px;
-        border: 1px solid #ccc;
-        padding: 12px 20px;
-        margin: 8px auto;
-    }
+            .text-line {
+                font-size: 28px;
+                font-weight: 600;
+                text-align: left;
+                height: 30px;
+            }
 
-    .general .semi1-full input {
-        width: 48%;
-        border-radius: 30px;
-        font-size: 20px;
-        height: 40px;
-        border: 1px solid #ccc;
-        padding: 12px 20px;
-        float: left;
-        margin-top: 8px;
-    }
+            hr {
+                border: none;
+                background-color: black;
+                height: 4px;
+                width: 100%;
+                margin: 20px auto;
+            }
 
-    .general .semi2-full input {
-        width: 48%;
-        border-radius: 30px;
-        font-size: 20px;
-        height: 40px;
-        border: 1px solid #ccc;
-        padding: 12px 20px;
-        float: right;
-        margin-top: 8px;
-    }
+            .full-width {
+                #tooltip();
 
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+                input {
+                    width: 100%;
+                    border-radius: 30px;
+                    font-size: 20px;
+                    height: 40px;
+                    border: 1px solid #ccc;
+                    padding: 12px 20px;
+                    margin: 8px auto;
+                }
 
-    input[type=number] {
-        -moz-appearance: textfield;
-    }
+                input,
+                textarea {
+                    &.ng-touched.ng-invalid {
+                        border: solid red 2px;
+                    }
 
-    .general textarea {
-        width: 100%;
-        border: 1px solid #ccc;
-        border-radius: 30px;
-        height: 150px;
-        font-size: 20px;
-        padding: 8px 18px;
-        margin: 8px auto
-    }
+                    &.ng-touched.ng-valid {
+                        border: solid green 2px;
+                    }
+                }
 
-    textarea {
-        resize: none;
-        -moz-border-bottom-colors: none;
-        -moz-border-left-colors: none;
-        -moz-border-right-colors: none;
-        -moz-border-top-colors: none;
-        overflow: hidden;
-    }
+                textarea {
+                    width: 100%;
+                    border: 1px solid #ccc;
+                    border-radius: 30px;
+                    height: 150px;
+                    font-size: 20px;
+                    padding: 8px 18px;
+                    margin: 8px auto;
 
-    .general .btn-submit button,
-    .general .image button {
-        width: 100%;
-        margin: 14px auto;
-        border-radius: 30px;
-        font-size: 20px;
-        background-color: black;
-        padding: 7px 20px;
-        cursor: pointer;
-        color: white;
-    }
+                    resize: none;
+                    -moz-border-bottom-colors: none;
+                    -moz-border-left-colors: none;
+                    -moz-border-right-colors: none;
+                    -moz-border-top-colors: none;
+                    overflow: hidden;
+                }
+            }
 
-    .image img {
-        margin-top: 14px;
-        width: 100%;
-        height: auto;
-        border-radius: 20px;
-    }
+            .image {
+                img {
+                    margin-top: 14px;
+                    width: 100%;
+                    height: auto;
+                    border-radius: 20px;
+                }
 
-    hr {
-        border: none;
-        background-color: black;
-        color: black;
-        height: 4px;
-        width: 100%;
-        margin: 20px auto;
-    }
+                button {
+                    width: 100%;
+                    margin: 14px auto;
+                    border-radius: 30px;
+                    font-size: 20px;
+                    background-color: black;
+                    padding: 7px 20px;
+                    cursor: pointer;
+                    color: white;
 
-    .text-line {
-        font-size: 28px;
-        font-weight: 600;
-        text-align: left;
-        height: 30px;
-    }
+                    #hover-item();
+                }
+            }
 
-    .full .error,
-    .full .semi-error {
-        background-color: black;
-        color: red;
-        float: left;
-        border-radius: 20px;
-        font-size: 18px;
-        text-align: center;
-    }
+            .mult-images {
+                align-items: stretch;
+                justify-content: center;
+                flex-wrap: wrap;
+                display: flex;
 
-    .full .error {
-        width: 100%;
-    }
+                .mult-image {
+                    margin: 10px 10px 10px;
 
-    .mul-img img {
-        width: 200px;
-        height: 200px;
-        border-radius: 20px;
-    }
+                    #hover-item();
 
-    .mul-img .upload button {
-        width: 200px;
-        height: 200px;
-        border-radius: 20px;
-        background: black;
-        color: white;
-        font-size: 30px;
-    }
+                    .cancel {
+                        button {
+                            background: none;
+                            font-size: 20px;
+                            position: absolute;
+                            border-radius: 20px;
+                            background: white;
+                        }
+                    }
 
-    .cancel button {
-        background: none;
-        font-size: 20px;
-        position: absolute;
-        border-radius: 20px;
-        background: white;
-    }
+                    img {
+                        width: 200px;
+                        height: 200px;
+                        border-radius: 20px;
+                    }
 
-    .mul-img {
-        margin: 10px 10px 10px;
-    }
+                    .upload {
+                        button {
+                            width: 200px;
+                            height: 200px;
+                            border-radius: 20px;
+                            background: black;
+                            color: white;
+                            font-size: 30px;
+                        }
+                    }
+                }
+            }
 
-    .mult-images {
-        align-items: stretch;
-        justify-content: center;
-        flex-wrap: wrap;
-        display: flex;
+            .btn-submit {
+                button {
+                    width: 100%;
+                    margin: 14px auto;
+                    border-radius: 30px;
+                    font-size: 20px;
+                    background-color: black;
+                    padding: 7px 20px;
+                    cursor: pointer;
+                    color: white;
+
+                    #hover-item();
+                }
+            }
+        }
     }
 }

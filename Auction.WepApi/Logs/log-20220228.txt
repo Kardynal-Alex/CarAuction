@@ -1,3 +1,3 @@
-2022-02-28T11:41:29.0466346+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2022-02-28T11:41:29.0516784+02:00  [INF] Hosting environment: "Development" (c3307c92)
-2022-02-28T11:41:29.0518996+02:00  [INF] Content root path: "D:\Asp.Net(project)\CarAuction\Auction.WepApi" (b5d60022)
+2022-02-28T15:33:11.2944408+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2022-02-28T15:33:11.3015117+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2022-02-28T15:33:11.3017276+02:00  [INF] Content root path: "D:\Asp.Net(project)\CarAuction\Auction.WepApi" (b5d60022)
