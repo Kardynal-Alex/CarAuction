@@ -1,16 +1,14 @@
-<button class="open-button" id="open-button" (click)="openForm()">Chat</button>
-
-<div class="chat-popup" id="myForm">
+<div class="chat-popup">
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="form-container">
     <h1>Chat</h1>
 
-    <label for="fllname"><b>FullName</b></label>
+    <label><b>FullName</b></label>
     <input type="text" placeholder="Type fullname.." formControlName="FullName" />
 
-    <label for="msg"><b>Message</b></label>
-    <textarea placeholder="Type message.." formControlName="Text" required></textarea>
+    <label><b>Message</b></label>
+    <textarea placeholder="Type message..." formControlName="Text" required></textarea>
 
-    <button type="submit" class="btn">Send</button>
-    <button type="button" class="btn cancel" (click)="closeForm()">Close</button>
+    <button class="btn">Send</button>
+    <button class="btn cancel" (click)="close()">Close</button>
   </form>
 </div>

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { AskOwner } from 'src/app/models/ask-owner';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,7 +16,9 @@ export class AskOwnerFormComponent implements OnInit {
   constructor(
     private toastrService: ToastrService,
     private authService: AuthService,
-    private lotService: LotService) {
+    private lotService: LotService,
+    private activeModal: NgbActiveModal
+  ) {
     this.myForm = new FormGroup({
       OwnerEmail: new FormControl(''),
       Text: new FormControl('', [Validators.required]),
@@ -39,7 +42,7 @@ export class AskOwnerFormComponent implements OnInit {
       };
       this.lotService.askOwner(askOwner)
         .subscribe(_ => {
-          this.closeForm();
+          this.close();
           this.toastrService.success('Message is sended to owner');
           this.myForm.reset();
         }, _ => {
@@ -48,12 +51,8 @@ export class AskOwnerFormComponent implements OnInit {
     }
   }
 
-  public openForm() {
-    document.getElementById("myForm").style.display = "block";
-  }
-
-  public closeForm() {
-    document.getElementById("myForm").style.display = "none";
+  public close() {
+    this.activeModal.close();
   }
 
 }

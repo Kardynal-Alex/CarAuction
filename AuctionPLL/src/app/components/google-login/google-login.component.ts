@@ -8,7 +8,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 @Component({
   selector: 'app-google-login',
   templateUrl: './google-login.component.html',
-  styleUrls: ['./google-login.component.css']
+  styleUrls: ['./google-login.component.less']
 })
 export class GoogleLoginComponent implements OnInit {
   @ViewChild('loginRef', { static: true }) loginElement: ElementRef;

@@ -11,6 +11,9 @@ import { CommentService } from 'src/app/services/comment.service';
 import { Favorite } from 'src/app/models/favorite';
 import { FavoriteService } from 'src/app/services/favorite.service';
 import { CommonConstants } from 'src/app/common/common-constants';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ShowLotImagesComponent } from '../show-lot-images/show-lot-images.component';
+import { AskOwnerFormComponent } from '../ask-owner-form/ask-owner-form.component';
 
 @Component({
   selector: 'app-show-lot-to-bid',
@@ -25,8 +28,10 @@ export class ShowLotToBidComponent implements OnInit, AfterViewInit, OnDestroy {
     private lotService: LotService,
     private localStorage: LocalStorageService,
     private commentService: CommentService,
-    private favoriteService: FavoriteService
+    private favoriteService: FavoriteService,
+    private modalService: NgbModal
   ) { }
+
   public lot: Lot;
   public comments: Comment[];
   public filtredComments: Comment[];
@@ -211,6 +216,12 @@ export class ShowLotToBidComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public showImages() {
-    document.getElementById('myNav').style.display = "block";
+    const modalRef = this.modalService.open(ShowLotImagesComponent, { animation: false });
+    modalRef.componentInstance.lot = this.lot;
+  }
+
+  public openAskForm() {
+    const modalRef = this.modalService.open(AskOwnerFormComponent, { animation: false });
+    modalRef.componentInstance.ownerEmail = this.lot?.user?.Email;
   }
 }

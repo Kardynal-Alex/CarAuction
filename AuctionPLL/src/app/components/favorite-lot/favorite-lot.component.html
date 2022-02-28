@@ -1,17 +1,21 @@
 <div class="lots">
-    <div class="text-line"><p>Your favorite lots</p></div>
-    <p></p>
-    <hr>
+    <div class="text-line">
+        <p>Your favorite lots</p>
+    </div>
+    <div class="hr">
+        <hr>
+    </div>
     <div *ngFor="let lot of lots">
-        <div class="card">   
-           <img [src]="createImgPath(lot.image)" alt="profile picture">
+        <div class="card" *ngIf="!lot.isSold">
+            <img [src]="createImgPath(lot.image)" alt="profile picture">
             <div class="favorite">
-              <a class="star" (click)="removeFromFavorite(lot.id)">&#9733;</a>
+                <a id="star-{{lot.id}}" class="unstar" (click)="changeStar(lot.id)">&#9733;</a>
             </div>
-            <div class="main-block">    
-                <h1>{{lot.nameLot}}</h1>
-                <p class="title">{{lot.description}}</p>
+            <div class="main-block">
+                <p>{{lot.nameLot}}</p>
+                <div class="title">{{lot.description}}</div>
             </div>
-            <p><button routerLink="/lot/{{lot.id}}" >Bid  {{lot.currentPrice | currency}}</button></p>
+            <button routerLink="/lot/{{lot.id}}">Bid {{lot.currentPrice | currency}}</button>
+        </div>
     </div>
 </div>

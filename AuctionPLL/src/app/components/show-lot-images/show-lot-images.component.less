@@ -22,36 +22,35 @@
     background-color: rgba(0, 0, 0, 0.9);
     overflow-x: hidden;
     transition: 0.5s;
-  }
 
-  .overlay-content {
-    z-index: 1;
-    width: 100%;
-    margin-top: 30px;
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-  }
+    .closebtn {
+      float: right;
+      position: fixed;
+      color: white;
+      font-size: 40px;
+      margin-left: 96%;
+      font-weight: bold;
 
-  .overlay .closebtn {
-    float: right;
-    position: fixed;
-    color: white;
-    font-size: 40px;
-    margin-left: 96%;
-    font-weight: bold;
-  }
+      &:hover,
+      &:focus {
+        color: red;
+        cursor: pointer;
+      }
+    }
 
-  .overlay .closebtn:hover,
-  .overlay .closebtn:focus {
-    color: red;
-    cursor: pointer;
-  }
+    .overlay-content {
+      z-index: 1;
+      width: 100%;
+      margin-top: 30px;
+      justify-content: center;
+      display: flex;
+      flex-wrap: wrap;
 
-  .overlay img {
-    width: 700px;
-    height: 500px;
-    padding: 20px;
+      img {
+        width: 700px;
+        height: 500px;
+        padding: 20px;
+      }
+    }
   }
-
 }

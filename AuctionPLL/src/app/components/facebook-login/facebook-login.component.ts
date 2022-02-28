@@ -10,7 +10,7 @@ declare var FB: any;
 @Component({
   selector: 'app-facebook-login',
   templateUrl: './facebook-login.component.html',
-  styleUrls: ['./facebook-login.component.css']
+  styleUrls: ['./facebook-login.component.less']
 })
 export class FacebookLoginComponent implements OnInit {
 

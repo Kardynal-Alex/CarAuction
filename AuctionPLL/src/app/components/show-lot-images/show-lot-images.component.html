@@ -1,11 +1,9 @@
-<div class="overlay" id="myNav" style="display: none;">
-    <span onclick="document.getElementById('myNav').style.display='none'" class="closebtn"
-        title="Close Modal">&times;</span>
+<div class="overlay">
+    <span (click)="close()" class="closebtn" title="Close Modal">&times;</span>
     <div class="overlay-content">
         <img [src]="createImgPath(lot?.image)" alt="profilePicture">
         <div *ngFor="let num of numbers;let i=index">
             <img [src]="createImgPath(lot['images']['image'+(i+1)])" alt="profilePicture">
         </div>
     </div>
-
 </div>

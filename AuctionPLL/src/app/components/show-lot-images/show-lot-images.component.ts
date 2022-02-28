@@ -1,5 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { Input } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Lot } from 'src/app/models/lot';
 import { LotService } from 'src/app/services/lot.service';
 
@@ -10,14 +11,18 @@ import { LotService } from 'src/app/services/lot.service';
 })
 export class ShowLotImagesComponent implements OnInit {
 
-  constructor(private lotService: LotService) { }
+  constructor(
+    private lotService: LotService,
+    private activeModal: NgbActiveModal
+  ) { }
+
   public ngOnInit() {
     this.numbers = Array.from(Array(this.lotService.numbersOfImages).keys());
   }
   public numbers = [];
   @Input() lot: Lot;
-  public closeImages() {
-    document.getElementById('myNav').style.display = "none";
+  public close() {
+    this.activeModal.close();
   }
 
   public createImgPath(serverPath: string): string {

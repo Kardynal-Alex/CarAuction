@@ -10,24 +10,29 @@ import { Guid } from 'guid-typescript';
 @Component({
   selector: 'app-favorite-lot',
   templateUrl: './favorite-lot.component.html',
-  styleUrls: ['./favorite-lot.component.less']
+  styleUrls: ['./favorite-lot.component.less', '../../components/show-lots/show-lots.component.less']
 })
 export class FavoriteLotComponent implements OnInit {
 
-  constructor(private lotService: LotService,
+  constructor(
+    private lotService: LotService,
     private favoriteService: FavoriteService,
-    private authService: AuthService) { }
+    private authService: AuthService
+  ) { }
 
 
   public lots: Lot[];
-  userId: string;
-  ngOnInit(): void {
+  public userId: string;
+  public ngOnInit(): void {
     this.userId = this.authService.getUserId();
     this.getLots(this.userId);
   }
 
   getLots(userId: string) {
-    this.lotService.getFavoriteUsersLots(userId).pipe(tap(lots => this.lots = lots)).subscribe();
+    this.lotService.getFavoriteUsersLots(userId)
+      .pipe(
+        tap(lots => this.lots = lots)
+      ).subscribe();
   }
 
   public createImgPath(serverPath: string) {
@@ -39,10 +44,11 @@ export class FavoriteLotComponent implements OnInit {
       id: Guid.create().toString(),
       userId: this.userId,
       lotId: lotId
-    }
-    this.favoriteService.deleteFavoriteByUserIdAndLotId(favorite).subscribe(() => {
-      this.lots = this.lots.filter(x => x.id != lotId);
-    });
+    };
+    this.favoriteService.deleteFavoriteByUserIdAndLotId(favorite)
+      .subscribe(_ => {
+        this.lots = this.lots.filter(x => x.id != lotId);
+      });
   }
 
 }

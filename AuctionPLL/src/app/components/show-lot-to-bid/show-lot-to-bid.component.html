@@ -9,11 +9,6 @@
             <div class="description-text">
                 <p>{{lot?.description}}</p>
             </div>
-            <div class="images">
-                <div id="images">
-                    <app-show-lot-images [lot]="lot"></app-show-lot-images>
-                </div>
-            </div>
             <div class="collage">
                 <div class="main-img">
                     <img [src]="createImgPath(lot.image)" alt="main-picture">
@@ -70,5 +65,6 @@
         <app-fresh-lots [lot]="lot"></app-fresh-lots>
     </div>
 </div>
-<app-ask-owner-form [ownerEmail]="lot?.user?.email" *ngIf="userId!==lot?.userId">
-</app-ask-owner-form>
+<div class="ask-owner-btn" *ngIf="userId!==lot?.userId">
+    <a (click)="openAskForm()">Chat</a>
+</div>
