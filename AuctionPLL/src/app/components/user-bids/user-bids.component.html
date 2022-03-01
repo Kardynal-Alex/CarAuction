@@ -1,16 +1,13 @@
 <div class="container">
-    <div class="text-line">
-        <p>There are you bids</p>
-    </div>
-    <p></p>
-    <hr>
+    <div class="text-line">There are you bids</div>
+    <app-hr></app-hr>
     <div *ngFor="let lot of lots">
         <div class="card">
             <img [src]="createImgPath(lot.image)" alt="profile picture">
             <div class="main-block">
                 <h1>{{lot.nameLot}}</h1>
-                <p class="title">{{lot.description}}</p>
-                <p class="title">Contact {{lot.user.email}} </p>
+                <div class="title">{{lot.description}}</div>
+                <div class="title">Contact {{lot.user.email}} </div>
             </div>
 
             <div class="sold">

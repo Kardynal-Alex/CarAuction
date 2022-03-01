@@ -43,6 +43,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationDialogComponent } from './common/confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogService } from './common/confirmation-dialog/confirmation-dialog.service';
 import { CommonConstants } from './common/common-constants';
+import { HrComponent } from './common/hr/hr.component';
 
 const appRoutes: Routes = [
   { path: '', component: ShowLotsComponent },
@@ -93,6 +94,7 @@ export function tokenGetter() {
     AskOwnerFormComponent,
     TwoStepVerificationComponent,
     ConfirmationDialogComponent,
+    HrComponent,
   ],
   imports: [
     BrowserModule,

@@ -20,7 +20,7 @@ import { AskOwnerFormComponent } from '../ask-owner-form/ask-owner-form.componen
   templateUrl: './show-lot-to-bid.component.html',
   styleUrls: ['./show-lot-to-bid.component.less']
 })
-export class ShowLotToBidComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ShowLotToBidComponent implements OnInit, OnDestroy {
   public id: number;
   constructor(
     private activateRoute: ActivatedRoute,
@@ -40,9 +40,10 @@ export class ShowLotToBidComponent implements OnInit, AfterViewInit, OnDestroy {
     this.lotService.getLotById(this.id)
       .subscribe(response => {
         this.lot = response;
-        if (!this.lot.isSold)
+        if (!this.lot.isSold) {
           this.initTimer(this.id, this.lot.startDateTime);
-        else {
+          this.initFavorite(response);
+        } else {
           setTimeout(() => {
             document.getElementById('timer-' + this.lot['id']).innerHTML = "EXPIRED"
           }, 1000);
@@ -58,20 +59,16 @@ export class ShowLotToBidComponent implements OnInit, AfterViewInit, OnDestroy {
     this.numbers = Array.from(Array(9).keys());
   }
 
-  public ngAfterViewInit() {
-    this.init();
-  }
-
   public ngOnDestroy() {
     this.id = null;
   }
 
-  public init() {
+  private initFavorite(lot: Lot) {
     if (this.userId.length > 0) {
       const favor: Favorite = {
         id: '',
         userId: this.userId,
-        lotId: this.lot?.id
+        lotId: lot.id
       };
       this.favoriteService.getFavoriteByUserIdAndLotId(favor)
         .subscribe(response => {
@@ -196,7 +193,8 @@ export class ShowLotToBidComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.id == null)
         clearInterval(x);
 
-      document.getElementById('timer-' + id).innerHTML = "#Timer " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      if (document.getElementById('demo-' + id) != null && t >= 0)
+        document.getElementById('timer-' + id).innerHTML = "#Timer " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
       if (t < 0) {
         clearInterval(x);
         this.checkLotIfTimerIsExpired(id);
@@ -209,8 +207,7 @@ export class ShowLotToBidComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.lot.startPrice == this.lot.currentPrice) {
       this.lot.startDateTime = new Date(Date.now());
       this.initTimer(this.lot.id, this.lot.startDateTime);
-    }
-    else if (this.lot.startPrice < this.lot.currentPrice) {
+    } else if (this.lot.startPrice < this.lot.currentPrice) {
       this.lot.isSold = true;
     }
   }

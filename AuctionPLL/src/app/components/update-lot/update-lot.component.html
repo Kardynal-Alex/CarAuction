@@ -1,66 +1,68 @@
-<div class="update-form">
-    <div class="text-line">
-        <p>Update Lot</p>
-    </div>
-    <hr>
-    <form>
-        <div class="full">
-            <input type="text" placeholder="Update name lot" name="NameLot" minlength="5" maxlength="35"
-                [(ngModel)]="lot['nameLot']" #NameLot="ngModel" required>
-            <div class="error" *ngIf="NameLot.errors?.required && NameLot.touched">Required field</div>
-            <div class="error" *ngIf="NameLot.errors?.minlength && NameLot.touched">Min length 5 is required</div>
-        </div>
-        <div class="full">
-            <textarea placeholder="Update description" name="Description" #Description="ngModel" minlength="10"
-                maxlength="70" [(ngModel)]="lot['description']" required></textarea>
-            <div class="error" *ngIf="Description.errors?.required && Description.touched">Required field</div>
-            <div class="error" *ngIf="Description.errors?.minlength && Description.touched">Min length 10 is required
+<div class="lot-form">
+    <div class="lot-form__general">
+        <div class="text-line">Create Lot</div>
+        <hr>
+        <form>
+            <div class="full-width">
+                <input type="text" placeholder="Update name lot" name="NameLot" minlength="5" maxlength="35"
+                    [(ngModel)]="lot['nameLot']" #NameLot="ngModel" required>
+                <div class="error" *ngIf="NameLot.errors?.required && NameLot.touched">Required field</div>
+                <div class="error" *ngIf="NameLot.errors?.minlength && NameLot.touched">Min length 5 is required</div>
             </div>
-        </div>
-        <div class="col-3">
-            <input type="number" placeholder="Start price" name="StartPrice" [(ngModel)]="lot['startPrice']" readonly>
-        </div>
-        <div class="col-3">
-            <input type="number" placeholder="Current price" name="CurrentPrice" [(ngModel)]="lot['currentPrice']"
-                readonly>
-        </div>
-        <div class="col-3">
-            <input type="number" placeholder="Enter year" name="Year" [(ngModel)]="lot['year']" min="1806" minlength="4"
-                maxlength="4" required #Year="ngModel" required pattern="[0-9]{4}">
-            <div class="error" *ngIf="Year.errors?.required && Year.touched">Required field</div>
-            <div class="error" *ngIf="Year.errors?.pattern && Year.touched">Enter correct year</div>
-        </div>
-        <div class="image">
-            <button (click)="deleteMainPhoto()" *ngIf="imagePath!=''">Delete photo</button>
-            <img [src]="createImgPath(imagePath)" *ngIf="imagePath!=''">
-            <input type="file" #file formControlName="Image" placeholder="Choose file" (change)="uploadFile(file.files)"
-                style="display:none;" multiple required>
-            <button type="button" class="btn btn-success" (click)="file.click()" *ngIf="imagePath==''">Upload
-                Image</button>
-            <div class="full">
-                <div class="error" *ngIf="file.errors?.required">Picture</div>
+            <div class="full-width">
+                <textarea placeholder="Update description" name="Description" #Description="ngModel" minlength="10"
+                    maxlength="70" [(ngModel)]="lot['description']" required></textarea>
+                <div class="error" *ngIf="Description.errors?.required && Description.touched">Required field</div>
+                <div class="error" *ngIf="Description.errors?.minlength && Description.touched">Min length 10 is
+                    required
+                </div>
             </div>
-        </div>
-        <div class="mult-images">
-            <div *ngFor="let lt of numbers; let i=index">
-                <div class="mul-img">
-                    <div class="cancel">
-                        <button (click)="deletePhotoByPath(lot['images']['image'+(i+1)],(i+1))"
-                            *ngIf="lot['images']['image'+(i+1)]">x</button>
-                    </div>
-                    <img [src]="createImgPath(lot['images']['image'+(i+1)])" *ngIf="lot['images']['image'+(i+1)]">
-                    <input type="file" #file placeholder="Choose file"
-                        (change)="uploadFiles(file.files,'image'+(i+1),(i+1))" style="display:none;" multiple required
-                        onclick="this.value=null" />
-                    <div class="upload" *ngIf="!lot['images']['image'+(i+1)]">
-                        <button type="button" id="but-{{(i+1)}}" class="btn btn-success"
-                            (click)="file.click()">+</button>
+            <div class="full-width">
+                <input type="number" placeholder="Start price" name="StartPrice" [(ngModel)]="lot['startPrice']"
+                    readonly>
+            </div>
+            <div class="full-width">
+                <input type="number" placeholder="Current price" name="CurrentPrice" [(ngModel)]="lot['currentPrice']"
+                    readonly>
+            </div>
+            <div class="full-width">
+                <input type="number" placeholder="Enter year" name="Year" [(ngModel)]="lot['year']" min="1806"
+                    minlength="4" maxlength="4" required #Year="ngModel" required pattern="[0-9]{4}">
+                <div class="error" *ngIf="Year.errors?.required && Year.touched">Required field</div>
+                <div class="error" *ngIf="Year.errors?.pattern && Year.touched">Enter correct year</div>
+            </div>
+            <div class="image">
+                <button (click)="deleteMainPhoto()" *ngIf="imagePath!=''">Delete photo</button>
+                <img [src]="createImgPath(imagePath)" *ngIf="imagePath!=''">
+                <input type="file" #file formControlName="Image" placeholder="Choose file"
+                    (change)="uploadFile(file.files)" style="display:none;" multiple required>
+                <button type="button" class="btn btn-success" (click)="file.click()" *ngIf="imagePath==''">Upload
+                    Image</button>
+                <div class="full">
+                    <div class="error" *ngIf="file.errors?.required">Picture</div>
+                </div>
+            </div>
+            <div class="mult-images">
+                <div *ngFor="let lt of numbers; let i=index">
+                    <div class="mult-image">
+                        <div class="cancel">
+                            <button (click)="deletePhotoByPath(lot['images']['image'+(i+1)],(i+1))"
+                                *ngIf="lot['images']['image'+(i+1)]">x</button>
+                        </div>
+                        <img [src]="createImgPath(lot['images']['image'+(i+1)])" *ngIf="lot['images']['image'+(i+1)]">
+                        <input type="file" #file placeholder="Choose file"
+                            (change)="uploadFiles(file.files,'image'+(i+1),(i+1))" style="display:none;" multiple
+                            required onclick="this.value=null" />
+                        <div class="upload" *ngIf="!lot['images']['image'+(i+1)]">
+                            <button type="button" id="but-{{(i+1)}}" class="btn btn-success"
+                                (click)="file.click()">+</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="btn-submit">
-            <button type="submit" (click)="updateLot()">Update lot</button>
-        </div>
-    </form>
+            <div class="btn-submit">
+                <button type="submit" (click)="updateLot()">Update lot</button>
+            </div>
+        </form>
+    </div>
 </div>
