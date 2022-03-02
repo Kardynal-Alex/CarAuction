@@ -16,7 +16,8 @@ export class ResetPasswordComponent implements OnInit {
     private toastrService: ToastrService,
     private authService: AuthService,
     private router: Router,
-    private acticeRoute: ActivatedRoute) { }
+    private acticeRoute: ActivatedRoute
+  ) { }
   private token: string;
   private email: string;
 
@@ -27,9 +28,9 @@ export class ResetPasswordComponent implements OnInit {
 
   public resetPassword(form: NgForm) {
     const resetPass: ResetPassword = {
-      Password: form.value.NewPassword,
-      Token: this.token,
-      Email: this.email
+      password: form.value.newPassword,
+      token: this.token,
+      email: this.email
     };
 
     this.authService.resetPassword(resetPass)

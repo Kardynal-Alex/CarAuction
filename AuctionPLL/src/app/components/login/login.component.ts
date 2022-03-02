@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { ToastrService } from 'ngx-toastr';
-import { CommonConstants } from 'src/app/common/common-constants';
+import { CommonConstants } from 'src/app/common/constants/common-constants';
 import { NgbActiveModal, NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from '../register/register.component';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { Login } from 'src/app/models/login';
 
 @Component({
   selector: 'app-login',
@@ -36,8 +37,8 @@ export class LoginComponent implements OnInit {
 
   private initLoginForm() {
     this.loginForm = this.formBuilder.group({
-      Email: [null, [Validators.required, Validators.email]],
-      Password: [null, [Validators.required, Validators.minLength(6)]]
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required, Validators.minLength(6)]]
     });
   }
 
@@ -47,7 +48,7 @@ export class LoginComponent implements OnInit {
 
   public isAuth: boolean = false;
   public login() {
-    const loginUser = this.loginForm.value;
+    const loginUser: Login = this.loginForm.value;
     this.authService.login(loginUser)
       .subscribe(response => {
         if (response['is2StepVerificationRequired']) {
@@ -56,7 +57,7 @@ export class LoginComponent implements OnInit {
             {
               queryParams: {
                 provider: response['provider'],
-                email: loginUser.Email
+                email: loginUser.email
               }
             });
         } else {

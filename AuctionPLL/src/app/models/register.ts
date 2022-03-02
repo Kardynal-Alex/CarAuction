@@ -1,8 +1,8 @@
 export class Register {
-    Name: string;
-    Surname: string;
-    Role: string;
-    Email: string;
-    Password: string;
-    ClientURI: string;
+    name: string;
+    surname: string;
+    role: string;
+    email: string;
+    password: string;
+    clientURI: string;
 }

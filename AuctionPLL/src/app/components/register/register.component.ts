@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Register } from 'src/app/models/register';
-import { CommonConstants } from 'src/app/common/common-constants';
+import { CommonConstants } from 'src/app/common/constants/common-constants';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from '../login/login.component';
 
@@ -29,22 +29,22 @@ export class RegisterComponent implements OnInit {
 
   private initRegisterForm() {
     this.registerForm = this.formBuilder.group({
-      Email: [null, [Validators.required, Validators.email]],
-      Password: [null, [Validators.required, Validators.minLength(6)]],
-      Name: [null, [Validators.required, Validators.pattern('[a-zA-Z]*')]],
-      Surname: [null, [Validators.required, Validators.pattern('[a-zA-Z]*')]]
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required, Validators.minLength(6)]],
+      name: [null, [Validators.required, Validators.pattern('[a-zA-Z]*')]],
+      surname: [null, [Validators.required, Validators.pattern('[a-zA-Z]*')]]
     });
   }
 
   public register() {
     console.log(this.registerForm.controls.Email.value)
     const registerUser: Register = {
-      Email: this.registerForm.controls.Email.value,
-      Password: this.registerForm.controls.Password.value,
-      Role: CommonConstants.User,
-      Name: this.registerForm.controls.Name.value,
-      Surname: this.registerForm.controls.Surname.value,
-      ClientURI: "https://localhost:4200/auction/emailconfirmation"
+      email: this.registerForm.controls.email.value,
+      password: this.registerForm.controls.password.value,
+      role: CommonConstants.User,
+      name: this.registerForm.controls.name.value,
+      surname: this.registerForm.controls.surname.value,
+      clientURI: "https://localhost:4200/auction/emailconfirmation"
     }
     this.authService.register(registerUser)
       .subscribe(_ => {

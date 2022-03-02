@@ -20,10 +20,10 @@ export class AskOwnerFormComponent implements OnInit {
     private activeModal: NgbActiveModal
   ) {
     this.myForm = new FormGroup({
-      OwnerEmail: new FormControl(''),
-      Text: new FormControl('', [Validators.required]),
-      FullName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      UserEmail: new FormControl('')
+      ownerEmail: new FormControl(''),
+      text: new FormControl('', [Validators.required]),
+      fullName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      userEmail: new FormControl('')
     });
   }
 
@@ -35,10 +35,10 @@ export class AskOwnerFormComponent implements OnInit {
   public onSubmit() {
     if (!this.myForm.invalid) {
       const askOwner: AskOwner = {
-        OwnerEmail: this.ownerEmail,
-        Text: this.myForm.controls['Text'].value,
-        FullName: this.myForm.controls['FullName'].value,
-        UserEmail: this.authService.getUserEmail()
+        ownerEmail: this.ownerEmail,
+        text: this.myForm.controls['text'].value,
+        fullName: this.myForm.controls['fullName'].value,
+        userEmail: this.authService.getUserEmail()
       };
       this.lotService.askOwner(askOwner)
         .subscribe(_ => {

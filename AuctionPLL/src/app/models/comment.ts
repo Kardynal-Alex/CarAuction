@@ -1,10 +1,10 @@
 
 export class Comment {
-    Id: string;
-    Author: string;
-    Text: string;
-    DateTime: Date;
-    LotId: string;
-    UserId: string;
-    IsBid: boolean;
+    id: string;
+    author: string;
+    text: string;
+    dateTime: Date;
+    lotId: string;
+    userId: string;
+    isBid: boolean;
 }

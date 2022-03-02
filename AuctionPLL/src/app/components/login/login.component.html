@@ -8,20 +8,20 @@
         <div class="container" [formGroup]="loginForm">
             <p>Sign in</p>
             <div class="has-tooltip">
-                <input type="text" placeholder="Enter Email" name="email" formControlName="Email" email>
+                <input type="text" placeholder="Enter email" name="email" formControlName="email" email>
                 <p class="tooltip"
-                    *ngIf="loginForm.controls.Email.errors?.required && loginForm.controls.Email.touched">
-                    Email is required</p>
-                <p class="tooltip" *ngIf="loginForm.controls.Email.errors?.email && loginForm.controls.Email.touched">
+                    *ngIf="loginForm.controls.email.errors?.required && loginForm.controls.email.touched">
+                    email is required</p>
+                <p class="tooltip" *ngIf="loginForm.controls.email.errors?.email && loginForm.controls.email.touched">
                     Incorect email</p>
             </div>
             <div class="has-tooltip">
-                <input type="password" placeholder="Enter Password" name="email" formControlName="Password">
+                <input type="password" placeholder="Enter password" name="email" formControlName="password">
                 <p class="tooltip"
-                    *ngIf="loginForm.controls.Password.errors?.required && loginForm.controls.Password.touched">
-                    Password is required</p>
+                    *ngIf="loginForm.controls.password.errors?.required && loginForm.controls.password.touched">
+                    password is required</p>
                 <p class="tooltip"
-                    *ngIf="loginForm.controls.Password.errors?.minlength && loginForm.controls.Password.touched">
+                    *ngIf="loginForm.controls.password.errors?.minlength && loginForm.controls.password.touched">
                     Min length 6</p>
             </div>
             <button (click)="login()" [disabled]="loginForm.invalid">Login</button>

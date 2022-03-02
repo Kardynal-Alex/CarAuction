@@ -16,9 +16,11 @@ export class Lot {
     user: User;
     lotState: LotState;
     images: Images;
-    constructor(id: number, nameLot: string, startPrice: number, isSold: boolean,
+    constructor(
+        id: number, nameLot: string, startPrice: number, isSold: boolean,
         image: string, description: string, userId: string, startDatetime: Date,
-        currentPrice: number, year: number) {
+        currentPrice: number, year: number
+    ) {
 
     }
 }

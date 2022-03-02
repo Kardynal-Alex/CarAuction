@@ -9,9 +9,9 @@
 <hr>
 <div class="comment-form">
     <form method="post" #createCommentForm="ngForm" (ngSubmit)="createComment(createCommentForm)">
-        <input type="text" name="Text" #Text="ngModel" ngModel required minlength="2" id="Text"
+        <input type="text" name="text" #text="ngModel" ngModel required minlength="2" id="text"
             placeholder="Add coment ...">
-        <button *ngIf="!lot.isSold;else comDisab" [disabled]="Text.invalid">&#8595;</button>
+        <button *ngIf="!lot.isSold;else comDisab" [disabled]="text.invalid">&#8595;</button>
         <ng-template #comDisab>
             <button disabled style="background: grey;">&#8595;</button>
         </ng-template>

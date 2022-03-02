@@ -1,6 +1,6 @@
 export class AskOwner {
-    OwnerEmail: string;
-    Text: string;
-    FullName: string;
-    UserEmail: string;
+    ownerEmail: string;
+    text: string;
+    fullName: string;
+    userEmail: string;
 }

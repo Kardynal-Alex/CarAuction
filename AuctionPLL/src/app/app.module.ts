@@ -42,8 +42,8 @@ import { TwoStepVerificationComponent } from './components/two-step-verification
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationDialogComponent } from './common/confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogService } from './common/confirmation-dialog/confirmation-dialog.service';
-import { CommonConstants } from './common/common-constants';
 import { HrComponent } from './common/hr/hr.component';
+import { CommonConstants } from './common/constants/common-constants';
 
 const appRoutes: Routes = [
   { path: '', component: ShowLotsComponent },

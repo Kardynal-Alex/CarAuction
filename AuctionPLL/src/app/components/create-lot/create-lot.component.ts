@@ -9,8 +9,8 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Images } from 'src/app/models/images';
 import { ComponentCanDeactivate } from 'src/app/guards/exit.about.guard';
 import { Observable } from 'rxjs';
-import { BaseUrl } from 'src/app/common/urls';
-import { CommonConstants } from 'src/app/common/common-constants';
+import { BaseUrl } from 'src/app/common/constants/urls';
+import { CommonConstants } from 'src/app/common/constants/common-constants';
 
 @Component({
   selector: 'app-create-lot',

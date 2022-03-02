@@ -4,7 +4,7 @@ import { Lot } from 'src/app/models/lot';
 import { LotService } from 'src/app/services/lot.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ConfirmationDialogService } from 'src/app/common/confirmation-dialog/confirmation-dialog.service';
-import { CommonConstants } from 'src/app/common/common-constants';
+import { CommonConstants } from 'src/app/common/constants/common-constants';
 
 @Component({
   selector: 'app-user-lots',

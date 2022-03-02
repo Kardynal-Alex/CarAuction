@@ -12,8 +12,8 @@ import { ExternalAuth } from '../models/external-auth';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TwoFactor } from '../models/two-factor';
 import { Observable } from 'rxjs';
-import { BaseUrl } from '../common/urls';
-import { CommonConstants } from '../common/common-constants';
+import { BaseUrl } from '../common/constants/urls';
+import { CommonConstants } from '../common/constants/common-constants';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

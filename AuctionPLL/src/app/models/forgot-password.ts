@@ -1,4 +1,4 @@
 export class ForgotPassword {
-    Email: string;
-    ClientURI: string;
+    email: string;
+    clientURI: string;
 }

@@ -6,39 +6,39 @@
         <div class="container" [formGroup]="registerForm">
             <p>Sign up</p>
             <div class="has-tooltip">
-                <input type="text" placeholder="Enter Email" formControlName="Email" email>
+                <input type="text" placeholder="Enter Email" formControlName="email" email>
                 <p class="tooltip"
-                    *ngIf="registerForm.controls.Email.errors?.required && registerForm.controls.Email.touched">
+                    *ngIf="registerForm.controls.email.errors?.required && registerForm.controls.email.touched">
                     Email is required</p>
                 <p class="tooltip"
-                    *ngIf="registerForm.controls.Email.errors?.email && registerForm.controls.Email.touched">
+                    *ngIf="registerForm.controls.email.errors?.email && registerForm.controls.email.touched">
                     Incorect email</p>
             </div>
             <div class="has-tooltip">
-                <input type="password" placeholder="Enter Password" formControlName="Password">
+                <input type="password" placeholder="Enter Password" formControlName="password">
                 <p class="tooltip"
-                    *ngIf="registerForm.controls.Password.errors?.required && registerForm.controls.Password.touched">
+                    *ngIf="registerForm.controls.password.errors?.required && registerForm.controls.password.touched">
                     Password is required</p>
                 <p class="tooltip"
-                    *ngIf="registerForm.controls.Password.errors?.minlength && registerForm.controls.Password.touched">
+                    *ngIf="registerForm.controls.password.errors?.minlength && registerForm.controls.password.touched">
                     Min length 6</p>
             </div>
             <div class="has-tooltip">
-                <input type="text" placeholder="Enter Name" formControlName="Name">
+                <input type="text" placeholder="Enter Name" formControlName="name">
                 <p class="tooltip"
-                    *ngIf="registerForm.controls.Name.errors?.required && registerForm.controls.Name.touched">
+                    *ngIf="registerForm.controls.name.errors?.required && registerForm.controls.name.touched">
                     Name is required</p>
                 <p class="tooltip"
-                    *ngIf="registerForm.controls.Name.errors?.pattern && registerForm.controls.Name.touched">
+                    *ngIf="registerForm.controls.name.errors?.pattern && registerForm.controls.name.touched">
                     Only letters</p>
             </div>
             <div class="has-tooltip">
-                <input type="text" placeholder="Enter Surname" formControlName="Surname">
+                <input type="text" placeholder="Enter Surname" formControlName="surname">
                 <p class="tooltip"
-                    *ngIf="registerForm.controls.Surname.errors?.required && registerForm.controls.Surname.touched">
+                    *ngIf="registerForm.controls.surname.errors?.required && registerForm.controls.surname.touched">
                     Surname is required</p>
                 <p class="tooltip"
-                    *ngIf="registerForm.controls.Surname.errors?.pattern && registerForm.controls.Surname.touched">
+                    *ngIf="registerForm.controls.surname.errors?.pattern && registerForm.controls.surname.touched">
                     Only letters</p>
             </div>
             <button (click)="register()" [disabled]="registerForm.invalid">Register</button>

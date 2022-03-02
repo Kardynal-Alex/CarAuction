@@ -10,7 +10,7 @@ import { Comment } from 'src/app/models/comment';
 import { CommentService } from 'src/app/services/comment.service';
 import { Favorite } from 'src/app/models/favorite';
 import { FavoriteService } from 'src/app/services/favorite.service';
-import { CommonConstants } from 'src/app/common/common-constants';
+import { CommonConstants } from 'src/app/common/constants/common-constants';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShowLotImagesComponent } from '../show-lot-images/show-lot-images.component';
 import { AskOwnerFormComponent } from '../ask-owner-form/ask-owner-form.component';
@@ -64,7 +64,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
   }
 
   private initFavorite(lot: Lot) {
-    if (this.userId.length > 0) {
+    if (this.userId?.length > 0) {
       const favor: Favorite = {
         id: '',
         userId: this.userId,
@@ -119,13 +119,13 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
         .subscribe(_ => {
           this.toastrService.success("Thanks for bid");
           const comment: Comment = {
-            Id: Guid.create().toString(),
-            Author: this.userName + " " + this.userSurname,
-            Text: "Bid $" + parseFloat(bid).toString(),
-            DateTime: new Date(Date.now()),
-            LotId: this.id.toString(),
-            UserId: this.userId,
-            IsBid: true
+            id: Guid.create().toString(),
+            author: this.userName + " " + this.userSurname,
+            text: "Bid $" + parseFloat(bid).toString(),
+            dateTime: new Date(Date.now()),
+            lotId: this.id.toString(),
+            userId: this.userId,
+            isBid: true
           };
           this.commentService.addComment(comment)
             .subscribe(_ => {
@@ -219,6 +219,6 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
 
   public openAskForm() {
     const modalRef = this.modalService.open(AskOwnerFormComponent, { animation: false });
-    modalRef.componentInstance.ownerEmail = this.lot?.user?.Email;
+    modalRef.componentInstance.ownerEmail = this.lot?.user?.email;
   }
 }

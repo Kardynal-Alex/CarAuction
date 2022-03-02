@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Favorite } from '../models/favorite';
 import { Observable } from 'rxjs';
-import { BaseUrl } from '../common/urls';
+import { BaseUrl } from '../common/constants/urls';
 
 @Injectable({ providedIn: 'root' })
 export class FavoriteService {

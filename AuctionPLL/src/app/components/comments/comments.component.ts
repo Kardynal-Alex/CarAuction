@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
-import { CommonConstants } from 'src/app/common/common-constants';
+import { CommonConstants } from 'src/app/common/constants/common-constants';
 import { Lot } from 'src/app/models/lot';
 import { CommentService } from 'src/app/services/comment.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -57,13 +57,13 @@ export class CommentsComponent implements OnInit {
   public createComment(form: NgForm) {
     if (this.userId != null) {
       const comment: Comment = {
-        Id: Guid.create().toString(),
-        Author: this.userName + " " + this.userSurname,
-        Text: form.value.Text,
-        DateTime: new Date(Date.now()),
-        LotId: this.id.toString(),
-        UserId: this.userId,
-        IsBid: false
+        id: Guid.create().toString(),
+        author: this.userName + " " + this.userSurname,
+        text: form.value.text,
+        dateTime: new Date(Date.now()),
+        lotId: this.id.toString(),
+        userId: this.userId,
+        isBid: false
       };
       this.commentService.addComment(comment)
         .subscribe(_ => {
