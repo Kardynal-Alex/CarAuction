@@ -9,4 +9,17 @@ export class Images {
     image7: string;
     image8: string;
     image9: string;
+
+    constructor() {
+        this.id = 0;
+        this.image1 = null;
+        this.image2 = null;
+        this.image3 = null;
+        this.image4 = null;
+        this.image5 = null;
+        this.image6 = null;
+        this.image7 = null;
+        this.image8 = null;
+        this.image9 = null;
+    }
 }

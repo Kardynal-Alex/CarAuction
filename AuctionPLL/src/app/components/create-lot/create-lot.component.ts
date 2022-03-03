@@ -24,7 +24,8 @@ export class CreateLotComponent implements OnInit, ComponentCanDeactivate {
     private lotService: LotService,
     private httpClient: HttpClient,
     private localStorage: LocalStorageService,
-    private router: Router) { }
+    private router: Router
+  ) { }
 
   public saved: boolean = false;
   public ngOnInit(): void {

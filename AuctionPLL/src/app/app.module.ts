@@ -44,10 +44,12 @@ import { ConfirmationDialogComponent } from './common/confirmation-dialog/confir
 import { ConfirmationDialogService } from './common/confirmation-dialog/confirmation-dialog.service';
 import { HrComponent } from './common/hr/hr.component';
 import { CommonConstants } from './common/constants/common-constants';
+import { CreateLotFormComponent } from './components/create-lot-form/create-lot-form.component';
 
 const appRoutes: Routes = [
   { path: '', component: ShowLotsComponent },
-  { path: 'createlot', component: CreateLotComponent, canActivate: [LoginGuard], canDeactivate: [ExitAboutGuard] },
+  { path: 'createlot', component: CreateLotFormComponent, canActivate: [LoginGuard], canDeactivate: [ExitAboutGuard] },
+  { path: 'createlotform', component: CreateLotComponent, canActivate: [LoginGuard], canDeactivate: [ExitAboutGuard] },
   { path: 'lot/:id', component: ShowLotToBidComponent },
   { path: 'userlots', component: UserLotsComponent, canActivate: [LoginGuard] },
   { path: 'userlots/updatelot/:id', component: UpdateLotComponent, canActivate: [LoginGuard], canDeactivate: [ExitAboutGuard] },
@@ -95,6 +97,7 @@ export function tokenGetter() {
     TwoStepVerificationComponent,
     ConfirmationDialogComponent,
     HrComponent,
+    CreateLotFormComponent,
   ],
   imports: [
     BrowserModule,

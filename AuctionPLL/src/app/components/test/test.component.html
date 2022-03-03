@@ -1,15 +1,29 @@
- <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+<!-- <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <div *ngFor="let num of numbers;let i=index" class="image">
-        <img [src]="createImgPath(myForm.controls['Image'+(i+1)])">
-        <input type="file" formControlName="Image{{i+1}}" name="Image{{i+1}}" (change)="onFileChange($event, 'Image'+(i+1),(i+1))" multiple
-        onclick="this.value=null" />
-       <!--   <button type="button" id="but-9" class="btn btn-success" (click)="file.click()" >upload</button> -->
-        <div class="cancel">
-            <button (click)="deletePhotoByPath(myForm.controls['Image'+(i+1)],'Image'+(i+1))" 
-            *ngIf="myForm.controls['Image'+(i+1)].length>0">x</button>
+        <img [src]="createImgPath(myForm.controls['image'+(i+1)])">
+        <input type="file" formControlName="image{{i+1}}" name="image{{i+1}}"
+            (change)="onFileChange($event, 'image'+(i+1),(i+1))" multiple onclick="this.value=null" />
+          <button type="button" id="but-9" class="btn btn-success" (click)="file.click()" >upload</button> 
+        <div class="cancel" style="margin-top: 20px;">
+            <button (click)="deletePhotoByPath(myForm.controls['image'+(i+1)],'image'+(i+1))"
+                *ngIf="!myForm.controls['image'+(i+1)]">delete</button>
         </div>
     </div>
     <button type="submit">Submit</button>
+</form> -->
+<button (click)="addImage()">Add image</button>
+<form [formGroup]="imageForm">
+    <div formArrayName="images" *ngFor="let image of imageArray.controls; let i = index" class="image">
+        <img [src]="createImgPath(imageForm.controls['images'].at(i).value)"
+            *ngIf="!!imageForm.controls['images'].at(i).value">
+        <input type="file" #file (change)="onFileChange($event, (i),(i))" onclick="this.value=null" />
+        <button type="button" class="btn btn-success" (click)="file.click()">upload</button>
+        <div class="cancel" style="margin-top: 20px;">
+            <button (click)="deletePhotoByPath(imageForm.controls['images'].at(i).value,(i))"
+                *ngIf="!!imageForm.controls['images'].at(i).value">delete</button>
+        </div>
+        <button (click)="removeImage(i)">delete component</button>
+    </div>
 </form>
 <!--  <form method="post" #createLotForm="ngForm" (ngSubmit)="createLot(createLotForm)">
     <div *ngFor="let lot of numbers; let i=index">
