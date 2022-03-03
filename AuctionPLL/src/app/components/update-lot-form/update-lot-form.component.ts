@@ -1,22 +1,20 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { BaseUrl } from 'src/app/common/constants/urls';
-import { ComponentCanDeactivate } from 'src/app/guards/exit.about.guard';
 import { Images } from 'src/app/models/images';
 import { Lot } from 'src/app/models/lot';
-import { AuthService } from 'src/app/services/auth.service';
 import { LotService } from 'src/app/services/lot.service';
 
 @Component({
-  selector: 'app-create-lot-form',
-  templateUrl: './create-lot-form.component.html',
-  styleUrls: ['./create-lot-form.component.less']
+  selector: 'app-update-lot-form',
+  templateUrl: './update-lot-form.component.html',
+  styleUrls: ['./update-lot-form.component.less']
 })
-export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
+export class UpdateLotFormComponent implements OnInit {
   public get imageArray() {
     return this.lotForm.get('images') as FormArray;
   }
@@ -25,42 +23,54 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
     private toastrService: ToastrService,
     private lotService: LotService,
     private httpClient: HttpClient,
-    private router: Router,
+    private activateRoute: ActivatedRoute,
     public formBuilder: FormBuilder,
-    private authService: AuthService
+    private router: Router
   ) { }
 
-  private saved: boolean = false;
-  public ngOnInit(): void {
-    this.initForm();
+  public saved: boolean = false;
+  public lot: Lot;
+  public routeId: number;
+  ngOnInit(): void {
+    this.routeId = this.activateRoute.snapshot.params['id'];
+    this.lotService.getLotById(this.routeId)
+      .subscribe(_ => {
+        this.lot = _;
+        this.initForm(_);
+      });
   }
 
   public lotForm: FormGroup;
-  private initForm() {
+  private initForm(lot: Lot) {
     this.lotForm = this.formBuilder.group({
-      nameLot: [null, [
+      nameLot: [lot.nameLot, [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(35)
       ]],
-      description: [null, [
+      description: [lot.description, [
         Validators.required,
         Validators.minLength(10),
         Validators.maxLength(70)
       ]],
-      startPrice: [null, [
-        Validators.required,
-        Validators.pattern('^(0*[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*)$'),
-        Validators.min(1)
-      ]],
-      year: [null, [
+      startPrice: [lot.startPrice],
+      currentPrice: [lot.currentPrice],
+      year: [lot.year, [
         Validators.required,
         Validators.pattern('[0-9]{4}'),
         Validators.min(1806)
       ]],
-      image: [null, Validators.required],
-      images: this.formBuilder.array([])
+      image: [lot.image, Validators.required],
+      images: this.formBuilder.array(this.initImages(lot.images))
     });
+  }
+
+  private initImages(images: Images): any[] {
+    const array = [];
+    for (let i = 0; i < this.lotService.numbersOfImages; i++) {
+      array.push(images['image' + (i + 1)]);
+    }
+    return array;
   }
 
   public addImage() {
@@ -74,42 +84,26 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
     this.lotForm.markAsDirty();
   }
 
-  public createLot() {
-    const userId = this.authService.getUserId();
-    const lot: Lot = {
-      id: 0,
-      nameLot: this.lotForm.controls.nameLot.value,
-      startPrice: this.lotForm.controls.startPrice.value,
-      isSold: false,
-      image: this.lotForm.controls.image.value,
-      description: this.lotForm.controls.description.value,
-      userId: userId,
-      startDateTime: new Date(Date.now()),
-      currentPrice: this.lotForm.controls.startPrice.value,
-      year: this.lotForm.controls.year.value,
+  public updateLot() {
+    this.lot = {
+      ...this.lot,
+      ... this.lotForm.value,
       user: null,
-      lotState: {
-        id: 0,
-        ownerId: userId,
-        futureOwnerId: userId,
-        countBid: 0,
-        lotId: 0
-      },
-      images: this.getImages()
+      lotState: null,
+      images: this.getImages(this.lot)
     };
-    this.lotService.createLot(lot)
+    this.lotService.updateLot(this.lot)
       .subscribe(_ => {
-        this.toastrService.success('Successfully added!');
+        this.toastrService.success("Lot is updated");
         this.saved = true;
-        this.router.navigate(['/userlots']);
-      }, _ => {
-        this.toastrService.error('Something went wrong!');
-      });
+        this.router.navigate(['userlots'])
+      }, _ => this.toastrService.error("Error!"));
   }
 
-  private getImages(): Images {
+  private getImages(lot: Lot): Images {
     let images: Images = new Images();
 
+    images.id = this.lot.id;
     let index = 0;
     for (let image of this.lotForm.controls.images.value) {
       images['image' + (index + 1)] = image;
@@ -130,6 +124,7 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
   public createImgPath(serverPath: string) {
     return this.lotService.createImgPath(serverPath);
   }
+
 
   @ViewChild('file') fileInput: any;
   public uploadMainImage(files: any) {

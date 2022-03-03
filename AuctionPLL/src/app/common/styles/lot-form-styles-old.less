@@ -112,32 +112,19 @@
                 justify-content: center;
                 flex-wrap: wrap;
                 display: flex;
-                padding: 10px;
 
                 .mult-image {
+                    margin: 10px 10px 10px;
+
                     #hover-item();
 
-                    width: 200px;
-                    height: 200px;
-
                     .cancel {
-                        float: right;
-                        position: absolute;
-                        top: 0;
-                        right: 10px;
-                        z-index: 1;
-
-                        a {
-                            text-decoration: none;
-                            font-size: 30px;
-                            border-radius: 20px;
+                        button {
                             background: none;
-                            color: red;
-
-                            &:hover {
-                                cursor: pointer;
-                                transform: scale(1.2);
-                            }
+                            font-size: 20px;
+                            position: absolute;
+                            border-radius: 20px;
+                            background: white;
                         }
                     }
 
@@ -157,21 +144,6 @@
                             font-size: 30px;
                         }
                     }
-                }
-            }
-
-            .images-btn {
-                button {
-                    width: 100%;
-                    margin: 14px auto;
-                    border-radius: 30px;
-                    font-size: 20px;
-                    background-color: black;
-                    padding: 7px 20px;
-                    cursor: pointer;
-                    color: white;
-
-                    #hover-item();
                 }
             }
 

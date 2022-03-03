@@ -1,0 +1,93 @@
+<div class="lot-form">
+    <div class="lot-form__general">
+        <div class="text-line">Create Lot</div>
+        <hr>
+        <form [formGroup]="lotForm">
+            <div class="full-width">
+                <div class="has-tooltip">
+                    <input type="text" placeholder="Enter name lot" formControlName="nameLot">
+                    <p class="tooltip"
+                        *ngIf="lotForm.controls.nameLot.errors?.required && lotForm.controls.nameLot.touched">
+                        Required field</p>
+                    <p class="tooltip"
+                        *ngIf="lotForm.controls.nameLot.errors?.minlength && lotForm.controls.nameLot.touched">
+                        Min length 5 is required</p>
+                    <p class="tooltip"
+                        *ngIf="lotForm.controls.nameLot.errors?.maxlength && lotForm.controls.nameLot.touched">
+                        Max length is 35 symbols</p>
+                </div>
+            </div>
+            <div class="full-width">
+                <div class="has-tooltip">
+                    <textarea placeholder="Enter description" formControlName="description"></textarea>
+                    <p class="tooltip"
+                        *ngIf="lotForm.controls.description.errors?.required && lotForm.controls.description.touched">
+                        Required field</p>
+                    <p class="tooltip"
+                        *ngIf="lotForm.controls.description.errors?.minlength && lotForm.controls.description.touched">
+                        Min length 10 is required</p>
+                    <p class="tooltip"
+                        *ngIf="lotForm.controls.description.errors?.maxlength && lotForm.controls.description.touched">
+                        Max length is 70 symbols</p>
+                </div>
+            </div>
+            <div class="full-width">
+                <div class="has-tooltip">
+                    <input type="text" formControlName="startPrice" readonly>
+                    <p class="tooltip">You cannot change price</p>
+                </div>
+            </div>
+            <div class="full-width">
+                <div class="has-tooltip">
+                    <input type="text" formControlName="currentPrice" readonly>
+                    <p class="tooltip">Current bid</p>
+                </div>
+            </div>
+            <div class="full-width">
+                <div class="has-tooltip">
+                    <input type="number" placeholder="Enter year" formControlName="year">
+                    <p class="tooltip" *ngIf="lotForm.controls.year.errors?.required && lotForm.controls.year.touched">
+                        Required field</p>
+                    <p class="tooltip" *ngIf="lotForm.controls.year.errors?.pattern && lotForm.controls.year.touched">
+                        Enter correct year</p>
+                    <p class="tooltip" *ngIf="lotForm.controls.year.errors?.min && lotForm.controls.year.touched">
+                        Min value 1806</p>
+                </div>
+            </div>
+            <div class="image">
+                <button (click)="deleteMainPhoto()" *ngIf="!!lotForm.controls.image.value">Delete photo</button>
+                <img [src]="createImgPath(lotForm.controls.image.value)" *ngIf="!!lotForm.controls.image.value">
+                <input type="file" #file placeholder="Choose file" (change)="uploadMainImage(file.files)"
+                    style="display:none;" onclick="this.value=null">
+                <button class="btn btn-success" (click)="file.click()" *ngIf="!lotForm.controls.image.value">Add main
+                    image</button>
+            </div>
+            <div class="mult-images">
+                <div formArrayName="images" *ngFor="let image of imageArray.controls; let i = index">
+                    <div class="mult-image">
+                        <div class="cancel">
+                            <a (click)="deletePhotoByPath(lotForm.controls['images'].at(i).value,i)"
+                                *ngIf="!!lotForm.controls['images'].at(i).value">&times;</a>
+                        </div>
+                        <div class="cancel">
+                            <a (click)="removeImage(i)" *ngIf="!lotForm.controls['images'].at(i).value">&times;</a>
+                        </div>
+                        <img [src]="createImgPath(lotForm.controls['images'].at(i).value)"
+                            *ngIf="!!lotForm.controls['images'].at(i).value">
+                        <input type="file" #file (change)="uploadImages($event, i)" onclick="this.value=null"
+                            style="display:none;" />
+                        <div class="upload" *ngIf="!lotForm.controls['images'].at(i).value">
+                            <button (click)="file.click()">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="images-btn">
+                <button (click)="addImage()">Add Image</button>
+            </div>
+            <div class="btn-submit">
+                <button (click)="updateLot()" [disabled]="lotForm.invalid">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
