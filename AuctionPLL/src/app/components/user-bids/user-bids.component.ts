@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Lot } from 'src/app/models/lot';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { LotService } from 'src/app/services/lot.service';
 import { tap } from "rxjs/operators";
-import { CommonConstants } from 'src/app/common/constants/common-constants';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-bids',
@@ -14,12 +13,11 @@ export class UserBidsComponent implements OnInit {
   public lots: Lot[];
   constructor(
     private lotService: LotService,
-    private localStorage: LocalStorageService) { }
+    private authService: AuthService
+  ) { }
 
   public getUserId(): string {
-    //replace on function
-    var payload = JSON.parse(window.atob(this.localStorage.get(CommonConstants.JWTToken).split('.')[1]));
-    return payload.id;
+    return this.authService.getUserId();
   }
 
   public ngOnInit(): void {

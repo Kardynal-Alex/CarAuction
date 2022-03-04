@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
 import { Lot } from 'src/app/models/lot';
+import { AuthService } from 'src/app/services/auth.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Comment } from '../../models/comment';
@@ -21,7 +22,9 @@ export class CommentsComponent implements OnInit {
     private commentService: CommentService,
     private toastrService: ToastrService,
     private activateRoute: ActivatedRoute,
-    private localStorage: LocalStorageService) { }
+    private localStorage: LocalStorageService,
+    private authService: AuthService
+  ) { }
   @Input() lot: Lot;
   @Input() userId: string;
 
@@ -93,9 +96,9 @@ export class CommentsComponent implements OnInit {
   public getUserId() {
     var token = this.localStorage.get(CommonConstants.JWTToken);
     if (token != null) {
-      var payload = JSON.parse(window.atob(token.split('.')[1]));
-      this.userName = payload.name;
-      this.userSurname = payload.surname;
+      var payload = this.authService.getPayload();
+      this.userName = payload?.name;
+      this.userSurname = payload?.surname;
     }
   }
 

@@ -26,5 +26,15 @@ namespace Auction.DAL.Interfaces
         /// </summary>
         /// <param name="updateImages"></param>
         void UpdateImages(Images updateImages);
+        /// <summary>
+        /// Delete lot images using reflection
+        /// </summary>
+        /// <param name="images"></param>
+        void DeleteImagesPhysically(Images images);
+        /// <summary>
+        ///  Delete image physically by path in folder
+        /// </summary>
+        /// <param name="path"></param>
+        void DeleteImagePhysicallyByPath(string path);
     }
 }

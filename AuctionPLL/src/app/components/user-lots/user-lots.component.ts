@@ -2,9 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Lot } from 'src/app/models/lot';
 import { LotService } from 'src/app/services/lot.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ConfirmationDialogService } from 'src/app/common/confirmation-dialog/confirmation-dialog.service';
-import { CommonConstants } from 'src/app/common/constants/common-constants';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-lots',
@@ -16,14 +15,12 @@ export class UserLotsComponent implements OnInit, OnDestroy {
   constructor(
     private toastrService: ToastrService,
     private lotService: LotService,
-    private localStorage: LocalStorageService,
-    private confirmationDialogService: ConfirmationDialogService
+    private confirmationDialogService: ConfirmationDialogService,
+    private authService: AuthService
   ) { }
 
   public getUserId(): string {
-    //replace on function
-    var payload = JSON.parse(window.atob(this.localStorage.get(CommonConstants.JWTToken).split('.')[1]));
-    return payload.id;
+    return this.authService.getUserId();
   }
 
   public init() {

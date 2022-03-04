@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth.service';
 import { LoginComponent } from '../login/login.component';
@@ -22,10 +22,6 @@ export class MenuComponent implements OnInit {
   public IsAuthenticated: boolean = false;
   @Input() IsAdmin: boolean;
   public ngOnInit() {
-    this.IsAuthenticated = this.authService.isAuthenticated();
-  }
-
-  public ngDoCheck() {
     this.IsAuthenticated = this.authService.isAuthenticated();
   }
 

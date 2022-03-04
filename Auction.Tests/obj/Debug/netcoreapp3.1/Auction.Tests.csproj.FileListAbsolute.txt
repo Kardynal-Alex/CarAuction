@@ -915,3 +915,5 @@ D:\Asp.Net(project)\CarAuction\Auction.Tests\obj\Debug\netcoreapp3.1\Auction.Tes
 D:\Asp.Net(project)\CarAuction\Auction.Tests\obj\Debug\netcoreapp3.1\Auction.Tests.dll
 D:\Asp.Net(project)\CarAuction\Auction.Tests\obj\Debug\netcoreapp3.1\Auction.Tests.pdb
 D:\Asp.Net(project)\CarAuction\Auction.Tests\obj\Debug\netcoreapp3.1\Auction.Tests.genruntimeconfig.cache
+D:\Asp.Net(project)\CarAuction\Auction.Tests\bin\Debug\netcoreapp3.1\package-lock.json
+D:\Asp.Net(project)\CarAuction\Auction.Tests\bin\Debug\netcoreapp3.1\package.json

@@ -3,6 +3,7 @@ using Auction.DAL.Entities;
 using Auction.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Auction.DAL.Repositories
@@ -44,6 +45,30 @@ namespace Auction.DAL.Repositories
         public void UpdateImages(Images updateImages)
         {
             context.Images.Update(updateImages);
+        }
+        /// <summary>
+        /// Delete lot images using reflection 
+        /// </summary>
+        public void DeleteImagesPhysically(Images images)
+        {
+            Type t = typeof(Images);
+            PropertyInfo[] props = t.GetProperties();
+            for (int i = 1; i < props.Length; i++)
+            {
+                var path = props[i].GetValue(images).ToString();
+                DeleteImagePhysicallyByPath(path);
+            }
+        }
+        /// <summary>
+        /// Delete image physically by path in folder
+        /// </summary>
+        /// <param name="path"></param>
+        public void DeleteImagePhysicallyByPath(string path)
+        {
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+            }
         }
     }
 }

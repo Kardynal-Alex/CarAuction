@@ -97,12 +97,12 @@ export class AuthService {
   }
 
   public getUserId(): string {
-    var payload = JSON.parse(window.atob(this.localStorage.get(CommonConstants.JWTToken)?.split('.')[1]));
+    var payload = this.getPayload();
     return payload?.id ?? null;
   }
 
   public getUserEmail(): string {
-    var payload = JSON.parse(window.atob(this.localStorage.get(CommonConstants.JWTToken)?.split('.')[1]));
+    var payload = this.getPayload();
     return payload?.email ?? null;
   }
 }

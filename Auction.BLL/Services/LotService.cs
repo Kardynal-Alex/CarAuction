@@ -60,22 +60,10 @@ namespace Auction.BLL.Services
             unitOfWork.LotRepository.DeleteLot(lot);
             unitOfWork.CommentRepository.DeleteCommentsRange(comments);
 
-            if (System.IO.File.Exists(lot.Image))
-            {
-                System.IO.File.Delete(lot.Image);
-            }
-
-            Type t = typeof(Images);
-            PropertyInfo[] props = t.GetProperties();
-            for (int i = 1; i < props.Length; i++)
-            {
-                var path = props[i].GetValue(lot.Images).ToString();
-                if (System.IO.File.Exists(path))
-                {
-                    System.IO.File.Delete(path);
-                }
-            }
+            unitOfWork.ImagesRepository.DeleteImagePhysicallyByPath(lot.Image);
+            unitOfWork.ImagesRepository.DeleteImagesPhysically(lot.Images);
             unitOfWork.ImagesRepository.DeleteImagesById(lot.Images.Id);
+
             await unitOfWork.SaveAsync();
         }
         /// <summary>

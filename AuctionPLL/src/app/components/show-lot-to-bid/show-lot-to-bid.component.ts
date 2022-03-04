@@ -14,6 +14,7 @@ import { CommonConstants } from 'src/app/common/constants/common-constants';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShowLotImagesComponent } from '../show-lot-images/show-lot-images.component';
 import { AskOwnerFormComponent } from '../ask-owner-form/ask-owner-form.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-show-lot-to-bid',
@@ -29,7 +30,8 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
     private localStorage: LocalStorageService,
     private commentService: CommentService,
     private favoriteService: FavoriteService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private authService: AuthService
   ) { }
 
   public lot: Lot;
@@ -98,10 +100,10 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
   public getUserId() {
     var token = this.localStorage.get(CommonConstants.JWTToken);
     if (token != null) {
-      var payload = JSON.parse(window.atob(token.split('.')[1]));
-      this.userId = payload.id;
-      this.userName = payload.name;
-      this.userSurname = payload.surname;
+      var payload = this.authService.getPayload();
+      this.userId = payload?.id;
+      this.userName = payload?.name;
+      this.userSurname = payload?.surname;
     }
   }
 
