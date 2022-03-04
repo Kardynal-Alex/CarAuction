@@ -9,6 +9,7 @@ import { ComponentCanDeactivate } from 'src/app/guards/exit.about.guard';
 import { Images } from 'src/app/models/images';
 import { Lot } from 'src/app/models/lot';
 import { AuthService } from 'src/app/services/auth.service';
+import { ImagesService } from 'src/app/services/images.service';
 import { LotService } from 'src/app/services/lot.service';
 
 @Component({
@@ -27,7 +28,8 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
     private httpClient: HttpClient,
     private router: Router,
     public formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private imagesService: ImagesService
   ) { }
 
   private saved: boolean = false;
@@ -135,12 +137,9 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
   public uploadMainImage(files: any) {
     if (files.length === 0)
       return;
-    let uploadApiPhoto = BaseUrl.ApiURL + 'upload';
-    let fileToUpload = <File>files[0];
-    let formData = new FormData();
-    formData.append('file', fileToUpload, fileToUpload.name);
-    this.httpClient.post(uploadApiPhoto, formData, { reportProgress: true, observe: 'events' }).
-      subscribe(event => {
+
+    this.imagesService.uploadMainImage(files)
+      .subscribe(event => {
         if (event.type === HttpEventType.Response) {
           const response = event.body;
           this.lotForm.controls.image.patchValue(response['dbPath']);
@@ -153,12 +152,9 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
   public uploadImages(files: any, index: number) {
     if (files.length === 0)
       return;
-    let uploadApiPhoto = BaseUrl.ApiURL + 'upload';
-    let fileToUpload = files.target.files[0];
-    let formData = new FormData();
-    formData.append('file', fileToUpload, fileToUpload.name);
-    this.httpClient.post(uploadApiPhoto, formData, { reportProgress: true, observe: 'events' }).
-      subscribe(event => {
+
+    this.imagesService.uploadImages(files)
+      .subscribe(event => {
         if (event.type === HttpEventType.Response) {
           const response = event.body;
           const myForm = this.imageArray.at(index);
