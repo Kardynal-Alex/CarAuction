@@ -46,6 +46,9 @@ import { HrComponent } from './common/hr/hr.component';
 import { CommonConstants } from './common/constants/common-constants';
 import { CreateLotFormComponent } from './components/create-lot-form/create-lot-form.component';
 import { UpdateLotFormComponent } from './components/update-lot-form/update-lot-form.component';
+import { AwesomeTooltipComponent } from './common/tooltip/tooltip.component';
+import { AwesomeTooltipDirective } from './common/tooltip/tooltip.directive';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 const appRoutes: Routes = [
   { path: '', component: ShowLotsComponent },
@@ -101,6 +104,8 @@ export function tokenGetter() {
     HrComponent,
     CreateLotFormComponent,
     UpdateLotFormComponent,
+    AwesomeTooltipComponent,
+    AwesomeTooltipDirective
   ],
   imports: [
     BrowserModule,
@@ -119,7 +124,8 @@ export function tokenGetter() {
       }
     }),
     NgbModule,
-    MatMenuModule
+    MatMenuModule,
+    OverlayModule
   ],
   exports: [],
   providers: [
@@ -129,7 +135,7 @@ export function tokenGetter() {
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [ConfirmationDialogComponent]
+  entryComponents: [ConfirmationDialogComponent, AwesomeTooltipComponent]
 })
 export class AppModule {
 }
