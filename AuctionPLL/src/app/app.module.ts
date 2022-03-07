@@ -49,6 +49,7 @@ import { UpdateLotFormComponent } from './components/update-lot-form/update-lot-
 import { AwesomeTooltipComponent } from './common/tooltip/tooltip.component';
 import { AwesomeTooltipDirective } from './common/tooltip/tooltip.directive';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { EmptyViewComponent } from './common/empty-view/empty-view.component';
 
 const appRoutes: Routes = [
   { path: '', component: ShowLotsComponent },
@@ -105,7 +106,8 @@ export function tokenGetter() {
     CreateLotFormComponent,
     UpdateLotFormComponent,
     AwesomeTooltipComponent,
-    AwesomeTooltipDirective
+    AwesomeTooltipDirective,
+    EmptyViewComponent
   ],
   imports: [
     BrowserModule,

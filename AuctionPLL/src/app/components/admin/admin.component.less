@@ -5,10 +5,6 @@
     outline: none;
   }
 
-  body {
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-  }
-
   .list {
     width: 40%;
     margin: 0 auto;
@@ -17,13 +13,6 @@
       font-weight: 600;
       font-size: 30px;
       height: 20px;
-    }
-
-    hr {
-      border: none;
-      background-color: black;
-      color: black;
-      height: 4px;
     }
 
     table {
@@ -42,12 +31,15 @@
       font-size: 20px;
     }
 
-    tr:nth-child(even) {
-      background-color: #f2f2f2;
+    tr {
+      &:nth-child(even) {
+        background-color: #f2f2f2;
+      }
 
       i {
         font-size: 30px;
       }
     }
+
   }
 }

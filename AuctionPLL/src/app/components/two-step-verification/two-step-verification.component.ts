@@ -40,6 +40,7 @@ export class TwoStepVerificationComponent implements OnInit {
         this.localStorage.set(CommonConstants.JWTToken, response['token']);
         this.router.navigate(['']);
         document.getElementById('2-step-form').style.display = 'none';
+        window.location.reload();
       }, _ => {
         this.toastrService.error('Something went wrong');
       });

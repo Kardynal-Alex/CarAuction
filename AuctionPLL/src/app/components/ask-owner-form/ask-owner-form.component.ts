@@ -28,8 +28,7 @@ export class AskOwnerFormComponent implements OnInit {
   }
 
   public myForm: FormGroup;
-  public ngOnInit() {
-  }
+  public ngOnInit() { }
 
   @Input() ownerEmail: string;
   public onSubmit() {

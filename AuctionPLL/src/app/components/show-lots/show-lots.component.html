@@ -23,7 +23,7 @@
 <div class="lots">
   <div *ngFor="let lot of lots | sort:sortMode:sortField">
     <div class="card" *ngIf="!lot.isSold">
-      <div class="timer" id="timer-{{lot.id}}">
+      <div class="timer">
         <p id="timer-{{lot.id}}"></p>
       </div>
       <img [src]="createImgPath(lot.image)" alt="profile picture">

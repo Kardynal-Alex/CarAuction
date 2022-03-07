@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
       role: CommonConstants.User,
       name: this.registerForm.controls.name.value,
       surname: this.registerForm.controls.surname.value,
-      clientURI: 'https://localhost:4200/auction/emailconfirmation'
+      clientURI: `${window.location.href.includes('https') ? 'https' : 'http'}://localhost:4200/auction/emailconfirmation`
     }
     this.authService.register(registerUser)
       .subscribe(_ => {

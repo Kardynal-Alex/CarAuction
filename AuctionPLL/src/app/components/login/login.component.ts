@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(loginUser)
       .subscribe(response => {
         if (response['is2StepVerificationRequired']) {
-          document.getElementById('login-form').style.display = 'none';
+          this.activeModal.close();
           this.router.navigate(['/twostepverification'],
             {
               queryParams: {

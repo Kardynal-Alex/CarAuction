@@ -17,7 +17,8 @@ export class FacebookLoginComponent implements OnInit {
   constructor(
     private toastrService: ToastrService,
     private authService: AuthService,
-    private localStorage: LocalStorageService) { }
+    private localStorage: LocalStorageService
+  ) { }
 
   public ngOnInit() {
     (window as any).fbAsyncInit = function () {

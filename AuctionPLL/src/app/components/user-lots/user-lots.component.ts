@@ -23,6 +23,7 @@ export class UserLotsComponent implements OnInit, OnDestroy {
     return this.authService.getUserId();
   }
 
+  private emptyText = 'List is empty =)';
   public init() {
     const userId = this.getUserId();
     this.lotService.getLotsByUserId(userId)

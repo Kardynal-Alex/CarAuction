@@ -20,8 +20,7 @@ export class ForgotPasswordComponent implements OnInit {
     private activeModal: NgbActiveModal
   ) { }
 
-  public ngOnInit(): void {
-  }
+  public ngOnInit(): void { }
 
   public openLoginForm() {
     this.activeModal.close();
@@ -31,7 +30,7 @@ export class ForgotPasswordComponent implements OnInit {
   public resetPassForm(form: NgForm) {
     const forgotPass: ForgotPassword = {
       email: form.value.email,
-      clientURI: 'https://localhost:4200/auction/resetpassword'
+      clientURI: `${window.location.href.includes('https') ? 'https' : 'http'}://localhost:4200/auction/resetpassword`
     };
     this.activeModal.close();
     this.authService.forgotPassword(forgotPass)

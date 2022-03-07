@@ -25,9 +25,9 @@ export class CommentsComponent implements OnInit {
     private localStorage: LocalStorageService,
     private authService: AuthService
   ) { }
+
   @Input() lot: Lot;
   @Input() userId: string;
-
   @Input() comments: Comment[];
   @Input() filtredComments: Comment[];
   public id: number;
@@ -50,11 +50,11 @@ export class CommentsComponent implements OnInit {
   }
 
   public sellerCommnets() {
-    this.filtredComments = this.comments.filter(x => x['userId'] == this.lot['userId']);
+    this.filtredComments = this.comments.filter(x => x.userId == this.lot.userId);
   }
 
   public bidHistory() {
-    this.filtredComments = this.comments.filter(x => x['isBid'] == true);
+    this.filtredComments = this.comments.filter(x => x.isBid == true);
   }
 
   public createComment(form: NgForm) {

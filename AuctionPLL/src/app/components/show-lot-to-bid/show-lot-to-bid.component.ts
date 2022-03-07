@@ -138,11 +138,9 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
         }, _ => {
           this.toastrService.error('Error');
         });
-    }
-    else if (parseFloat(bid) <= this.lot.currentPrice || !(typeof bid === "number")) {
+    } else if (!(typeof bid === "number") || parseFloat(bid) <= this.lot.currentPrice) {
       this.toastrService.error('Incorrect input data', 'Try again');
-    }
-    else if (this.userId.length > 0) {
+    } else if (this.userId.length > 0) {
       this.toastrService.error('You must be registered', 'Try again');
     }
   }
@@ -198,7 +196,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
       }
 
       if (document.getElementById('timer-' + id) != null && t >= 0)
-        document.getElementById('timer-' + id).innerHTML = '#Timer ' + days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
+        document.getElementById('timer-' + id).innerHTML = "#Timer " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
       if (t < 0) {
         clearInterval(x);
         this.checkLotIfTimerIsExpired(id);
