@@ -37,7 +37,6 @@ export class RegisterComponent implements OnInit {
   }
 
   public register() {
-    console.log(this.registerForm.controls.Email.value)
     const registerUser: Register = {
       email: this.registerForm.controls.email.value,
       password: this.registerForm.controls.password.value,

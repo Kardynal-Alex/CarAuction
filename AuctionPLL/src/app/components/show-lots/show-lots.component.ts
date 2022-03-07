@@ -13,7 +13,7 @@ import { SortMode } from 'src/app/common/sort-mode';
   templateUrl: './show-lots.component.html',
   styleUrls: ['./show-lots.component.less']
 })
-export class ShowLotsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ShowLotsComponent implements OnInit, AfterViewInit {
 
   public get SortViewMode(): typeof SortMode {
     return SortMode;
@@ -44,9 +44,6 @@ export class ShowLotsComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.isAuth) {
       this.init();
     }
-  }
-
-  public ngOnDestroy() {
   }
 
   public init() {
@@ -95,13 +92,13 @@ export class ShowLotsComponent implements OnInit, AfterViewInit, OnDestroy {
       };
       this.favoriteService.addFavorite(favorite)
         .subscribe(_ => {
-          document.getElementById('star-' + lotId).className = "star";
+          document.getElementById('star-' + lotId).className = 'star';
           this.favorites.push(favorite);
         }, _ => {
-          this.toastrService.info("You need to be authorized!");
+          this.toastrService.info('You need to be authorized!');
         });
     } else {
-      this.toastrService.info("You need to be authorized!!");
+      this.toastrService.info('You need to be authorized!!');
     }
   }
 
@@ -111,11 +108,11 @@ export class ShowLotsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.favoriteService.deleteFavoriteById(favoriteId)
       .subscribe(_ => {
         this.favorites = this.favorites.filter(x => x.id != favoriteId);
-        document.getElementById('star-' + lotId).className = "unstar";
+        document.getElementById('star-' + lotId).className = 'unstar';
       });
   }
 
-  public createImgPath(serverPath: string) {
+  public createImgPath(serverPath: string): string {
     return this.lotService.createImgPath(serverPath);
   }
 
@@ -134,7 +131,7 @@ export class ShowLotsComponent implements OnInit, AfterViewInit, OnDestroy {
       if (parseFloat(lot.startPrice.toString()) === parseFloat(lot.currentPrice.toString())) {
         this.lotService.updateOnlyDateLot(lot)
           .subscribe(_ => {
-            document.getElementById('demo-' + id).innerHTML = "Expired";
+            document.getElementById('timer-' + id).innerHTML = 'Expired';
             this.lots[index].startDateTime = new Date(Date.now());
           }, _ => { });
         this.initTimer(lot.id, this.lots[index].startDateTime);
@@ -155,8 +152,8 @@ export class ShowLotsComponent implements OnInit, AfterViewInit, OnDestroy {
       var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((t % (1000 * 60)) / 1000);
 
-      if (document.getElementById('demo-' + id) != null && t >= 0)
-        document.getElementById('demo-' + id).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      if (document.getElementById('timer-' + id) != null && t >= 0)
+        document.getElementById('timer-' + id).innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
       if (t < 0) {
         clearInterval(this.str[id]);
         this.checkLotIfTimerIsExpired(id);

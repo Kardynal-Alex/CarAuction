@@ -19,13 +19,12 @@ export class TwoStepVerificationComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private localStorage: LocalStorageService,
-    private router: Router) { }
+    private router: Router
+  ) { }
 
   private provider: string;
   private email: string;
-  public ngOnInit() {
-    document.getElementById("2-step-form").style.display = "block";
-  }
+  public ngOnInit() { }
 
   public login(form: NgForm) {
     this.provider = this.route.snapshot.queryParams['provider'];
@@ -37,12 +36,12 @@ export class TwoStepVerificationComponent implements OnInit {
     };
     this.authService.twoSteplogin(twoFactor)
       .subscribe(response => {
-        this.toastrService.success("Login successfully.");
+        this.toastrService.success('Login successfully');
         this.localStorage.set(CommonConstants.JWTToken, response['token']);
         this.router.navigate(['']);
-        document.getElementById("2-step-form").style.display = "none";
+        document.getElementById('2-step-form').style.display = 'none';
       }, _ => {
-        this.toastrService.error("Something went wrong");
+        this.toastrService.error('Something went wrong');
       });
   }
 

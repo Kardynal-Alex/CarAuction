@@ -47,7 +47,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
           this.initFavorite(response);
         } else {
           setTimeout(() => {
-            document.getElementById('timer-' + this.lot['id']).innerHTML = "EXPIRED"
+            document.getElementById('timer-' + this.lot.id).innerHTML = 'EXPIRED'
           }, 1000);
         }
       });
@@ -56,7 +56,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
   public numbers = [];
   public ngOnInit() {
     this.getLot();
-    this.getUserId();
+    this.getUserInfo();
     this.getComments(this.id);
     this.numbers = Array.from(Array(9).keys());
   }
@@ -68,7 +68,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
   private initFavorite(lot: Lot) {
     if (this.userId?.length > 0) {
       const favor: Favorite = {
-        id: '',
+        id: null,
         userId: this.userId,
         lotId: lot.id
       };
@@ -76,9 +76,9 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
         .subscribe(response => {
           this.favorite = response;
           if (response != null) {
-            document.getElementById("star-" + response['lotId']).className = "star";
+            document.getElementById('star-' + response['lotId']).className = 'star';
           } else {
-            document.getElementById("star-" + this.id).className = "unstar";
+            document.getElementById('star-' + this.id).className = 'unstar';
           }
         });
     }
@@ -97,7 +97,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
   public userId: string;
   public userName: string;
   public userSurname: string;
-  public getUserId() {
+  public getUserInfo() {
     var token = this.localStorage.get(CommonConstants.JWTToken);
     if (token != null) {
       var payload = this.authService.getPayload();
@@ -112,18 +112,18 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
   }
 
   public placeBid() {
-    var bid = prompt("Place bid more than current");
+    var bid = prompt('Place bid more than current');
     if (parseFloat(bid) > this.lot.currentPrice && this.userId.length > 0) {
       this.lot.currentPrice = parseFloat(bid);
       this.lot.lotState.futureOwnerId = this.userId;
       this.lot.lotState.countBid += 1;
       this.lotService.updateLot(this.lot)
         .subscribe(_ => {
-          this.toastrService.success("Thanks for bid");
+          this.toastrService.success('Thanks for bid');
           const comment: Comment = {
             id: Guid.create().toString(),
             author: this.userName + " " + this.userSurname,
-            text: "Bid $" + parseFloat(bid).toString(),
+            text: 'Bid $' + parseFloat(bid).toString(),
             dateTime: new Date(Date.now()),
             lotId: this.id.toString(),
             userId: this.userId,
@@ -133,17 +133,17 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
             .subscribe(_ => {
               this.getComments(this.id);
             }, _ => {
-              this.toastrService.error("Cannot add comment!");
+              this.toastrService.error('Cannot add comment!');
             });
         }, _ => {
-          this.toastrService.error("Error");
+          this.toastrService.error('Error');
         });
     }
     else if (parseFloat(bid) <= this.lot.currentPrice || !(typeof bid === "number")) {
-      this.toastrService.error("Incorrect input data", "Try again");
+      this.toastrService.error('Incorrect input data', 'Try again');
     }
     else if (this.userId.length > 0) {
-      this.toastrService.error("You must be registered", "Try again");
+      this.toastrService.error('You must be registered', 'Try again');
     }
   }
 
@@ -162,20 +162,20 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
       };
       this.favoriteService.addFavorite(favorite)
         .subscribe(_ => {
-          document.getElementById('star-' + lotId).className = "star";
+          document.getElementById('star-' + lotId).className = 'star';
           this.favorite = favorite;
         }, _ => {
-          this.toastrService.info("You need to be authorized!");
+          this.toastrService.info('You need to be authorized!');
         });
     } else {
-      this.toastrService.info("You need to be authorized!");
+      this.toastrService.info('You need to be authorized!');
     }
   }
 
   public removeFromFavorite(lotId: number) {
-    this.favoriteService.deleteFavoriteById(this.favorite['id'])
+    this.favoriteService.deleteFavoriteById(this.favorite.id)
       .subscribe(_ => {
-        document.getElementById('star-' + lotId).className = "unstar";
+        document.getElementById('star-' + lotId).className = 'unstar';
         this.favorite = null;
       });
   }
@@ -192,15 +192,17 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
       var hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((t % (1000 * 60)) / 1000);
-      if (this.id == null)
+      if (this.id == null) {
         clearInterval(x);
+        return;
+      }
 
-      if (document.getElementById('demo-' + id) != null && t >= 0)
-        document.getElementById('timer-' + id).innerHTML = "#Timer " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      if (document.getElementById('timer-' + id) != null && t >= 0)
+        document.getElementById('timer-' + id).innerHTML = '#Timer ' + days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
       if (t < 0) {
         clearInterval(x);
         this.checkLotIfTimerIsExpired(id);
-        document.getElementById('timer-' + id).innerHTML = "EXPIRED";
+        document.getElementById('timer-' + id).innerHTML = 'EXPIRED';
       }
     }, 1000);
   }

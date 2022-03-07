@@ -4,13 +4,17 @@
             <div class="container">
                 <h2>Two factor verification</h2>
                 <p>Two factor code</p>
-                <div>
-                    <input placeholder="Enter Generated Token" id="token" name="token" ngModel #Token="ngModel" required
+                <div class="has-tooltip">
+                    <input placeholder="Enter Generated Token" name="token" ngModel #Token="ngModel" required
                         maxlength="6" minlength="6" pattern="[0-9]*">
-                    <div class="error" *ngIf="Token.errors?.required && Token.touched">Required field</div>
-                    <div class="error" *ngIf="Token.errors?.minlength && Token.touched">Min length 6</div>
-                    <div class="error" *ngIf="Token.errors?.maxlength && Token.touched">Max length 6</div>
-                    <div class="error" *ngIf="Token.errors?.pattern && Token.touched">Only numbers</div>
+                    <p class="tooltip" *ngIf="Token.errors?.required && Token.touched">
+                        Required field</p>
+                    <p class="tooltip" *ngIf="Token.errors?.minlength && Token.touched">
+                        Min length 6</p>
+                    <p class="tooltip" *ngIf="Token.errors?.maxlength && Token.touched">
+                        Max length 6</p>
+                    <p class="tooltip" *ngIf="Token.errors?.pattern && Token.touched">
+                        Only numbers</p>
                 </div>
                 <button [disabled]="Token.invalid">Submit</button>
             </div>

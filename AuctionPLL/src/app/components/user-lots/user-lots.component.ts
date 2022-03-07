@@ -70,7 +70,7 @@ export class UserLotsComponent implements OnInit, OnDestroy {
             .subscribe(_ => {
               lotEnd.isSold = true;
               clearInterval(this.str[lotEnd.id]);
-              document.getElementById('demo-' + lotEnd.id).innerHTML = "Expired";
+              document.getElementById('timer-' + lotEnd.id).innerHTML = "Expired";
               this.toastrService.success("Lot is closed!");
             }, _ => {
               this.toastrService.error("Something went wrong!");
@@ -98,7 +98,7 @@ export class UserLotsComponent implements OnInit, OnDestroy {
       var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((t % (1000 * 60)) / 1000);
 
-      document.getElementById('demo-' + id).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      document.getElementById('timer-' + id).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
       if (t < 0) {
         clearInterval(this.str[id]);
         this.checkLotIfTimerIsExpired(id);
