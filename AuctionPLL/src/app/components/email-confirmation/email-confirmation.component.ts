@@ -26,10 +26,10 @@ export class EmailConfirmationComponent implements OnInit {
 
     this.authService.confirmEmail('api/account/emailconfirmation', token, email)
       .subscribe(_ => {
-        this.toastrService.success("Succesfully confirmed");
+        this.toastrService.success('Succesfully confirmed');
         this.router.navigate(['']);
       }, _ => {
-        this.toastrService.error("Need to confirm email");
+        this.toastrService.error('Need to confirm email');
         this.router.navigate(['']);
       });
   }

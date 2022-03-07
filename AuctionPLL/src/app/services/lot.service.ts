@@ -21,7 +21,7 @@ export class LotService {
     }
 
     public getLotsByUserId(userId: string): Observable<Lot[]> {
-        return this.httpClient.get<Lot[]>(this.apiUrl + "getuserlots/" + userId);
+        return this.httpClient.get<Lot[]>(this.apiUrl + 'getuserlots/' + userId);
     }
 
     public deleteLotById(lotId: number): Observable<Object> {
@@ -33,19 +33,19 @@ export class LotService {
     }
 
     public getFreshLots(): Observable<Lot[]> {
-        return this.httpClient.get<Lot[]>(this.apiUrl + "getfreshlots/");
+        return this.httpClient.get<Lot[]>(this.apiUrl + 'getfreshlots/');
     }
 
     public getFavoriteUsersLots(userId: string): Observable<Lot[]> {
-        return this.httpClient.get<Lot[]>(this.apiUrl + "favorites/" + userId);
+        return this.httpClient.get<Lot[]>(this.apiUrl + 'favorites/' + userId);
     }
 
     public getUserBids(id: string): Observable<Lot[]> {
-        return this.httpClient.get<Lot[]>(this.apiUrl + "userbids/" + id);
+        return this.httpClient.get<Lot[]>(this.apiUrl + 'userbids/' + id);
     }
 
     public getSoldLots(): Observable<Lot[]> {
-        return this.httpClient.get<Lot[]>(this.apiUrl + "getsoldlots/");
+        return this.httpClient.get<Lot[]>(this.apiUrl + 'getsoldlots/');
     }
 
     public updateLot(lot: Lot): Observable<Object> {
@@ -53,19 +53,19 @@ export class LotService {
     }
 
     public updateLotAfterClosing(lot: Lot): Observable<Object> {
-        return this.httpClient.put(this.apiUrl + "closebid/", lot);
+        return this.httpClient.put(this.apiUrl + 'closebid/', lot);
     }
 
     public updateOnlyDateLot(lot: Lot): Observable<Object> {
-        return this.httpClient.put(this.apiUrl + "onlydatelot/", lot);
+        return this.httpClient.put(this.apiUrl + 'onlydatelot/', lot);
     }
 
     public deletePhoto(path: string): Observable<Object> {
-        return this.httpClient.delete(this.uploadApiPhoto + "?path=" + path);
+        return this.httpClient.delete(this.uploadApiPhoto + '?path=' + path);
     }
 
     public askOwner(askOwner: AskOwner): Observable<Object> {
-        return this.httpClient.post(this.apiUrl + "askowner/", askOwner);
+        return this.httpClient.post(this.apiUrl + 'askowner/', askOwner);
     }
 
     public createImgPath(serverPath: string): string {

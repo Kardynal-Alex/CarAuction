@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
             this.activeModal.close();
             this.modalService.open(ForgotPasswordComponent, { animation: false });
           } else {
-            this.toastrService.success("Login successfully.");
+            this.toastrService.success('Login successfully.');
             this.activeModal.close();
             const token = (<any>response).token;
             this.localStorage.set(CommonConstants.JWTToken, JSON.stringify(token));
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
           }
         }
       }, _ => {
-        this.toastrService.error("Incorect login or password!");
+        this.toastrService.error('Incorect login or password!');
       });
   }
 

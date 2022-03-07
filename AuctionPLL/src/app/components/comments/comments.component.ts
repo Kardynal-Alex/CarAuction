@@ -61,7 +61,7 @@ export class CommentsComponent implements OnInit {
     if (this.userId != null) {
       const comment: Comment = {
         id: Guid.create().toString(),
-        author: this.userName + " " + this.userSurname,
+        author: this.userName + ' ' + this.userSurname,
         text: form.value.text,
         dateTime: new Date(Date.now()),
         lotId: this.id.toString(),
@@ -70,24 +70,24 @@ export class CommentsComponent implements OnInit {
       };
       this.commentService.addComment(comment)
         .subscribe(_ => {
-          this.toastrService.success("Comment is added");
+          this.toastrService.success('Comment is added');
           form.resetForm();
           this.getComments(this.id);
         }, _ => {
-          this.toastrService.error("Can not add your comment")
+          this.toastrService.error('Can not add your comment')
         })
     } else {
-      this.toastrService.warning("Only for registered user", "Warning!");
+      this.toastrService.warning('Only for registered user', 'Warning!');
     }
   }
 
   public deleteComment(commentId: string) {
     this.commentService.deleteVommentById(commentId)
       .subscribe(_ => {
-        this.toastrService.success("Comment is deleted!");
+        this.toastrService.success('Comment is deleted!');
         this.getComments(this.id);
       }, _ => {
-        this.toastrService.error("Error!");
+        this.toastrService.error('Error!');
       });
   }
 

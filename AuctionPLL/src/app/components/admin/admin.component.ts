@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { AdminService } from '../../services/admin.service';
-import { tap } from "rxjs/operators";
+import { tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -28,10 +28,10 @@ export class AdminComponent implements OnInit {
   public deleteUser(userId: string) {
     this.adminService.deleteUser(userId)
       .subscribe(_ => {
-        this.toastrService.success("User is deleted!");
+        this.toastrService.success('User is deleted!');
         this.getUsers();
       }, _ => {
-        this.toastrService.error("Error!");
+        this.toastrService.error('Error!');
       });
   }
 }

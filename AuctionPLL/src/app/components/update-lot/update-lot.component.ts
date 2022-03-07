@@ -60,18 +60,18 @@ export class UpdateLotComponent implements OnInit, ComponentCanDeactivate {
       this.lot.lotState = null;
       this.lotService.updateLot(this.lot)
         .subscribe(_ => {
-          this.toastrService.success("Lot is updated");
+          this.toastrService.success('Lot is updated');
           this.saved = true;
           this.router.navigate(['userlots'])
-        }, _ => this.toastrService.error("Error!"));
+        }, _ => this.toastrService.error('Error!'));
     } else {
-      this.toastrService.error("Download image!");
+      this.toastrService.error('Download image!');
     }
   }
 
   public canDeactivate(): boolean | Observable<boolean> {
     if (!this.saved) {
-      return confirm("Are you want to leave the page?");
+      return confirm('Are you want to leave the page?');
     } else {
       return true;
     }
@@ -106,7 +106,7 @@ export class UpdateLotComponent implements OnInit, ComponentCanDeactivate {
     if (!!this.imagePath) {
       this.lotService.deletePhoto(this.imagePath)
         .subscribe(_ => {
-          this.toastrService.success("Photo is deleted");
+          this.toastrService.success('Photo is deleted');
           this.imagePath = '';
         });
     }
@@ -134,7 +134,7 @@ export class UpdateLotComponent implements OnInit, ComponentCanDeactivate {
     if (imagePath !== '') {
       this.lotService.deletePhoto(imagePath)
         .subscribe(_ => {
-          this.toastrService.success("Photo is deleted");
+          this.toastrService.success('Photo is deleted');
           this.lot['images']['image' + number] = '';
           document.getElementById('but-' + number).style.display = 'block';
         });

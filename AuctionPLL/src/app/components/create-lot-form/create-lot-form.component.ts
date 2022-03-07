@@ -1,10 +1,9 @@
-import { HttpClient, HttpEventType } from '@angular/common/http';
+import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { BaseUrl } from 'src/app/common/constants/urls';
 import { ComponentCanDeactivate } from 'src/app/guards/exit.about.guard';
 import { Images } from 'src/app/models/images';
 import { Lot } from 'src/app/models/lot';
@@ -25,7 +24,6 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
   constructor(
     private toastrService: ToastrService,
     private lotService: LotService,
-    private httpClient: HttpClient,
     private router: Router,
     public formBuilder: FormBuilder,
     private authService: AuthService,
@@ -123,7 +121,7 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
 
   public canDeactivate(): boolean | Observable<boolean> {
     if (!this.saved) {
-      return confirm("Are you want to leave the page?");
+      return confirm('Are you want to leave the page?');
     } else {
       return true;
     }
@@ -170,7 +168,7 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
         .subscribe(_ => {
           const form = this.imageArray.at(index);
           form.patchValue(null);
-          this.toastrService.success("Photo is deleted");
+          this.toastrService.success('Photo is deleted');
         });
     }
   }
@@ -180,7 +178,7 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
       this.lotService.deletePhoto(this.lotForm.controls.image.value)
         .subscribe(_ => {
           this.lotForm.controls.image.patchValue(null);
-          this.toastrService.success("Photo is deleted");
+          this.toastrService.success('Photo is deleted');
         });
     }
   }

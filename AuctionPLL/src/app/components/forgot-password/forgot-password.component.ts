@@ -36,9 +36,9 @@ export class ForgotPasswordComponent implements OnInit {
     this.activeModal.close();
     this.authService.forgotPassword(forgotPass)
       .subscribe(_ => {
-        this.toastrService.success("Please check your email to reset your password", "The link has been sent");
+        this.toastrService.success('Please check your email to reset your password', 'The link has been sent');
       }, _ => {
-        this.toastrService.error("Incorect email");
+        this.toastrService.error('Incorect email');
       });
   }
 

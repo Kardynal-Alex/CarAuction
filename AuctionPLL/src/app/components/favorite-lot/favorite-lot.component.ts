@@ -3,7 +3,7 @@ import { Lot } from 'src/app/models/lot';
 import { AuthService } from 'src/app/services/auth.service';
 import { FavoriteService } from 'src/app/services/favorite.service';
 import { LotService } from 'src/app/services/lot.service';
-import { tap } from "rxjs/operators";
+import { tap } from 'rxjs/operators';
 import { Favorite } from 'src/app/models/favorite';
 import { Guid } from 'guid-typescript';
 

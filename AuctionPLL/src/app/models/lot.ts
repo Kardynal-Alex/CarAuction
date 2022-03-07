@@ -1,6 +1,6 @@
-import { User } from "./user";
-import { LotState } from "./lot-state";
-import { Images } from "./images";
+import { User } from './user';
+import { LotState } from './lot-state';
+import { Images } from './images';
 
 export class Lot {
     id: number;

@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using PDFGenerator.Shared;
 
 namespace Auction.Tests.WepApiTests
@@ -32,7 +31,7 @@ namespace Auction.Tests.WepApiTests
                     options.UseInternalServiceProvider(serviceProvider);
                 });
 
-                var dir = Path.GetDirectoryName("D:\\EpamProject\\FinalProject\\Auction.WepApi\\Resources");
+                var dir = Path.GetDirectoryName("D:\\Asp.Net(project)\\CarAuction\\Auction.WepApi\\Resources");
                 Environment.CurrentDirectory = dir;
 
                 using (var scope = services.BuildServiceProvider().CreateScope())

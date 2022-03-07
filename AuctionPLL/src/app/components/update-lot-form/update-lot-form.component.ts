@@ -1,10 +1,9 @@
-import { HttpClient, HttpEventType } from '@angular/common/http';
+import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { BaseUrl } from 'src/app/common/constants/urls';
 import { Images } from 'src/app/models/images';
 import { Lot } from 'src/app/models/lot';
 import { ImagesService } from 'src/app/services/images.service';
@@ -23,7 +22,6 @@ export class UpdateLotFormComponent implements OnInit {
   constructor(
     private toastrService: ToastrService,
     private lotService: LotService,
-    private httpClient: HttpClient,
     private activateRoute: ActivatedRoute,
     public formBuilder: FormBuilder,
     private router: Router,
@@ -96,10 +94,10 @@ export class UpdateLotFormComponent implements OnInit {
     };
     this.lotService.updateLot(this.lot)
       .subscribe(_ => {
-        this.toastrService.success("Lot is updated");
+        this.toastrService.success('Lot is updated');
         this.saved = true;
         this.router.navigate(['userlots'])
-      }, _ => this.toastrService.error("Error!"));
+      }, _ => this.toastrService.error('Error!'));
   }
 
   private getImages(lot: Lot): Images {
@@ -117,7 +115,7 @@ export class UpdateLotFormComponent implements OnInit {
 
   public canDeactivate(): boolean | Observable<boolean> {
     if (!this.saved) {
-      return confirm("Are you want to leave the page?");
+      return confirm('Are you want to leave the page?');
     } else {
       return true;
     }
@@ -164,7 +162,7 @@ export class UpdateLotFormComponent implements OnInit {
         .subscribe(_ => {
           const form = this.imageArray.at(index);
           form.patchValue(null);
-          this.toastrService.success("Photo is deleted");
+          this.toastrService.success('Photo is deleted');
         });
     }
   }
@@ -174,7 +172,7 @@ export class UpdateLotFormComponent implements OnInit {
       this.lotService.deletePhoto(this.lotForm.controls.image.value)
         .subscribe(_ => {
           this.lotForm.controls.image.patchValue(null);
-          this.toastrService.success("Photo is deleted");
+          this.toastrService.success('Photo is deleted');
         });
     }
   }

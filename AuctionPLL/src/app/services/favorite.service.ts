@@ -22,10 +22,10 @@ export class FavoriteService {
     }
 
     public getFavoriteByUserIdAndLotId(favorite: Favorite): Observable<Favorite> {
-        return this.httpClient.post<Favorite>(this.apiUrl + "favorite/", favorite);
+        return this.httpClient.post<Favorite>(this.apiUrl + 'favorite/', favorite);
     }
 
     public deleteFavoriteByUserIdAndLotId(favorite: Favorite): Observable<Object> {
-        return this.httpClient.post(this.apiUrl + "deletepost", favorite);
+        return this.httpClient.post(this.apiUrl + 'deletepost', favorite);
     }
 }

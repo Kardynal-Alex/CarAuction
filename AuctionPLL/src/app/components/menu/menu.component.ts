@@ -35,9 +35,9 @@ export class MenuComponent implements OnInit {
         this.IsAuthenticated = false;
         this.router.navigate(['/']);
         window.location.reload();
-        this.toastrService.success("Logout successfully.");
+        this.toastrService.success('Logout successfully.');
       }, _ => {
-        this.toastrService.error("Error!");
+        this.toastrService.error('Error!');
       });
   }
 }

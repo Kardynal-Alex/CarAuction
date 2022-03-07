@@ -37,7 +37,7 @@ export class GoogleLoginComponent implements OnInit {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) { return; }
       js = d.createElement(s); js.id = id;
-      js.src = "https://apis.google.com/js/platform.js?onload=googleSDKLoaded";
+      js.src = 'https://apis.google.com/js/platform.js?onload=googleSDKLoaded';
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'google-jssdk'));
   }
@@ -47,21 +47,21 @@ export class GoogleLoginComponent implements OnInit {
       (googleUser) => {
         let profile = googleUser.getBasicProfile();
         const externalAuth: ExternalAuth = {
-          provider: "GOOGLE",
+          provider: 'GOOGLE',
           idToken: googleUser.getAuthResponse().id_token
         }
         this.authService.googleLogin(externalAuth)
           .subscribe(response => {
-            this.toastrService.success("Login successfully.");
+            this.toastrService.success('Login successfully.');
             const token = (<any>response).token;
             this.localStorage.set(CommonConstants.JWTToken, JSON.stringify(token));
             window.location.reload();
           }, _ => {
-            this.toastrService.error("error");
+            this.toastrService.error('error');
           });
         //console.log('Token || ' + googleUser.getAuthResponse().id_token);
         //console.log('Email: ' , profile.getEmail());
-        //console.log("profile", googleUser.getAuthResponse());
+        //console.log('profile', googleUser.getAuthResponse());
       }, (error) => {
         alert(JSON.stringify(error, undefined, 2));
       });

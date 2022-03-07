@@ -52,7 +52,7 @@ export class CreateLotComponent implements OnInit, ComponentCanDeactivate {
     if (this.imagePath !== '') {
       this.photoIsEmpty = true;
       this.lotService.deletePhoto(this.imagePath).subscribe(response => {
-        this.toastrService.success("Photo is deleted");
+        this.toastrService.success('Photo is deleted');
         this.imagePath = '';
       });
     }
@@ -103,13 +103,13 @@ export class CreateLotComponent implements OnInit, ComponentCanDeactivate {
           }
         });
     } else {
-      this.toastrService.error("Image is not uploaded!");
+      this.toastrService.error('Image is not uploaded!');
     }
   }
 
   public canDeactivate(): boolean | Observable<boolean> {
     if (!this.saved) {
-      return confirm("Are you want to leave the page?");
+      return confirm('Are you want to leave the page?');
     }
     else {
       return true;
@@ -164,7 +164,7 @@ export class CreateLotComponent implements OnInit, ComponentCanDeactivate {
     if (!!imagePath) {
       this.lotService.deletePhoto(imagePath)
         .subscribe(_ => {
-          this.toastrService.success("Photo is deleted");
+          this.toastrService.success('Photo is deleted');
           this.images[field] = '';
         });
     }
