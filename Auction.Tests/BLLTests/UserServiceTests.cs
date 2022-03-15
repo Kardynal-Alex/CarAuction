@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using IdentityConstants = Auction.DAL.EF.IdentityConstants;
 
 namespace Auction.Tests.BLLTests
 {
@@ -34,10 +35,10 @@ namespace Auction.Tests.BLLTests
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.Setup(x => x.UserManager).Returns(userManager);
 
-            var userService = new UserService(mockUnitOfWork.Object, 
-                                            UnitTestHelper.CreateMapperProfileBLL(), 
-                                            new Mock<IOptions<FacebookAuthSettings>>().Object,
-                                            new Mock<IOptions<GoogleAuthSettings>>().Object);
+            var userService = new UserService(mockUnitOfWork.Object,
+                                              UnitTestHelper.CreateMapperProfileBLL(),
+                                              new Mock<IOptions<FacebookAuthSettings>>().Object,
+                                              new Mock<IOptions<GoogleAuthSettings>>().Object);
             var user = await userService.GetUserByIdAsync(userId);
             var mappedUser = new AutoMapperHelper<UserDTO, User>().MapToType(user);
             Assert.That(mappedUser, Is.EqualTo(Users().ElementAt(0)).Using(new UserEqualityComparer()));
@@ -53,7 +54,7 @@ namespace Auction.Tests.BLLTests
                     Name = "Ira",
                     UserName = "irakardinal@gmail.com",
                     Surname = "Kardynal",
-                    Role = "user",
+                    Role = IdentityConstants.User,
                     Email = "irakardinal@gmail.com",
                     PasswordHash = BCrypt.Net.BCrypt.HashPassword("ira123")
                 },
@@ -63,7 +64,7 @@ namespace Auction.Tests.BLLTests
                     Name = "Oleksandr",
                     UserName = "admin@gmail.com",
                     Surname = "Kardynal",
-                    Role = "admin",
+                    Role = IdentityConstants.Admin,
                     Email = "admin@gmail.com",
                     PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin123")
                 }
@@ -81,9 +82,9 @@ namespace Auction.Tests.BLLTests
             mockUnitOfWork.Setup(x => x.UserManager).Returns(mockUserManager.Object);
 
             var userService = new UserService(mockUnitOfWork.Object,
-                                            UnitTestHelper.CreateMapperProfileBLL(),
-                                            new Mock<IOptions<FacebookAuthSettings>>().Object,
-                                            new Mock<IOptions<GoogleAuthSettings>>().Object);
+                                              UnitTestHelper.CreateMapperProfileBLL(),
+                                              new Mock<IOptions<FacebookAuthSettings>>().Object,
+                                              new Mock<IOptions<GoogleAuthSettings>>().Object);
             var userDTO = await userService.GetUserByEmailAsync(email);
 
             var mappedUser = new AutoMapperHelper<UserDTO, User>().MapToType(userDTO);
@@ -100,38 +101,38 @@ namespace Auction.Tests.BLLTests
             mockUnitOfWork.Setup(x => x.UserManager)
                 .Returns(userManagerMock.Object);
             var userService = new UserService(mockUnitOfWork.Object,
-                                            UnitTestHelper.CreateMapperProfileBLL(),
-                                            new Mock<IOptions<FacebookAuthSettings>>().Object,
-                                            new Mock<IOptions<GoogleAuthSettings>>().Object);
+                                              UnitTestHelper.CreateMapperProfileBLL(),
+                                              new Mock<IOptions<FacebookAuthSettings>>().Object,
+                                              new Mock<IOptions<GoogleAuthSettings>>().Object);
 
             var users = userService.GetUsersWithRoleUser();
             var mappedUsers = new AutoMapperHelper<UserDTO, User>().MapToTypeList(users);
-            Assert.That(mappedUsers, Is.EqualTo(Users().Where(x => x.Role == "user"))
+            Assert.That(mappedUsers, Is.EqualTo(Users().Where(x => x.Role == IdentityConstants.User))
                 .Using(new UserEqualityComparer()));
         }
 
         Mock<UserManager<TIDentityUser>> GetUserManagerMock<TIDentityUser>() where TIDentityUser : IdentityUser
         {
             return new Mock<UserManager<TIDentityUser>>(
-                    new Mock<IUserStore<TIDentityUser>>().Object,
-                    new Mock<IOptions<IdentityOptions>>().Object,
-                    new Mock<IPasswordHasher<TIDentityUser>>().Object,
-                    new IUserValidator<TIDentityUser>[0],
-                    new IPasswordValidator<TIDentityUser>[0],
-                    new Mock<ILookupNormalizer>().Object,
-                    new Mock<IdentityErrorDescriber>().Object,
-                    new Mock<IServiceProvider>().Object,
-                    null);
+                new Mock<IUserStore<TIDentityUser>>().Object,
+                new Mock<IOptions<IdentityOptions>>().Object,
+                new Mock<IPasswordHasher<TIDentityUser>>().Object,
+                new IUserValidator<TIDentityUser>[0],
+                new IPasswordValidator<TIDentityUser>[0],
+                new Mock<ILookupNormalizer>().Object,
+                new Mock<IdentityErrorDescriber>().Object,
+                new Mock<IServiceProvider>().Object,
+                null);
         }
 
         Mock<RoleManager<TIdentityRole>> GetRoleManagerMock<TIdentityRole>() where TIdentityRole : IdentityRole
         {
             return new Mock<RoleManager<TIdentityRole>>(
-                    new Mock<IRoleStore<TIdentityRole>>().Object,
-                    new IRoleValidator<TIdentityRole>[0],
-                    new Mock<ILookupNormalizer>().Object,
-                    new Mock<IdentityErrorDescriber>().Object,
-                    null);
+                new Mock<IRoleStore<TIdentityRole>>().Object,
+                new IRoleValidator<TIdentityRole>[0],
+                new Mock<ILookupNormalizer>().Object,
+                new Mock<IdentityErrorDescriber>().Object,
+                null);
         }
     }
 }

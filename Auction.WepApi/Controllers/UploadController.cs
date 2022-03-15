@@ -70,7 +70,7 @@ namespace Auction.WepApi.Controllers
             {
                 System.IO.File.Delete(path);
             }
-            return Ok();
+            return NoContent();
         }
     }
 }

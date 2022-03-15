@@ -97,7 +97,7 @@ namespace Auction.WepApi.Controllers
             try
             {
                 await service.DeleteFavoriteByLotIdAndUserIdAsync(mapper.Map<FavoriteViewModel, FavoriteDTO>(favoriteViewModel));
-                return Ok();
+                return NoContent();
             }
             catch (Exception ex)
             {
@@ -116,7 +116,7 @@ namespace Auction.WepApi.Controllers
             try
             {
                 await service.DeleteFavoriteAsync(id);
-                return Ok();
+                return NoContent();
             }
             catch (Exception ex)
             {

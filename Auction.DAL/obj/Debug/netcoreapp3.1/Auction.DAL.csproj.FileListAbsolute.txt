@@ -15,7 +15,6 @@ D:\Asp.Net(project)\CarAuction\Auction.DAL\bin\Debug\netcoreapp3.1\Auction.DAL.r
 D:\Asp.Net(project)\CarAuction\Auction.DAL\bin\Debug\netcoreapp3.1\Auction.DAL.runtimeconfig.dev.json
 D:\Asp.Net(project)\CarAuction\Auction.DAL\bin\Debug\netcoreapp3.1\Auction.DAL.dll
 D:\Asp.Net(project)\CarAuction\Auction.DAL\bin\Debug\netcoreapp3.1\Auction.DAL.pdb
-D:\Asp.Net(project)\CarAuction\Auction.DAL\obj\Debug\netcoreapp3.1\Auction.DAL.csproj.AssemblyReference.cache
 D:\Asp.Net(project)\CarAuction\Auction.DAL\obj\Debug\netcoreapp3.1\Auction.DAL.GeneratedMSBuildEditorConfig.editorconfig
 D:\Asp.Net(project)\CarAuction\Auction.DAL\obj\Debug\netcoreapp3.1\Auction.DAL.AssemblyInfoInputs.cache
 D:\Asp.Net(project)\CarAuction\Auction.DAL\obj\Debug\netcoreapp3.1\Auction.DAL.AssemblyInfo.cs

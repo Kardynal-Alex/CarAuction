@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using Auction.Tests.BLLTests;
 using Microsoft.Extensions.Options;
 using DinkToPdf.Contracts;
+using IdentityConstants = Auction.DAL.EF.IdentityConstants;
 
 namespace Auction.Tests.BLLTests
 {
@@ -88,17 +89,17 @@ namespace Auction.Tests.BLLTests
             await lotService.AddLotAsync(lotDTO);
 
             mockUnitOfWork.Verify(x => x.LotRepository.AddLotAsync(It.Is<Lot>(x =>
-                  x.Id == lotDTO.Id && x.NameLot == lotDTO.NameLot && x.StartPrice == lotDTO.StartPrice
-                  && x.IsSold == lotDTO.IsSold && x.Image == lotDTO.Image && x.Description == lotDTO.Description
-                  && x.UserId == lotDTO.UserId && x.StartDateTime == lotDTO.StartDateTime
-                  && x.CurrentPrice == lotDTO.CurrentPrice && x.Year == lotDTO.Year
-                  && x.Images.Image1 == lotDTO.Images.Image1 && x.Images.Image2 == lotDTO.Images.Image2
-                  && x.Images.Image3 == lotDTO.Images.Image3 && x.Images.Image4 == lotDTO.Images.Image4
-                  && x.Images.Image5 == lotDTO.Images.Image5 && x.Images.Image6 == lotDTO.Images.Image6
-                  && x.Images.Image7 == lotDTO.Images.Image7 && x.Images.Image8 == lotDTO.Images.Image8
-                  && x.Images.Image9 == lotDTO.Images.Image9 && x.LotState.OwnerId == lotDTO.LotState.OwnerId 
-                  && x.LotState.FutureOwnerId == lotDTO.LotState.FutureOwnerId && x.LotState.CountBid == lotDTO.LotState.CountBid 
-                  && x.LotState.LotId == lotDTO.LotState.LotId)), Times.Once);
+                  x.Id == lotDTO.Id && x.NameLot == lotDTO.NameLot && x.StartPrice == lotDTO.StartPrice &&
+                  x.IsSold == lotDTO.IsSold && x.Image == lotDTO.Image && x.Description == lotDTO.Description &&
+                  x.UserId == lotDTO.UserId && x.StartDateTime == lotDTO.StartDateTime &&
+                  x.CurrentPrice == lotDTO.CurrentPrice && x.Year == lotDTO.Year &&
+                  x.Images.Image1 == lotDTO.Images.Image1 && x.Images.Image2 == lotDTO.Images.Image2 &&
+                  x.Images.Image3 == lotDTO.Images.Image3 && x.Images.Image4 == lotDTO.Images.Image4 &&
+                  x.Images.Image5 == lotDTO.Images.Image5 && x.Images.Image6 == lotDTO.Images.Image6 &&
+                  x.Images.Image7 == lotDTO.Images.Image7 && x.Images.Image8 == lotDTO.Images.Image8 &&
+                  x.Images.Image9 == lotDTO.Images.Image9 && x.LotState.OwnerId == lotDTO.LotState.OwnerId &&
+                  x.LotState.FutureOwnerId == lotDTO.LotState.FutureOwnerId && x.LotState.CountBid == lotDTO.LotState.CountBid &&
+                  x.LotState.LotId == lotDTO.LotState.LotId)), Times.Once);
 
             mockUnitOfWork.Verify(x => x.SaveAsync(), Times.Once);
         }
@@ -348,7 +349,7 @@ namespace Auction.Tests.BLLTests
                         Id = "5ae019a1-c312-4589-ab62-8b8a1fcb882c",
                         Name = "Ira",
                         Surname = "Kardynal",
-                        Role = "user",
+                        Role = IdentityConstants.User,
                         Email = "irakardinal@gmail.com"
                     },
                     LotState = new LotStateDTO
@@ -390,10 +391,10 @@ namespace Auction.Tests.BLLTests
             await lotService.UpdateLotAsync(lotDTO);
 
             mockUnitOfWork.Verify(x => x.LotRepository.UpdateLot(It.Is<Lot>(x =>
-                  x.Id == lotDTO.Id && x.NameLot == lotDTO.NameLot && x.StartPrice == lotDTO.StartPrice
-                  && x.IsSold == lotDTO.IsSold && x.Image == lotDTO.Image && x.Description == lotDTO.Description
-                  && x.UserId == lotDTO.UserId && x.StartDateTime == lotDTO.StartDateTime
-                  && x.CurrentPrice == lotDTO.CurrentPrice && x.Year == lotDTO.Year)), Times.Once);
+                  x.Id == lotDTO.Id && x.NameLot == lotDTO.NameLot && x.StartPrice == lotDTO.StartPrice &&
+                  x.IsSold == lotDTO.IsSold && x.Image == lotDTO.Image && x.Description == lotDTO.Description &&
+                  x.UserId == lotDTO.UserId && x.StartDateTime == lotDTO.StartDateTime &&
+                  x.CurrentPrice == lotDTO.CurrentPrice && x.Year == lotDTO.Year)), Times.Once);
             mockUnitOfWork.Verify(x => x.SaveAsync(), Times.AtLeastOnce);
         }
 
@@ -445,23 +446,23 @@ namespace Auction.Tests.BLLTests
             await lotService.UpdateLotAsync(lotDTO);
 
             mockUnitOfWork.Verify(x => x.LotRepository.UpdateLot(It.Is<Lot>(x =>
-                  x.Id == lotDTO.Id && x.NameLot == lotDTO.NameLot && x.StartPrice == lotDTO.StartPrice
-                  && x.IsSold == lotDTO.IsSold && x.Image == lotDTO.Image && x.Description == lotDTO.Description
-                  && x.UserId == lotDTO.UserId && x.StartDateTime == lotDTO.StartDateTime
-                  && x.CurrentPrice == lotDTO.CurrentPrice && x.Year == lotDTO.Year
+                  x.Id == lotDTO.Id && x.NameLot == lotDTO.NameLot && x.StartPrice == lotDTO.StartPrice &&
+                  x.IsSold == lotDTO.IsSold && x.Image == lotDTO.Image && x.Description == lotDTO.Description &&
+                  x.UserId == lotDTO.UserId && x.StartDateTime == lotDTO.StartDateTime &&
+                  x.CurrentPrice == lotDTO.CurrentPrice && x.Year == lotDTO.Year
                  )), Times.Once);
 
             mockUnitOfWork.Verify(x => x.ImagesRepository.UpdateImages(It.Is<Images>(x =>
-                   x.Image1 == lotDTO.Images.Image1 && x.Image2 == lotDTO.Images.Image2
-                   && x.Image3 == lotDTO.Images.Image3 && x.Image4 == lotDTO.Images.Image4
-                   && x.Image5 == lotDTO.Images.Image5 && x.Image6 == lotDTO.Images.Image6
-                   && x.Image7 == lotDTO.Images.Image7 && x.Image8 == lotDTO.Images.Image8
-                   && x.Image9 == lotDTO.Images.Image9)), Times.Once);
+                   x.Image1 == lotDTO.Images.Image1 && x.Image2 == lotDTO.Images.Image2 &&
+                   x.Image3 == lotDTO.Images.Image3 && x.Image4 == lotDTO.Images.Image4 &&
+                   x.Image5 == lotDTO.Images.Image5 && x.Image6 == lotDTO.Images.Image6 &&
+                   x.Image7 == lotDTO.Images.Image7 && x.Image8 == lotDTO.Images.Image8 &&
+                   x.Image9 == lotDTO.Images.Image9)), Times.Once);
 
             mockUnitOfWork.Verify(x => x.LotStateRepository.UpdateLotState(It.Is<LotState>(x =>
-                x.Id == lotDTO.LotState.Id && x.OwnerId == lotDTO.LotState.OwnerId
-                && x.FutureOwnerId == lotDTO.LotState.FutureOwnerId && x.CountBid == lotDTO.LotState.CountBid
-                && x.LotId == lotDTO.LotState.LotId)), Times.Once);
+                x.Id == lotDTO.LotState.Id && x.OwnerId == lotDTO.LotState.OwnerId &&
+                x.FutureOwnerId == lotDTO.LotState.FutureOwnerId && x.CountBid == lotDTO.LotState.CountBid &&
+                x.LotId == lotDTO.LotState.LotId)), Times.Once);
 
             mockUnitOfWork.Verify(x => x.SaveAsync(), Times.AtLeastOnce);
         }
@@ -491,10 +492,10 @@ namespace Auction.Tests.BLLTests
             await lotService.UpdateLotAsync(lotDTO);
 
             mockUnitOfWork.Verify(x => x.LotRepository.UpdateLot(It.Is<Lot>(x =>
-                  x.Id == lotDTO.Id && x.NameLot == lotDTO.NameLot && x.StartPrice == lotDTO.StartPrice
-                  && x.IsSold == lotDTO.IsSold && x.Image == lotDTO.Image && x.Description == lotDTO.Description
-                  && x.UserId == lotDTO.UserId && x.StartDateTime == lotDTO.StartDateTime
-                  && x.CurrentPrice == lotDTO.CurrentPrice && x.Year == lotDTO.Year
+                  x.Id == lotDTO.Id && x.NameLot == lotDTO.NameLot && x.StartPrice == lotDTO.StartPrice &&
+                  x.IsSold == lotDTO.IsSold && x.Image == lotDTO.Image && x.Description == lotDTO.Description &&
+                  x.UserId == lotDTO.UserId && x.StartDateTime == lotDTO.StartDateTime &&
+                  x.CurrentPrice == lotDTO.CurrentPrice && x.Year == lotDTO.Year
                  )), Times.Once);
 
             mockUnitOfWork.Verify(x => x.SaveAsync(), Times.AtLeastOnce);
@@ -509,7 +510,7 @@ namespace Auction.Tests.BLLTests
                 Name = "Ira",
                 UserName = "irakardinal@gmail.com",
                 Surname = "Kardynal",
-                Role = "user",
+                Role = IdentityConstants.User,
                 Email = "irakardinal@gmail.com",
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword("ira123")
             };
@@ -553,7 +554,7 @@ namespace Auction.Tests.BLLTests
                     Id = "925695ec-0e70-4e43-8514-8a0710e11d53",
                     Name = "Oleksandr",
                     Surname = "Kardynal",
-                    Role = "admin",
+                    Role = IdentityConstants.Admin,
                     Email = "admin@gmail.com"
                 }
             };
@@ -561,16 +562,16 @@ namespace Auction.Tests.BLLTests
             await lotService.UpdateLotAsync(lotDTO);
 
             mockUnitOfWork.Verify(x => x.LotRepository.UpdateLot(It.Is<Lot>(x =>
-                  x.Id == lotDTO.Id && x.NameLot == lotDTO.NameLot && x.StartPrice == lotDTO.StartPrice
-                  && x.IsSold == lotDTO.IsSold && x.Image == lotDTO.Image && x.Description == lotDTO.Description
-                  && x.UserId == lotDTO.UserId && x.StartDateTime == lotDTO.StartDateTime
-                  && x.CurrentPrice == lotDTO.CurrentPrice && x.Year == lotDTO.Year
+                  x.Id == lotDTO.Id && x.NameLot == lotDTO.NameLot && x.StartPrice == lotDTO.StartPrice &&
+                  x.IsSold == lotDTO.IsSold && x.Image == lotDTO.Image && x.Description == lotDTO.Description &&
+                  x.UserId == lotDTO.UserId && x.StartDateTime == lotDTO.StartDateTime &&
+                  x.CurrentPrice == lotDTO.CurrentPrice && x.Year == lotDTO.Year
                  )), Times.Once);
 
             mockUnitOfWork.Verify(x => x.LotStateRepository.UpdateLotState(It.Is<LotState>(x =>
-                x.Id == lotDTO.LotState.Id && x.OwnerId == lotDTO.LotState.OwnerId
-                && x.FutureOwnerId == lotDTO.LotState.FutureOwnerId && x.CountBid == lotDTO.LotState.CountBid
-                && x.LotId == lotDTO.LotState.LotId)), Times.Once);
+                x.Id == lotDTO.LotState.Id && x.OwnerId == lotDTO.LotState.OwnerId &&
+                x.FutureOwnerId == lotDTO.LotState.FutureOwnerId && x.CountBid == lotDTO.LotState.CountBid &&
+                x.LotId == lotDTO.LotState.LotId)), Times.Once);
 
             mockUnitOfWork.Verify(x => x.EmailService.SendEmailAsync(It.IsAny<EmailMessage>()), Times.Once);
 

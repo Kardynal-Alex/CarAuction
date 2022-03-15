@@ -68,10 +68,10 @@ namespace Auction.BLL.Services
         /// <param name="commentDTO"></param>
         private void ValidateLotDTO(CommentDTO commentDTO)
         {
-            if (commentDTO.Author == null || commentDTO.Text == null || commentDTO.UserId == null) 
+            if (string.IsNullOrEmpty(commentDTO.Author) || string.IsNullOrEmpty(commentDTO.Text) ||
+                string.IsNullOrEmpty(commentDTO.UserId))
                 throw new AuctionException("incorect text data");
-            if (commentDTO.Author == "" || commentDTO.Text == "" || commentDTO.UserId == "")
-                throw new AuctionException("incorect text data");
+
             if (!int.TryParse(commentDTO.LotId.ToString(), out int lotid) || lotid < 0) 
                 throw new AuctionException("Invalid lot id");
         }

@@ -19,6 +19,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using IdentityConstants = Auction.DAL.EF.IdentityConstants;
 
 namespace Auction.BLL.Services
 {
@@ -31,10 +32,11 @@ namespace Auction.BLL.Services
         private readonly IMapper mapper;
         private readonly FacebookAuthSettings fbAuthSettings;
         private readonly GoogleAuthSettings googleAuthSettings;
-        public UserService(IUnitOfWork unitOfWork, 
-                           IMapper mapper, 
-                           IOptions<FacebookAuthSettings> fbAuthSettingsAccessor,
-                           IOptions<GoogleAuthSettings> googlelAuthSettingsAccessor)
+        public UserService(
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IOptions<FacebookAuthSettings> fbAuthSettingsAccessor,
+            IOptions<GoogleAuthSettings> googlelAuthSettingsAccessor)
         {
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
@@ -48,7 +50,7 @@ namespace Auction.BLL.Services
         /// <returns>Boolean result</returns>
         public async Task<bool> DeleteUser(string userId)
         {
-            if (userId == null || userId == "") 
+            if (string.IsNullOrEmpty(userId)) 
                 throw new AuctionException("Invalid user id");
 
             var user = await unitOfWork.UserManager.FindByIdAsync(userId);
@@ -229,7 +231,7 @@ namespace Auction.BLL.Services
         /// <returns></returns>
         public List<UserDTO> GetUsersWithRoleUser()
         {
-            var users = unitOfWork.UserManager.Users.Where(x => x.Role.ToLower() == "user").ToList();
+            var users = unitOfWork.UserManager.Users.Where(x => x.Role.ToLower() == IdentityConstants.User).ToList();
             return mapper.Map<List<UserDTO>>(users);
         }
         /// <summary>
@@ -329,7 +331,7 @@ namespace Auction.BLL.Services
                     Name = userInfo.FirstName,
                     Surname = userInfo.LastName,
                     UserName = userInfo.Email,
-                    Role = "user",
+                    Role = IdentityConstants.User,
                     EmailConfirmed = true
                 };
                 var result = await unitOfWork.UserManager.CreateAsync(newUser, Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Substring(0, 8));
@@ -414,7 +416,7 @@ namespace Auction.BLL.Services
                     {
                         Email = payload.Email,
                         UserName = payload.Email,
-                        Role = "user",
+                        Role = IdentityConstants.User,
                         Name = payload.FamilyName,
                         Surname = payload.GivenName,
                         EmailConfirmed = payload.EmailVerified

@@ -224,12 +224,12 @@ namespace Auction.Tests.DALTests
             {
                 new User
                 {
-                    Id="925695ec-0e70-4e43-8514-8a0710e11d53",
-                    Name="Oleksandr",
-                    Surname="Kardynal",
-                    Role="admin",
-                    Email="admin@gmail.com",
-                    UserName="admin@gmail.com"
+                    Id = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                    Name = "Oleksandr",
+                    Surname = "Kardynal",
+                    Role = IdentityConstants.Admin,
+                    Email = "admin@gmail.com",
+                    UserName = "admin@gmail.com"
                 }
             };
 

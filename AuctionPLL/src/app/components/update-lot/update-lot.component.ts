@@ -8,6 +8,9 @@ import { ComponentCanDeactivate } from 'src/app/guards/exit.about.guard';
 import { Observable } from 'rxjs';
 import { BaseUrl } from 'src/app/common/constants/urls';
 
+/**
+  * @deprecated old form - use update-lot-form with reactive forms
+*/
 @Component({
   selector: 'app-update-lot',
   templateUrl: './update-lot.component.html',

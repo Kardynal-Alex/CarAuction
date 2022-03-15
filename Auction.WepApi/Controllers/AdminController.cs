@@ -49,7 +49,8 @@ namespace Auction.WepApi.Controllers
         {
             try
             {
-                return Ok(await service.DeleteUser(id));
+                await service.DeleteUser(id);
+                return NoContent();
             }
             catch (Exception ex)
             {

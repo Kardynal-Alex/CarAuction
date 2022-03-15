@@ -79,7 +79,7 @@ namespace Auction.WepApi.Controllers
             try
             {
                 await service.DeleteCommentByIdAsync(id);
-                return Ok();
+                return NoContent();
             }
             catch (Exception ex)
             {

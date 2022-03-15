@@ -83,8 +83,8 @@ namespace Auction.WepApi
 
             app.UseHttpsRedirection();
             app.UseCors(options => options.AllowAnyOrigin()
-                                           .AllowAnyMethod()
-                                           .AllowAnyHeader());
+                                          .AllowAnyMethod()
+                                          .AllowAnyHeader());
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions()
             {

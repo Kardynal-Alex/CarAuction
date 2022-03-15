@@ -13,9 +13,13 @@ namespace Auction.DAL.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationContext context;
-        public UnitOfWork(ApplicationContext ctx, RoleManager<IdentityRole> _roleManager, 
-                          UserManager<User> _userManager, SignInManager<User> _signInManager,
-                          EmailConfiguration mailConfig)
+        public UnitOfWork(
+            ApplicationContext ctx, 
+            RoleManager<IdentityRole> _roleManager, 
+            UserManager<User> _userManager, 
+            SignInManager<User> _signInManager,
+            EmailConfiguration mailConfig
+        )
         {
             context = ctx;
             roleManager = _roleManager;

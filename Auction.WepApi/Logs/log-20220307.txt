@@ -1,7 +1,0 @@
-2022-03-07T13:48:25.0558752+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2022-03-07T13:48:25.0639168+02:00  [INF] Hosting environment: "Development" (c3307c92)
-2022-03-07T13:48:25.0648171+02:00  [INF] Content root path: "D:\Asp.Net(project)\CarAuction\Auction.WepApi" (b5d60022)
-2022-03-07T13:59:31.5695363+02:00 8000006b-0005-fb00-b63f-84710c7967bb [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. (96eb03fe)
-2022-03-07T15:26:21.8546186+02:00 80000085-0004-fd00-b63f-84710c7967bb [WRN] VerifyTwoFactorTokenAsync() failed for user. (64bee0bd)
-2022-03-07T15:26:21.8559239+02:00 80000085-0004-fd00-b63f-84710c7967bb [INF] Message: Invalid Token Verification (a909d9c4)
-2022-03-07T15:26:21.8561878+02:00 80000085-0004-fd00-b63f-84710c7967bb [INF] In method: Void MoveNext() (9f7d37fa)

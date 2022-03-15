@@ -215,8 +215,8 @@ namespace Auction.BLL.Services
             if (lotDTO.NameLot == null || lotDTO.Image == null || lotDTO.Description == null || lotDTO.UserId == null)
                 throw new AuctionException("Invalid text data");
 
-            if (lotDTO.NameLot.Length == 0 || lotDTO.Description.Length == 0
-                || lotDTO.UserId.Length == 0 || lotDTO.Image.Length == 0)  
+            if (lotDTO.NameLot.Length == 0 || lotDTO.Description.Length == 0 ||
+                lotDTO.UserId.Length == 0 || lotDTO.Image.Length == 0)
                 throw new AuctionException("Invalid length text data");
 
             if (!double.TryParse(lotDTO.StartPrice.ToString(), out double startPrice) ||
@@ -273,12 +273,12 @@ namespace Auction.BLL.Services
         /// <param name="askOwnerDTO"></param>
         private void ValidateAskOwnerModel(AskOwnerDTO askOwnerDTO)
         {
-            if (askOwnerDTO.OwnerEmail.Length == 0 || askOwnerDTO.FullName.Length == 0
-                || askOwnerDTO.UserEmail.Length == 0 || askOwnerDTO.Text.Length == 0)
+            if (askOwnerDTO.OwnerEmail.Length == 0 || askOwnerDTO.FullName.Length == 0 ||
+                askOwnerDTO.UserEmail.Length == 0 || askOwnerDTO.Text.Length == 0)
                 throw new AuctionException("Nullable value");
 
-            if (askOwnerDTO.OwnerEmail == null || askOwnerDTO.FullName == null
-                || askOwnerDTO.UserEmail == null || askOwnerDTO.Text == null)
+            if (askOwnerDTO.OwnerEmail == null || askOwnerDTO.FullName == null ||
+                askOwnerDTO.UserEmail == null || askOwnerDTO.Text == null)
                 throw new AuctionException("Nullable value");
         }
     }

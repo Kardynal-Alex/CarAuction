@@ -14,6 +14,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection;
 using Auction.WepApi.Mapping;
 using PDFGenerator.Mapping;
+using IdentityConstants = Auction.DAL.EF.IdentityConstants;
 
 namespace Auction.Tests
 {
@@ -172,7 +173,7 @@ namespace Auction.Tests
                     Name = "Oleksandr",
                     UserName = "admin@gmail.com",
                     Surname = "Kardynal",
-                    Role = "admin",
+                    Role = IdentityConstants.Admin,
                     Email = "admin@gmail.com",
                     PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin123")
                 },
@@ -182,13 +183,13 @@ namespace Auction.Tests
                     Name = "Ira",
                     UserName = "irakardinal@gmail.com",
                     Surname = "Kardynal",
-                    Role = "user",
+                    Role = IdentityConstants.User,
                     Email = "irakardinal@gmail.com",
                     PasswordHash = BCrypt.Net.BCrypt.HashPassword("ira123")
                 }
             }.AsQueryable();
-            context.Roles.Add(new IdentityRole { Id = "105695ec-0e70-4e43-8514-8a0710e11d53", Name = "user" });
-            context.Roles.Add(new IdentityRole { Id = "012095ec-0e70-4e43-8514-8a0710e11d53", Name = "admin" });
+            context.Roles.Add(new IdentityRole { Id = "105695ec-0e70-4e43-8514-8a0710e11d53", Name = IdentityConstants.User });
+            context.Roles.Add(new IdentityRole { Id = "012095ec-0e70-4e43-8514-8a0710e11d53", Name = IdentityConstants.Admin });
             context.UserRoles.Add(new IdentityUserRole<string> 
             { 
                 UserId = "925695ec-0e70-4e43-8514-8a0710e11d53", 

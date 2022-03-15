@@ -224,7 +224,7 @@ namespace Auction.WepApi.Controllers
             try
             {
                 await lotService.DeleteLotAsync(id);
-                return Ok();
+                return NoContent();
             }
             catch (Exception ex)
             {

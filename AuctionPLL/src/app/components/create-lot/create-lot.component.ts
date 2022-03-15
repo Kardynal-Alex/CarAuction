@@ -12,10 +12,9 @@ import { Observable } from 'rxjs';
 import { BaseUrl } from 'src/app/common/constants/urls';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
 
-/*
-  @depricated old form - use create-lot-form with reactive forms
+/**
+  * @deprecated old form - use create-lot-form with reactive forms
 */
-
 @Component({
   selector: 'app-create-lot',
   templateUrl: './create-lot.component.html',

@@ -63,7 +63,7 @@ namespace Auction.BLL.Services
         /// <returns></returns>
         public async Task<List<FavoriteDTO>> GetFavoriteByUserIdAsync(string userId)
         {
-            if (userId == null || userId == "") 
+            if (string.IsNullOrEmpty(userId)) 
                 throw new AuctionException("Icorect userId");
 
             var favorites = await unitOfWork.FavoriteRepository.GetFavoriteByUserIdAsync(userId);

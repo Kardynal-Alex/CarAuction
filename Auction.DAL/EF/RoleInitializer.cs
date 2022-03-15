@@ -22,13 +22,13 @@ namespace Auction.DAL.EF
             string userPassword = "ira1234";
             string userName = "Ira";
             string userSurname = "Kardynal";
-            if (await roleManager.FindByNameAsync("admin") == null)
+            if (await roleManager.FindByNameAsync(IdentityConstants.Admin) == null)
             {
-                await roleManager.CreateAsync(new IdentityRole("admin"));
+                await roleManager.CreateAsync(new IdentityRole(IdentityConstants.Admin));
             }
-            if (await roleManager.FindByNameAsync("user") == null)
+            if (await roleManager.FindByNameAsync(IdentityConstants.User) == null)
             {
-                await roleManager.CreateAsync(new IdentityRole("user"));
+                await roleManager.CreateAsync(new IdentityRole(IdentityConstants.User));
             }
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
@@ -38,12 +38,12 @@ namespace Auction.DAL.EF
                     UserName = adminEmail,
                     Name = adminName,
                     Surname = adminSurname,
-                    Role = "admin"
+                    Role = IdentityConstants.Admin
                 };
                 IdentityResult result = await userManager.CreateAsync(admin, adminPassword);
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(admin, "admin");
+                    await userManager.AddToRoleAsync(admin, IdentityConstants.Admin);
                 }
             }
             if (await userManager.FindByNameAsync(userEmail) == null)
@@ -54,12 +54,12 @@ namespace Auction.DAL.EF
                     UserName = userEmail,
                     Name = userName,
                     Surname = userSurname,
-                    Role = "user"
+                    Role = IdentityConstants.User
                 };
                 IdentityResult result = await userManager.CreateAsync(user, userPassword);
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(user, "user");
+                    await userManager.AddToRoleAsync(user, IdentityConstants.User);
                 }
             }
         }

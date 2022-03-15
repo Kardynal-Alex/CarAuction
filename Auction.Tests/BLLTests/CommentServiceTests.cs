@@ -33,9 +33,10 @@ namespace Auction.Tests.BLLTests
 
             await commentSevice.AddCommentAsync(commentDTO);
 
-            mockUnitOfWork.Verify(x => x.CommentRepository.AddCommnetAsync(It.Is<Comment>(
-                x => x.Id == commentDTO.Id && x.Author == commentDTO.Author && x.Text == commentDTO.Text && x.DateTime == commentDTO.DateTime
-                && x.LotId == commentDTO.LotId && x.UserId == commentDTO.UserId && x.IsBid == commentDTO.IsBid)), Times.Once);
+            mockUnitOfWork.Verify(x => x.CommentRepository.AddCommnetAsync(It.Is<Comment>(x => 
+                x.Id == commentDTO.Id && x.Author == commentDTO.Author && x.Text == commentDTO.Text && 
+                x.DateTime == commentDTO.DateTime && x.LotId == commentDTO.LotId && 
+                x.UserId == commentDTO.UserId && x.IsBid == commentDTO.IsBid)), Times.Once);
             mockUnitOfWork.Verify(x => x.SaveAsync(), Times.Once);
         }
 

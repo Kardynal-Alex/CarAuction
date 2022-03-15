@@ -154,7 +154,7 @@ namespace Auction.Tests.WepApiTests
                 Id = "925695ec-0e70-4e43-8514-8a0710e11d53",
                 Name = "Oleksandr",
                 Surname = "Kardynal",
-                Role = "admin",
+                Role = IdentityConstants.Admin,
                 Email = "admin@gmail.com"
             };
         }
@@ -227,7 +227,7 @@ namespace Auction.Tests.WepApiTests
                         Id = "5ae019a1-c312-4589-ab62-8b8a1fcb882c",
                         Name = "Ira",
                         Surname = "Kardynal",
-                        Role = "user",
+                        Role = IdentityConstants.User,
                         Email = "irakardinal@gmail.com"
                     }
                 }
