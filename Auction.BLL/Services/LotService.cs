@@ -314,7 +314,7 @@ namespace Auction.BLL.Services
             if(string.IsNullOrEmpty(authorDescriptionDTO.UserId) || string.IsNullOrEmpty(authorDescriptionDTO.Description))
                 throw new AuctionException("Nullable value");
 
-            if (!double.TryParse(authorDescriptionDTO.LotId.ToString(), out double lotId))
+            if (!double.TryParse(authorDescriptionDTO.LotId.ToString(), out double lotId) || lotId < 0) 
                 throw new AuctionException("Invalid number data");
         }
         /// <summary>

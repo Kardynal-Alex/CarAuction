@@ -16,3 +16,4 @@ export class AppComponent implements OnInit {
 }
 //run app with https protocol
 //ng serve --ssl --ssl-cert D:\\EpamProject\\FinalProject\\AuctionPLL\\localhost.crt --ssl-key D:\\EpamProject\\FinalProject\\AuctionPLL\\localhost.key
+//git push -u origin master

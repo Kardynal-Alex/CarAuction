@@ -284,5 +284,78 @@ namespace Auction.Tests.DALTests
                     Image9 = "Resources\\Images\\22-9.jpg"
                 }
             };
+
+        [Test]
+        public async Task LotRepository_AddAuthorDescription()
+        {
+            await using var context = new ApplicationContext(_context);
+
+            var lotRepository = new LotRepository(context);
+            var authorDescription = new AuthorDescription { Id = 10 };
+
+            await lotRepository.AddAuthorDescriptionAsync(authorDescription);
+            await context.SaveChangesAsync();
+
+            Assert.That(context.AuthorDescriptions.Count(), Is.EqualTo(3));
+        }
+
+        [Test]
+        public async Task LotRepository_UpdateAuthorDescription()
+        {
+            await using var context = new ApplicationContext(_context);
+
+            var lotRepository = new LotRepository(context);
+            var authorDescription = new AuthorDescription 
+            {
+                Id = 1,
+                LotId = 1,
+                UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                Description = "New Description 1"
+            };
+
+            lotRepository.UpdateAuthorDescription(authorDescription);
+            await context.SaveChangesAsync();
+
+            Assert.That(authorDescription, Is.EqualTo(new AuthorDescription
+            {
+                Id = 1,
+                LotId = 1,
+                UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                Description = "New Description 1"
+            }).Using(new AuthorDescriptionEqualityComparer()));
+        }
+
+        [TestCase(1)]
+        [TestCase(2)]
+        public async Task LotRepository_GetAuthorDescriptionByLotId(int lotId)
+        {
+            await using var context = new ApplicationContext(_context);
+
+            var lotRepository = new LotRepository(context);
+            var lot = await lotRepository.GetAuthorDescriptionByLotIdAsync(lotId);
+
+            var expected = ExpectedAuthorDescriptions.FirstOrDefault(x => x.LotId == lotId);
+            Assert.That(lot, Is.EqualTo(expected).Using(new AuthorDescriptionEqualityComparer()));
+        }
+
+        private static IEnumerable<AuthorDescription> ExpectedAuthorDescriptions =>
+           new[]
+           {
+                new AuthorDescription
+                {
+                    Id = 1,
+                    LotId = 1,
+                    UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                    Description = "Description 1"
+                },
+                new AuthorDescription
+                {
+                    Id = 2,
+                    LotId = 2,
+                    UserId = "5ae019a1-c312-4589-ab62-8b8a1fcb882c",
+                    Description = "Description 2"
+                }
+           };
+
     }
 }

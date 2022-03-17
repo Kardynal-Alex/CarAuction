@@ -146,5 +146,5 @@ namespace Auction.Tests.DALTests
                     CountBid = 0
                 }
             };
-    }
+   }
 }

@@ -227,6 +227,20 @@ namespace Auction.Tests
                 Image8 = "Resources\\Images\\22-8.jpg",
                 Image9 = "Resources\\Images\\22-9.jpg"
             });
+            context.AuthorDescriptions.Add(new AuthorDescription
+            {
+                Id = 1,
+                LotId = 1,
+                UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
+                Description = "Description 1"
+            });
+            context.AuthorDescriptions.Add(new AuthorDescription
+            {
+                Id = 2,
+                LotId = 2,
+                UserId = "5ae019a1-c312-4589-ab62-8b8a1fcb882c",
+                Description = "Description 2"
+            });
             context.SaveChanges();
         }
 

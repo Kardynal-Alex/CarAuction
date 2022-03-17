@@ -121,4 +121,22 @@ namespace Auction.Tests
             return obj.GetHashCode();
         }
     }
+
+    public class AuthorDescriptionDTOEqualityComparer : IEqualityComparer<AuthorDescriptionDTO>
+    {
+        public bool Equals([AllowNull] AuthorDescriptionDTO x, [AllowNull] AuthorDescriptionDTO y)
+        {
+            if (x == null && y == null)
+                return true;
+            if (x == null || y == null)
+                return false;
+
+            return x.Id == y.Id && x.LotId == y.LotId && x.Description == y.Description && x.UserId == y.UserId;
+        }
+
+        public int GetHashCode([DisallowNull] AuthorDescriptionDTO obj)
+        {
+            return obj.GetHashCode();
+        }
+    }
 }
