@@ -146,5 +146,30 @@ namespace Auction.DAL.Repositories
         {
             context.Entry(updateLot).State = EntityState.Modified;
         }
+        /// <summary>
+        /// Add AuthorDescription
+        /// </summary>
+        /// <param name="authorDescription"></param>
+        public async Task AddAuthorDescriptionAsync(AuthorDescription authorDescription)
+        {
+            await context.AuthorDescriptions.AddAsync(authorDescription);
+        }
+        /// <summary>
+        /// Update AuthorDescription
+        /// </summary>
+        /// <param name="authorDescription"></param>
+        public void UpdateAuthorDescription(AuthorDescription authorDescription)
+        {
+            context.AuthorDescriptions.Update(authorDescription);
+        }
+        /// <summary>
+        /// Get Author Description By LotId
+        /// </summary>
+        /// <param name="lotId"></param>
+        /// <returns></returns>
+        public async Task<AuthorDescription> GetAuthorDescriptionByLotIdAsync(int lotId)
+        {
+            return await context.AuthorDescriptions.FirstOrDefaultAsync(_ => _.LotId == lotId);
+        }
     }
 }

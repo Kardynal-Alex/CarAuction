@@ -27,6 +27,7 @@ namespace Auction.WepApi.Mapping
             CreateMap<AskOwnerDTO, AskOwnerViewModel>().ReverseMap();
             CreateMap<AuthResponseDTO, AuthResponseViewModel>().ReverseMap();
             CreateMap<TwoFactorDTO, TwoFactorViewModel>().ReverseMap();
+            CreateMap<AuthorDescriptionDTO, AuthorDescriptionViewModel>().ReverseMap();
         }
     }
 }

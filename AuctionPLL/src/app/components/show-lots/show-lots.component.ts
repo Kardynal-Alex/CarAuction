@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { LotService } from 'src/app/services/lot.service';
 import { Lot } from '../../models/lot';
@@ -120,23 +120,22 @@ export class ShowLotsComponent implements OnInit, AfterViewInit {
     var index = this.lots.findIndex(x => x.id == id);
     var lot = this.lots[index];
 
-    if (parseFloat(lot.startPrice.toString()) < parseFloat(lot.currentPrice.toString())) {
+    if (lot.startPrice < lot.currentPrice) {
       lot.isSold = true;
       this.lotService.updateLotAfterClosing(lot)
         .subscribe(_ => {
           this.lots = this.lots.filter(x => x.id != id);
         }, _ => { });
       return;
-    } else
-      if (parseFloat(lot.startPrice.toString()) === parseFloat(lot.currentPrice.toString())) {
-        this.lotService.updateOnlyDateLot(lot)
-          .subscribe(_ => {
-            document.getElementById('timer-' + id).innerHTML = 'Expired';
-            this.lots[index].startDateTime = new Date(Date.now());
-          }, _ => { });
-        this.initTimer(lot.id, this.lots[index].startDateTime);
-        return;
-      }
+    } else if (lot.startPrice === lot.currentPrice) {
+      this.lotService.updateOnlyDateLot(lot)
+        .subscribe(_ => {
+          document.getElementById('timer-' + id).innerHTML = 'Expired';
+          this.lots[index].startDateTime = new Date(Date.now());
+        }, _ => { });
+      this.initTimer(lot.id, this.lots[index].startDateTime);
+      return;
+    }
   }
 
   public initTimer(id: number, date: Date) {

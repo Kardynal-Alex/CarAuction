@@ -4,6 +4,7 @@ import { Lot } from '../models/lot';
 import { AskOwner } from '../models/ask-owner';
 import { Observable } from 'rxjs';
 import { BaseUrl } from '../common/constants/urls';
+import { AuthorDescription } from '../models/author-description';
 
 @Injectable({ providedIn: 'root' })
 export class LotService {
@@ -70,5 +71,17 @@ export class LotService {
 
     public createImgPath(serverPath: string): string {
         return `https://localhost:44325/${serverPath}`;
+    }
+
+    public addAuthorDescription(authorDescription: AuthorDescription): Observable<Object> {
+        return this.httpClient.post(this.apiUrl + 'addAuthorDescription/', authorDescription);
+    }
+
+    public updateAuthorDescription(authorDescription: AuthorDescription): Observable<Object> {
+        return this.httpClient.put(this.apiUrl + 'updateAuthorDescription/', authorDescription);
+    }
+
+    public getAuthorDescriptionByLotId(id: number): Observable<AuthorDescription> {
+        return this.httpClient.get<AuthorDescription>(this.apiUrl + 'getAuthorDescriptionByLotId/' + id);
     }
 }

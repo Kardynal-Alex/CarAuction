@@ -32,6 +32,10 @@ namespace Auction.DAL.EF
         /// </summary>
         public DbSet<Images> Images { get; set; }
         /// <summary>
+        /// Gets and sets <see cref="DbSet"/> of <see cref="AuthorDescription"/>entities.
+        /// </summary>
+        public DbSet<AuthorDescription> AuthorDescriptions { get; set; }
+        /// <summary>
         /// Fluent Api
         /// Set connection 0ne-to-many((many)Lot-to-(one)User)
         /// Set connection 0ne-to-one((one)Lot-to-(one)LotState)

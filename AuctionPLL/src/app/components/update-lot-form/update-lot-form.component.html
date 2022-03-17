@@ -1,8 +1,12 @@
 <div class="lot-form">
     <div class="lot-form__general">
-        <div class="text-line">Update Lot</div>
-        <app-hr></app-hr>
-        <form [formGroup]="lotForm">
+        <div class="toggler" (click)="toggleForm()">
+            <span class="title__collapse-icon">
+                <i class="fa" [ngClass]="isCollapsedForm ? 'fa-angle-right' : 'fa-angle-down'"></i>
+            </span>
+            <span class="title__caption">Update Lot</span>
+        </div>
+        <form [formGroup]="lotForm" [@toggle]="isCollapsedForm ? 'hide' : 'show'" *ngIf="!!lotForm?.controls">
             <div class="full-width">
                 <div class="has-tooltip">
                     <input type="text" placeholder="Enter name lot" formControlName="nameLot">
@@ -83,5 +87,31 @@
                 <button (click)="updateLot()" [disabled]="lotForm.invalid">Submit</button>
             </div>
         </form>
+        <div class="toggler" (click)="toggleAuthorOpinion()">
+            <span class="title__collapse-icon">
+                <i class="fa" [ngClass]="isCollapsedAuthorOpinion ? 'fa-angle-right' : 'fa-angle-down'"></i>
+            </span>
+            <span class="title__caption">Author Description</span>
+        </div>
+        <div class="author-opinion" [@toggle]="isCollapsedAuthorOpinion ? 'hide' : 'show'">
+            <form [formGroup]="authorForm" *ngIf="!!authorForm?.controls">
+                <div class="full-width">
+                    <div class="has-tooltip">
+                        <textarea autosize placeholder="Enter description" formControlName="description"
+                            contenteditable></textarea>
+                        <p class="tooltip"
+                            *ngIf="authorForm.controls.description.errors?.required && authorForm.controls.description.touched">
+                            Required field</p>
+                        <p class="tooltip"
+                            *ngIf="authorForm.controls.description.errors?.minlength && authorForm.controls.description.touched">
+                            Min length 10 is required</p>
+                    </div>
+                </div>
+                <div class="btn-submit">
+                    <button (click)="createAuthorDescription()"
+                        [disabled]="authorForm.invalid">{{!!isNewDescription?'Create':'Update'}}</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

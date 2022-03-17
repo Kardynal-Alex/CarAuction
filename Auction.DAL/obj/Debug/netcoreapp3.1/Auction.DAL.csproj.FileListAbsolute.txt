@@ -22,3 +22,4 @@ D:\Asp.Net(project)\CarAuction\Auction.DAL\obj\Debug\netcoreapp3.1\Auction.DAL.c
 D:\Asp.Net(project)\CarAuction\Auction.DAL\obj\Debug\netcoreapp3.1\Auction.DAL.dll
 D:\Asp.Net(project)\CarAuction\Auction.DAL\obj\Debug\netcoreapp3.1\Auction.DAL.pdb
 D:\Asp.Net(project)\CarAuction\Auction.DAL\obj\Debug\netcoreapp3.1\Auction.DAL.genruntimeconfig.cache
+D:\Asp.Net(project)\CarAuction\Auction.DAL\obj\Debug\netcoreapp3.1\Auction.DAL.csproj.AssemblyReference.cache

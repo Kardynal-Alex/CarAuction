@@ -251,5 +251,59 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
+        /// <summary>
+        /// AddAuthorDescription
+        /// </summary>
+        /// <param name="authorDescriptionViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("addAuthorDescription")]
+        public async Task<ActionResult> AddAuthorDescription([FromBody]AuthorDescriptionViewModel authorDescriptionViewModel)
+        {
+            try
+            {
+                var authorDescriptionDTO = mapper.Map<AuthorDescriptionViewModel, AuthorDescriptionDTO>(authorDescriptionViewModel);
+                await lotService.AddAuthorDescriptionAsync(authorDescriptionDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                LogInfo.LogInfoMethod(ex, logger);
+                return BadRequest();
+            }
+        }
+        /// <summary>
+        /// UpdateAuthorDescription        /// </summary>
+        /// <param name="authorDescriptionViewModel"></param>
+        /// <returns></returns>
+        [HttpPut("updateAuthorDescription")]
+        public async Task<ActionResult> UpdateAuthorDescription([FromBody] AuthorDescriptionViewModel authorDescriptionViewModel)
+        {
+            try
+            {
+                var authorDescriptionDTO = mapper.Map<AuthorDescriptionViewModel, AuthorDescriptionDTO>(authorDescriptionViewModel);
+                await lotService.UpdateAuthorDescriptionAsync(authorDescriptionDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                LogInfo.LogInfoMethod(ex, logger);
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("getAuthorDescriptionByLotId/{id}")]
+        public async Task<ActionResult<AuthorDescriptionViewModel>> GetUserBids(int id)
+        {
+            try
+            {
+                var authorDescriptionDTO = await lotService.GetAuthorDescriptionByLotIdAsync(id);
+                return Ok(mapper.Map<AuthorDescriptionDTO, AuthorDescriptionViewModel>(authorDescriptionDTO));
+            }
+            catch (Exception ex)
+            {
+                LogInfo.LogInfoMethod(ex, logger);
+                return BadRequest();
+            }
+        }
     }
 }

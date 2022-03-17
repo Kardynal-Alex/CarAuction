@@ -1,18 +1,34 @@
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { CommonConstants } from 'src/app/common/constants/common-constants';
+import { AuthorDescription } from 'src/app/models/author-description';
 import { Images } from 'src/app/models/images';
 import { Lot } from 'src/app/models/lot';
+import { AuthService } from 'src/app/services/auth.service';
 import { ImagesService } from 'src/app/services/images.service';
 import { LotService } from 'src/app/services/lot.service';
 
 @Component({
   selector: 'app-update-lot-form',
   templateUrl: './update-lot-form.component.html',
-  styleUrls: ['./update-lot-form.component.less']
+  styleUrls: ['./update-lot-form.component.less'], animations: [
+    trigger('toggle', [
+      state('hide', style({
+        height: '0px',
+        overflow: 'hidden'
+      })),
+      state('show', style({
+        height: '*'
+      })),
+      transition('hide => show', animate('0.35s ease')),
+      transition('show => hide', animate('0.35s ease'))
+    ])
+  ]
 })
 export class UpdateLotFormComponent implements OnInit {
   public get imageArray() {
@@ -24,10 +40,14 @@ export class UpdateLotFormComponent implements OnInit {
     private lotService: LotService,
     private activateRoute: ActivatedRoute,
     public formBuilder: FormBuilder,
+    public formBuilder1: FormBuilder,
     private router: Router,
-    private imagesService: ImagesService
+    private imagesService: ImagesService,
+    private authService: AuthService
   ) { }
 
+  public isCollapsedForm = false;
+  public isCollapsedAuthorOpinion = !false;
   public saved: boolean = false;
   public lot: Lot;
   public routeId: number;
@@ -37,6 +57,10 @@ export class UpdateLotFormComponent implements OnInit {
       .subscribe(_ => {
         this.lot = _;
         this.initForm(_);
+      });
+    this.lotService.getAuthorDescriptionByLotId(this.routeId)
+      .subscribe(_ => {
+        this.initAuthorDescriptionForm(_);
       });
   }
 
@@ -63,6 +87,47 @@ export class UpdateLotFormComponent implements OnInit {
       image: [lot.image, Validators.required],
       images: this.formBuilder.array(this.initImages(lot.images))
     });
+  }
+
+  public authorDescription: AuthorDescription;
+  public authorForm: FormGroup;
+  public isNewDescription: boolean = false;
+  private initAuthorDescriptionForm(authorDescription: AuthorDescription) {
+    this.authorDescription = authorDescription;
+    const description = !!authorDescription?.description ? authorDescription?.description : null;
+    this.isNewDescription = !description;
+    this.authorForm = this.formBuilder1.group({
+      description: [description, [
+        Validators.required,
+        Validators.minLength(20)
+      ]]
+    });
+  }
+
+  public createAuthorDescription() {
+    const description = this.authorForm.controls.description.value;
+    if (this.isNewDescription) {
+      this.authorDescription = {
+        id: 0,
+        userId: this.authService.getUserId(),
+        lotId: parseInt(this.routeId.toString()),
+        description: description
+      };
+      this.lotService.addAuthorDescription(this.authorDescription)
+        .subscribe(_ => {
+          this.toastrService.success('Author Description is created');
+          this.saved = true;
+          this.router.navigate(['userlots'])
+        }, _ => this.toastrService.error('Error!'))
+    } else {
+      this.authorDescription.description = description;
+      this.lotService.updateAuthorDescription(this.authorDescription)
+        .subscribe(_ => {
+          this.toastrService.success('Author Description is updated');
+          this.saved = true;
+          this.router.navigate(['userlots'])
+        }, _ => this.toastrService.error('Error!'))
+    }
   }
 
   private initImages(images: Images): any[] {
@@ -96,7 +161,7 @@ export class UpdateLotFormComponent implements OnInit {
       .subscribe(_ => {
         this.toastrService.success('Lot is updated');
         this.saved = true;
-        this.router.navigate(['userlots'])
+        this.router.navigate(['userlots']);
       }, _ => this.toastrService.error('Error!'));
   }
 
@@ -121,6 +186,14 @@ export class UpdateLotFormComponent implements OnInit {
     }
   }
 
+  public toggleForm() {
+    this.isCollapsedForm = !this.isCollapsedForm;
+  }
+
+  public toggleAuthorOpinion() {
+    this.isCollapsedAuthorOpinion = !this.isCollapsedAuthorOpinion;
+  }
+
   public createImgPath(serverPath: string) {
     return this.lotService.createImgPath(serverPath);
   }
@@ -134,7 +207,7 @@ export class UpdateLotFormComponent implements OnInit {
       .subscribe(event => {
         if (event.type === HttpEventType.Response) {
           const response = event.body;
-          this.lotForm.controls.image.patchValue(response['dbPath']);
+          this.lotForm.controls.image.patchValue(response[CommonConstants.ImageResponsePath]);
           this.toastrService.success('Photo is uploaded!');
           this.fileInput.nativeElement.value = '';
         }
@@ -150,7 +223,7 @@ export class UpdateLotFormComponent implements OnInit {
         if (event.type === HttpEventType.Response) {
           const response = event.body;
           const myForm = this.imageArray.at(index);
-          myForm.patchValue(response['dbPath']);
+          myForm.patchValue(response[CommonConstants.ImageResponsePath]);
           this.toastrService.success('Photo is uploaded!');
         }
       });

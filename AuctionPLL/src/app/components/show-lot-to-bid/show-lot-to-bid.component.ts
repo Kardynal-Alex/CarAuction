@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Lot } from 'src/app/models/lot';
@@ -53,12 +53,10 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
       });
   }
 
-  public numbers = [];
   public ngOnInit() {
     this.getLot();
     this.getUserInfo();
     this.getComments(this.id);
-    this.numbers = Array.from(Array(9).keys());
   }
 
   public ngOnDestroy() {

@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { CommonConstants } from 'src/app/common/constants/common-constants';
 import { ComponentCanDeactivate } from 'src/app/guards/exit.about.guard';
 import { Images } from 'src/app/models/images';
 import { Lot } from 'src/app/models/lot';
@@ -140,7 +141,7 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
       .subscribe(event => {
         if (event.type === HttpEventType.Response) {
           const response = event.body;
-          this.lotForm.controls.image.patchValue(response['dbPath']);
+          this.lotForm.controls.image.patchValue(response[CommonConstants.ImageResponsePath]);
           this.toastrService.success('Photo is uploaded!');
           this.fileInput.nativeElement.value = '';
         }
@@ -156,7 +157,7 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
         if (event.type === HttpEventType.Response) {
           const response = event.body;
           const myForm = this.imageArray.at(index);
-          myForm.patchValue(response['dbPath']);
+          myForm.patchValue(response[CommonConstants.ImageResponsePath]);
           this.toastrService.success('Photo is uploaded!');
         }
       });

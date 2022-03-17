@@ -21,6 +21,7 @@ namespace Auction.BLL.Mapping
             CreateMap<Favorite, FavoriteDTO>().ReverseMap();
             CreateMap<Images, ImagesDTO>().ReverseMap();
             CreateMap<AskOwner, AskOwnerDTO>().ReverseMap();
+            CreateMap<AuthorDescription, AuthorDescriptionDTO>().ReverseMap();
         }
     }
 }
