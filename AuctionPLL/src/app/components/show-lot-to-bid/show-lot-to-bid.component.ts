@@ -15,6 +15,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShowLotImagesComponent } from '../show-lot-images/show-lot-images.component';
 import { AskOwnerFormComponent } from '../ask-owner-form/ask-owner-form.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { AuthorDescription } from 'src/app/models/author-description';
 
 @Component({
   selector: 'app-show-lot-to-bid',
@@ -37,6 +38,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
   public lot: Lot;
   public comments: Comment[];
   public filtredComments: Comment[];
+  public authorDescription: AuthorDescription;
   public getLot() {
     this.id = this.activateRoute.snapshot.params['id'];
     this.lotService.getLotById(this.id)
@@ -53,10 +55,18 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
       });
   }
 
+  public getAuthorDescription() {
+    this.lotService.getAuthorDescriptionByLotId(this.id)
+      .subscribe(_ => {
+        this.authorDescription = _;
+      });
+  }
+
   public ngOnInit() {
     this.getLot();
     this.getUserInfo();
     this.getComments(this.id);
+    this.getAuthorDescription();
   }
 
   public ngOnDestroy() {

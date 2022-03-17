@@ -55,6 +55,12 @@
                     </tr>
                 </table>
             </div>
+            <div class="author-description" *ngIf="!!authorDescription?.description">
+                <div class="description">
+                    <div class="header">{{lot.user?.name}} {{lot.user?.surname}}</div>
+                    <div>{{authorDescription?.description}}</div>
+                </div>
+            </div>
             <app-comments [lot]="lot" [userId]="userId" [comments]="comments" [filtredComments]="filtredComments">
             </app-comments>
         </div>

@@ -1,3 +1,4 @@
 2022-03-17T16:38:43.3749440+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
 2022-03-17T16:38:43.3799850+02:00  [INF] Hosting environment: "Development" (c3307c92)
 2022-03-17T16:38:43.3802912+02:00  [INF] Content root path: "D:\Asp.Net(project)\CarAuction\Auction.WepApi" (b5d60022)
+2022-03-17T16:51:24.0967624+02:00 8000001e-0005-fd00-b63f-84710c7967bb [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. (96eb03fe)
