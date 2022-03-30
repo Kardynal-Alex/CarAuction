@@ -35,7 +35,7 @@ export class ShowLotsComponent implements OnInit, AfterViewInit {
     this.sortMode = null;
     this.isAuth = this.authService.isAuthenticated();
     if (this.isAuth) {
-      this.userId = this.authService.getUserId();
+      this.userId = this.authService.getUserIdFromToken();
     }
     this.getLots();
   }

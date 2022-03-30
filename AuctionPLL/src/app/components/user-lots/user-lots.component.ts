@@ -20,7 +20,7 @@ export class UserLotsComponent implements OnInit, OnDestroy {
   ) { }
 
   public getUserId(): string {
-    return this.authService.getUserId();
+    return this.authService.getUserIdFromToken();
   }
 
   public emptyText = 'List is empty =)';

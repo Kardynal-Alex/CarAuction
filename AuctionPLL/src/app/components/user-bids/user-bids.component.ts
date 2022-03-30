@@ -17,7 +17,7 @@ export class UserBidsComponent implements OnInit {
   ) { }
 
   public getUserId(): string {
-    return this.authService.getUserId();
+    return this.authService.getUserIdFromToken();
   }
 
   public ngOnInit(): void {

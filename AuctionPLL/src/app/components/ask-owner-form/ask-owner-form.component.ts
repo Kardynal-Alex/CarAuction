@@ -37,7 +37,7 @@ export class AskOwnerFormComponent implements OnInit {
         ownerEmail: this.ownerEmail,
         text: this.myForm.controls['text'].value,
         fullName: this.myForm.controls['fullName'].value,
-        userEmail: this.authService.getUserEmail()
+        userEmail: this.authService.getUserEmailFromToken()
       };
       this.lotService.askOwner(askOwner)
         .subscribe(_ => {

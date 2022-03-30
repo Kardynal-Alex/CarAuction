@@ -24,7 +24,7 @@ export class FavoriteLotComponent implements OnInit {
   public lots: Lot[];
   public userId: string;
   public ngOnInit(): void {
-    this.userId = this.authService.getUserId();
+    this.userId = this.authService.getUserIdFromToken();
     this.getLots(this.userId);
   }
 

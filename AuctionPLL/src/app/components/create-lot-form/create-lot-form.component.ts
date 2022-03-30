@@ -76,7 +76,7 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
   }
 
   public createLot() {
-    const userId = this.authService.getUserId();
+    const userId = this.authService.getUserIdFromToken();
     const lot: Lot = {
       id: 0,
       nameLot: this.lotForm.controls.nameLot.value,

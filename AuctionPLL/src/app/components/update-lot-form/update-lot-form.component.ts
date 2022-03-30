@@ -109,7 +109,7 @@ export class UpdateLotFormComponent implements OnInit {
     if (this.isNewDescription) {
       this.authorDescription = {
         id: 0,
-        userId: this.authService.getUserId(),
+        userId: this.authService.getUserIdFromToken(),
         lotId: parseInt(this.routeId.toString()),
         description: description
       };

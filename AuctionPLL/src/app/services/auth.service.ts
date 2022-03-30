@@ -96,12 +96,12 @@ export class AuthService {
     return false;
   }
 
-  public getUserId(): string {
+  public getUserIdFromToken(): string {
     var payload = this.getPayload();
     return payload?.id ?? null;
   }
 
-  public getUserEmail(): string {
+  public getUserEmailFromToken(): string {
     var payload = this.getPayload();
     return payload?.email ?? null;
   }
