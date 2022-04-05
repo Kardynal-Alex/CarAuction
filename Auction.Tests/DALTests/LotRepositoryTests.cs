@@ -290,10 +290,10 @@ namespace Auction.Tests.DALTests
         {
             await using var context = new ApplicationContext(_context);
 
-            var lotRepository = new LotRepository(context);
+            var authorDescriptionRepository = new AuthorDescriptionRepository(context);
             var authorDescription = new AuthorDescription { Id = 10 };
 
-            await lotRepository.AddAuthorDescriptionAsync(authorDescription);
+            await authorDescriptionRepository.AddAuthorDescriptionAsync(authorDescription);
             await context.SaveChangesAsync();
 
             Assert.That(context.AuthorDescriptions.Count(), Is.EqualTo(3));
@@ -304,7 +304,7 @@ namespace Auction.Tests.DALTests
         {
             await using var context = new ApplicationContext(_context);
 
-            var lotRepository = new LotRepository(context);
+            var authorDescriptionRepository = new AuthorDescriptionRepository(context);
             var authorDescription = new AuthorDescription 
             {
                 Id = 1,
@@ -313,7 +313,7 @@ namespace Auction.Tests.DALTests
                 Description = "New Description 1"
             };
 
-            lotRepository.UpdateAuthorDescription(authorDescription);
+            authorDescriptionRepository.UpdateAuthorDescription(authorDescription);
             await context.SaveChangesAsync();
 
             Assert.That(authorDescription, Is.EqualTo(new AuthorDescription
@@ -331,8 +331,8 @@ namespace Auction.Tests.DALTests
         {
             await using var context = new ApplicationContext(_context);
 
-            var lotRepository = new LotRepository(context);
-            var lot = await lotRepository.GetAuthorDescriptionByLotIdAsync(lotId);
+            var authorDescriptionRepository = new AuthorDescriptionRepository(context);
+            var lot = await authorDescriptionRepository.GetAuthorDescriptionByLotIdAsync(lotId);
 
             var expected = ExpectedAuthorDescriptions.FirstOrDefault(x => x.LotId == lotId);
             Assert.That(lot, Is.EqualTo(expected).Using(new AuthorDescriptionEqualityComparer()));

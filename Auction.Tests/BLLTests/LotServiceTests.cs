@@ -583,9 +583,8 @@ namespace Auction.Tests.BLLTests
         public async Task LotService_AddAuthorDescription()
         {
             var mockUnitOfWork = new Mock<IUnitOfWork>();
-            var mockConverter = new Mock<IConverter>();
-            mockUnitOfWork.Setup(x => x.LotRepository.AddAuthorDescriptionAsync(It.IsAny<AuthorDescription>()));
-            var lotService = new LotService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfileBLL(), mockConverter.Object);
+            mockUnitOfWork.Setup(x => x.AuthorDescriptionRepository.AddAuthorDescriptionAsync(It.IsAny<AuthorDescription>()));
+            var authorDescriptionService = new AuthorDescriptionService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfileBLL());
 
             var authorDescriptionDTO = new AuthorDescriptionDTO
             {
@@ -595,9 +594,9 @@ namespace Auction.Tests.BLLTests
                 Description = "Description 3"
             };
 
-            await lotService.AddAuthorDescriptionAsync(authorDescriptionDTO);
+            await authorDescriptionService.AddAuthorDescriptionAsync(authorDescriptionDTO);
 
-            mockUnitOfWork.Verify(x => x.LotRepository.AddAuthorDescriptionAsync(It.Is<AuthorDescription>(x =>
+            mockUnitOfWork.Verify(x => x.AuthorDescriptionRepository.AddAuthorDescriptionAsync(It.Is<AuthorDescription>(x =>
                  x.Id == authorDescriptionDTO.Id && x.LotId == authorDescriptionDTO.LotId &&
                  x.Description == authorDescriptionDTO.Description && x.UserId == authorDescriptionDTO.UserId)), Times.Once);
 
@@ -608,9 +607,8 @@ namespace Auction.Tests.BLLTests
         public void LotService_AddAuthorDescription_ThrowAuctionExceptionIfModelIsIncorrect()
         {
             var mockUnitOfWork = new Mock<IUnitOfWork>();
-            var mockConverter = new Mock<IConverter>();
-            mockUnitOfWork.Setup(x => x.LotRepository.AddAuthorDescriptionAsync(It.IsAny<AuthorDescription>()));
-            var lotService = new LotService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfileBLL(), mockConverter.Object);
+            mockUnitOfWork.Setup(x => x.AuthorDescriptionRepository.AddAuthorDescriptionAsync(It.IsAny<AuthorDescription>()));
+            var authorDescriptionService = new AuthorDescriptionService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfileBLL());
 
             //LotId is negative
             var authorDescriptionDTO = new AuthorDescriptionDTO
@@ -620,17 +618,17 @@ namespace Auction.Tests.BLLTests
                 UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
                 Description = "Description 3"
             };
-            Assert.ThrowsAsync<AuctionException>(async () => await lotService.AddAuthorDescriptionAsync(authorDescriptionDTO));
+            Assert.ThrowsAsync<AuctionException>(async () => await authorDescriptionService.AddAuthorDescriptionAsync(authorDescriptionDTO));
 
             //UserId empty
             authorDescriptionDTO.LotId = 1;
             authorDescriptionDTO.UserId = "";
-            Assert.ThrowsAsync<AuctionException>(async () => await lotService.AddAuthorDescriptionAsync(authorDescriptionDTO));
+            Assert.ThrowsAsync<AuctionException>(async () => await authorDescriptionService.AddAuthorDescriptionAsync(authorDescriptionDTO));
 
             //Description empty
             authorDescriptionDTO.Description = "";
             authorDescriptionDTO.UserId = "925695ec-0e70-4e43-8514-8a0710e11d53";
-            Assert.ThrowsAsync<AuctionException>(async () => await lotService.AddAuthorDescriptionAsync(authorDescriptionDTO));
+            Assert.ThrowsAsync<AuctionException>(async () => await authorDescriptionService.AddAuthorDescriptionAsync(authorDescriptionDTO));
         }
 
         [TestCase(1)]
@@ -638,8 +636,7 @@ namespace Auction.Tests.BLLTests
         {
             var authorDescription = ExpectedAuthorDTODescriptions.First(x => x.LotId == lotId);
             var mockUnitOfWork = new Mock<IUnitOfWork>();
-            var mockConverter = new Mock<IConverter>();
-            mockUnitOfWork.Setup(x => x.LotRepository.GetAuthorDescriptionByLotIdAsync(It.IsAny<int>()))
+            mockUnitOfWork.Setup(x => x.AuthorDescriptionRepository.GetAuthorDescriptionByLotIdAsync(It.IsAny<int>()))
                 .Returns(Task.FromResult(
                     new AuthorDescription
                     {
@@ -648,9 +645,9 @@ namespace Auction.Tests.BLLTests
                         UserId = "925695ec-0e70-4e43-8514-8a0710e11d53",
                         Description = "Description 1"
                     }));
-            var lotService = new LotService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfileBLL(), mockConverter.Object);
+            var authorDescriptionService = new AuthorDescriptionService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfileBLL());
 
-            var authorDescriptionDTO = await lotService.GetAuthorDescriptionByLotIdAsync(lotId);
+            var authorDescriptionDTO = await authorDescriptionService.GetAuthorDescriptionByLotIdAsync(lotId);
             var expected = ExpectedAuthorDTODescriptions.FirstOrDefault(x => x.LotId == lotId);
 
             Assert.IsInstanceOf<AuthorDescriptionDTO>(authorDescriptionDTO);

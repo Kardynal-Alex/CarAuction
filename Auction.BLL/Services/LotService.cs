@@ -281,54 +281,5 @@ namespace Auction.BLL.Services
                 askOwnerDTO.UserEmail == null || askOwnerDTO.Text == null)
                 throw new AuctionException("Nullable value");
         }
-        /// <summary>
-        /// Add AuthorDescription
-        /// </summary>
-        /// <param name="authorDescription"></param>
-        public async Task AddAuthorDescriptionAsync(AuthorDescriptionDTO authorDescriptionDTO)
-        {
-            ValidateAskOwnerModel(authorDescriptionDTO);
-
-            await unitOfWork.LotRepository.AddAuthorDescriptionAsync(
-                mapper.Map<AuthorDescriptionDTO,AuthorDescription>(authorDescriptionDTO));
-            await unitOfWork.SaveAsync();
-        }
-        /// <summary>
-        /// Update AuthorDescription
-        /// </summary>
-        /// <param name="authorDescription"></param>
-        public async Task UpdateAuthorDescriptionAsync(AuthorDescriptionDTO authorDescriptionDTO)
-        {
-            ValidateAskOwnerModel(authorDescriptionDTO);
-
-            unitOfWork.LotRepository.UpdateAuthorDescription(
-                  mapper.Map<AuthorDescriptionDTO, AuthorDescription>(authorDescriptionDTO));
-            await unitOfWork.SaveAsync();
-        }
-        /// <summary>
-        /// Validate ask authorDescriptionDTO
-        /// </summary>
-        /// <param name="authorDescriptionDTO"></param>
-        private void ValidateAskOwnerModel(AuthorDescriptionDTO authorDescriptionDTO)
-        {
-            if(string.IsNullOrEmpty(authorDescriptionDTO.UserId) || string.IsNullOrEmpty(authorDescriptionDTO.Description))
-                throw new AuctionException("Nullable value");
-
-            if (!double.TryParse(authorDescriptionDTO.LotId.ToString(), out double lotId) || lotId < 0) 
-                throw new AuctionException("Invalid number data");
-        }
-        /// <summary>
-        /// Get Author Description ByLotId
-        /// </summary>
-        /// <param name="lotId"></param>
-        /// <returns></returns>
-        public async Task<AuthorDescriptionDTO> GetAuthorDescriptionByLotIdAsync(int lotId)
-        {
-            if (!int.TryParse(lotId.ToString(), out int variable) || variable < 0) 
-                throw new AuctionException("Incorect lotId");
-
-            var authorDescription = await unitOfWork.LotRepository.GetAuthorDescriptionByLotIdAsync(lotId);
-            return mapper.Map<AuthorDescription, AuthorDescriptionDTO>(authorDescription);
-        }
     }
 }

@@ -16,6 +16,7 @@ import { ShowLotImagesComponent } from '../show-lot-images/show-lot-images.compo
 import { AskOwnerFormComponent } from '../ask-owner-form/ask-owner-form.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { AuthorDescription } from 'src/app/models/author-description';
+import { AuthorDescriptionService } from 'src/app/services/author-description.service';
 
 @Component({
   selector: 'app-show-lot-to-bid',
@@ -32,7 +33,8 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
     private commentService: CommentService,
     private favoriteService: FavoriteService,
     private modalService: NgbModal,
-    private authService: AuthService
+    private authService: AuthService,
+    private authorDescriptionService: AuthorDescriptionService
   ) { }
 
   public lot: Lot;
@@ -56,7 +58,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
   }
 
   public getAuthorDescription() {
-    this.lotService.getAuthorDescriptionByLotId(this.id)
+    this.authorDescriptionService.getAuthorDescriptionByLotId(this.id)
       .subscribe(_ => {
         this.authorDescription = _;
       });

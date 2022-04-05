@@ -36,6 +36,10 @@ namespace Auction.DAL.Interfaces
         /// </summary>
         IImagesRepository ImagesRepository { get; }
         /// <summary>
+        /// Gets author description repositore
+        /// </summary>
+        IAuthorDescriptionRepository AuthorDescriptionRepository { get; }
+        /// <summary>
         /// UserManager(identity).
         /// </summary>
         UserManager<User> UserManager { get; }

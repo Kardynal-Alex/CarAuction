@@ -47,6 +47,7 @@ namespace Auction.BLL.Configure
             services.AddTransient<ILotService, LotService>();
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<IFavoriteService, FavoriteService>();
+            services.AddTransient<IAuthorDescriptionService, AuthorDescriptionService>();
             return services;
         }
     }

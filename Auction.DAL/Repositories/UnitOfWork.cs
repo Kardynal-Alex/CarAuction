@@ -95,6 +95,17 @@ namespace Auction.DAL.Repositories
             }
         }
         /// <summary>
+        /// GEts Author Description Repository
+        /// </summary>
+        private AuthorDescriptionRepository authorDescriptionRepository;
+        public IAuthorDescriptionRepository AuthorDescriptionRepository
+        {
+            get
+            {
+                return authorDescriptionRepository ?? (authorDescriptionRepository = new Repositories.AuthorDescriptionRepository(context));
+            }
+        }
+        /// <summary>
         /// Gets userManager.
         /// </summary>
         private readonly UserManager<User> userManager;

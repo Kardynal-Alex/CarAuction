@@ -10,6 +10,7 @@ import { AuthorDescription } from 'src/app/models/author-description';
 import { Images } from 'src/app/models/images';
 import { Lot } from 'src/app/models/lot';
 import { AuthService } from 'src/app/services/auth.service';
+import { AuthorDescriptionService } from 'src/app/services/author-description.service';
 import { ImagesService } from 'src/app/services/images.service';
 import { LotService } from 'src/app/services/lot.service';
 
@@ -43,7 +44,8 @@ export class UpdateLotFormComponent implements OnInit {
     public formBuilder1: FormBuilder,
     private router: Router,
     private imagesService: ImagesService,
-    private authService: AuthService
+    private authService: AuthService,
+    private authorDescriptionService: AuthorDescriptionService
   ) { }
 
   public isCollapsedForm = false;
@@ -58,7 +60,7 @@ export class UpdateLotFormComponent implements OnInit {
         this.lot = _;
         this.initForm(_);
       });
-    this.lotService.getAuthorDescriptionByLotId(this.routeId)
+    this.authorDescriptionService.getAuthorDescriptionByLotId(this.routeId)
       .subscribe(_ => {
         this.initAuthorDescriptionForm(_);
       });
@@ -113,7 +115,7 @@ export class UpdateLotFormComponent implements OnInit {
         lotId: parseInt(this.routeId.toString()),
         description: description
       };
-      this.lotService.addAuthorDescription(this.authorDescription)
+      this.authorDescriptionService.addAuthorDescription(this.authorDescription)
         .subscribe(_ => {
           this.toastrService.success('Author Description is created');
           this.saved = true;
@@ -121,7 +123,7 @@ export class UpdateLotFormComponent implements OnInit {
         }, _ => this.toastrService.error('Error!'))
     } else {
       this.authorDescription.description = description;
-      this.lotService.updateAuthorDescription(this.authorDescription)
+      this.authorDescriptionService.updateAuthorDescription(this.authorDescription)
         .subscribe(_ => {
           this.toastrService.success('Author Description is updated');
           this.saved = true;

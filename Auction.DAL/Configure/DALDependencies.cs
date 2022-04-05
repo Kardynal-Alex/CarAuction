@@ -43,6 +43,7 @@ namespace Auction.DAL.Configure
             services.AddTransient<ICommentRepository, CommentRepository>();
             services.AddTransient<IFavoriteRepository, FavoriteRepository>();
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IAuthorDescriptionRepository, AuthorDescriptionRepository>();
 
             return services;
         }

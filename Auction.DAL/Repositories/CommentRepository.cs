@@ -9,6 +9,9 @@ using System;
 
 namespace Auction.DAL.Repositories
 {
+    /// <summary>
+    /// CommentRepository
+    /// </summary>
     public class CommentRepository : ICommentRepository
     {
         private readonly ApplicationContext context;
