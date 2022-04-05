@@ -30,6 +30,8 @@ tests_results
 
 /[Bb]in/
 /[Oo]bj/
+*/bin/*
+*/obj/*
 
 # Build results
 
@@ -89,6 +91,7 @@ project.fragment.lock.json
 *.scc
 *.pdb
 *.cache
+*.Cache
 
 # Chutzpah Test files
 _Chutzpah*
@@ -152,10 +155,3 @@ orleans.codegen.cs
 #NSwag
 **/client/front/**/lib/client.ts
 **/client/back/**/Client.cs
-
-**/Auction.BLL/obj/Debug/netcoreapp3.1/Auction.BLL.dll
-**/Auction.DAL/obj/Debug/netcoreapp3.1/Auction.DAL.dll
-**/Auction.WebApi/obj/Debug/netcoreapp3.1/Auction.WebApi.dll
-**/Auction.BLL/bin/Debug/netcoreapp3.1/Auction.BLL.pdb
-**/Auction.DAL/bin/Debug/netcoreapp3.1/Auction.DAL.pdb
-**/Auction.WebApi/bin/Debug/netcoreapp3.1/Auction.WebApi.pdb
