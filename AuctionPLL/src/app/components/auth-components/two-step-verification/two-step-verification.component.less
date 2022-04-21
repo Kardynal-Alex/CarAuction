@@ -1,21 +1,16 @@
-@import '../../common/styles/tooltip.less';
+@import '../../../common/styles/tooltip.less';
 
 :host {
-
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
 
   * {
     box-sizing: border-box;
     outline: none;
   }
 
-  .register-form {
+  .two-step {
     margin: 0 auto;
     justify-content: center;
     text-align: center;
-    align-items: center;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -23,47 +18,43 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
     padding-top: 60px;
 
-    .register-content {
+    .two-step-content {
       background-color: #fefefe;
       margin: 5% auto 15% auto;
       border: 1px solid #888;
       width: 30%;
       border-radius: 40px;
 
-      .close {
-        position: relative;
-        float: right;
-        top: 0;
-        color: #000;
-        font-size: 35px;
-        font-weight: bold;
-        margin-top: 13px;
-        margin-right: 20px;
-
-        &:hover,
-        &:focus {
-          color: red;
-          cursor: pointer;
-        }
+      &.animate {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s
       }
 
       .container {
-        padding: 30px;
+        padding: 40px;
+        margin-top: 0%;
 
         p {
-          font-size: 35px;
+          font-size: 20px;
+        }
+
+        p,
+        h2 {
           font-weight: 600;
         }
 
-        input[type=text],
-        input[type=password] {
+        h2 {
+          font-size: 28px;
+        }
+
+        #tooltip();
+
+        input {
           padding: 12px 20px;
           margin: 8px auto;
-          display: inline-block;
           border: 1px solid #ccc;
           box-sizing: border-box;
 
@@ -76,15 +67,12 @@
           }
         }
 
-        input[type=text],
-        input[type=password],
+        input,
         button {
           width: 80%;
           font-size: 18px;
           border-radius: 30px;
         }
-
-        #tooltip();
 
         button {
           background-color: #04AA6D;
@@ -92,35 +80,25 @@
           padding: 14px 20px;
           margin: 8px 0;
           border: none;
-          cursor: pointer;
 
           &:hover {
             opacity: 0.8;
-            border-radius: 30px;
-          }
-        }
-      }
-
-      .login-btn {
-        font-size: 18px;
-
-        button {
-          border: none;
-          width: auto;
-          background: none;
-          color: black;
-
-          &:hover {
-            width: auto;
-            background: none;
-            color: black;
+            cursor: pointer;
           }
         }
 
-        .underline p {
-          text-decoration: underline;
-        }
       }
     }
   }
+
+  @keyframes animatezoom {
+    from {
+      transform: scale(0)
+    }
+
+    to {
+      transform: scale(1)
+    }
+  }
+
 }

@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -18,39 +18,34 @@ import { SortPipe } from '../app/pipes/sort.pipe';
 import { TestComponent } from './components/test/test.component';
 import { ExitAboutGuard } from './guards/exit.about.guard';
 
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { CreateLotComponent } from './components/create-lot/create-lot.component';
+import { LoginComponent } from './components/auth-components/login/login.component';
+import { RegisterComponent } from './components/auth-components/register/register.component';
+import { CreateLotComponent } from './components/lot-components/create-lot/create-lot.component';
 import { MenuComponent } from './components/menu/menu.component';
-import { ShowLotsComponent } from './components/show-lots/show-lots.component';
-import { UserLotsComponent } from './components/user-lots/user-lots.component';
-import { ShowLotToBidComponent } from './components/show-lot-to-bid/show-lot-to-bid.component';
-import { UpdateLotComponent } from './components/update-lot/update-lot.component';
-import { UserBidsComponent } from './components/user-bids/user-bids.component';
+import { ShowLotsComponent } from './components/lot-components/show-lots/show-lots.component';
+import { UserLotsComponent } from './components/lot-components/user-lots/user-lots.component';
+import { ShowLotToBidComponent } from './components/lot-components/show-lot-to-bid/show-lot-to-bid.component';
+import { UpdateLotComponent } from './components/lot-components/update-lot/update-lot.component';
+import { UserBidsComponent } from './components/lot-components/user-bids/user-bids.component';
 import { AdminComponent } from './components/admin/admin.component';
-import { EmailConfirmationComponent } from './components/email-confirmation/email-confirmation.component';
-import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { FavoriteLotComponent } from './components/favorite-lot/favorite-lot.component';
-import { SoldLotsComponent } from './components/sold-lots/sold-lots.component';
-import { ShowLotImagesComponent } from './components/show-lot-images/show-lot-images.component';
+import { EmailConfirmationComponent } from './components/auth-components/email-confirmation/email-confirmation.component';
+import { ForgotPasswordComponent } from './components/auth-components/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/auth-components/reset-password/reset-password.component';
+import { FavoriteLotComponent } from './components/lot-components/favorite-lot/favorite-lot.component';
+import { SoldLotsComponent } from './components/lot-components/sold-lots/sold-lots.component';
+import { ShowLotImagesComponent } from './components/lot-components/show-lot-images/show-lot-images.component';
 import { AskOwnerFormComponent } from './components/ask-owner-form/ask-owner-form.component';
-import { CommentsComponent } from './components/comments/comments.component';
-import { FreshLotsComponent } from './components/fresh-lots/fresh-lots.component';
-import { FacebookLoginComponent } from './components/facebook-login/facebook-login.component';
-import { GoogleLoginComponent } from './components/google-login/google-login.component';
-import { TwoStepVerificationComponent } from './components/two-step-verification/two-step-verification.component';
+import { CommentsComponent } from './components/lot-components/comments/comments.component';
+import { FreshLotsComponent } from './components/lot-components/fresh-lots/fresh-lots.component';
+import { FacebookLoginComponent } from './components/auth-components/facebook-login/facebook-login.component';
+import { GoogleLoginComponent } from './components/auth-components/google-login/google-login.component';
+import { TwoStepVerificationComponent } from './components/auth-components/two-step-verification/two-step-verification.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ConfirmationDialogComponent } from './common/confirmation-dialog/confirmation-dialog.component';
-import { ConfirmationDialogService } from './common/confirmation-dialog/confirmation-dialog.service';
-import { HrComponent } from './common/hr/hr.component';
 import { CommonConstants } from './common/constants/common-constants';
-import { CreateLotFormComponent } from './components/create-lot-form/create-lot-form.component';
-import { UpdateLotFormComponent } from './components/update-lot-form/update-lot-form.component';
-import { AwesomeTooltipComponent } from './common/tooltip/tooltip.component';
-import { AwesomeTooltipDirective } from './common/tooltip/tooltip.directive';
+import { CreateLotFormComponent } from './components/lot-components/create-lot-form/create-lot-form.component';
+import { UpdateLotFormComponent } from './components/lot-components/update-lot-form/update-lot-form.component';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { EmptyViewComponent } from './common/empty-view/empty-view.component';
+import { CommonModule } from './common/common.module';
 
 const appRoutes: Routes = [
   { path: '', component: ShowLotsComponent },
@@ -102,13 +97,8 @@ export function tokenGetter() {
     GoogleLoginComponent,
     AskOwnerFormComponent,
     TwoStepVerificationComponent,
-    ConfirmationDialogComponent,
-    HrComponent,
     CreateLotFormComponent,
     UpdateLotFormComponent,
-    AwesomeTooltipComponent,
-    AwesomeTooltipDirective,
-    EmptyViewComponent
   ],
   imports: [
     BrowserModule,
@@ -129,17 +119,15 @@ export function tokenGetter() {
     NgbModule,
     MatMenuModule,
     OverlayModule,
-    TextareaAutosizeModule
+    TextareaAutosizeModule,
+    CommonModule
   ],
   exports: [],
   providers: [
     SortPipe,
-    ExitAboutGuard,
-    ConfirmationDialogService
+    ExitAboutGuard
   ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [ConfirmationDialogComponent, AwesomeTooltipComponent]
+  entryComponents: []
 })
-export class AppModule {
-}
+export class AppModule { }

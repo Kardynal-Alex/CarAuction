@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth.service';
-import { LoginComponent } from '../login/login.component';
+import { LoginComponent } from '../auth-components/login/login.component';
 
 @Component({
   selector: 'app-menu',

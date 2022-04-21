@@ -13,7 +13,7 @@ import { FavoriteService } from 'src/app/services/favorite.service';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShowLotImagesComponent } from '../show-lot-images/show-lot-images.component';
-import { AskOwnerFormComponent } from '../ask-owner-form/ask-owner-form.component';
+import { AskOwnerFormComponent } from '../../ask-owner-form/ask-owner-form.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { AuthorDescription } from 'src/app/models/author-description';
 import { AuthorDescriptionService } from 'src/app/services/author-description.service';
