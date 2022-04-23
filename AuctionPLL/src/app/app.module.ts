@@ -41,20 +41,24 @@ import { GoogleLoginComponent } from './components/auth-components/google-login/
 import { TwoStepVerificationComponent } from './components/auth-components/two-step-verification/two-step-verification.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonConstants } from './common/constants/common-constants';
-import { CreateLotFormComponent } from './components/lot-components/create-lot-form/create-lot-form.component';
-import { UpdateLotFormComponent } from './components/lot-components/update-lot-form/update-lot-form.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonComponentModule } from './common/common-component.module';
 import { AdminModule } from './components/admin-components/admin.module';
+import { LotFormModule } from './components/lot-components/manage-lot-form-components/lot-form.module';
 
 const appRoutes: Routes = [
   { path: '', component: ShowLotsComponent },
-  { path: 'createlot', component: CreateLotFormComponent, canActivate: [LoginGuard], canDeactivate: [ExitAboutGuard] },
-  { path: 'createlotform', component: CreateLotComponent, canActivate: [LoginGuard], canDeactivate: [ExitAboutGuard] },
+  // @deprecated
+  // { path: 'createlotform', component: CreateLotComponent, canActivate: [LoginGuard], canDeactivate: [ExitAboutGuard] },
+  {
+    path: 'lotform',
+    loadChildren: () => LotFormModule,
+    canActivate: [LoginGuard]
+  },
   { path: 'lot/:id', component: ShowLotToBidComponent },
   { path: 'userlots', component: UserLotsComponent, canActivate: [LoginGuard] },
-  { path: 'userlots/updatelot/:id', component: UpdateLotFormComponent, canActivate: [LoginGuard], canDeactivate: [ExitAboutGuard] },
-  { path: 'userlots/updatelotform/:id', component: UpdateLotComponent, canActivate: [LoginGuard], canDeactivate: [ExitAboutGuard] },
+  // @deprecated
+  //{ path: 'userlots/updatelotform/:id', component: UpdateLotComponent, canActivate: [LoginGuard], canDeactivate: [ExitAboutGuard] },
   { path: 'userbids', component: UserBidsComponent, canActivate: [LoginGuard] },
   { path: 'admin', loadChildren: () => AdminModule, canActivate: [AdminGuard] },
   { path: 'emailconfirmation', component: EmailConfirmationComponent },
@@ -96,8 +100,6 @@ export function tokenGetter() {
     GoogleLoginComponent,
     AskOwnerFormComponent,
     TwoStepVerificationComponent,
-    CreateLotFormComponent,
-    UpdateLotFormComponent,
   ],
   imports: [
     BrowserModule,

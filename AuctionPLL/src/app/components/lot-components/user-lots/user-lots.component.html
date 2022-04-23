@@ -8,7 +8,7 @@
                 <div class="title">{{lot.description}}</div>
             </div>
             <div class="row">
-                <button class="btn" routerLink="/userlots/updatelot/{{lot.id}}" [disabled]="lot.isSold">
+                <button class="btn" routerLink="/lotform/updatelot/{{lot.id}}" [disabled]="lot.isSold">
                     <i class="fa fa-edit" awesomeTooltip="Edit lot"></i>
                 </button>
                 <button class="btn" (click)="deleteLot(lot.id)">

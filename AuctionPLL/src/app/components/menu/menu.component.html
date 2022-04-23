@@ -11,7 +11,7 @@
   <button mat-button [matMenuTriggerFor]="menu2" *ngIf="!!IsAuthenticated">Cabinet</button>
   <mat-menu #menu2="matMenu">
     <button routerLink="/userlots" mat-menu-item>My Lot</button>
-    <button routerLink="/createlot" mat-menu-item>Create Lot</button>
+    <button routerLink="/lotform/createlot" mat-menu-item>Create Lot</button>
     <button routerLink="/userbids" mat-menu-item>My Bid</button>
     <button routerLink="/favorites" mat-menu-item>Favorite &#9733;</button>
     <button routerLink="/admin" *ngIf="IsAdmin" mat-menu-item>Admin</button>
