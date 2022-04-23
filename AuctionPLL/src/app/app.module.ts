@@ -27,7 +27,6 @@ import { UserLotsComponent } from './components/lot-components/user-lots/user-lo
 import { ShowLotToBidComponent } from './components/lot-components/show-lot-to-bid/show-lot-to-bid.component';
 import { UpdateLotComponent } from './components/lot-components/update-lot/update-lot.component';
 import { UserBidsComponent } from './components/lot-components/user-bids/user-bids.component';
-import { AdminComponent } from './components/admin/admin.component';
 import { EmailConfirmationComponent } from './components/auth-components/email-confirmation/email-confirmation.component';
 import { ForgotPasswordComponent } from './components/auth-components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/auth-components/reset-password/reset-password.component';
@@ -45,7 +44,8 @@ import { CommonConstants } from './common/constants/common-constants';
 import { CreateLotFormComponent } from './components/lot-components/create-lot-form/create-lot-form.component';
 import { UpdateLotFormComponent } from './components/lot-components/update-lot-form/update-lot-form.component';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { CommonModule } from './common/common.module';
+import { CommonComponentModule } from './common/common-component.module';
+import { AdminModule } from './components/admin-components/admin.module';
 
 const appRoutes: Routes = [
   { path: '', component: ShowLotsComponent },
@@ -56,7 +56,7 @@ const appRoutes: Routes = [
   { path: 'userlots/updatelot/:id', component: UpdateLotFormComponent, canActivate: [LoginGuard], canDeactivate: [ExitAboutGuard] },
   { path: 'userlots/updatelotform/:id', component: UpdateLotComponent, canActivate: [LoginGuard], canDeactivate: [ExitAboutGuard] },
   { path: 'userbids', component: UserBidsComponent, canActivate: [LoginGuard] },
-  { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
+  { path: 'admin', loadChildren: () => AdminModule, canActivate: [AdminGuard] },
   { path: 'emailconfirmation', component: EmailConfirmationComponent },
   { path: 'resetpassword', component: ResetPasswordComponent },
   { path: 'favorites', component: FavoriteLotComponent },
@@ -83,7 +83,6 @@ export function tokenGetter() {
     UpdateLotComponent,
     UserBidsComponent,
     SortPipe,
-    AdminComponent,
     EmailConfirmationComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
@@ -120,7 +119,7 @@ export function tokenGetter() {
     MatMenuModule,
     OverlayModule,
     TextareaAutosizeModule,
-    CommonModule
+    CommonComponentModule,
   ],
   exports: [],
   providers: [

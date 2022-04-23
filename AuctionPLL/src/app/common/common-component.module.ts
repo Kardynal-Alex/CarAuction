@@ -29,4 +29,4 @@ import { AwesomeTooltipDirective } from "./tooltip/tooltip.directive";
         AwesomeTooltipComponent
     ]
 })
-export class CommonModule { }
+export class CommonComponentModule { }
