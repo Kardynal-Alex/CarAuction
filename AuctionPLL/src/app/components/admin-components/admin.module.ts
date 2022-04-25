@@ -9,7 +9,7 @@ const appRoutes: Routes = [
         path: '',
         component: AdminComponent
     }
-]
+];
 
 @NgModule({
     imports: [

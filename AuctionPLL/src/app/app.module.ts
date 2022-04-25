@@ -17,24 +17,15 @@ import { AdminGuard } from './guards/admin.guard';
 import { TestComponent } from './components/test/test.component';
 import { ExitAboutGuard } from './guards/exit.about.guard';
 
-import { LoginComponent } from './components/auth-components/login/login.component';
-import { RegisterComponent } from './components/auth-components/register/register.component';
 import { CreateLotComponent } from './components/lot-components/manage-lot-form-components/create-lot/create-lot.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ShowLotsComponent } from './components/lot-components/show-lots/show-lots.component';
 import { UserLotsComponent } from './components/lot-components/user-lots/user-lots.component';
 import { UpdateLotComponent } from './components/lot-components/manage-lot-form-components/update-lot/update-lot.component';
 import { UserBidsComponent } from './components/lot-components/user-bids/user-bids.component';
-import { EmailConfirmationComponent } from './components/auth-components/email-confirmation/email-confirmation.component';
-import { ForgotPasswordComponent } from './components/auth-components/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './components/auth-components/reset-password/reset-password.component';
 import { FavoriteLotComponent } from './components/lot-components/favorite-lot/favorite-lot.component';
 import { SoldLotsComponent } from './components/lot-components/sold-lots/sold-lots.component';
 import { ShowLotImagesComponent } from './components/lot-components/bid-page/show-lot-images/show-lot-images.component';
-import { AskOwnerFormComponent } from './components/ask-owner-form/ask-owner-form.component';
-import { FacebookLoginComponent } from './components/auth-components/facebook-login/facebook-login.component';
-import { GoogleLoginComponent } from './components/auth-components/google-login/google-login.component';
-import { TwoStepVerificationComponent } from './components/auth-components/two-step-verification/two-step-verification.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonConstants } from './common/constants/common-constants';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -42,6 +33,7 @@ import { CommonComponentModule } from './common/common-component.module';
 import { AdminModule } from './components/admin-components/admin.module';
 import { LotFormModule } from './components/lot-components/manage-lot-form-components/lot-form.module';
 import { BidPageModule } from './components/lot-components/bid-page/bid-page.module';
+import { AuthComponentModule } from './components/auth-components/auth-component.module';
 
 const appRoutes: Routes = [
   { path: '', component: ShowLotsComponent },
@@ -60,14 +52,18 @@ const appRoutes: Routes = [
   // @deprecated
   //{ path: 'userlots/updatelotform/:id', component: UpdateLotComponent, canActivate: [LoginGuard], canDeactivate: [ExitAboutGuard] },
   { path: 'userbids', component: UserBidsComponent, canActivate: [LoginGuard] },
-  { path: 'admin', loadChildren: () => AdminModule, canActivate: [AdminGuard] },
-  { path: 'emailconfirmation', component: EmailConfirmationComponent },
-  { path: 'resetpassword', component: ResetPasswordComponent },
+  {
+    path: 'admin',
+    loadChildren: () => AdminModule, canActivate: [AdminGuard]
+  },
+  {
+    path: 'auth',
+    loadChildren: () => AuthComponentModule
+  },
   { path: 'favorites', component: FavoriteLotComponent },
   { path: 'sold-lots', component: SoldLotsComponent },
   { path: 'test', component: TestComponent },
   { path: 'images', component: ShowLotImagesComponent },
-  { path: 'twostepverification', component: TwoStepVerificationComponent },
   { path: '**', component: ShowLotsComponent }
 ];
 
@@ -77,24 +73,15 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     CreateLotComponent,
     MenuComponent,
     ShowLotsComponent,
     UserLotsComponent,
     UpdateLotComponent,
     UserBidsComponent,
-    EmailConfirmationComponent,
-    ForgotPasswordComponent,
-    ResetPasswordComponent,
     FavoriteLotComponent,
     SoldLotsComponent,
     TestComponent,
-    FacebookLoginComponent,
-    GoogleLoginComponent,
-    AskOwnerFormComponent,
-    TwoStepVerificationComponent,
   ],
   imports: [
     BrowserModule,
@@ -117,7 +104,8 @@ export function tokenGetter() {
     OverlayModule,
     TextareaAutosizeModule,
     CommonComponentModule,
-    BidPageModule
+    BidPageModule,
+    AuthComponentModule
   ],
   exports: [],
   providers: [

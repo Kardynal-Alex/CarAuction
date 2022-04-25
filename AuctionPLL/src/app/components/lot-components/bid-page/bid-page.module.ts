@@ -1,9 +1,11 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule, Routes } from "@angular/router";
 import { CommonComponentModule } from "src/app/common/common-component.module";
 import { SortPipe } from "src/app/pipes/sort.pipe";
+import { AskOwnerFormComponent } from "./ask-owner-form/ask-owner-form.component";
 import { CommentsComponent } from "./comments/comments.component";
 import { FreshLotsComponent } from "./fresh-lots/fresh-lots.component";
 import { ShowLotImagesComponent } from "./show-lot-images/show-lot-images.component";
@@ -23,6 +25,7 @@ const appRoutes: Routes = [
         FreshLotsComponent,
         ShowLotImagesComponent,
         CommentsComponent,
+        AskOwnerFormComponent,
         SortPipe
     ],
     imports: [
@@ -31,6 +34,8 @@ const appRoutes: Routes = [
         CommonComponentModule,
         CommonModule,
         FormsModule,
+        BrowserModule,
+        ReactiveFormsModule
     ],
     providers: [],
     declarations: [
@@ -38,6 +43,7 @@ const appRoutes: Routes = [
         FreshLotsComponent,
         ShowLotImagesComponent,
         CommentsComponent,
+        AskOwnerFormComponent,
         SortPipe
     ]
 })

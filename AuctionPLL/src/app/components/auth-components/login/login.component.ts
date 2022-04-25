@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
       .subscribe(response => {
         if (response['is2StepVerificationRequired']) {
           this.activeModal.close();
-          this.router.navigate(['/twostepverification'],
+          this.router.navigate(['/auth/twostepverification'],
             {
               queryParams: {
                 provider: response['provider'],
