@@ -6,7 +6,10 @@ import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-sold-lots',
   templateUrl: './sold-lots.component.html',
-  styleUrls: ['./sold-lots.component.less', '../show-lots/show-lots.component.less']
+  styleUrls: [
+    './sold-lots.component.less',
+    '../show-lots/show-lots.component.less'
+  ]
 })
 export class SoldLotsComponent implements OnInit {
 

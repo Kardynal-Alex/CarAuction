@@ -35,7 +35,7 @@ export class FreshLotsComponent implements OnInit {
   public redirectToNewLot(id: number) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/lot/' + id]);
+    this.router.navigate(['/bid/lot/' + id]);
   }
 
 }

@@ -2,7 +2,7 @@
     <div class="text-line">
         <p>Sold lots</p>
     </div>
-    <hr>
+    <app-hr></app-hr>
     <div *ngFor="let lot of lots">
         <div class="card">
             <img [src]="createImgPath(lot?.image)" alt="profile picture">

@@ -9,7 +9,7 @@ import { Lot } from 'src/app/models/lot';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { Comment } from '../../../models/comment';
+import { Comment } from '../../../../models/comment';
 
 @Component({
   selector: 'app-comments',

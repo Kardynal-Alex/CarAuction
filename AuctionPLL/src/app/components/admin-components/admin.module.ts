@@ -1,7 +1,5 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule, Routes } from "@angular/router";
 import { CommonComponentModule } from "src/app/common/common-component.module";
 import { AdminComponent } from "./admin/admin.component";
