@@ -20,10 +20,7 @@ import { ExitAboutGuard } from './guards/exit.about.guard';
 import { CreateLotComponent } from './components/lot-components/manage-lot-form-components/create-lot/create-lot.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ShowLotsComponent } from './components/lot-components/show-lots/show-lots.component';
-import { UserLotsComponent } from './components/lot-components/user-lots/user-lots.component';
 import { UpdateLotComponent } from './components/lot-components/manage-lot-form-components/update-lot/update-lot.component';
-import { UserBidsComponent } from './components/lot-components/user-bids/user-bids.component';
-import { FavoriteLotComponent } from './components/lot-components/favorite-lot/favorite-lot.component';
 import { SoldLotsComponent } from './components/lot-components/sold-lots/sold-lots.component';
 import { ShowLotImagesComponent } from './components/lot-components/bid-page/show-lot-images/show-lot-images.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -34,6 +31,7 @@ import { AdminModule } from './components/admin-components/admin.module';
 import { LotFormModule } from './components/lot-components/manage-lot-form-components/lot-form.module';
 import { BidPageModule } from './components/lot-components/bid-page/bid-page.module';
 import { AuthComponentModule } from './components/auth-components/auth-component.module';
+import { UserCabinetModule } from './components/lot-components/user-cabinet/user-cabinet.module';
 
 const appRoutes: Routes = [
   { path: '', component: ShowLotsComponent },
@@ -48,10 +46,8 @@ const appRoutes: Routes = [
     path: 'bid',
     loadChildren: () => BidPageModule
   },
-  { path: 'userlots', component: UserLotsComponent, canActivate: [LoginGuard] },
   // @deprecated
   //{ path: 'userlots/updatelotform/:id', component: UpdateLotComponent, canActivate: [LoginGuard], canDeactivate: [ExitAboutGuard] },
-  { path: 'userbids', component: UserBidsComponent, canActivate: [LoginGuard] },
   {
     path: 'admin',
     loadChildren: () => AdminModule, canActivate: [AdminGuard]
@@ -60,7 +56,10 @@ const appRoutes: Routes = [
     path: 'auth',
     loadChildren: () => AuthComponentModule
   },
-  { path: 'favorites', component: FavoriteLotComponent },
+  {
+    path: 'cabinet',
+    loadChildren: () => UserCabinetModule
+  },
   { path: 'sold-lots', component: SoldLotsComponent },
   { path: 'test', component: TestComponent },
   { path: 'images', component: ShowLotImagesComponent },
@@ -76,10 +75,7 @@ export function tokenGetter() {
     CreateLotComponent,
     MenuComponent,
     ShowLotsComponent,
-    UserLotsComponent,
     UpdateLotComponent,
-    UserBidsComponent,
-    FavoriteLotComponent,
     SoldLotsComponent,
     TestComponent,
   ],
@@ -104,7 +100,8 @@ export function tokenGetter() {
     OverlayModule,
     TextareaAutosizeModule,
     CommonComponentModule,
-    BidPageModule
+    BidPageModule,
+    UserCabinetModule
   ],
   exports: [],
   providers: [

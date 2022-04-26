@@ -10,7 +10,10 @@ import { Guid } from 'guid-typescript';
 @Component({
   selector: 'app-favorite-lot',
   templateUrl: './favorite-lot.component.html',
-  styleUrls: ['./favorite-lot.component.less', '../show-lots/show-lots.component.less']
+  styleUrls: [
+    './favorite-lot.component.less',
+    '../../show-lots/show-lots.component.less'
+  ]
 })
 export class FavoriteLotComponent implements OnInit {
 
