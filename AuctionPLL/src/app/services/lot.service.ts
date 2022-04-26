@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Lot } from '../models/lot';
+import { Lot } from '../models/lot-models/lot';
 import { AskOwner } from '../models/ask-owner';
 import { Observable } from 'rxjs';
 import { BaseUrl } from '../common/constants/urls';

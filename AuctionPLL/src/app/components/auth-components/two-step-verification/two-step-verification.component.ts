@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
-import { TwoFactor } from 'src/app/models/two-factor';
+import { TwoFactor } from 'src/app/models/auth-models/two-factor';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ResetPassword } from 'src/app/models/reset-password';
+import { ResetPassword } from 'src/app/models/auth-models/reset-password';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({

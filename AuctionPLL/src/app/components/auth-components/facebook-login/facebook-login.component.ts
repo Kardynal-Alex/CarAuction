@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
-import { Facebook } from 'src/app/models/facebook';
+import { Facebook } from 'src/app/models/auth-models/facebook';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 

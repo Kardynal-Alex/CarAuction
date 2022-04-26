@@ -5,7 +5,7 @@ import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
-import { Lot } from 'src/app/models/lot';
+import { Lot } from 'src/app/models/lot-models/lot';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';

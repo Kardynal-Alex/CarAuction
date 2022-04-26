@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Lot } from 'src/app/models/lot';
+import { Lot } from 'src/app/models/lot-models/lot';
 import { LotService } from 'src/app/services/lot.service';
 import { tap } from 'rxjs/operators';
 

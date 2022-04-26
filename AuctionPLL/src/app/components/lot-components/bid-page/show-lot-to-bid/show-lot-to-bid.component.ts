@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Lot } from 'src/app/models/lot';
+import { Lot } from 'src/app/models/lot-models/lot';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { LotService } from 'src/app/services/lot.service';
 import { tap } from "rxjs/operators";

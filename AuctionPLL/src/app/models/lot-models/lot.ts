@@ -1,4 +1,4 @@
-import { User } from './user';
+import { User } from '../auth-models/user';
 import { LotState } from './lot-state';
 import { Images } from './images';
 

@@ -2,7 +2,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Images } from 'src/app/models/images';
+import { Images } from 'src/app/models/lot-models/images';
 import { LotService } from 'src/app/services/lot.service';
 
 @Component({

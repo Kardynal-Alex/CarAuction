@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BaseUrl } from '../common/constants/urls';
-import { Images } from '../models/images';
+import { Images } from '../models/lot-models/images';
 
 @Injectable({ providedIn: 'root' })
 export class ImagesService {

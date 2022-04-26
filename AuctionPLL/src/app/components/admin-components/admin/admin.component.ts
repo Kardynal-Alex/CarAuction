@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/auth-models/user';
 import { AdminService } from '../../../services/admin.service';
 import { tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';

@@ -8,7 +8,7 @@ import { CommonConstants } from 'src/app/common/constants/common-constants';
 import { NgbActiveModal, NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from '../register/register.component';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
-import { Login } from 'src/app/models/login';
+import { Login } from 'src/app/models/auth-models/login';
 
 @Component({
   selector: 'app-login',
