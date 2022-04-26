@@ -104,8 +104,7 @@ export function tokenGetter() {
     OverlayModule,
     TextareaAutosizeModule,
     CommonComponentModule,
-    BidPageModule,
-    AuthComponentModule
+    BidPageModule
   ],
   exports: [],
   providers: [

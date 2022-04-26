@@ -34,7 +34,6 @@ const appRoutes: Routes = [
         CommonComponentModule,
         CommonModule,
         FormsModule,
-        BrowserModule,
         ReactiveFormsModule
     ],
     providers: [],

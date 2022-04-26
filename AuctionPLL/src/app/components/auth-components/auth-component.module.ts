@@ -1,3 +1,4 @@
+import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
@@ -29,7 +30,7 @@ const appRoutes: Routes = [
 @NgModule({
     imports: [
         FormsModule,
-        BrowserModule,
+        CommonModule,
         ReactiveFormsModule,
         RouterModule,
         RouterModule.forChild(appRoutes)
