@@ -6,9 +6,13 @@ import { AwesomeTooltipComponent } from './tooltip.component';
 
 @Directive({ selector: '[awesomeTooltip]' })
 export class AwesomeTooltipDirective implements OnInit {
-
+    /*
+        TODO: How to use
+        <i class="fa fa-edit" awesomeTooltip="Edit lot" [showToolTip]="false"></i>
+    */
     @Input('awesomeTooltip') text = '';
     private overlayRef: OverlayRef;
+    @Input() showToolTip: boolean = true;
 
     constructor(
         private overlay: Overlay,
@@ -17,6 +21,9 @@ export class AwesomeTooltipDirective implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        console.log(this.showToolTip)
+        if (!this.showToolTip) return;
+
         const positionStrategy = this.overlayPositionBuilder
             .flexibleConnectedTo(this.elementRef)
             .withPositions([{
@@ -32,13 +39,25 @@ export class AwesomeTooltipDirective implements OnInit {
 
     @HostListener('mouseenter')
     show() {
-        const tooltipRef: ComponentRef<AwesomeTooltipComponent>
-            = this.overlayRef.attach(new ComponentPortal(AwesomeTooltipComponent));
-        tooltipRef.instance.text = this.text;
+        if (this.overlayRef && !this.overlayRef.hasAttached()) {
+            const tooltipRef: ComponentRef<AwesomeTooltipComponent>
+                = this.overlayRef.attach(new ComponentPortal(AwesomeTooltipComponent));
+            tooltipRef.instance.text = this.text;
+        }
     }
 
     @HostListener('mouseout')
     hide() {
-        this.overlayRef.detach();
+        this.closeToolTip();
+    }
+
+    ngOnDestroy() {
+        this.closeToolTip();
+    }
+
+    private closeToolTip() {
+        if (this.overlayRef) {
+            this.overlayRef.detach();
+        }
     }
 }
