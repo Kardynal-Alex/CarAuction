@@ -1,7 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule, Routes } from "@angular/router";
 import { CommonComponentModule } from "src/app/common/common-component.module";
 import { SortPipe } from "src/app/pipes/sort.pipe";
@@ -16,7 +15,7 @@ const appRoutes: Routes = [
         path: 'lot/:id',
         component: ShowLotToBidComponent
     }
-]
+];
 
 @NgModule({
     exports: [

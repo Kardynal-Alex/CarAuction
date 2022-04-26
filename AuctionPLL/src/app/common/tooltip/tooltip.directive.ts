@@ -21,7 +21,6 @@ export class AwesomeTooltipDirective implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        console.log(this.showToolTip)
         if (!this.showToolTip) return;
 
         const positionStrategy = this.overlayPositionBuilder
