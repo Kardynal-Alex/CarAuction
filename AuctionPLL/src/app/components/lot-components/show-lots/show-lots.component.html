@@ -21,6 +21,7 @@
 </div>
 <hr>
 <div class="lots">
+  <app-mat-spinner *ngIf="!lots?.length" [diameter]="500" [strokeWidth]="50"></app-mat-spinner>
   <div *ngFor="let lot of lots | sort:sortMode:sortField">
     <div class="card" *ngIf="!lot.isSold">
       <div class="timer">

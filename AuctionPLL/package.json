@@ -36,6 +36,7 @@
     "hammerjs": "^2.0.8",
     "ngx-countdown": "^12.0.0",
     "ngx-countdown-timer": "^0.2.0",
+    "ngx-material-spinner": "^12.0.1",
     "ngx-textarea-autosize": "^2.0.3",
     "ngx-toastr": "^13.2.1",
     "primeng": "^11.4.2",

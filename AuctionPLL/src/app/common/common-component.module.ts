@@ -6,6 +6,8 @@ import { EmptyViewComponent } from "./empty-view/empty-view.component";
 import { HrComponent } from "./hr/hr.component";
 import { AwesomeTooltipComponent } from "./tooltip/tooltip.component";
 import { AwesomeTooltipDirective } from "./tooltip/tooltip.directive";
+import { MatSpinnerComponent } from './mat-spinner/mat-spinner.component';
+import { AngularMaterialModule } from "../material.module";
 
 @NgModule({
     providers: [
@@ -13,13 +15,15 @@ import { AwesomeTooltipDirective } from "./tooltip/tooltip.directive";
     ],
     imports: [
         OverlayModule,
+        AngularMaterialModule
     ],
     exports: [
         HrComponent,
         EmptyViewComponent,
         ConfirmationDialogComponent,
         AwesomeTooltipComponent,
-        AwesomeTooltipDirective
+        AwesomeTooltipDirective,
+        MatSpinnerComponent
     ],
     declarations: [
         HrComponent,
@@ -27,6 +31,8 @@ import { AwesomeTooltipDirective } from "./tooltip/tooltip.directive";
         ConfirmationDialogComponent,
         AwesomeTooltipComponent,
         AwesomeTooltipDirective,
+        MatSpinnerComponent,
+        MatSpinnerComponent
     ],
     entryComponents: [
         ConfirmationDialogComponent,

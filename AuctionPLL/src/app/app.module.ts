@@ -8,8 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from "@auth0/angular-jwt";
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatMenuModule } from '@angular/material/menu';
 import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
 
 import { LoginGuard } from './guards/login.guard';
@@ -32,6 +30,7 @@ import { LotFormModule } from './components/lot-components/manage-lot-form-compo
 import { BidPageModule } from './components/lot-components/bid-page/bid-page.module';
 import { AuthComponentModule } from './components/auth-components/auth-component.module';
 import { UserCabinetModule } from './components/lot-components/user-cabinet/user-cabinet.module';
+import { AngularMaterialModule } from './material.module';
 
 const appRoutes: Routes = [
   { path: '', component: ShowLotsComponent },
@@ -80,7 +79,6 @@ export function tokenGetter() {
   imports: [
     BrowserModule,
     FormsModule,
-    MatTooltipModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
@@ -94,12 +92,12 @@ export function tokenGetter() {
       }
     }),
     NgbModule,
-    MatMenuModule,
     OverlayModule,
     TextareaAutosizeModule,
     CommonComponentModule,
     BidPageModule,
-    UserCabinetModule
+    UserCabinetModule,
+    AngularMaterialModule
   ],
   exports: [],
   providers: [
