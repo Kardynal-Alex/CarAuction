@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
+import { ErrorMessages } from 'src/app/common/constants/error-messages';
 import { Facebook } from 'src/app/models/auth-models/facebook';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -48,12 +49,12 @@ export class FacebookLoginComponent implements OnInit {
         }
         this.authService.facebookLogin(facebookLogin)
           .subscribe(response => {
-            this.toastrService.success("Login successfully.");
+            this.toastrService.success('Login successfully');
             const token = (<any>response).token;
             this.localStorage.set(CommonConstants.JWTToken, JSON.stringify(token));
             window.location.reload();
           }, _ => {
-            this.toastrService.error("error");
+            this.toastrService.error(ErrorMessages.Error);
           });
       }
     });

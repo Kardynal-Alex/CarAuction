@@ -102,7 +102,7 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
       .subscribe(_ => {
         this.toastrService.success('Successfully added!');
         this.saved = true;
-        this.router.navigate(['/userlots']);
+        this.router.navigate(['/cabinet/userlots']);
       }, _ => {
         this.toastrService.error('Something went wrong!');
       });

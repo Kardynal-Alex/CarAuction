@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
+import { ErrorMessages } from 'src/app/common/constants/error-messages';
 import { ExternalAuth } from 'src/app/models/auth-models/external-auth';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -57,7 +58,7 @@ export class GoogleLoginComponent implements OnInit {
             this.localStorage.set(CommonConstants.JWTToken, JSON.stringify(token));
             window.location.reload();
           }, _ => {
-            this.toastrService.error('error');
+            this.toastrService.error(ErrorMessages.Error);
           });
         //console.log('Token || ' + googleUser.getAuthResponse().id_token);
         //console.log('Email: ' , profile.getEmail());

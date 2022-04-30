@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ErrorMessages } from 'src/app/common/constants/error-messages';
 import { ResetPassword } from 'src/app/models/auth-models/reset-password';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -38,7 +39,7 @@ export class ResetPasswordComponent implements OnInit {
         this.toastrService.success('Password is updated!');
         this.router.navigate(['']);
       }, _ => {
-        this.toastrService.error('Error!');
+        this.toastrService.error(ErrorMessages.Error);
         this.router.navigate(['']);
       });
   }

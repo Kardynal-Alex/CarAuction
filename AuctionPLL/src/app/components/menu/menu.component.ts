@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { ErrorMessages } from 'src/app/common/constants/error-messages';
 import { AuthService } from '../../services/auth.service';
 import { LoginComponent } from '../auth-components/login/login.component';
 
@@ -37,7 +38,7 @@ export class MenuComponent implements OnInit {
         window.location.reload();
         this.toastrService.success('Logout successfully.');
       }, _ => {
-        this.toastrService.error('Error!');
+        this.toastrService.error(ErrorMessages.Error);
       });
   }
 }

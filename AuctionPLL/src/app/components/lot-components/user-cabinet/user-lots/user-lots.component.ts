@@ -4,6 +4,7 @@ import { Lot } from 'src/app/models/lot-models/lot';
 import { LotService } from 'src/app/services/lot.service';
 import { ConfirmationDialogService } from 'src/app/common/confirmation-dialog/confirmation-dialog.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ErrorMessages } from 'src/app/common/constants/error-messages';
 
 @Component({
   selector: 'app-user-lots',
@@ -53,9 +54,9 @@ export class UserLotsComponent implements OnInit, OnDestroy {
             .subscribe(_ => {
               this.lots = this.lots.filter(x => x.id != id);
               clearInterval(this.str[id]);
-              this.toastrService.success("Lot is deleted!");
+              this.toastrService.success('Lot is deleted!');
             }, _ => {
-              this.toastrService.error("Something went wrong!");
+              this.toastrService.error(ErrorMessages.SomethingWentWrong, ErrorMessages.TryAgain);
             });
         }
       })
@@ -72,9 +73,9 @@ export class UserLotsComponent implements OnInit, OnDestroy {
               lotEnd.isSold = true;
               clearInterval(this.str[lotEnd.id]);
               document.getElementById('timer-' + lotEnd.id).innerHTML = "Expired";
-              this.toastrService.success("Lot is closed!");
+              this.toastrService.success('Lot is closed!');
             }, _ => {
-              this.toastrService.error("Something went wrong!");
+              this.toastrService.error(ErrorMessages.SomethingWentWrong, ErrorMessages.TryAgain);
             });
         }
       })

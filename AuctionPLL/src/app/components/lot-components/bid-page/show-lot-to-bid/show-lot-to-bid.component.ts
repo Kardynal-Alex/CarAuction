@@ -17,6 +17,7 @@ import { AskOwnerFormComponent } from '../ask-owner-form/ask-owner-form.componen
 import { AuthService } from 'src/app/services/auth.service';
 import { AuthorDescription } from 'src/app/models/author-description';
 import { AuthorDescriptionService } from 'src/app/services/author-description.service';
+import { ErrorMessages } from 'src/app/common/constants/error-messages';
 
 @Component({
   selector: 'app-show-lot-to-bid',
@@ -122,8 +123,15 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
   }
 
   public placeBid() {
-    var bid = prompt('Place bid more than current');
-    if (parseFloat(bid) > this.lot.currentPrice && this.userId.length > 0) {
+    const bid = prompt('Place bid more than current');
+    const parsedBid = parseFloat(bid);
+    if (this.userId.length === 0) {
+      return this.toastrService.error(ErrorMessages.Unauthorized);
+    }
+    if (parsedBid <= this.lot.currentPrice) {
+      return this.toastrService.error('Incorrect input data');
+    }
+    if (parsedBid > this.lot.currentPrice) {
       this.lot.currentPrice = parseFloat(bid);
       this.lot.lotState.futureOwnerId = this.userId;
       this.lot.lotState.countBid += 1;
@@ -132,8 +140,8 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
           this.toastrService.success('Thanks for bid');
           const comment: Comment = {
             id: Guid.create().toString(),
-            author: this.userName + " " + this.userSurname,
-            text: 'Bid $' + parseFloat(bid).toString(),
+            author: this.userName + ' ' + this.userSurname,
+            text: 'Bid $' + parsedBid.toString(),
             dateTime: new Date(Date.now()),
             lotId: this.id.toString(),
             userId: this.userId,
@@ -146,12 +154,8 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
               this.toastrService.error('Cannot add comment!');
             });
         }, _ => {
-          this.toastrService.error('Error');
+          this.toastrService.error(ErrorMessages.Error);
         });
-    } else if (!(typeof bid === "number") || parseFloat(bid) <= this.lot.currentPrice) {
-      this.toastrService.error('Incorrect input data', 'Try again');
-    } else if (this.userId.length > 0) {
-      this.toastrService.error('You must be registered', 'Try again');
     }
   }
 
@@ -173,10 +177,10 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
           document.getElementById('star-' + lotId).className = 'star';
           this.favorite = favorite;
         }, _ => {
-          this.toastrService.info('You need to be authorized!');
+          this.toastrService.info(ErrorMessages.Unauthorized);
         });
     } else {
-      this.toastrService.info('You need to be authorized!');
+      this.toastrService.info(ErrorMessages.Unauthorized);
     }
   }
 

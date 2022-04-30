@@ -3,6 +3,7 @@ import { User } from 'src/app/models/auth-models/user';
 import { AdminService } from '../../../services/admin.service';
 import { tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { ErrorMessages } from 'src/app/common/constants/error-messages';
 
 @Component({
   selector: 'app-admin',
@@ -31,7 +32,7 @@ export class AdminComponent implements OnInit {
         this.toastrService.success('User is deleted!');
         this.getUsers();
       }, _ => {
-        this.toastrService.error('Error!');
+        this.toastrService.error(ErrorMessages.Error);
       });
   }
 }

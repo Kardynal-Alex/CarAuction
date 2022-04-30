@@ -7,7 +7,7 @@
         <div class="card">
             <img [src]="createImgPath(lot?.image)" alt="profile picture">
             <div class="main-block">
-                <h1>{{lot.nameLot}}</h1>
+                <p>{{lot.nameLot}}</p>
                 <p class="title">{{lot.description}}</p>
             </div>
             <p><button routerLink="/lot/{{lot.id}}">Sold for {{lot.currentPrice | currency}}</button></p>

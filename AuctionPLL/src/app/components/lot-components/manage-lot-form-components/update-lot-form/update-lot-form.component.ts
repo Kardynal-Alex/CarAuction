@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
+import { ErrorMessages } from 'src/app/common/constants/error-messages';
 import { AuthorDescription } from 'src/app/models/author-description';
 import { Images } from 'src/app/models/lot-models/images';
 import { Lot } from 'src/app/models/lot-models/lot';
@@ -120,7 +121,7 @@ export class UpdateLotFormComponent implements OnInit {
           this.toastrService.success('Author Description is created');
           this.saved = true;
           this.router.navigate(['userlots'])
-        }, _ => this.toastrService.error('Error!'))
+        }, _ => this.toastrService.error(ErrorMessages.Error))
     } else {
       this.authorDescription.description = description;
       this.authorDescriptionService.updateAuthorDescription(this.authorDescription)
@@ -128,7 +129,7 @@ export class UpdateLotFormComponent implements OnInit {
           this.toastrService.success('Author Description is updated');
           this.saved = true;
           this.router.navigate(['userlots'])
-        }, _ => this.toastrService.error('Error!'))
+        }, _ => this.toastrService.error(ErrorMessages.Error))
     }
   }
 
@@ -164,7 +165,7 @@ export class UpdateLotFormComponent implements OnInit {
         this.toastrService.success('Lot is updated');
         this.saved = true;
         this.router.navigate(['userlots']);
-      }, _ => this.toastrService.error('Error!'));
+      }, _ => this.toastrService.error(ErrorMessages.Error));
   }
 
   private getImages(lot: Lot): Images {

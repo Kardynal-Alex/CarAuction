@@ -35,8 +35,8 @@ import { UserCabinetModule } from './components/lot-components/user-cabinet/user
 
 const appRoutes: Routes = [
   { path: '', component: ShowLotsComponent },
-  // @deprecated
   // { path: 'createlotform', component: CreateLotComponent, canActivate: [LoginGuard], canDeactivate: [ExitAboutGuard] },
+  // { path: 'userlots/updatelotform/:id', component: UpdateLotComponent, canActivate: [LoginGuard], canDeactivate: [ExitAboutGuard] },
   {
     path: 'lotform',
     loadChildren: () => LotFormModule,
@@ -46,8 +46,6 @@ const appRoutes: Routes = [
     path: 'bid',
     loadChildren: () => BidPageModule
   },
-  // @deprecated
-  //{ path: 'userlots/updatelotform/:id', component: UpdateLotComponent, canActivate: [LoginGuard], canDeactivate: [ExitAboutGuard] },
   {
     path: 'admin',
     loadChildren: () => AdminModule, canActivate: [AdminGuard]

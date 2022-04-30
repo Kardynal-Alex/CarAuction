@@ -5,6 +5,7 @@ import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
+import { ErrorMessages } from 'src/app/common/constants/error-messages';
 import { Lot } from 'src/app/models/lot-models/lot';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommentService } from 'src/app/services/comment.service';
@@ -77,7 +78,7 @@ export class CommentsComponent implements OnInit {
           this.toastrService.error('Can not add your comment')
         })
     } else {
-      this.toastrService.warning('Only for registered user', 'Warning!');
+      this.toastrService.warning(ErrorMessages.Unauthorized, 'Warning!');
     }
   }
 
@@ -87,7 +88,7 @@ export class CommentsComponent implements OnInit {
         this.toastrService.success('Comment is deleted!');
         this.getComments(this.id);
       }, _ => {
-        this.toastrService.error('Error!');
+        this.toastrService.error(ErrorMessages.Error);
       });
   }
 

@@ -7,6 +7,7 @@ import { Favorite } from 'src/app/models/favorite';
 import { AuthService } from 'src/app/services/auth.service';
 import { Guid } from 'guid-typescript';
 import { SortMode } from 'src/app/common/sort-mode';
+import { ErrorMessages } from 'src/app/common/constants/error-messages';
 
 @Component({
   selector: 'app-show-lots',
@@ -95,10 +96,10 @@ export class ShowLotsComponent implements OnInit, AfterViewInit {
           document.getElementById('star-' + lotId).className = 'star';
           this.favorites.push(favorite);
         }, _ => {
-          this.toastrService.info('You need to be authorized!');
+          this.toastrService.info(ErrorMessages.Unauthorized);
         });
     } else {
-      this.toastrService.info('You need to be authorized!!');
+      this.toastrService.info(ErrorMessages.Unauthorized);
     }
   }
 

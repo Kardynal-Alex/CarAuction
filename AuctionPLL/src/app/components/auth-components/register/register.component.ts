@@ -6,6 +6,7 @@ import { Register } from 'src/app/models/auth-models/register';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from '../login/login.component';
+import { ErrorMessages } from 'src/app/common/constants/error-messages';
 
 @Component({
   selector: 'app-register',
@@ -50,7 +51,7 @@ export class RegisterComponent implements OnInit {
         this.toastrService.info('You redirect to login page.');
         this.openLoginForm();
       }, _ => {
-        this.toastrService.error('Error');
+        this.toastrService.error(ErrorMessages.Error);
       });
   }
 
