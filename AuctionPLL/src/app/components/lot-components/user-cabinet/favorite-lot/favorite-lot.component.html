@@ -3,11 +3,11 @@
         <p>Your favorite lots</p>
     </div>
     <app-hr></app-hr>
-    <div *ngFor="let lot of lots">
+    <div *ngFor="let lot of lots$.value">
         <div class="card" *ngIf="!lot.isSold">
             <img [src]="createImgPath(lot.image)" alt="profile picture">
             <div class="favorite">
-                <a id="star-{{lot.id}}" class="unstar" (click)="changeStar(lot.id)">&#9733;</a>
+                <a id="star-{{lot.id}}" class="star" (click)="removeFromFavorite(lot.id)">&#9733;</a>
             </div>
             <div class="main-block">
                 <p>{{lot.nameLot}}</p>

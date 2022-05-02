@@ -8,14 +8,16 @@ import { AwesomeTooltipComponent } from "./tooltip/tooltip.component";
 import { AwesomeTooltipDirective } from "./tooltip/tooltip.directive";
 import { MatSpinnerComponent } from './mat-spinner/mat-spinner.component';
 import { AngularMaterialModule } from "../material.module";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
     providers: [
         ConfirmationDialogService
     ],
     imports: [
+        CommonModule,
         OverlayModule,
-        AngularMaterialModule
+        AngularMaterialModule,
     ],
     exports: [
         HrComponent,

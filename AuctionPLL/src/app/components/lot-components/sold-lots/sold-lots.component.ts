@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Lot } from 'src/app/models/lot-models/lot';
 import { LotService } from 'src/app/services/lot.service';
 import { tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-sold-lots',
@@ -11,19 +12,22 @@ import { tap } from 'rxjs/operators';
     '../show-lots/show-lots.component.less'
   ]
 })
-export class SoldLotsComponent implements OnInit {
+export class SoldLotsComponent implements OnInit, OnDestroy {
 
   constructor(private lotService: LotService) { }
 
-  public lots: Lot[];
+  public lots$ = new BehaviorSubject<Lot[]>([]);
   public ngOnInit() {
     this.getLots();
   }
 
+  public ngOnDestroy(): void {
+    this.lots$.complete();
+  }
+
   public getLots() {
     this.lotService.getSoldLots()
-      .pipe(tap(lots => this.lots = lots))
-      .subscribe();
+      .subscribe(_ => this.lots$.next(_));
   }
 
   public createImgPath(serverPath: string): string {

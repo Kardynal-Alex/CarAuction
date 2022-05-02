@@ -1,38 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from 'src/app/models/auth-models/user';
 import { AdminService } from '../../../services/admin.service';
-import { tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
+import { BehaviorSubject } from 'rxjs';
+import { ConfirmationDialogService } from 'src/app/common/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.less']
 })
-export class AdminComponent implements OnInit {
-  public users: User[];
+export class AdminComponent implements OnInit, OnDestroy {
+  public users$ = new BehaviorSubject<User[]>([]);
   constructor(
     private adminService: AdminService,
-    private toastrService: ToastrService) { }
+    private toastrService: ToastrService,
+    private confirmationDialogService: ConfirmationDialogService
+  ) { }
 
   public getUsers() {
     this.adminService.getUsersWithRoleUser()
-      .pipe(tap(users => this.users = users))
-      .subscribe();
+      .subscribe(_ => this.users$.next(_));
   }
 
   public ngOnInit(): void {
     this.getUsers();
   }
 
+  public ngOnDestroy(): void {
+    this.users$.complete();
+  }
+
   public deleteUser(userId: string) {
-    this.adminService.deleteUser(userId)
-      .subscribe(_ => {
-        this.toastrService.success('User is deleted!');
-        this.getUsers();
-      }, _ => {
-        this.toastrService.error(ErrorMessages.Error);
-      });
+    this.confirmationDialogService.confirm('Please confirm', 'Do you really want to ... ?')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.adminService.deleteUser(userId)
+            .subscribe(_ => {
+              this.toastrService.success('User is deleted!');
+              this.getUsers();
+            }, _ => {
+              this.toastrService.error(ErrorMessages.Error);
+            });
+        }
+      }).catch();
   }
 }

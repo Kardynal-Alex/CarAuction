@@ -1,4 +1,4 @@
-import { ComponentRef, Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
+import { ComponentRef, Directive, ElementRef, HostListener, Input, OnInit, TemplateRef } from '@angular/core';
 import { Overlay, OverlayPositionBuilder, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 
@@ -13,6 +13,7 @@ export class AwesomeTooltipDirective implements OnInit {
     @Input('awesomeTooltip') text = '';
     private overlayRef: OverlayRef;
     @Input() showToolTip: boolean = true;
+    @Input() contentTemplate: TemplateRef<any>;
 
     constructor(
         private overlay: Overlay,
@@ -42,6 +43,7 @@ export class AwesomeTooltipDirective implements OnInit {
             const tooltipRef: ComponentRef<AwesomeTooltipComponent>
                 = this.overlayRef.attach(new ComponentPortal(AwesomeTooltipComponent));
             tooltipRef.instance.text = this.text;
+            tooltipRef.instance.contentTemplate = this.contentTemplate;
         }
     }
 

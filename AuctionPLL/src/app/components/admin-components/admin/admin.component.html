@@ -11,12 +11,12 @@
             <th>Email</th>
             <th></th>
         </tr>
-        <tr *ngFor="let user of users; let i=index">
+        <tr *ngFor="let user of users$.value; let i=index">
             <th>{{(i+1)}}</th>
             <td>{{user.name}}</td>
             <td>{{user.surname}}</td>
             <td>{{user.email}}</td>
-            <td><button (click)="deleteUser(user.id)"><i class="fa fa-trash"></i></button></td>
+            <td><a (click)="deleteUser(user.id)"><i class="fa fa-trash"></i></a></td>
         </tr>
     </table>
 </div>

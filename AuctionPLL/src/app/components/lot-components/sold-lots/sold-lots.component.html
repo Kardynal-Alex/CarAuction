@@ -3,14 +3,14 @@
         <p>Sold lots</p>
     </div>
     <app-hr></app-hr>
-    <div *ngFor="let lot of lots">
+    <div *ngFor="let lot of lots$.value">
         <div class="card">
             <img [src]="createImgPath(lot?.image)" alt="profile picture">
             <div class="main-block">
-                <p>{{lot.nameLot}}</p>
-                <p class="title">{{lot.description}}</p>
+                <p>{{lot?.nameLot}}</p>
+                <p class="title">{{lot?.description}}</p>
             </div>
-            <p><button routerLink="/lot/{{lot.id}}">Sold for {{lot.currentPrice | currency}}</button></p>
+            <p><button routerLink="/lot/{{lot.id}}">Sold for {{lot?.currentPrice | currency}}</button></p>
         </div>
     </div>
 </div>

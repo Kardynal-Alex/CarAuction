@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Lot } from 'src/app/models/lot-models/lot';
 import { AuthService } from 'src/app/services/auth.service';
 import { FavoriteService } from 'src/app/services/favorite.service';
 import { LotService } from 'src/app/services/lot.service';
-import { tap } from 'rxjs/operators';
 import { Favorite } from 'src/app/models/favorite';
 import { Guid } from 'guid-typescript';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-favorite-lot',
@@ -15,7 +15,7 @@ import { Guid } from 'guid-typescript';
     '../../show-lots/show-lots.component.less'
   ]
 })
-export class FavoriteLotComponent implements OnInit {
+export class FavoriteLotComponent implements OnInit, OnDestroy {
 
   constructor(
     private lotService: LotService,
@@ -23,19 +23,20 @@ export class FavoriteLotComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-
-  public lots: Lot[];
+  public lots$ = new BehaviorSubject<Lot[]>([]);
   public userId: string;
   public ngOnInit(): void {
     this.userId = this.authService.getUserIdFromToken();
     this.getLots(this.userId);
   }
 
+  public ngOnDestroy(): void {
+    this.lots$.complete();
+  }
+
   getLots(userId: string) {
     this.lotService.getFavoriteUsersLots(userId)
-      .pipe(
-        tap(lots => this.lots = lots)
-      ).subscribe();
+      .subscribe(_ => this.lots$.next(_));
   }
 
   public createImgPath(serverPath: string) {
@@ -50,7 +51,7 @@ export class FavoriteLotComponent implements OnInit {
     };
     this.favoriteService.deleteFavoriteByUserIdAndLotId(favorite)
       .subscribe(_ => {
-        this.lots = this.lots.filter(x => x.id != lotId);
+        this.lots$.next(this.lots$.value.filter(x => x.id != lotId));
       });
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { LotService } from 'src/app/services/lot.service';
 import { Lot } from '../../../models/lot-models/lot';
@@ -14,7 +14,7 @@ import { ErrorMessages } from 'src/app/common/constants/error-messages';
   templateUrl: './show-lots.component.html',
   styleUrls: ['./show-lots.component.less']
 })
-export class ShowLotsComponent implements OnInit, AfterViewInit {
+export class ShowLotsComponent implements OnInit {
 
   public get SortViewMode(): typeof SortMode {
     return SortMode;
@@ -41,13 +41,7 @@ export class ShowLotsComponent implements OnInit, AfterViewInit {
     this.getLots();
   }
 
-  public ngAfterViewInit() {
-    if (this.isAuth) {
-      this.init();
-    }
-  }
-
-  public init() {
+  public markStars() {
     this.favoriteService.getUserFavorite(this.userId)
       .subscribe(response => {
         this.favorites = response;
@@ -57,18 +51,23 @@ export class ShowLotsComponent implements OnInit, AfterViewInit {
             if (x != null)
               x.className = "star";
           }
-        }, 1000);
+        }, 500);
       });
   }
 
   public getLots() {
-    this.lotService.getAllLots()
-      .subscribe(res => {
-        this.lots = res;
-        for (let lot of res) {
-          this.initTimer(lot.id, lot.startDateTime);
-        }
-      });
+    setTimeout(() =>
+      this.lotService.getAllLots()
+        .subscribe(res => {
+          this.lots = res;
+          for (let lot of res) {
+            this.initTimer(lot.id, lot.startDateTime);
+            if (this.isAuth) {
+              this.markStars();
+            }
+          }
+        })
+      , 1000);
   }
 
   public sortMode: SortMode;

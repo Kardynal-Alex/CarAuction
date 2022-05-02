@@ -1,9 +1,9 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'awesome-tooltip',
-  styleUrls: ['./tooltip.component.css'],
+  styleUrls: ['./tooltip.component.less'],
   templateUrl: './tooltip.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
@@ -20,4 +20,5 @@ import { animate, style, transition, trigger } from '@angular/animations';
 })
 export class AwesomeTooltipComponent {
   @Input() text = '';
+  @Input() contentTemplate: TemplateRef<any> = null;
 }

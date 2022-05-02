@@ -1,7 +1,7 @@
-<div class="container" *ngIf="!!lots?.length; else empty">
+<div class="container" *ngIf="!!lots$?.value?.length; else empty">
     <div class="text-line">There are you bids</div>
     <app-hr></app-hr>
-    <div *ngFor="let lot of lots">
+    <div *ngFor="let lot of lots$.value">
         <div class="card">
             <img [src]="createImgPath(lot.image)" alt="profile picture">
             <div class="main-block">
