@@ -6,10 +6,6 @@ import { AwesomeTooltipComponent } from './tooltip.component';
 
 @Directive({ selector: '[awesomeTooltip]' })
 export class AwesomeTooltipDirective implements OnInit {
-    /*
-        TODO: How to use
-        <i class="fa fa-edit" awesomeTooltip="Edit lot" [showToolTip]="false"></i>
-    */
     @Input('awesomeTooltip') text = '';
     private overlayRef: OverlayRef;
     @Input() showToolTip: boolean = true;
@@ -62,3 +58,17 @@ export class AwesomeTooltipDirective implements OnInit {
         }
     }
 }
+
+/*
+TODO: How to use in simple way
+<i class="fa fa-edit" awesomeTooltip="Edit lot" [showToolTip]="false"></i>
+///////////////////////////////////////////////////////////////////////////////
+TODO use tooltip directive with ng-template
+<button><i class="fa fa-close" awesomeTooltip [contentTemplate]="tooltipTemplate"></i></button>
+<ng-template #tooltipTemplate>
+    <div>
+        <p>Close Bid</p>
+        <p>Start price</p>
+    </div>
+</ng-template>
+*/

@@ -9,6 +9,7 @@ import { AwesomeTooltipDirective } from "./tooltip/tooltip.directive";
 import { MatSpinnerComponent } from './mat-spinner/mat-spinner.component';
 import { AngularMaterialModule } from "../material.module";
 import { CommonModule } from "@angular/common";
+import { CommonDirectiveModule } from "./directives/common-directives.module";
 
 @NgModule({
     providers: [
@@ -18,6 +19,7 @@ import { CommonModule } from "@angular/common";
         CommonModule,
         OverlayModule,
         AngularMaterialModule,
+        CommonDirectiveModule
     ],
     exports: [
         HrComponent,
@@ -25,7 +27,8 @@ import { CommonModule } from "@angular/common";
         ConfirmationDialogComponent,
         AwesomeTooltipComponent,
         AwesomeTooltipDirective,
-        MatSpinnerComponent
+        MatSpinnerComponent,
+        CommonDirectiveModule
     ],
     declarations: [
         HrComponent,

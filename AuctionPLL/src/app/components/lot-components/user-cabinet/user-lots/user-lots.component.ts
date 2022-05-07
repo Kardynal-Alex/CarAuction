@@ -5,6 +5,7 @@ import { LotService } from 'src/app/services/lot.service';
 import { ConfirmationDialogService } from 'src/app/common/confirmation-dialog/confirmation-dialog.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-lots',
@@ -28,6 +29,7 @@ export class UserLotsComponent implements OnInit, OnDestroy {
   public init() {
     const userId = this.getUserId();
     this.lotService.getLotsByUserId(userId)
+      .pipe(map(lots => lots.filter(lot => !lot?.isSold)))
       .subscribe(response => {
         this.lots = response;
         for (let lot of response) {

@@ -4,7 +4,7 @@
             <div class="timer" id="timer-{{lot.id}}"></div>
             <img [src]="createImgPath(lot.image)" alt="profile picture">
             <div class="main-block">
-                <div class="header">{{lot.nameLot}}</div>
+                <div class="header" bold>{{lot.nameLot}}</div>
                 <div class="title">{{lot.description}}</div>
             </div>
             <div class="row">
@@ -16,7 +16,7 @@
                 </button>
                 <div class="has-tooltip">
                     <button class="btn" (click)="endBid(lot)" [disbled]="lot.isSold">
-                        <i class="fa fa-close" awesomeTooltip="" [contentTemplate]="tooltipTemplate"></i></button>
+                        <i class="fa fa-close" awesomeTooltip [contentTemplate]="tooltipTemplate"></i></button>
                     <ng-template #tooltipTemplate>
                         <div *ngIf="!lot.isSold">
                             <p>Close Bid</p>
