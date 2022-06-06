@@ -64,12 +64,11 @@
             <div class="mult-images">
                 <div formArrayName="images" *ngFor="let image of imageArray.controls; let i = index">
                     <div class="mult-image">
-                        <div class="cancel">
-                            <a (click)="deletePhotoByPath(lotForm.controls['images'].at(i).value,i)"
-                                *ngIf="!!lotForm.controls['images'].at(i).value">&times;</a>
+                        <div class="cancel" *ngIf="!!lotForm.controls['images'].at(i).value">
+                            <a (click)="deletePhotoByPath(lotForm.controls['images'].at(i).value,i)">&times;</a>
                         </div>
-                        <div class="cancel">
-                            <a (click)="removeImage(i)" *ngIf="!lotForm.controls['images'].at(i).value">&times;</a>
+                        <div class="cancel" *ngIf="!lotForm.controls['images'].at(i).value">
+                            <a (click)="removeImage(i)">&times;</a>
                         </div>
                         <img [src]="createImgPath(lotForm.controls['images'].at(i).value)"
                             *ngIf="!!lotForm.controls['images'].at(i).value">
