@@ -87,8 +87,8 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ["localhost:4200"],
-        blacklistedRoutes: []
+        allowedDomains: ["localhost:4200"],
+        disallowedRoutes: []
       }
     }),
     NgbModule,
@@ -103,7 +103,6 @@ export function tokenGetter() {
   providers: [
     ExitAboutGuard
   ],
-  bootstrap: [AppComponent],
-  entryComponents: []
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

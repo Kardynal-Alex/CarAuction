@@ -1,0 +1,1 @@
+{"ast":null,"code":"export let BaseUrl = /*#__PURE__*/(() => {\n  class BaseUrl {}\n\n  BaseUrl.ApiURL = 'https://localhost:44325/api/';\n  BaseUrl.UIUrl = '';\n  return BaseUrl;\n})();","map":null,"metadata":{},"sourceType":"module"}

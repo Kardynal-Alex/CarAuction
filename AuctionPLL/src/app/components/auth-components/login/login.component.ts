@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
@@ -24,13 +24,13 @@ export class LoginComponent implements OnInit {
     private localStorage: LocalStorageService,
     private modalService: NgbModal,
     private activeModal: NgbActiveModal,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {
     this.initLoginForm();
   }
 
   public modalOptions: NgbModalOptions;
-  public loginForm: FormGroup;
+  public loginForm: UntypedFormGroup;
   public ngOnInit() {
     this.isAuth = this.authService.isAuthenticated();
   }

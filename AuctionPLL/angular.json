@@ -96,19 +96,6 @@
             "scripts": []
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -124,5 +111,7 @@
       }
     }
   },
-  "defaultProject": "AuctionPLL"
+  "cli": {
+    "analytics": "4a63268b-d005-4cbf-8c25-c2fcfad273b7"
+  }
 }

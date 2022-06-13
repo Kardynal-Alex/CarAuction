@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class CustomEncoder {\n  encodeKey(key) {\n    return encodeURIComponent(key);\n  }\n\n  encodeValue(value) {\n    return encodeURIComponent(value);\n  }\n\n  decodeKey(key) {\n    return decodeURIComponent(key);\n  }\n\n  decodeValue(value) {\n    return decodeURIComponent(value);\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

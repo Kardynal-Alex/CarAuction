@@ -1,6 +1,6 @@
 import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -19,14 +19,14 @@ import { LotService } from 'src/app/services/lot.service';
 })
 export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
   public get imageArray() {
-    return this.lotForm.get('images') as FormArray;
+    return this.lotForm.get('images') as UntypedFormArray;
   }
 
   constructor(
     private toastrService: ToastrService,
     private lotService: LotService,
     private router: Router,
-    public formBuilder: FormBuilder,
+    public formBuilder: UntypedFormBuilder,
     private authService: AuthService,
     private imagesService: ImagesService
   ) { }
@@ -36,7 +36,7 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
     this.initForm();
   }
 
-  public lotForm: FormGroup;
+  public lotForm: UntypedFormGroup;
   private initForm() {
     this.lotForm = this.formBuilder.group({
       nameLot: [null, [
@@ -66,7 +66,7 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
 
   public addImage() {
     if (this.lotService.numbersOfImages !== this.imageArray.controls.length) {
-      this.imageArray.push(new FormControl(null, [Validators.required]));
+      this.imageArray.push(new UntypedFormControl(null, [Validators.required]));
     }
   }
 

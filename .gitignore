@@ -155,3 +155,7 @@ orleans.codegen.cs
 #NSwag
 **/client/front/**/lib/client.ts
 **/client/back/**/Client.cs
+
+.angular/cache/*
+!.angular/cache/**
+

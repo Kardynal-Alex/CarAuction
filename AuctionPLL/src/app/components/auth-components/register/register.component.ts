@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Register } from 'src/app/models/auth-models/register';
@@ -19,12 +19,12 @@ export class RegisterComponent implements OnInit {
     private toastrService: ToastrService,
     private modalService: NgbModal,
     private activeModal: NgbActiveModal,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {
     this.initRegisterForm();
   }
 
-  public registerForm: FormGroup;
+  public registerForm: UntypedFormGroup;
   public ngOnInit(): void {
   }
 

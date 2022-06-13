@@ -1,0 +1,1 @@
+{"ast":null,"code":"export let ErrorMessages = /*#__PURE__*/(() => {\n  class ErrorMessages {}\n\n  ErrorMessages.Unauthorized = 'You must be authorized';\n  ErrorMessages.Error = 'Error';\n  ErrorMessages.SomethingWentWrong = 'Something went wrong';\n  ErrorMessages.TryAgain = 'Try again';\n  return ErrorMessages;\n})();","map":null,"metadata":{},"sourceType":"module"}
