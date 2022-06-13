@@ -38,10 +38,6 @@ import { CommonDirectiveModule } from "./directives/common-directives.module";
         AwesomeTooltipDirective,
         MatSpinnerComponent,
         MatSpinnerComponent
-    ],
-    entryComponents: [
-        ConfirmationDialogComponent,
-        AwesomeTooltipComponent
     ]
 })
 export class CommonComponentModule { }
