@@ -1,7 +1,7 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -34,15 +34,15 @@ import { LotService } from 'src/app/services/lot.service';
 })
 export class UpdateLotFormComponent implements OnInit {
   public get imageArray() {
-    return this.lotForm.get('images') as FormArray;
+    return this.lotForm.get('images') as UntypedFormArray;
   }
 
   constructor(
     private toastrService: ToastrService,
     private lotService: LotService,
     private activateRoute: ActivatedRoute,
-    public formBuilder: FormBuilder,
-    public formBuilder1: FormBuilder,
+    public formBuilder: UntypedFormBuilder,
+    public formBuilder1: UntypedFormBuilder,
     private router: Router,
     private imagesService: ImagesService,
     private authService: AuthService,
@@ -67,7 +67,7 @@ export class UpdateLotFormComponent implements OnInit {
       });
   }
 
-  public lotForm: FormGroup;
+  public lotForm: UntypedFormGroup;
   private initForm(lot: Lot) {
     this.lotForm = this.formBuilder.group({
       nameLot: [lot.nameLot, [
@@ -93,7 +93,7 @@ export class UpdateLotFormComponent implements OnInit {
   }
 
   public authorDescription: AuthorDescription;
-  public authorForm: FormGroup;
+  public authorForm: UntypedFormGroup;
   public isNewDescription: boolean = false;
   private initAuthorDescriptionForm(authorDescription: AuthorDescription) {
     this.authorDescription = authorDescription;
@@ -142,7 +142,7 @@ export class UpdateLotFormComponent implements OnInit {
 
   public addImage() {
     if (this.lotService.numbersOfImages !== this.imageArray.controls.length) {
-      this.imageArray.push(new FormControl(null, [Validators.required]));
+      this.imageArray.push(new UntypedFormControl(null, [Validators.required]));
     }
   }
 

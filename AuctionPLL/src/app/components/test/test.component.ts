@@ -1,6 +1,6 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Images } from 'src/app/models/lot-models/images';
 import { LotService } from 'src/app/services/lot.service';
@@ -13,16 +13,16 @@ import { LotService } from 'src/app/services/lot.service';
 export class TestComponent implements OnInit {
 
   get imageArray() {
-    return this.imageForm.get('images') as FormArray;
+    return this.imageForm.get('images') as UntypedFormArray;
   }
 
-  t() { return this.imageForm.get('images') as FormArray; }
+  t() { return this.imageForm.get('images') as UntypedFormArray; }
 
   constructor(
     private lotService: LotService,
     private httpClient: HttpClient,
     private toastrService: ToastrService,
-    public fb: FormBuilder
+    public fb: UntypedFormBuilder
   ) {
     /*   this.myForm = new FormGroup({
         image1: new FormControl(null),
@@ -42,13 +42,13 @@ export class TestComponent implements OnInit {
   }
 
   addImage() {
-    this.imageArray.push(new FormControl(null))
+    this.imageArray.push(new UntypedFormControl(null))
     console.log(this.imageForm.value)
     //(<FormArray>this.myForm.controls["images"]).push(new FormControl());
   }
 
   /*   myForm: FormGroup; */
-  imageForm: FormGroup;
+  imageForm: UntypedFormGroup;
   /* images: Images; */
   public createImgPath(serverPath: string) {
     if (!!serverPath)

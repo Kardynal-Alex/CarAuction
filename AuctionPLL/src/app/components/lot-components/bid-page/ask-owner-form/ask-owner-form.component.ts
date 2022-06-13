@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { AskOwner } from 'src/app/models/ask-owner';
@@ -19,15 +19,15 @@ export class AskOwnerFormComponent implements OnInit {
     private lotService: LotService,
     private activeModal: NgbActiveModal
   ) {
-    this.myForm = new FormGroup({
-      ownerEmail: new FormControl(''),
-      text: new FormControl('', [Validators.required]),
-      fullName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      userEmail: new FormControl('')
+    this.myForm = new UntypedFormGroup({
+      ownerEmail: new UntypedFormControl(''),
+      text: new UntypedFormControl('', [Validators.required]),
+      fullName: new UntypedFormControl('', [Validators.required, Validators.minLength(2)]),
+      userEmail: new UntypedFormControl('')
     });
   }
 
-  public myForm: FormGroup;
+  public myForm: UntypedFormGroup;
   public ngOnInit() { }
 
   @Input() ownerEmail: string;
