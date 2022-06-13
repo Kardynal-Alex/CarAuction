@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class ExitAboutGuard {\n  canDeactivate(component) {\n    return !!component?.canDeactivate ? component.canDeactivate() : true;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}
