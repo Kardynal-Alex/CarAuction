@@ -32,12 +32,12 @@ export class MenuComponent implements OnInit {
 
   public logout() {
     this.authService.logout()
-      .subscribe(_ => {
+      .subscribe(() => {
         this.IsAuthenticated = false;
         this.router.navigate(['/']);
         window.location.reload();
         this.toastrService.success('Logout successfully.');
-      }, _ => {
+      }, () => {
         this.toastrService.error(ErrorMessages.Error);
       });
   }

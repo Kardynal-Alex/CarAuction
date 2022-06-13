@@ -39,7 +39,7 @@ export class CommentsComponent implements OnInit {
 
   public getComments(lotId: number) {
     this.commentService.getCommentsByLotId(lotId)
-      .pipe(tap(comments => {
+      .pipe(tap((comments) => {
         this.comments = comments;
         this.filtredComments = comments;
       }))
@@ -70,11 +70,11 @@ export class CommentsComponent implements OnInit {
         isBid: false
       };
       this.commentService.addComment(comment)
-        .subscribe(_ => {
+        .subscribe((_) => {
           this.toastrService.success('Comment is added');
           form.resetForm();
           this.getComments(this.id);
-        }, _ => {
+        }, (_) => {
           this.toastrService.error('Can not add your comment')
         })
     } else {
@@ -84,10 +84,10 @@ export class CommentsComponent implements OnInit {
 
   public deleteComment(commentId: string) {
     this.commentService.deleteVommentById(commentId)
-      .subscribe(_ => {
+      .subscribe((_) => {
         this.toastrService.success('Comment is deleted!');
         this.getComments(this.id);
-      }, _ => {
+      }, (_) => {
         this.toastrService.error(ErrorMessages.Error);
       });
   }

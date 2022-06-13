@@ -45,7 +45,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
   public getLot() {
     this.id = this.activateRoute.snapshot.params['id'];
     this.lotService.getLotById(this.id)
-      .subscribe(response => {
+      .subscribe((response) => {
         this.lot = response;
         if (!this.lot.isSold) {
           this.initTimer(this.id, this.lot.startDateTime);
@@ -60,7 +60,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
 
   public getAuthorDescription() {
     this.authorDescriptionService.getAuthorDescriptionByLotId(this.id)
-      .subscribe(_ => {
+      .subscribe((_) => {
         this.authorDescription = _;
       });
   }
@@ -78,13 +78,9 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
 
   private initFavorite(lot: Lot) {
     if (this.userId?.length > 0) {
-      const favor: Favorite = {
-        id: null,
-        userId: this.userId,
-        lotId: lot.id
-      };
+      const favor = new Favorite(null, this.userId, lot.id);
       this.favoriteService.getFavoriteByUserIdAndLotId(favor)
-        .subscribe(response => {
+        .subscribe((response) => {
           this.favorite = response;
           if (response != null) {
             document.getElementById('star-' + response['lotId']).className = 'star';
@@ -98,7 +94,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
   public getComments(lotId: number) {
     this.commentService.getCommentsByLotId(lotId)
       .pipe(
-        tap(comments => {
+        tap((comments) => {
           this.comments = comments;
           this.filtredComments = comments;
         }))
@@ -136,7 +132,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
       this.lot.lotState.futureOwnerId = this.userId;
       this.lot.lotState.countBid += 1;
       this.lotService.updateLot(this.lot)
-        .subscribe(_ => {
+        .subscribe((_) => {
           this.toastrService.success('Thanks for bid');
           const comment: Comment = {
             id: Guid.create().toString(),
@@ -148,12 +144,12 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
             isBid: true
           };
           this.commentService.addComment(comment)
-            .subscribe(_ => {
+            .subscribe((_) => {
               this.getComments(this.id);
-            }, _ => {
+            }, (_) => {
               this.toastrService.error('Cannot add comment!');
             });
-        }, _ => {
+        }, (_) => {
           this.toastrService.error(ErrorMessages.Error);
         });
     }
@@ -173,10 +169,10 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
         lotId: lotId
       };
       this.favoriteService.addFavorite(favorite)
-        .subscribe(_ => {
+        .subscribe((_) => {
           document.getElementById('star-' + lotId).className = 'star';
           this.favorite = favorite;
-        }, _ => {
+        }, (_) => {
           this.toastrService.info(ErrorMessages.Unauthorized);
         });
     } else {
@@ -186,7 +182,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
 
   public removeFromFavorite(lotId: number) {
     this.favoriteService.deleteFavoriteById(this.favorite.id)
-      .subscribe(_ => {
+      .subscribe((_) => {
         document.getElementById('star-' + lotId).className = 'unstar';
         this.favorite = null;
       });

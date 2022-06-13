@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Lot } from 'src/app/models/lot-models/lot';
 import { LotService } from 'src/app/services/lot.service';
-import { tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -27,7 +26,7 @@ export class SoldLotsComponent implements OnInit, OnDestroy {
 
   public getLots() {
     this.lotService.getSoldLots()
-      .subscribe(_ => this.lots$.next(_));
+      .subscribe((_) => this.lots$.next(_));
   }
 
   public createImgPath(serverPath: string): string {

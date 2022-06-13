@@ -21,7 +21,7 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   public getUsers() {
     this.adminService.getUsersWithRoleUser()
-      .subscribe(_ => this.users$.next(_));
+      .subscribe((_) => this.users$.next(_));
   }
 
   public ngOnInit(): void {
@@ -40,7 +40,7 @@ export class AdminComponent implements OnInit, OnDestroy {
             .subscribe(_ => {
               this.toastrService.success('User is deleted!');
               this.getUsers();
-            }, _ => {
+            }, (_) => {
               this.toastrService.error(ErrorMessages.Error);
             });
         }

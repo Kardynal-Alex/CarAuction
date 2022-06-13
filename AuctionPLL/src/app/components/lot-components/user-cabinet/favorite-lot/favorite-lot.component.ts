@@ -36,7 +36,7 @@ export class FavoriteLotComponent implements OnInit, OnDestroy {
 
   getLots(userId: string) {
     this.lotService.getFavoriteUsersLots(userId)
-      .subscribe(_ => this.lots$.next(_));
+      .subscribe((_) => this.lots$.next(_));
   }
 
   public createImgPath(serverPath: string) {
@@ -50,8 +50,8 @@ export class FavoriteLotComponent implements OnInit, OnDestroy {
       lotId: lotId
     };
     this.favoriteService.deleteFavoriteByUserIdAndLotId(favorite)
-      .subscribe(_ => {
-        this.lots$.next(this.lots$.value.filter(x => x.id != lotId));
+      .subscribe((_) => {
+        this.lots$.next(this.lots$.value.filter((x) => x.id != lotId));
       });
   }
 

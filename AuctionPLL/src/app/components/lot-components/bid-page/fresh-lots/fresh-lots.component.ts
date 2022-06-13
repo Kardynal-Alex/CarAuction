@@ -24,7 +24,7 @@ export class FreshLotsComponent implements OnInit {
 
   public getFreshLots() {
     this.lotService.getFreshLots()
-      .pipe(tap(lots => this.lots = lots))
+      .pipe(tap((lots) => this.lots = lots))
       .subscribe();
   }
 

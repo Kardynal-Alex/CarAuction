@@ -29,8 +29,8 @@ export class UserLotsComponent implements OnInit, OnDestroy {
   public init() {
     const userId = this.getUserId();
     this.lotService.getLotsByUserId(userId)
-      .pipe(map(lots => lots.filter(lot => !lot?.isSold)))
-      .subscribe(response => {
+      .pipe(map((lots) => lots.filter(lot => !lot?.isSold)))
+      .subscribe((response) => {
         this.lots = response;
         for (let lot of response) {
           this.initTimer(lot.id, lot.startDateTime);
@@ -53,11 +53,11 @@ export class UserLotsComponent implements OnInit, OnDestroy {
       .then((confirmed) => {
         if (confirmed) {
           this.lotService.deleteLotById(id)
-            .subscribe(_ => {
+            .subscribe(() => {
               this.lots = this.lots.filter(x => x.id != id);
               clearInterval(this.str[id]);
               this.toastrService.success('Lot is deleted!');
-            }, _ => {
+            }, () => {
               this.toastrService.error(ErrorMessages.SomethingWentWrong, ErrorMessages.TryAgain);
             });
         }
@@ -71,12 +71,12 @@ export class UserLotsComponent implements OnInit, OnDestroy {
         if (confirmed) {
           lotEnd.isSold = true;
           this.lotService.updateLot(lotEnd)
-            .subscribe(_ => {
+            .subscribe(() => {
               lotEnd.isSold = true;
               clearInterval(this.str[lotEnd.id]);
               document.getElementById('timer-' + lotEnd.id).innerHTML = "Expired";
               this.toastrService.success('Lot is closed!');
-            }, _ => {
+            }, () => {
               this.toastrService.error(ErrorMessages.SomethingWentWrong, ErrorMessages.TryAgain);
             });
         }

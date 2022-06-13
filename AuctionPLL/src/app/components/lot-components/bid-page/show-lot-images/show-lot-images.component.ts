@@ -19,6 +19,7 @@ export class ShowLotImagesComponent implements OnInit {
   public ngOnInit() {
     this.numbers = Array.from(Array(this.lotService.numbersOfImages).keys());
   }
+
   public numbers = [];
   @Input() lot: Lot;
   public close() {

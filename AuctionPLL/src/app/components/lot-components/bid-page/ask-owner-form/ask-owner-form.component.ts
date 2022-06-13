@@ -40,11 +40,11 @@ export class AskOwnerFormComponent implements OnInit {
         userEmail: this.authService.getUserEmailFromToken()
       };
       this.lotService.askOwner(askOwner)
-        .subscribe(_ => {
+        .subscribe((_) => {
           this.close();
           this.toastrService.success('Message is sended to owner');
           this.myForm.reset();
-        }, _ => {
+        }, (_) => {
           this.toastrService.error('some data is incorect');
         });
     }

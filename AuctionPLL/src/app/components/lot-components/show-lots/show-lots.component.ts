@@ -91,10 +91,10 @@ export class ShowLotsComponent implements OnInit {
         lotId: lotId
       };
       this.favoriteService.addFavorite(favorite)
-        .subscribe(_ => {
+        .subscribe((_) => {
           document.getElementById('star-' + lotId).className = 'star';
           this.favorites.push(favorite);
-        }, _ => {
+        }, (_) => {
           this.toastrService.info(ErrorMessages.Unauthorized);
         });
     } else {
@@ -106,7 +106,7 @@ export class ShowLotsComponent implements OnInit {
     const index = this.favorites.findIndex(x => x.lotId == lotId);
     const favoriteId = this.favorites[index].id;
     this.favoriteService.deleteFavoriteById(favoriteId)
-      .subscribe(_ => {
+      .subscribe((_) => {
         this.favorites = this.favorites.filter(x => x.id != favoriteId);
         document.getElementById('star-' + lotId).className = 'unstar';
       });
@@ -123,16 +123,16 @@ export class ShowLotsComponent implements OnInit {
     if (lot.startPrice < lot.currentPrice) {
       lot.isSold = true;
       this.lotService.updateLotAfterClosing(lot)
-        .subscribe(_ => {
+        .subscribe(() => {
           this.lots = this.lots.filter(x => x.id != id);
-        }, _ => { });
+        });
       return;
     } else if (lot.startPrice === lot.currentPrice) {
       this.lotService.updateOnlyDateLot(lot)
-        .subscribe(_ => {
+        .subscribe(() => {
           document.getElementById('timer-' + id).innerHTML = 'Expired';
           this.lots[index].startDateTime = new Date(Date.now());
-        }, _ => { });
+        });
       this.initTimer(lot.id, this.lots[index].startDateTime);
       return;
     }

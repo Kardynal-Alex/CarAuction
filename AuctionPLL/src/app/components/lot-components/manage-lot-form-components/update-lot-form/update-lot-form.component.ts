@@ -123,8 +123,7 @@ export class UpdateLotFormComponent implements OnInit {
           this.router.navigate(['userlots'])
         }, _ => this.toastrService.error(ErrorMessages.Error))
     } else {
-      this.authorDescription.description = description;
-      this.authorDescriptionService.updateAuthorDescription(this.authorDescription)
+      this.authorDescriptionService.updateAuthorDescription({ ...this.authorDescription, description })
         .subscribe(_ => {
           this.toastrService.success('Author Description is updated');
           this.saved = true;

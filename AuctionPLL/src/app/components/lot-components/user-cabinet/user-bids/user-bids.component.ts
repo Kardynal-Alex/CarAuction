@@ -24,7 +24,7 @@ export class UserBidsComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     const userId = this.getUserId();
     this.lotService.getUserBids(userId)
-      .subscribe(_ => this.lots$.next(_));
+      .subscribe((_) => this.lots$.next(_));
   }
 
   public ngOnDestroy(): void {
