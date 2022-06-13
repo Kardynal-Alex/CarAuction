@@ -67,42 +67,42 @@ export function tokenGetter() {
   return localStorage.getItem(CommonConstants.JWTToken);
 }
 @NgModule({
-    declarations: [
-        AppComponent,
-        CreateLotComponent,
-        MenuComponent,
-        ShowLotsComponent,
-        UpdateLotComponent,
-        SoldLotsComponent,
-        TestComponent,
-    ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        HttpClientModule,
-        RouterModule.forRoot(appRoutes),
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        ToastrModule.forRoot({ preventDuplicates: true }),
-        JwtModule.forRoot({
-            config: {
-                tokenGetter: tokenGetter,
-                whitelistedDomains: ["localhost:4200"],
-                blacklistedRoutes: []
-            }
-        }),
-        NgbModule,
-        OverlayModule,
-        TextareaAutosizeModule,
-        CommonComponentModule,
-        BidPageModule,
-        UserCabinetModule,
-        AngularMaterialModule
-    ],
-    exports: [],
-    providers: [
-        ExitAboutGuard
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    CreateLotComponent,
+    MenuComponent,
+    ShowLotsComponent,
+    UpdateLotComponent,
+    SoldLotsComponent,
+    TestComponent,
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot({ preventDuplicates: true }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:4200"],
+        disallowedRoutes: []
+      }
+    }),
+    NgbModule,
+    OverlayModule,
+    TextareaAutosizeModule,
+    CommonComponentModule,
+    BidPageModule,
+    UserCabinetModule,
+    AngularMaterialModule
+  ],
+  exports: [],
+  providers: [
+    ExitAboutGuard
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
