@@ -74,7 +74,7 @@ export function tokenGetter() {
     ShowLotsComponent,
     UpdateLotComponent,
     SoldLotsComponent,
-    TestComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

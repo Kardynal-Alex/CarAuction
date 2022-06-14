@@ -44,13 +44,14 @@ export class RegisterComponent implements OnInit {
       role: CommonConstants.User,
       name: this.registerForm.controls.name.value,
       surname: this.registerForm.controls.surname.value,
-      clientURI: `${window.location.href.includes('https') ? 'https' : 'http'}://localhost:4200/auction/auth/emailconfirmation`
-    }
+      clientURI: `${window.location.href.includes('https')
+        ? 'https' : 'http'}://localhost:4200/auction/auth/emailconfirmation`
+    };
     this.authService.register(registerUser)
-      .subscribe(_ => {
+      .subscribe((_) => {
         this.toastrService.info('You redirect to login page.');
         this.openLoginForm();
-      }, _ => {
+      }, (_) => {
         this.toastrService.error(ErrorMessages.Error);
       });
   }

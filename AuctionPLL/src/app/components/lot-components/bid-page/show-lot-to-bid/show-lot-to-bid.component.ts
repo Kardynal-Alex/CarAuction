@@ -18,6 +18,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { AuthorDescription } from 'src/app/models/author-description';
 import { AuthorDescriptionService } from 'src/app/services/author-description.service';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
+import { getStarId, getTimerId } from 'src/app/utils/element-id.service';
+import { FavoriteConstants } from 'src/app/common/constants/favorite-constants';
 
 @Component({
   selector: 'app-show-lot-to-bid',
@@ -52,7 +54,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
           this.initFavorite(response);
         } else {
           setTimeout(() => {
-            document.getElementById('timer-' + this.lot.id).innerHTML = 'EXPIRED'
+            document.getElementById(getTimerId(this.lot.id)).innerHTML = 'EXPIRED';
           }, 1000);
         }
       });
@@ -83,9 +85,9 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
         .subscribe((response) => {
           this.favorite = response;
           if (response != null) {
-            document.getElementById('star-' + response['lotId']).className = 'star';
+            document.getElementById(getStarId(response.lotId)).className = FavoriteConstants.STAR;
           } else {
-            document.getElementById('star-' + this.id).className = 'unstar';
+            document.getElementById(getStarId(this.id)).className = FavoriteConstants.UNSTAR;
           }
         });
     }
@@ -137,7 +139,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
           const comment: Comment = {
             id: Guid.create().toString(),
             author: this.userName + ' ' + this.userSurname,
-            text: 'Bid $' + parsedBid.toString(),
+            text: `Bid $ ${parsedBid}`,
             dateTime: new Date(Date.now()),
             lotId: this.id.toString(),
             userId: this.userId,
@@ -156,7 +158,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
   }
 
   public changeStar(lotId: number) {
-    document.getElementById('star-' + lotId).className == 'unstar' ?
+    document.getElementById(getStarId(lotId)).className == FavoriteConstants.UNSTAR ?
       this.addToFavorite(lotId) : this.removeFromFavorite(lotId);
   }
 
@@ -170,7 +172,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
       };
       this.favoriteService.addFavorite(favorite)
         .subscribe((_) => {
-          document.getElementById('star-' + lotId).className = 'star';
+          document.getElementById(getStarId(lotId)).className = FavoriteConstants.STAR;
           this.favorite = favorite;
         }, (_) => {
           this.toastrService.info(ErrorMessages.Unauthorized);
@@ -183,7 +185,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
   public removeFromFavorite(lotId: number) {
     this.favoriteService.deleteFavoriteById(this.favorite.id)
       .subscribe((_) => {
-        document.getElementById('star-' + lotId).className = 'unstar';
+        document.getElementById(getStarId(lotId)).className = FavoriteConstants.UNSTAR;
         this.favorite = null;
       });
   }
@@ -205,12 +207,12 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
         return;
       }
 
-      if (document.getElementById('timer-' + id) != null && t >= 0)
-        document.getElementById('timer-' + id).innerHTML = "#Timer " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      if (document.getElementById(getTimerId(id)) != null && t >= 0)
+        document.getElementById(getTimerId(id)).innerHTML = "#Timer " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
       if (t < 0) {
         clearInterval(x);
         this.checkLotIfTimerIsExpired(id);
-        document.getElementById('timer-' + id).innerHTML = 'EXPIRED';
+        document.getElementById(getTimerId(id)).innerHTML = 'EXPIRED';
       }
     }, 1000);
   }

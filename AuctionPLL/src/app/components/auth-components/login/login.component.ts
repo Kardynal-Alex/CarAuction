@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
   public login() {
     const loginUser: Login = this.loginForm.value;
     this.authService.login(loginUser)
-      .subscribe(response => {
+      .subscribe((response) => {
         if (response['is2StepVerificationRequired']) {
           this.activeModal.close();
           this.router.navigate(['/auth/twostepverification'],
@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
             window.location.reload();
           }
         }
-      }, _ => {
+      }, (_) => {
         this.toastrService.error('Incorect login or password!');
       });
   }

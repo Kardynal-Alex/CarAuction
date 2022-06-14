@@ -14,20 +14,18 @@
                 <button class="btn" (click)="deleteLot(lot.id)">
                     <i class="fa fa-trash" awesomeTooltip="Delete lot"></i>
                 </button>
-                <div class="has-tooltip">
-                    <button class="btn" (click)="endBid(lot)" [disbled]="lot.isSold">
-                        <i class="fa fa-close" awesomeTooltip [contentTemplate]="tooltipTemplate"></i></button>
-                    <ng-template #tooltipTemplate>
-                        <div *ngIf="!lot.isSold">
-                            <p>Close Bid</p>
-                            <p>Start price {{lot.startPrice | currency}}</p>
-                            <p>Current Bid {{lot.currentPrice | currency}}</p>
-                        </div>
-                        <div *ngIf="lot.isSold">
-                            <p>Sold for {{lot.currentPrice | currency}}</p>
-                        </div>
-                    </ng-template>
-                </div>
+                <button class="btn" (click)="endBid(lot)" [disbled]="lot.isSold">
+                    <i class="fa fa-close" awesomeTooltip [contentTemplate]="tooltipTemplate"></i></button>
+                <ng-template #tooltipTemplate>
+                    <div *ngIf="!lot.isSold">
+                        <p>Close Bid</p>
+                        <p>Start price {{lot.startPrice | currency}}</p>
+                        <p>Current Bid {{lot.currentPrice | currency}}</p>
+                    </div>
+                    <div *ngIf="lot.isSold">
+                        <p>Sold for {{lot.currentPrice | currency}}</p>
+                    </div>
+                </ng-template>
             </div>
         </div>
     </div>

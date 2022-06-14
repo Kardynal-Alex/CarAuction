@@ -48,12 +48,12 @@ export class FacebookLoginComponent implements OnInit {
           accessToken: response.authResponse['accessToken']
         }
         this.authService.facebookLogin(facebookLogin)
-          .subscribe(response => {
+          .subscribe((response) => {
             this.toastrService.success('Login successfully');
             const token = (<any>response).token;
             this.localStorage.set(CommonConstants.JWTToken, JSON.stringify(token));
             window.location.reload();
-          }, _ => {
+          }, (_) => {
             this.toastrService.error(ErrorMessages.Error);
           });
       }

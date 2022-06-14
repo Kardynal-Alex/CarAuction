@@ -25,10 +25,10 @@ export class EmailConfirmationComponent implements OnInit {
     const email = this.route.snapshot.queryParams['email'];
 
     this.authService.confirmEmail('api/account/auth/emailconfirmation', token, email)
-      .subscribe(_ => {
+      .subscribe((_) => {
         this.toastrService.success('Succesfully confirmed');
         this.router.navigate(['']);
-      }, _ => {
+      }, (_) => {
         this.toastrService.error('Need to confirm email');
         this.router.navigate(['']);
       });

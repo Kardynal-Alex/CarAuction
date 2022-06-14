@@ -99,11 +99,11 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
       images: this.getImages()
     };
     this.lotService.createLot(lot)
-      .subscribe(_ => {
+      .subscribe((_) => {
         this.toastrService.success('Successfully added!');
         this.saved = true;
         this.router.navigate(['/cabinet/userlots']);
-      }, _ => {
+      }, (_) => {
         this.toastrService.error('Something went wrong!');
       });
   }
@@ -138,7 +138,7 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
       return;
 
     this.imagesService.uploadMainImage(files)
-      .subscribe(event => {
+      .subscribe((event) => {
         if (event.type === HttpEventType.Response) {
           const response = event.body;
           this.lotForm.controls.image.patchValue(response[CommonConstants.ImageResponsePath]);
@@ -153,7 +153,7 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
       return;
 
     this.imagesService.uploadImages(files)
-      .subscribe(event => {
+      .subscribe((event) => {
         if (event.type === HttpEventType.Response) {
           const response = event.body;
           const myForm = this.imageArray.at(index);
@@ -166,7 +166,7 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
   public deletePhotoByPath(imagePath: string, index: number) {
     if (!!imagePath) {
       this.lotService.deletePhoto(imagePath)
-        .subscribe(_ => {
+        .subscribe((_) => {
           const form = this.imageArray.at(index);
           form.patchValue(null);
           this.toastrService.success('Photo is deleted');
@@ -177,7 +177,7 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
   public deleteMainPhoto() {
     if (!!this.lotForm.controls.image.value) {
       this.lotService.deletePhoto(this.lotForm.controls.image.value)
-        .subscribe(_ => {
+        .subscribe((_) => {
           this.lotForm.controls.image.patchValue(null);
           this.toastrService.success('Photo is deleted');
         });

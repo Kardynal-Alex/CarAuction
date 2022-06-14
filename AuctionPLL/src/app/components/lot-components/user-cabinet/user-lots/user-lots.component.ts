@@ -6,6 +6,7 @@ import { ConfirmationDialogService } from 'src/app/common/confirmation-dialog/co
 import { AuthService } from 'src/app/services/auth.service';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
 import { map } from 'rxjs/operators';
+import { getTimerId } from 'src/app/utils/element-id.service';
 
 @Component({
   selector: 'app-user-lots',
@@ -74,7 +75,7 @@ export class UserLotsComponent implements OnInit, OnDestroy {
             .subscribe(() => {
               lotEnd.isSold = true;
               clearInterval(this.str[lotEnd.id]);
-              document.getElementById('timer-' + lotEnd.id).innerHTML = "Expired";
+              document.getElementById(getTimerId(lotEnd.id)).innerHTML = 'Expired';
               this.toastrService.success('Lot is closed!');
             }, () => {
               this.toastrService.error(ErrorMessages.SomethingWentWrong, ErrorMessages.TryAgain);
@@ -102,7 +103,7 @@ export class UserLotsComponent implements OnInit, OnDestroy {
       var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((t % (1000 * 60)) / 1000);
 
-      document.getElementById('timer-' + id).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      document.getElementById(getTimerId(id)).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
       if (t < 0) {
         clearInterval(this.str[id]);
         this.checkLotIfTimerIsExpired(id);

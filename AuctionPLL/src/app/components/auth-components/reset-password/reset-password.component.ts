@@ -35,10 +35,10 @@ export class ResetPasswordComponent implements OnInit {
     };
 
     this.authService.resetPassword(resetPass)
-      .subscribe(_ => {
+      .subscribe((_) => {
         this.toastrService.success('Password is updated!');
         this.router.navigate(['']);
-      }, _ => {
+      }, (_) => {
         this.toastrService.error(ErrorMessages.Error);
         this.router.navigate(['']);
       });

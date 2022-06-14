@@ -121,14 +121,14 @@ export class UpdateLotFormComponent implements OnInit {
           this.toastrService.success('Author Description is created');
           this.saved = true;
           this.router.navigate(['userlots'])
-        }, _ => this.toastrService.error(ErrorMessages.Error))
+        }, (_) => this.toastrService.error(ErrorMessages.Error))
     } else {
       this.authorDescriptionService.updateAuthorDescription({ ...this.authorDescription, description })
         .subscribe(_ => {
           this.toastrService.success('Author Description is updated');
           this.saved = true;
           this.router.navigate(['userlots'])
-        }, _ => this.toastrService.error(ErrorMessages.Error))
+        }, (_) => this.toastrService.error(ErrorMessages.Error))
     }
   }
 
@@ -160,11 +160,11 @@ export class UpdateLotFormComponent implements OnInit {
       images: this.getImages(this.lot)
     };
     this.lotService.updateLot(this.lot)
-      .subscribe(_ => {
+      .subscribe((_) => {
         this.toastrService.success('Lot is updated');
         this.saved = true;
         this.router.navigate(['userlots']);
-      }, _ => this.toastrService.error(ErrorMessages.Error));
+      }, (_) => this.toastrService.error(ErrorMessages.Error));
   }
 
   private getImages(lot: Lot): Images {
@@ -221,7 +221,7 @@ export class UpdateLotFormComponent implements OnInit {
       return;
 
     this.imagesService.uploadImages(files)
-      .subscribe(event => {
+      .subscribe((event) => {
         if (event.type === HttpEventType.Response) {
           const response = event.body;
           const myForm = this.imageArray.at(index);
@@ -234,7 +234,7 @@ export class UpdateLotFormComponent implements OnInit {
   public deletePhotoByPath(imagePath: string, index: number) {
     if (!!imagePath) {
       this.lotService.deletePhoto(imagePath)
-        .subscribe(_ => {
+        .subscribe((_) => {
           const form = this.imageArray.at(index);
           form.patchValue(null);
           this.toastrService.success('Photo is deleted');
@@ -245,7 +245,7 @@ export class UpdateLotFormComponent implements OnInit {
   public deleteMainPhoto() {
     if (!!this.lotForm.controls.image.value) {
       this.lotService.deletePhoto(this.lotForm.controls.image.value)
-        .subscribe(_ => {
+        .subscribe((_) => {
           this.lotForm.controls.image.patchValue(null);
           this.toastrService.success('Photo is deleted');
         });

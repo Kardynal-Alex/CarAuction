@@ -16,7 +16,7 @@ export class ConfirmationDialogService {
         this.modalOptions = {
             backdrop: 'static',
             backdropClass: 'customBackdrop'
-        }
+        };
         const modalRef = this.modalService.open(ConfirmationDialogComponent, this.modalOptions);
         modalRef.componentInstance.title = title;
         modalRef.componentInstance.message = message;

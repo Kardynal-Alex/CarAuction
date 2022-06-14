@@ -62,7 +62,7 @@ export class CommentsComponent implements OnInit {
     if (this.userId != null) {
       const comment: Comment = {
         id: Guid.create().toString(),
-        author: this.userName + ' ' + this.userSurname,
+        author: `${this.userName} ${this.userSurname}`,
         text: form.value.text,
         dateTime: new Date(Date.now()),
         lotId: this.id.toString(),

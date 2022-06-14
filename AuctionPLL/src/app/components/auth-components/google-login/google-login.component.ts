@@ -57,7 +57,7 @@ export class GoogleLoginComponent implements OnInit {
             const token = (<any>response).token;
             this.localStorage.set(CommonConstants.JWTToken, JSON.stringify(token));
             window.location.reload();
-          }, _ => {
+          }, (_) => {
             this.toastrService.error(ErrorMessages.Error);
           });
         //console.log('Token || ' + googleUser.getAuthResponse().id_token);

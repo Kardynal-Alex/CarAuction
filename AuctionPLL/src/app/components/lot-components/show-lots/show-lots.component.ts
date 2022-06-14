@@ -8,6 +8,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Guid } from 'guid-typescript';
 import { SortMode } from 'src/app/common/sort-mode';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
+import { getStarId, getTimerId } from 'src/app/utils/element-id.service';
+import { FavoriteConstants } from 'src/app/common/constants/favorite-constants';
 
 @Component({
   selector: 'app-show-lots',
@@ -43,13 +45,13 @@ export class ShowLotsComponent implements OnInit {
 
   public markStars() {
     this.favoriteService.getUserFavorite(this.userId)
-      .subscribe(response => {
+      .subscribe((response) => {
         this.favorites = response;
         setTimeout(() => {
           for (let favorite of response) {
-            var x = document.getElementById("star-" + favorite.lotId);
+            var x = document.getElementById(getStarId(favorite.lotId));
             if (x != null)
-              x.className = "star";
+              x.className = FavoriteConstants.STAR;
           }
         }, 500);
       });
@@ -58,7 +60,7 @@ export class ShowLotsComponent implements OnInit {
   public getLots() {
     setTimeout(() =>
       this.lotService.getAllLots()
-        .subscribe(res => {
+        .subscribe((res) => {
           this.lots = res;
           for (let lot of res) {
             this.initTimer(lot.id, lot.startDateTime);
@@ -78,7 +80,7 @@ export class ShowLotsComponent implements OnInit {
   }
 
   public changeStar(lotId: number) {
-    document.getElementById('star-' + lotId).className == 'unstar' ?
+    document.getElementById(getStarId(lotId)).className == FavoriteConstants.UNSTAR ?
       this.addToFavorite(lotId) : this.removeFromFavorite(lotId);
   }
 
@@ -92,7 +94,7 @@ export class ShowLotsComponent implements OnInit {
       };
       this.favoriteService.addFavorite(favorite)
         .subscribe((_) => {
-          document.getElementById('star-' + lotId).className = 'star';
+          document.getElementById(getStarId(lotId)).className = FavoriteConstants.STAR;
           this.favorites.push(favorite);
         }, (_) => {
           this.toastrService.info(ErrorMessages.Unauthorized);
@@ -108,7 +110,7 @@ export class ShowLotsComponent implements OnInit {
     this.favoriteService.deleteFavoriteById(favoriteId)
       .subscribe((_) => {
         this.favorites = this.favorites.filter(x => x.id != favoriteId);
-        document.getElementById('star-' + lotId).className = 'unstar';
+        document.getElementById(getStarId(lotId)).className = FavoriteConstants.UNSTAR;
       });
   }
 
@@ -130,7 +132,7 @@ export class ShowLotsComponent implements OnInit {
     } else if (lot.startPrice === lot.currentPrice) {
       this.lotService.updateOnlyDateLot(lot)
         .subscribe(() => {
-          document.getElementById('timer-' + id).innerHTML = 'Expired';
+          document.getElementById(getTimerId(id)).innerHTML = 'Expired';
           this.lots[index].startDateTime = new Date(Date.now());
         });
       this.initTimer(lot.id, this.lots[index].startDateTime);
@@ -151,8 +153,8 @@ export class ShowLotsComponent implements OnInit {
       var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((t % (1000 * 60)) / 1000);
 
-      if (document.getElementById('timer-' + id) != null && t >= 0)
-        document.getElementById('timer-' + id).innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
+      if (document.getElementById(getTimerId(id)) != null && t >= 0)
+        document.getElementById(getTimerId(id)).innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
       if (t < 0) {
         clearInterval(this.str[id]);
         this.checkLotIfTimerIsExpired(id);

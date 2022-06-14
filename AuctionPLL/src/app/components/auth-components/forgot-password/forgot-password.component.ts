@@ -30,13 +30,14 @@ export class ForgotPasswordComponent implements OnInit {
   public resetPassForm(form: NgForm) {
     const forgotPass: ForgotPassword = {
       email: form.value.email,
-      clientURI: `${window.location.href.includes('https') ? 'https' : 'http'}://localhost:4200/auction/auth/resetpassword`
+      clientURI: `${window.location.href.includes('https')
+        ? 'https' : 'http'}://localhost:4200/auction/auth/resetpassword`
     };
     this.activeModal.close();
     this.authService.forgotPassword(forgotPass)
-      .subscribe(_ => {
+      .subscribe((_) => {
         this.toastrService.success('Please check your email to reset your password', 'The link has been sent');
-      }, _ => {
+      }, (_) => {
         this.toastrService.error('Incorect email');
       });
   }

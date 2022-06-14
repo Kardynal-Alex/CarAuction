@@ -35,13 +35,13 @@ export class TwoStepVerificationComponent implements OnInit {
       token: form.value.token
     };
     this.authService.twoSteplogin(twoFactor)
-      .subscribe(response => {
+      .subscribe((response) => {
         this.toastrService.success('Login successfully');
         this.localStorage.set(CommonConstants.JWTToken, response['token']);
         this.router.navigate(['']);
         document.getElementById('2-step-form').style.display = 'none';
         window.location.reload();
-      }, _ => {
+      }, (_) => {
         this.toastrService.error('Something went wrong');
       });
   }
