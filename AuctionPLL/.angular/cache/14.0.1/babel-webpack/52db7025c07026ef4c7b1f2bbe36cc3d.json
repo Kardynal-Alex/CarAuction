@@ -1,1 +1,0 @@
-{"ast":null,"code":"export let CommonConstants = /*#__PURE__*/(() => {\n  class CommonConstants {}\n\n  CommonConstants.JWTToken = 'token';\n  CommonConstants.User = 'user';\n  CommonConstants.Admin = 'admin';\n  CommonConstants.ImageResponsePath = 'dbPath';\n  return CommonConstants;\n})();","map":null,"metadata":{},"sourceType":"module"}

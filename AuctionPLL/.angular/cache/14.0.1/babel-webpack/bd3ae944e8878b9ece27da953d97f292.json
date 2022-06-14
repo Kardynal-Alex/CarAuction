@@ -1,1 +1,0 @@
-{"ast":null,"code":"export class Images {\n  constructor() {\n    this.id = 0;\n    this.image1 = null;\n    this.image2 = null;\n    this.image3 = null;\n    this.image4 = null;\n    this.image5 = null;\n    this.image6 = null;\n    this.image7 = null;\n    this.image8 = null;\n    this.image9 = null;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

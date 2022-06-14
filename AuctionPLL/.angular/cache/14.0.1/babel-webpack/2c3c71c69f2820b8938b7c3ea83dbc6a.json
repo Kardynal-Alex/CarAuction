@@ -1,1 +1,0 @@
-{"ast":null,"code":"export class Favorite {\n  constructor(id, userId, lotId) {\n    this.id = id;\n    this.userId = userId;\n    this.lotId = lotId;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}
