@@ -35,15 +35,15 @@ export class AskOwnerFormComponent implements OnInit {
     if (!this.myForm.invalid) {
       const askOwner: AskOwner = {
         ownerEmail: this.ownerEmail,
-        text: this.myForm.controls['text'].value,
-        fullName: this.myForm.controls['fullName'].value,
+        text: this.myForm.controls.text.value,
+        fullName: this.myForm.controls.fullName.value,
         userEmail: this.authService.getUserEmailFromToken()
       };
       this.lotService.askOwner(askOwner)
         .subscribe((_) => {
-          this.close();
           this.toastrService.success('Message is sended to owner');
           this.myForm.reset();
+          this.close();
         }, (_) => {
           this.toastrService.error('some data is incorect');
         });

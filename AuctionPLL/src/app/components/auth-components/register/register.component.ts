@@ -28,12 +28,13 @@ export class RegisterComponent implements OnInit {
   public ngOnInit(): void {
   }
 
+  private ONLY_STRING_PATTERN = '[a-zA-Z]*';
   private initRegisterForm() {
     this.registerForm = this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required, Validators.minLength(6)]],
-      name: [null, [Validators.required, Validators.pattern('[a-zA-Z]*')]],
-      surname: [null, [Validators.required, Validators.pattern('[a-zA-Z]*')]]
+      name: [null, [Validators.required, Validators.pattern(this.ONLY_STRING_PATTERN)]],
+      surname: [null, [Validators.required, Validators.pattern(this.ONLY_STRING_PATTERN)]]
     });
   }
 

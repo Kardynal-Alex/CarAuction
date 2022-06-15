@@ -51,7 +51,7 @@ export class UserLotsComponent implements OnInit, OnDestroy {
 
   public deleteLot(id: number) {
     this.confirmationDialogService.confirm('Please confirm', 'Do you really want to ... ?')
-      .then((confirmed) => {
+      .pipe(map((confirmed) => {
         if (confirmed) {
           this.lotService.deleteLotById(id)
             .subscribe(() => {
@@ -62,13 +62,12 @@ export class UserLotsComponent implements OnInit, OnDestroy {
               this.toastrService.error(ErrorMessages.SomethingWentWrong, ErrorMessages.TryAgain);
             });
         }
-      })
-      .catch();
+      }));
   }
 
   public endBid(lotEnd: Lot) {
     this.confirmationDialogService.confirm('Please confirm', 'Do you really want to ... ?')
-      .then((confirmed) => {
+      .pipe(map((confirmed) => {
         if (confirmed) {
           lotEnd.isSold = true;
           this.lotService.updateLot(lotEnd)
@@ -81,8 +80,7 @@ export class UserLotsComponent implements OnInit, OnDestroy {
               this.toastrService.error(ErrorMessages.SomethingWentWrong, ErrorMessages.TryAgain);
             });
         }
-      })
-      .catch();
+      }));
   }
 
   public createImgPath(serverPath: string) {
@@ -112,14 +110,14 @@ export class UserLotsComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  public checkLotIfTimerIsExpired(id: number) {
+  private checkLotIfTimerIsExpired(id: number) {
     var index = this.lots.findIndex(x => x.id == id);
     var lot = this.lots[index];
 
-    if (parseFloat(lot?.startPrice.toString()) < parseFloat(lot?.currentPrice.toString())) {
+    if (lot.startPrice < lot.currentPrice) {
       this.lots = this.lots.filter(x => x.id != id);
       return;
-    } else if (parseFloat(lot?.startPrice.toString()) === parseFloat(lot?.currentPrice.toString())) {
+    } else if (lot.startPrice === lot.currentPrice) {
       this.initTimer(lot.id, lot.startDateTime);
       return;
     }

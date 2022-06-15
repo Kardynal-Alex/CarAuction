@@ -43,7 +43,7 @@ export class ShowLotsComponent implements OnInit {
     this.getLots();
   }
 
-  public markStars() {
+  private markStars() {
     this.favoriteService.getUserFavorite(this.userId)
       .subscribe((response) => {
         this.favorites = response;
@@ -85,7 +85,7 @@ export class ShowLotsComponent implements OnInit {
   }
 
   public favorites: Favorite[];
-  public addToFavorite(lotId: number) {
+  private addToFavorite(lotId: number) {
     if (this.isAuth) {
       const favorite: Favorite = {
         id: Guid.create().toString(),
@@ -104,7 +104,7 @@ export class ShowLotsComponent implements OnInit {
     }
   }
 
-  public removeFromFavorite(lotId: number) {
+  private removeFromFavorite(lotId: number) {
     const index = this.favorites.findIndex(x => x.lotId == lotId);
     const favoriteId = this.favorites[index].id;
     this.favoriteService.deleteFavoriteById(favoriteId)
@@ -118,7 +118,7 @@ export class ShowLotsComponent implements OnInit {
     return this.lotService.createImgPath(serverPath);
   }
 
-  public checkLotIfTimerIsExpired(id: number) {
+  private checkLotIfTimerIsExpired(id: number) {
     var index = this.lots.findIndex(x => x.id == id);
     var lot = this.lots[index];
 

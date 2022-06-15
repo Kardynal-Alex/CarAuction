@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LocalStorageService } from '../services/local-storage.service';
 import { User } from '../models/auth-models/user';
 import { Observable } from 'rxjs';
 import { BaseUrl } from '../common/constants/urls';
@@ -9,8 +8,7 @@ import { BaseUrl } from '../common/constants/urls';
 export class AdminService {
     private apiUrl = BaseUrl.ApiURL + 'admin/';
     constructor(
-        private httpClient: HttpClient,
-        private localStorage: LocalStorageService
+        private httpClient: HttpClient
     ) { }
 
     public getUsersWithRoleUser(): Observable<User[]> {

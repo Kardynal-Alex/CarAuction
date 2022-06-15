@@ -76,7 +76,7 @@ export class CommentsComponent implements OnInit {
           this.getComments(this.id);
         }, (_) => {
           this.toastrService.error('Can not add your comment')
-        })
+        });
     } else {
       this.toastrService.warning(ErrorMessages.Unauthorized, 'Warning!');
     }

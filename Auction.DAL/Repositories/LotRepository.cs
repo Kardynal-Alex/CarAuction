@@ -100,11 +100,12 @@ namespace Auction.DAL.Repositories
         /// <param name="lotId"></param>
         public async Task<Lot> GetLotByIdWithDetailsAsync(int lotId)
         {
-            return await context.Lots.Where(x => x.Id == lotId)
-                                     .Include(x => x.User)
-                                     .Include(x => x.LotState)
-                                     .Include(x => x.Images)
-                                     .FirstOrDefaultAsync();
+            return await context.Lots
+                .Where(x => x.Id == lotId)
+                    .Include(x => x.User)
+                        .Include(x => x.LotState)
+                            .Include(x => x.Images)
+                                .FirstOrDefaultAsync();
         }
         /// <summary>
 		/// Get lots by user id
@@ -112,10 +113,11 @@ namespace Auction.DAL.Repositories
         /// <param name="userId"></param>
         public async Task<List<Lot>> GetLotsByUserIdAsync(string userId)
         {
-            return await context.Lots.Where(x => x.UserId == userId)
-                                     .Include(x => x.User)
-                                     .Include(x => x.LotState)
-                                     .ToListAsync();
+            return await context.Lots
+                .Where(x => x.UserId == userId)
+                    .Include(x => x.User)
+                        .Include(x => x.LotState)
+                            .ToListAsync();
         }
         /// <summary>
         /// Get sold lots
