@@ -1,4 +1,7 @@
-﻿using PDFGenerator.Models;
+﻿using HtmlWorkflow.Constants;
+using HtmlWorkflow.Extensions;
+using HtmlWorkflow.Models;
+using PDFGenerator.Models;
 using System;
 using System.Text;
 
@@ -18,31 +21,36 @@ namespace PDFGenerator.TemplateGeneratorBodyText
         public string GetHTMLString(LotData lot, UserData futureOwnerLot)
         {
             StringBuilder text = new StringBuilder();
-            text.Append($@"<html>
-                            <head>
-                            </head>
-                            <body>");
-            text.Append(@$"<div class='header' style='text-align:center;font-size:40px;'>
-                                <h3>Congratulate you</h3>
-                                <h5>{ lot.NameLot }</h5>
-                            </div>
-                            <div class='description'  style='font-size:30px;'>
-                                <p>{ lot.Description }</p>
-                                <p>Price to pay { lot.CurrentPrice } $</p>
-                            </div>");
-            text.Append($@"<div class='contacts'  style='font-size:25px;'>
-                                <p>Former owner contact { lot.User.Email }</p>
-                                <p>{ lot.User.Name }  { lot.User.Surname }</p>
-                            </div>");
-            text.Append($@"<div class='image'>
-                                <img src='https://localhost:44325/{lot.Image}' 
-                                style='width:100%;height:auto;align-items:center;'/>
-                            </div>");
-            text.Append($@"<div style='font-size:20px;font-weight:600;text-align:right;'>
-                                <p>{ DateTime.Now.Date.ToShortDateString() }</p>
-                            </div>");
-            text.Append(@"  </body>
-                          </html>");
+            text.Append(HTMLConstants.OpenHTML)
+                .Append(HTMLConstants.OpenHead)
+                .Append(HTMLConstants.CloseHead)
+                .Append(HTMLConstants.OpenBody);
+
+            text.AddArrayOfTextBlock(new HTMLHelper[]
+            {
+               new HTMLHelper { Text = "<h3>Congratulate you  with your new car</h3>" },
+               new HTMLHelper { Text = $"<h5>{lot.NameLot}</h5>" }
+            }, "header");
+            text.AddArrayOfTextBlock(new HTMLHelper[]
+            {
+               new HTMLHelper { Text = $"Small descriptions: {lot.Description}" },
+               new HTMLHelper { Text = $"Price to pay: {lot.CurrentPrice} $" }
+            }, "description");
+            text.AddArrayOfTextBlock(new HTMLHelper[]
+            {
+                new HTMLHelper { Text = $"Former owner contacts:", ClassName = "owner-contact" },
+                new HTMLHelper { Text = $"~ Email: {lot.User.Email}" },
+                new HTMLHelper { Text = $"~ FullName: {lot.User.Name}  {lot.User.Surname}" }
+            }, "contacts");
+
+            text.AddImageBlock(lot.Image, "image");
+
+            text.AddTextBlock(new HTMLHelper
+            {
+                Text = DateTime.Now.Date.ToShortDateString()
+            }, "date-now-info");
+            text.Append(HTMLConstants.CloseBody)
+                .Append(HTMLConstants.CloseHTML);
             return text.ToString();
         }
     }

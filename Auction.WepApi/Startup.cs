@@ -61,13 +61,12 @@ namespace Auction.WepApi
         {
             //DAL Dependencies
             services.AddDALDependencies(Configuration);
-            var emailConfig = Configuration.GetSection("EmailConfiguration")
-                                           .Get<EmailConfiguration>();
+            var emailConfig = Configuration
+                                .GetSection("EmailConfiguration")
+                                    .Get<EmailConfiguration>();
             services.AddSingleton(emailConfig);
-
             //BLL Dependencies
             services.AddBLLDependencies(Configuration);
-
             //PDF Dependencies
             services.AddPDFDependencies();
         }
@@ -83,8 +82,8 @@ namespace Auction.WepApi
 
             app.UseHttpsRedirection();
             app.UseCors(options => options.AllowAnyOrigin()
-                                          .AllowAnyMethod()
-                                          .AllowAnyHeader());
+                                            .AllowAnyMethod()
+                                                .AllowAnyHeader());
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions()
             {

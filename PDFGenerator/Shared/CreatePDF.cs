@@ -2,7 +2,6 @@
 using DinkToPdf.Contracts;
 using PDFGenerator.Models;
 using PDFGenerator.TemplateGeneratorBodyText;
-using System.IO;
 
 namespace PDFGenerator.Shared
 {
@@ -38,7 +37,7 @@ namespace PDFGenerator.Shared
             };
             var htmlText = new CloseLotTextInfo();
 
-            string stylePath = @"D:\EpamProject\FinalProject\PDFGenerator\assets\info.css";
+            string stylePath = @"D:\Asp.Net(project)\CarAuction\PDFGenerator\assets\info.css";
             var objectSettings = new ObjectSettings
             {
                 PagesCount = true,

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { from, Observable } from 'rxjs';
 import { ConfirmationDialogComponent } from './confirmation-dialog.component';
 
 @Injectable()
@@ -13,7 +12,7 @@ export class ConfirmationDialogService {
         title: string,
         message: string,
         btnOkText: string = 'OK',
-        btnCancelText: string = 'Cancel'): Observable<boolean> {
+        btnCancelText: string = 'Cancel'): Promise<boolean> {
         this.modalOptions = {
             backdrop: 'static',
             backdropClass: 'customBackdrop'
@@ -24,7 +23,7 @@ export class ConfirmationDialogService {
         modalRef.componentInstance.btnOkText = btnOkText;
         modalRef.componentInstance.btnCancelText = btnCancelText;
 
-        return from(modalRef.result);
+        return modalRef.result;
     }
 
 }

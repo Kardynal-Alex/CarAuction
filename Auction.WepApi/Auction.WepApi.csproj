@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Auction.BLL\Auction.BLL.csproj" />
+    <ProjectReference Include="..\PDFGenerator\PDFGenerator.csproj" />
   </ItemGroup>
 
   <ItemGroup>

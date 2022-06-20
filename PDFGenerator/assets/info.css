@@ -1,11 +1,38 @@
 ﻿.header {
-    text-align:center;
-    align-content:center;
-    
+    text-align: center;
+    align-content: center;
 }
 
-img{
-    align-content:center;
-    width:100%;
-    height:auto;
+body {
+    font-family: 'Cascadia Code';
+    font-style: normal;
+}
+
+.image {
+    align-content: center;
+    width: 100%;
+    height: auto;
+}
+
+.date-now-info {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: right;
+}
+
+.owner-contact {
+    text-decoration: underline;
+}
+
+.header {
+    text-align: center;
+    font-size: 30px;
+}
+
+.description {
+    font-size: 30px;
+}
+
+.contacts {
+    font-size: 25px;
 }

@@ -51,26 +51,32 @@ namespace Auction.DAL.Repositories
         /// <returns></returns>
         public async Task SendEmailAsync(EmailMessage emailMessage)
         {
-            MailMessage mm = new MailMessage(EmailConfiguration.From, emailMessage.To);
-            mm.Subject = emailMessage.Subject;
             var bodyBuilder = emailMessage.Content;
-            mm.Body = bodyBuilder; 
-            mm.IsBodyHtml = true;
+            MailMessage mail = new MailMessage(EmailConfiguration.From, emailMessage.To)
+            {
+                Subject = emailMessage.Subject,
+                Body = bodyBuilder,
+                IsBodyHtml = true,
+                Priority = MailPriority.High
+            };
 
             if (emailMessage.PDFFile != null && emailMessage.PDFFile.Length > 0) 
             {
                 var memoryStream = new MemoryStream(emailMessage.PDFFile);
-                mm.Attachments.Add(new Attachment(memoryStream, "Info.pdf", MediaTypeNames.Application.Pdf));
+                mail.Attachments.Add(new Attachment(memoryStream, "Info.pdf", MediaTypeNames.Application.Pdf));
             }
 
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = EmailConfiguration.SmtpServer;
-            smtp.Port = EmailConfiguration.Port;
-            smtp.EnableSsl = true;
-            NetworkCredential nc = new NetworkCredential(EmailConfiguration.From, EmailConfiguration.Password);
-            smtp.UseDefaultCredentials = true;
-            smtp.Credentials = nc;
-            await smtp.SendMailAsync(mm);
+            NetworkCredential credentials = new NetworkCredential(EmailConfiguration.From, EmailConfiguration.Password);
+            SmtpClient smtp = new SmtpClient()
+            {
+                Host = EmailConfiguration.SmtpServer,
+                Port = EmailConfiguration.Port,
+                EnableSsl = true,
+                //UseDefaultCredentials = true,
+                Credentials = credentials
+            };
+
+            await smtp.SendMailAsync(mail);
         }
     }
 }
