@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31205.134
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auction.WepApi", "Auction.WepApi.csproj", "{BC775506-676F-47E5-9BE2-D51749CBACA3}"
 EndProject
@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auction.DAL", "..\Auction.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auction.Tests", "..\Auction.Tests\Auction.Tests.csproj", "{3FCD92B2-0553-446D-9B79-496C61840A6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFGenerator", "..\PDFGenerator\PDFGenerator.csproj", "{A81B5509-C0A6-4C7E-A363-39F682829FD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PDFGenerator", "..\PDFGenerator\PDFGenerator.csproj", "{A81B5509-C0A6-4C7E-A363-39F682829FD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlWorkflow", "..\HtmlWorkflow\HtmlWorkflow.csproj", "{B587AA60-7733-4156-B6A3-5D06E6565FA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{A81B5509-C0A6-4C7E-A363-39F682829FD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A81B5509-C0A6-4C7E-A363-39F682829FD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A81B5509-C0A6-4C7E-A363-39F682829FD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B587AA60-7733-4156-B6A3-5D06E6565FA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B587AA60-7733-4156-B6A3-5D06E6565FA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B587AA60-7733-4156-B6A3-5D06E6565FA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B587AA60-7733-4156-B6A3-5D06E6565FA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -51,7 +51,7 @@ export class UserLotsComponent implements OnInit, OnDestroy {
 
   public deleteLot(id: number) {
     this.confirmationDialogService.confirm('Please confirm', 'Do you really want to ... ?')
-      .pipe(map((confirmed) => {
+      .then((confirmed) => {
         if (confirmed) {
           this.lotService.deleteLotById(id)
             .subscribe(() => {
@@ -62,14 +62,15 @@ export class UserLotsComponent implements OnInit, OnDestroy {
               this.toastrService.error(ErrorMessages.SomethingWentWrong, ErrorMessages.TryAgain);
             });
         }
-      }));
+      }).catch();
   }
 
   public endBid(lotEnd: Lot) {
     this.confirmationDialogService.confirm('Please confirm', 'Do you really want to ... ?')
-      .pipe(map((confirmed) => {
+      .then((confirmed) => {
         if (confirmed) {
           lotEnd.isSold = true;
+          console.log("+")
           this.lotService.updateLot(lotEnd)
             .subscribe(() => {
               lotEnd.isSold = true;
@@ -80,7 +81,7 @@ export class UserLotsComponent implements OnInit, OnDestroy {
               this.toastrService.error(ErrorMessages.SomethingWentWrong, ErrorMessages.TryAgain);
             });
         }
-      }));
+      }).catch();
   }
 
   public createImgPath(serverPath: string) {

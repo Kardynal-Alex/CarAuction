@@ -13,6 +13,19 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Auction.DAL\Auction.DAL.csproj" />
+    <ProjectReference Include="..\HtmlWorkflow\HtmlWorkflow.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="TemplateGeneratorBodyText\CloseLotTextInfo.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="assets\info.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

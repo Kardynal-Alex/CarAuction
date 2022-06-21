@@ -5,7 +5,6 @@ import { ToastrService } from 'ngx-toastr';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
 import { BehaviorSubject } from 'rxjs';
 import { ConfirmationDialogService } from 'src/app/common/confirmation-dialog/confirmation-dialog.service';
-import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin',
@@ -35,17 +34,14 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   public deleteUser(userId: string) {
     this.confirmationDialogService.confirm('Please confirm', 'Do you really want to ... ?')
-      .pipe(
-        filter((confirmed) => confirmed),
-        map(() => {
-          this.adminService.deleteUser(userId)
-            .subscribe((_) => {
-              this.toastrService.success('User is deleted!');
-              this.getUsers();
-            }, (_) => {
-              this.toastrService.error(ErrorMessages.Error);
-            });
-        })
-      );
+      .then(() => {
+        this.adminService.deleteUser(userId)
+          .subscribe((_) => {
+            this.toastrService.success('User is deleted!');
+            this.getUsers();
+          }, (_) => {
+            this.toastrService.error(ErrorMessages.Error);
+          });
+      }).catch();
   }
 }
