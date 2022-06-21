@@ -1,5 +1,8 @@
 ﻿using Auction.DAL.Entities;
 using Auction.DAL.Interfaces;
+using HtmlWorkflow.Constants;
+using HtmlWorkflow.Extensions;
+using HtmlWorkflow.Models;
 using System;
 using System.IO;
 using System.Net;
@@ -27,22 +30,22 @@ namespace Auction.DAL.Repositories
         /// <returns></returns>
         public string AskOwnerMessage(AskOwner askOwner)
         {
-            StringBuilder text = new StringBuilder();
-            text.Append(@"<html>
-                            <head>
-                            </head>
-                            <body>");
+            StringBuilder sb = new StringBuilder();
+            sb.Append(HtmlConstants.OpenHTML)
+              .Append(HtmlConstants.OpenHead)
+              .Append(HtmlConstants.CloseHead)
+              .Append(HtmlConstants.OpenBody);
 
-            text.Append("<div style='font-weight:600;font-size:30px;'")
-                .Append($"<h5>From {askOwner.UserEmail} </h5>")
-                .Append("</div>")
-                .Append("<div style='font-size:25px;'>")
-                .Append($"<h5> {askOwner.Text} </h5>")
-                .Append("</div>");
+            sb.AddTextBlock(
+                new HtmlHelper { Text = $"From {askOwner.UserEmail}" },
+                new HtmlDivHelper { Style = "font-weight:600;font-size:30px;" });
+            sb.AddTextBlock(
+                new HtmlHelper { Text = $"{askOwner.Text}" },
+                new HtmlDivHelper { Style = "font-size:25px;" });
 
-            text.Append(@"  </body>
-                          </html>");
-            return text.ToString();
+            sb.Append(HtmlConstants.CloseBody)
+              .Append(HtmlConstants.CloseHTML);
+            return sb.ToString();
         }
         /// <summary>
         /// Send email

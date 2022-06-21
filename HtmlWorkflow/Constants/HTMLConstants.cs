@@ -1,9 +1,9 @@
 ﻿namespace HtmlWorkflow.Constants
 {
     /// <summary>
-    /// HTMLConstants with HTML constants
+    /// HtmlConstants with HTML constants
     /// </summary>
-    public static class HTMLConstants
+    public static class HtmlConstants
     {
         #region of constants for HTML Atrribute open/closed tag
         public static readonly string OpenHTML = "<html>";
@@ -23,6 +23,7 @@
         public static readonly string H1 = "h1";
         public static readonly string P = "p";
         public static readonly string DIV = "div";
+        public static readonly string IMG = "img";
         #endregion
     }
 }

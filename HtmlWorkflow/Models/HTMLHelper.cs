@@ -1,11 +1,11 @@
 ﻿
 namespace HtmlWorkflow.Models
 {
+    /// <summary>
     /// HTMLHelper class
     /// </summary>
-    public class HTMLHelper
+    public class HtmlHelper : HtmlBaseHelper
     {
         public string Text { get; set; }
-        public string ClassName { get; set; }
     }
 }

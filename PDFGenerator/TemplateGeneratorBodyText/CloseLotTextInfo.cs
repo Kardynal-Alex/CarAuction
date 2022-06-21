@@ -20,38 +20,46 @@ namespace PDFGenerator.TemplateGeneratorBodyText
         /// <returns></returns>
         public string GetHTMLString(LotData lot, UserData futureOwnerLot)
         {
-            StringBuilder text = new StringBuilder();
-            text.Append(HTMLConstants.OpenHTML)
-                .Append(HTMLConstants.OpenHead)
-                .Append(HTMLConstants.CloseHead)
-                .Append(HTMLConstants.OpenBody);
+            StringBuilder sb = new StringBuilder();
+            sb.Append(HtmlConstants.OpenHTML)
+              .Append(HtmlConstants.OpenHead)
+              .Append(HtmlConstants.CloseHead)
+              .Append(HtmlConstants.OpenBody);
 
-            text.AddArrayOfTextBlock(new HTMLHelper[]
+            sb.AddArrayOfTextBlock(new HtmlHelper[]
             {
-               new HTMLHelper { Text = "<h3>Congratulate you  with your new car</h3>" },
-               new HTMLHelper { Text = $"<h5>{lot.NameLot}</h5>" }
-            }, "header");
-            text.AddArrayOfTextBlock(new HTMLHelper[]
+               new HtmlHelper { Text = "<h3>Congratulate you  with your new car</h3>" },
+               new HtmlHelper { Text = $"<h5>{lot.NameLot}</h5>" }
+            }, new HtmlDivHelper { ClassName = "header" });
+            sb.AddArrayOfTextBlock(new HtmlHelper[]
             {
-               new HTMLHelper { Text = $"Small descriptions: {lot.Description}" },
-               new HTMLHelper { Text = $"Price to pay: {lot.CurrentPrice} $" }
-            }, "description");
-            text.AddArrayOfTextBlock(new HTMLHelper[]
+               new HtmlHelper { Text = $"Small descriptions: {lot.Description}" },
+               new HtmlHelper { Text = $"Price to pay: {lot.CurrentPrice} $" }
+            }, new HtmlDivHelper { ClassName = "description" });
+            sb.AddArrayOfTextBlock(new HtmlHelper[]
             {
-                new HTMLHelper { Text = $"Former owner contacts:", ClassName = "owner-contact" },
-                new HTMLHelper { Text = $"~ Email: {lot.User.Email}" },
-                new HTMLHelper { Text = $"~ FullName: {lot.User.Name}  {lot.User.Surname}" }
-            }, "contacts");
+                new HtmlHelper { Text = $"Former owner contacts:", ClassName = "owner-contact" },
+                new HtmlHelper { Text = $"~ Email: {lot.User.Email}" },
+                new HtmlHelper { Text = $"~ FullName: {lot.User.Name}  {lot.User.Surname}" }
+            }, new HtmlDivHelper { ClassName = "contacts" });
 
-            text.AddImageBlock(lot.Image, "image");
+            sb.AddImageBlock(
+                new HtmlImgHelper
+                {
+                    ImagePath = $"https://localhost:44325/{lot.Image}",
+                    Style = "width:100%;height:auto;align-items:center;"
+                },
+                new HtmlDivHelper
+                {
+                    ClassName = "image"
+                });
 
-            text.AddTextBlock(new HTMLHelper
-            {
-                Text = DateTime.Now.Date.ToShortDateString()
-            }, "date-now-info");
-            text.Append(HTMLConstants.CloseBody)
-                .Append(HTMLConstants.CloseHTML);
-            return text.ToString();
+            sb.AddTextBlock(
+                new HtmlHelper { Text = DateTime.Now.Date.ToShortDateString() },
+                new HtmlDivHelper { ClassName = "date-now-info" });
+            sb.Append(HtmlConstants.CloseBody)
+              .Append(HtmlConstants.CloseHTML);
+            return sb.ToString();
         }
     }
 }
