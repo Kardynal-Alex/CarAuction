@@ -4,7 +4,6 @@ using Auction.BLL.Validation;
 using Auction.DAL.Entities;
 using Auction.DAL.Interfaces;
 using AutoMapper;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -50,8 +49,7 @@ namespace Auction.BLL.Services
         /// <returns></returns>
         public async Task DeleteFavoriteAsync(string id)
         {
-            if (id.Length == 0)   
-                throw new AuctionException("incorect id");
+            Precognitions.StringIsNullOrEmpty(id);
 
             unitOfWork.FavoriteRepository.DeleteFavorite(id);
             await unitOfWork.SaveAsync();
@@ -63,8 +61,7 @@ namespace Auction.BLL.Services
         /// <returns></returns>
         public async Task<List<FavoriteDTO>> GetFavoriteByUserIdAsync(string userId)
         {
-            if (string.IsNullOrEmpty(userId)) 
-                throw new AuctionException("Icorect userId");
+            Precognitions.StringIsNullOrEmpty(userId, "Icorect userId");
 
             var favorites = await unitOfWork.FavoriteRepository.GetFavoriteByUserIdAsync(userId);
             return mapper.Map<List<FavoriteDTO>>(favorites);
@@ -73,16 +70,10 @@ namespace Auction.BLL.Services
         /// Validate input data for favoriteDTO
         /// </summary>
         /// <param name="favoriteDTO"></param>
-        private void ValidateFavoriteDTO(FavoriteDTO favoriteDTO)
+        private static void ValidateFavoriteDTO(FavoriteDTO favoriteDTO)
         {
-            if (favoriteDTO.UserId == null || !int.TryParse(favoriteDTO.LotId.ToString(), out int fav))  
-                throw new AuctionException("Incorrect data");
-
-            if (favoriteDTO.UserId == "" || fav < 0)
-                throw new AuctionException("Incorrect data");
-
-            if (favoriteDTO.UserId.Length == 0)
-                throw new AuctionException("Incorrect length");
+            Precognitions.IntIsNotNumberOrNegative(favoriteDTO.LotId);
+            Precognitions.StringIsNullOrEmpty(favoriteDTO.UserId, "Incorrect length");
         }
         /// <summary>
         /// Delete user favorite lots

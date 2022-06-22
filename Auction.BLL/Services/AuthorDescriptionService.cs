@@ -50,11 +50,9 @@ namespace Auction.BLL.Services
         /// <param name="authorDescriptionDTO"></param>
         private void ValidateAskOwnerModel(AuthorDescriptionDTO authorDescriptionDTO)
         {
-            if (string.IsNullOrEmpty(authorDescriptionDTO.UserId) || string.IsNullOrEmpty(authorDescriptionDTO.Description))
-                throw new AuctionException("Nullable value");
-
-            if (!double.TryParse(authorDescriptionDTO.LotId.ToString(), out double lotId) || lotId < 0)
-                throw new AuctionException("Invalid number data");
+            Precognitions.StringIsNullOrEmpty(authorDescriptionDTO.UserId);
+            Precognitions.StringIsNullOrEmpty(authorDescriptionDTO.Description);
+            Precognitions.IntIsNotNumberOrNegative(authorDescriptionDTO.LotId, "Invalid number data");
         }
         /// <summary>
         /// Get Author Description ByLotId
@@ -63,8 +61,7 @@ namespace Auction.BLL.Services
         /// <returns></returns>
         public async Task<AuthorDescriptionDTO> GetAuthorDescriptionByLotIdAsync(int lotId)
         {
-            if (!int.TryParse(lotId.ToString(), out int variable) || variable < 0)
-                throw new AuctionException("Incorect lotId");
+            Precognitions.IntIsNotNumberOrNegative(lotId);
 
             var authorDescription = await unitOfWork.AuthorDescriptionRepository.GetAuthorDescriptionByLotIdAsync(lotId);
             return mapper.Map<AuthorDescription, AuthorDescriptionDTO>(authorDescription);
