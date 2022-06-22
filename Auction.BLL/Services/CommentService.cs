@@ -3,7 +3,6 @@ using Auction.BLL.Interfaces;
 using Auction.DAL.Entities;
 using Auction.DAL.Interfaces;
 using AutoMapper;
-using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Auction.BLL.Validation;
@@ -43,8 +42,7 @@ namespace Auction.BLL.Services
         /// <returns></returns>
         public async Task DeleteCommentByIdAsync(Guid commentId)
         {
-            if (commentId == null)
-                throw new AuctionException("Comment id is null");
+            Precognitions.GuidIsNullOrEmpty(commentId, "Comment id is null");
 
             unitOfWork.CommentRepository.DeleteCommentById(commentId);
             await unitOfWork.SaveAsync();
@@ -56,8 +54,7 @@ namespace Auction.BLL.Services
         /// <returns></returns>
         public async Task<List<CommentDTO>> GetCommentsByLotIdAsync(int lotId)
         {
-            if (!int.TryParse(lotId.ToString(), out _) || lotId < 0) 
-                throw new AuctionException("Invalid lot id");
+            Precognitions.IntIsNotNumberOrNegative(lotId, "Invalid lot id");
 
             var comments = await unitOfWork.CommentRepository.GetCommentsByLotIdAsync(lotId);
             return mapper.Map<List<CommentDTO>>(comments);
@@ -66,14 +63,12 @@ namespace Auction.BLL.Services
         /// Validate commentDTO model
         /// </summary>
         /// <param name="commentDTO"></param>
-        private void ValidateLotDTO(CommentDTO commentDTO)
+        private static void ValidateLotDTO(CommentDTO commentDTO)
         {
-            if (string.IsNullOrEmpty(commentDTO.Author) || string.IsNullOrEmpty(commentDTO.Text) ||
-                string.IsNullOrEmpty(commentDTO.UserId))
-                throw new AuctionException("incorect text data");
-
-            if (!int.TryParse(commentDTO.LotId.ToString(), out int lotid) || lotid < 0) 
-                throw new AuctionException("Invalid lot id");
+            Precognitions.StringIsNullOrEmpty(commentDTO.Author);
+            Precognitions.StringIsNullOrEmpty(commentDTO.UserId);
+            Precognitions.StringIsNullOrEmpty(commentDTO.Text);
+            Precognitions.IntIsNotNumberOrNegative(commentDTO.LotId, "Invalid lot id");
         }
     }
 }

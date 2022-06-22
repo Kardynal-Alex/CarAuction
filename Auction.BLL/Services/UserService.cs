@@ -50,8 +50,7 @@ namespace Auction.BLL.Services
         /// <returns>Boolean result</returns>
         public async Task<bool> DeleteUser(string userId)
         {
-            if (string.IsNullOrEmpty(userId)) 
-                throw new AuctionException("Invalid user id");
+            Precognitions.StringIsNullOrEmpty(userId, "Invalid user id");
 
             var user = await unitOfWork.UserManager.FindByIdAsync(userId);
             if (user != null)
@@ -76,8 +75,7 @@ namespace Auction.BLL.Services
         /// <returns>UserDTO</returns>
         public async Task<UserDTO> GetUserByEmailAsync(string email)
         {
-            if (email == null)
-                throw new AuctionException("Invalid email");
+            Precognitions.StringIsNullOrEmpty(email, "Invalid email");
 
             var user = await unitOfWork.UserManager.FindByEmailAsync(email);
             return mapper.Map<User, UserDTO>(user);
@@ -359,8 +357,10 @@ namespace Auction.BLL.Services
         {
             var user = await unitOfWork.UserManager.FindByEmailAsync(email);
 
-            if (user == null) 
+            if (user == null)
+            {
                 throw new AuctionException("user is not foundeed");
+            }
             else
             {
                 var claims = new List<Claim>

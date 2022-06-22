@@ -9,7 +9,6 @@ using PDFGenerator.Models;
 using PDFGenerator.Shared;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Auction.BLL.Services
@@ -51,11 +50,10 @@ namespace Auction.BLL.Services
         /// <returns></returns>
         public async Task DeleteLotAsync(int lotId)
         {
-            if (!int.TryParse(lotId.ToString(), out int lotid)) 
-                throw new AuctionException("Invalid lot id");
+            Precognitions.IntIsNotNumberOrNegative(lotId, "Invalid lot id");
 
-            var lot = await unitOfWork.LotRepository.GetLotByIdAsync(lotid);
-            var comments = await unitOfWork.CommentRepository.GetCommentsByLotIdAsync(lotid);
+            var lot = await unitOfWork.LotRepository.GetLotByIdAsync(lotId);
+            var comments = await unitOfWork.CommentRepository.GetCommentsByLotIdAsync(lotId);
             //delete cascading with lotstate
             unitOfWork.LotRepository.DeleteLot(lot);
             unitOfWork.CommentRepository.DeleteCommentsRange(comments);
@@ -81,7 +79,7 @@ namespace Auction.BLL.Services
         /// <returns></returns>
         public async Task<List<LotDTO>> GetFavoriteLotsByUserIdAsync(string userId)
         {
-            ValidateStringData(userId);
+            Precognitions.StringIsNullOrEmpty(userId);
 
             var lots = await unitOfWork.LotRepository.GetFavoriteLotsByUserIdAsync(userId);
             return mapper.Map<List<LotDTO>>(lots);
@@ -102,8 +100,7 @@ namespace Auction.BLL.Services
         /// <returns>LotDTO</returns>
         public async Task<LotDTO> GetLotByIdWithDetailsAsync(int lotId)
         {
-            if (!int.TryParse(lotId.ToString(), out int lotid) || lotid < 0) 
-                throw new AuctionException("Invalid lot id");
+            Precognitions.IntIsNotNumberOrNegative(lotId, "Invalid lot id");
 
             var listlot = await unitOfWork.LotRepository.GetLotByIdWithDetailsAsync(lotId);
             return mapper.Map<Lot, LotDTO>(listlot);
@@ -115,7 +112,7 @@ namespace Auction.BLL.Services
         /// <returns>List of LotDTO</returns>
         public async Task<List<LotDTO>> GetLotsByUserIdAsync(string userId)
         {
-            ValidateStringData(userId);
+            Precognitions.StringIsNullOrEmpty(userId);
 
             var listLot = await unitOfWork.LotRepository.GetLotsByUserIdAsync(userId);
             return mapper.Map<List<LotDTO>>(listLot);
@@ -210,7 +207,7 @@ namespace Auction.BLL.Services
         /// validate lotDTO
         /// </summary>
         /// <param name="lotDTO"></param>
-        private void ValidateLotDTO(LotDTO lotDTO)
+        private static void ValidateLotDTO(LotDTO lotDTO)
         {
             if (lotDTO.NameLot == null || lotDTO.Image == null || lotDTO.Description == null || lotDTO.UserId == null)
                 throw new AuctionException("Invalid text data");
@@ -226,15 +223,6 @@ namespace Auction.BLL.Services
 
             if (startPrice <= 0 || currentPrice <= 0 || year <= 0 || startPrice > currentPrice || year.ToString().Length != 4)  
                 throw new AuctionException("Invalid number range data");
-        }
-        /// <summary>
-        /// Validate string data
-        /// </summary>
-        /// <param name="data"></param>
-        private void ValidateStringData(string data)
-        {
-            if (data == null || data.Length == 0)
-                throw new AuctionException("Invalid user id");
         }
         /// <summary>
         /// Update only date lot
@@ -271,15 +259,12 @@ namespace Auction.BLL.Services
         /// Validate ask owner model
         /// </summary>
         /// <param name="askOwnerDTO"></param>
-        private void ValidateAskOwnerModel(AskOwnerDTO askOwnerDTO)
+        private static void ValidateAskOwnerModel(AskOwnerDTO askOwnerDTO)
         {
-            if (askOwnerDTO.OwnerEmail.Length == 0 || askOwnerDTO.FullName.Length == 0 ||
-                askOwnerDTO.UserEmail.Length == 0 || askOwnerDTO.Text.Length == 0)
-                throw new AuctionException("Nullable value");
-
-            if (askOwnerDTO.OwnerEmail == null || askOwnerDTO.FullName == null ||
-                askOwnerDTO.UserEmail == null || askOwnerDTO.Text == null)
-                throw new AuctionException("Nullable value");
+            Precognitions.StringIsNullOrEmpty(askOwnerDTO.OwnerEmail);
+            Precognitions.StringIsNullOrEmpty(askOwnerDTO.FullName);
+            Precognitions.StringIsNullOrEmpty(askOwnerDTO.UserEmail);
+            Precognitions.StringIsNullOrEmpty(askOwnerDTO.Text);
         }
     }
 }
