@@ -4,14 +4,8 @@ using AutoMapper;
 
 namespace Auction.BLL.Mapping
 {
-    /// <summary>
-    /// Automapper profile class in bll level
-    /// </summary>
     public class AutomapperProfileBLL : Profile
     {
-        /// <summary>
-        /// AutomapperProfile ctor
-        /// </summary>
         public AutomapperProfileBLL()
         {
             CreateMap<LotState, LotStateDTO>().ReverseMap();

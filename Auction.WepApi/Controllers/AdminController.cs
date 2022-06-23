@@ -10,9 +10,6 @@ using System.Threading.Tasks;
 
 namespace Auction.WepApi.Controllers
 {
-    /// <summary>
-    /// Admin Controller
-    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AdminController : ControllerBase
@@ -26,21 +23,14 @@ namespace Auction.WepApi.Controllers
             this.mapper = mapper;
             this.logger = logger;
         }
-        /// <summary>
-        /// Get users with role user
-        /// </summary>
-        /// <returns></returns>
+        
         [HttpGet("users")]
         public ActionResult<List<UserViewModel>> GetUser()
         {
             var user = service.GetUsersWithRoleUser();
             return Ok(mapper.Map<List<UserViewModel>>(user));
         }
-        /// <summary>
-        /// Delete user by id and his lot and lostate
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+      
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> Delete(string id)
         {

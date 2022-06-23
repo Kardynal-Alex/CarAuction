@@ -4,21 +4,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System;
 
 namespace Auction.BLL.Configure
 {
-    /// <summary>
-    /// Add services connecting wid bll level
-    /// </summary>
     public static class BLLDependencies
     {
-        /// <summary>
-        /// Extensions method add services in startup
-        /// Contains authentification services base on JWT Token
-        /// </summary>
-        /// <param name="services"></param>
-        /// <returns></returns>
         public static IServiceCollection AddBLLDependencies(this IServiceCollection services, IConfiguration Configuration)
         {
             services.AddAuthentication(opt =>

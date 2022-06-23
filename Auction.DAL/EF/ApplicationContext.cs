@@ -5,35 +5,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Auction.DAL.EF
 {
-    /// <summary>
-    /// Main DB context in the application.
-    /// </summary>
     public class ApplicationContext : IdentityDbContext<User>
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> opt) : base(opt) { }
-        /// <summary>
-        /// Gets and sets <see cref="DbSet"/> of <see cref="Lot"/>entities.
-        /// </summary>
         public DbSet<Lot> Lots { get; set; }
-        /// <summary>
-        /// Gets and sets <see cref="DbSet"/> of <see cref="LotState"/>entities.
-        /// </summary>
         public DbSet<LotState> LotStates { get; set; }
-        /// <summary>
-        /// Gets and sets <see cref="DbSet"/> of <see cref="Comment"/>entities.
-        /// </summary>
         public DbSet<Comment> Comments { get; set; }
-        /// <summary>
-        /// Gets and sets <see cref="DbSet"/> of <see cref="Favorite"/>entities.
-        /// </summary>
         public DbSet<Favorite> Favorites { get; set; }
-        /// <summary>
-        /// Gets and sets <see cref="DbSet"/> of <see cref="Images"/>entities.
-        /// </summary>
         public DbSet<Images> Images { get; set; }
-        /// <summary>
-        /// Gets and sets <see cref="DbSet"/> of <see cref="AuthorDescription"/>entities.
-        /// </summary>
         public DbSet<AuthorDescription> AuthorDescriptions { get; set; }
         /// <summary>
         /// Fluent Api

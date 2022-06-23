@@ -1,8 +1,5 @@
 ﻿namespace HtmlWorkflow.Constants
 {
-    /// <summary>
-    /// HtmlConstants with HTML constants
-    /// </summary>
     public static class HtmlConstants
     {
         #region of constants for HTML Atrribute open/closed tag

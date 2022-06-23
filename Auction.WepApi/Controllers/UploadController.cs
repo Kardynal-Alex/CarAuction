@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -11,9 +8,6 @@ using System.Threading.Tasks;
 
 namespace Auction.WepApi.Controllers
 {
-    /// <summary>
-    /// Upload photo Controller
-    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class UploadController : ControllerBase
@@ -23,10 +17,7 @@ namespace Auction.WepApi.Controllers
         {
             this.logger = logger;
         }
-        /// <summary>
-        /// Upload photo
-        /// </summary>
-        /// <returns></returns>
+
         [HttpPost, DisableRequestSizeLimit]
         public async Task<IActionResult> Upload()
         {
@@ -57,11 +48,7 @@ namespace Auction.WepApi.Controllers
                 return StatusCode(500, $"Internal server error: {ex}");
             }
         }
-        /// <summary>
-        /// Delete image by image path
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
+       
         [HttpDelete]
         public ActionResult DeletePhoto(string path)
         {

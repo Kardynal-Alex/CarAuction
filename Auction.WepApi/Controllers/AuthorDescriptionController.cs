@@ -11,9 +11,6 @@ using System.Threading.Tasks;
 
 namespace Auction.WepApi.Controllers
 {
-    /// <summary>
-    /// AuthorDescription controller
-    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AuthorDescriptionController : ControllerBase
@@ -27,11 +24,7 @@ namespace Auction.WepApi.Controllers
             this.mapper = mapper;
             this.logger = logger;
         }
-        /// <summary>
-        /// AddAuthorDescription
-        /// </summary>
-        /// <param name="authorDescriptionViewModel"></param>
-        /// <returns></returns>
+       
         [HttpPost("addAuthorDescription")]
         public async Task<ActionResult> AddAuthorDescription([FromBody] AuthorDescriptionViewModel authorDescriptionViewModel)
         {
@@ -47,10 +40,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// UpdateAuthorDescription        /// </summary>
-        /// <param name="authorDescriptionViewModel"></param>
-        /// <returns></returns>
+       
         [HttpPut("updateAuthorDescription")]
         public async Task<ActionResult> UpdateAuthorDescription([FromBody] AuthorDescriptionViewModel authorDescriptionViewModel)
         {

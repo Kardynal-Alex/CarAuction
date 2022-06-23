@@ -12,9 +12,6 @@ using Auction.WepApi.Logs;
 
 namespace Auction.WepApi.Controllers
 {
-    /// <summary>
-    /// Lot Controller
-    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class LotController : ControllerBase
@@ -28,11 +25,7 @@ namespace Auction.WepApi.Controllers
             this.mapper = mapper;
             this.logger = logger;
         }
-        /// <summary>
-        /// Get lot by user id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+      
         [HttpGet("getuserlots/{id}")]
         public async Task<ActionResult<List<LotViewModel>>> GetLotsByUserId(string id)
         {
@@ -47,11 +40,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Get favorite user lot
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+      
         [HttpGet("favorites/{id}")]
         public async Task<ActionResult<List<LotViewModel>>> GetFavoriteLotsByUserId(string id)
         {
@@ -66,42 +55,28 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Get fresh lots
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+      
         [HttpGet("getfreshlots")]
         public async Task<ActionResult<List<LotViewModel>>> GetFreshLots()
         {
             var listDTO = await lotService.GetFreshLots();
             return Ok(mapper.Map<List<LotViewModel>>(listDTO));
         }
-        /// <summary>
-        /// Get sold lots
-        /// </summary>
-        /// <returns></returns>
+       
         [HttpGet("getsoldlots")]
         public async Task<ActionResult<List<LotViewModel>>> GetSoldLots()
         {
             var listDTOs = await lotService.GetSoldLotsAsync();
             return Ok(mapper.Map<List<LotViewModel>>(listDTOs));
         }
-        /// <summary>
-        /// Get all lots
-        /// </summary>
-        /// <returns></returns>
+   
         [HttpGet]
         public async Task<ActionResult<List<LotViewModel>>> GetAllLots()
         {
             var listLotDTO = await lotService.GetAllLotsAsync();
             return Ok(mapper.Map<List<LotViewModel>>(listLotDTO));
         }
-        /// <summary>
-        /// Get lot by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+      
         [HttpGet("{id}")]
         public async Task<ActionResult<LotViewModel>> GetLotByIdWithAllDetails(int id)
         {
@@ -116,11 +91,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Get user bids(all lots where he made bid(can be sold lot and no yet))
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+       
         [HttpGet("userbids/{id}")]
         public async Task<ActionResult<List<LotViewModel>>> GetUserBids(string id)
         {
@@ -135,11 +106,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Add lot and lotstate
-        /// </summary>
-        /// <param name="lotViewModel"></param>
-        /// <returns></returns>
+      
         [HttpPost]
         public async Task<ActionResult<LotViewModel>> AddLot([FromBody] LotViewModel lotViewModel)
         {
@@ -155,11 +122,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Update lot after closing
-        /// </summary>
-        /// <param name="lotViewModel"></param>
-        /// <returns></returns>
+     
         [HttpPut("closebid")]
         public async Task<ActionResult> PutCloseBid([FromBody] LotViewModel lotViewModel)
         {
@@ -175,9 +138,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Update only lot
-        /// </summary>
+      
         [HttpPut("onlydatelot")]
         public async Task<ActionResult> UpdateOnlyDateLot([FromBody] LotViewModel lotViewModel)
         {
@@ -193,11 +154,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Update lot
-        /// </summary>
-        /// <param name="lotViewModel"></param>
-        /// <returns></returns>
+      
         [HttpPut]
         public async Task<ActionResult> Put([FromBody] LotViewModel lotViewModel)
         {
@@ -213,11 +170,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Delete lot and lotstate
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+       
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
@@ -232,10 +185,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Ask Owner By sending email
-        /// </summary>
-        /// <returns></returns>
+       
         [HttpPost("askowner")]
         public async Task<ActionResult> AskOwnerSendingEmail([FromBody] AskOwnerViewModel askOwnerViewModel)
         {

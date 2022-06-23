@@ -23,9 +23,6 @@ using IdentityConstants = Auction.DAL.EF.IdentityConstants;
 
 namespace Auction.BLL.Services
 {
-    /// <summary>
-    /// User Service class
-    /// </summary>
     public class UserService : IUserService
     {
         private readonly IUnitOfWork unitOfWork;
@@ -43,11 +40,7 @@ namespace Auction.BLL.Services
             fbAuthSettings = fbAuthSettingsAccessor.Value;
             googleAuthSettings = googlelAuthSettingsAccessor.Value;
         }
-        /// <summary>
-        /// Delete user by id
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns>Boolean result</returns>
+       
         public async Task<bool> DeleteUser(string userId)
         {
             Precognitions.StringIsNullOrEmpty(userId, "Invalid user id");
@@ -68,11 +61,7 @@ namespace Auction.BLL.Services
             }
             throw new AuctionException("User is not founded!");
         }
-        /// <summary>
-        /// Get user by email
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns>UserDTO</returns>
+       
         public async Task<UserDTO> GetUserByEmailAsync(string email)
         {
             Precognitions.StringIsNullOrEmpty(email, "Invalid email");
@@ -80,11 +69,7 @@ namespace Auction.BLL.Services
             var user = await unitOfWork.UserManager.FindByEmailAsync(email);
             return mapper.Map<User, UserDTO>(user);
         }
-        /// <summary>
-        /// Login user
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns>JWT Token</returns>
+       
         public async Task<AuthResponseDTO> LoginAsync(UserDTO model)
         {
             if (model.Email == null || model.Password == null)
@@ -122,11 +107,7 @@ namespace Auction.BLL.Services
             var token = GenerateToken(claims);
             return new AuthResponseDTO { Token = token };
         }
-        /// <summary>
-        /// Generate one time password for 2 step verification
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
+       
         private async Task<AuthResponseDTO> GenerateOTPFor2StepVerification(User user)
         {
             var providers = await unitOfWork.UserManager.GetValidTwoFactorProvidersAsync(user);
@@ -146,11 +127,7 @@ namespace Auction.BLL.Services
 
             return new AuthResponseDTO { Is2StepVerificationRequired = true, Provider = "Email" };
         }
-        /// <summary>
-        /// Verify one time password for login
-        /// </summary>
-        /// <param name="twoFactorDTO"></param>
-        /// <returns></returns>
+      
         public async Task<AuthResponseDTO> TwoStepVerificationAsync(TwoFactorDTO twoFactorDTO)
         {
             var user = await unitOfWork.UserManager.FindByEmailAsync(twoFactorDTO.Email);
@@ -165,19 +142,12 @@ namespace Auction.BLL.Services
             var token = GenerateToken(claims);
             return new AuthResponseDTO { Token = token };
         }
-        /// <summary>
-        /// Logout
-        /// </summary>
-        /// <returns></returns>
+     
         public async Task LogoutAsync()
         {
             await unitOfWork.SignInManager.SignOutAsync();
         }
-        /// <summary>
-        /// Register user
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns>boolean result</returns>
+        
         public async Task<bool> RegisterAsync(UserDTO model)
         {
             if (model.Name == null || model.Surname == null || model.Role == null || model.Email == null || model.Password == null)
@@ -213,31 +183,19 @@ namespace Auction.BLL.Services
             }
             return false;
         }
-        /// <summary>
-        /// get user by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>UserDTO</returns>
+     
         public async Task<UserDTO> GetUserByIdAsync(string id)
         {
             var user = await unitOfWork.UserManager.FindByIdAsync(id);
             return mapper.Map<UserDTO>(user);
         }
-        /// <summary>
-        /// Get users with role user
-        /// </summary>
-        /// <returns></returns>
+      
         public List<UserDTO> GetUsersWithRoleUser()
         {
             var users = unitOfWork.UserManager.Users.Where(x => x.Role.ToLower() == IdentityConstants.User).ToList();
             return mapper.Map<List<UserDTO>>(users);
         }
-        /// <summary>
-        /// Regsiter with email confirmation
-        /// </summary>
-        /// <param name="email"></param>
-        /// <param name="token"></param>
-        /// <returns></returns>
+
         public async Task EmailConfirmationAsync(string email, string token)
         {
             var user = await unitOfWork.UserManager.FindByEmailAsync(email);
@@ -249,11 +207,7 @@ namespace Auction.BLL.Services
                 throw new AuctionException("Cannot confirm email");
 
         }
-        /// <summary>
-        /// Forgot password
-        /// </summary>
-        /// <param name="forgotPasswordDTO"></param>
-        /// <returns></returns>
+       
         public async Task ForgotPasswordAsync(ForgotPasswordDTO forgotPasswordDTO)
         {
             if (forgotPasswordDTO.Email == null || forgotPasswordDTO.ClientURI == null) 
@@ -277,11 +231,7 @@ namespace Auction.BLL.Services
                 Content = string.Format("<h2 style='color:red;'>{0}</h2>", callback)
             });
         }
-        /// <summary>
-        /// Reset password
-        /// </summary>
-        /// <param name="resetPasswordDTO"></param>
-        /// <returns></returns>
+     
         public async Task ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO)
         {
             if (resetPasswordDTO.Email == null || resetPasswordDTO.Password == null || resetPasswordDTO.Token == null)
@@ -297,11 +247,7 @@ namespace Auction.BLL.Services
 
             await unitOfWork.UserManager.SetLockoutEndDateAsync(user, new DateTime(2000, 1, 1));
         }
-        /// <summary>
-        /// facebook login
-        /// </summary>
-        /// <param name="accessToken"></param>
-        /// <returns></returns>
+       
         public async Task<string> FacebookLoginAsync(string accessToken)
         {
             HttpClient Client = new HttpClient();
@@ -348,11 +294,7 @@ namespace Auction.BLL.Services
             var token = GenerateToken(claims);
             return token;
         }
-        /// <summary>
-        /// GetUserClaims
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
+     
         private async Task<List<Claim>> GetClaims(string email)
         {
             var user = await unitOfWork.UserManager.FindByEmailAsync(email);
@@ -374,11 +316,7 @@ namespace Auction.BLL.Services
                 return claims;
             }
         }
-        /// <summary>
-        /// GenerateToken
-        /// </summary>
-        /// <param name="claims"></param>
-        /// <returns></returns>
+      
         private string GenerateToken(List<Claim> claims)
         {
             var now = DateTime.UtcNow;
@@ -392,11 +330,7 @@ namespace Auction.BLL.Services
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
             return tokenString;
         }
-        /// <summary>
-        /// Google login
-        /// </summary>
-        /// <param name="googleAuthDTO"></param>
-        /// <returns></returns>
+      
         public async Task<string> GoogleLoginAsync(GoogleAuthDTO googleAuthDTO)
         {
             var payload = await VerifyGoogleToken(googleAuthDTO);
@@ -450,11 +384,7 @@ namespace Auction.BLL.Services
             var token = GenerateToken(claims);
             return token;
         }
-        /// <summary>
-        /// Verify goole token
-        /// </summary>
-        /// <param name="externalAuth"></param>
-        /// <returns></returns>
+        
         private async Task<GoogleJsonWebSignature.Payload> VerifyGoogleToken(GoogleAuthDTO externalAuth)
         {
             try

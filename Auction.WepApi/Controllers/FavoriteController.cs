@@ -7,14 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Auction.WepApi.Controllers
 {
-    /// <summary>
-    /// Favorite controller
-    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class FavoriteController : ControllerBase
@@ -28,11 +24,7 @@ namespace Auction.WepApi.Controllers
             this.mapper = mapper;
             this.logger = logger;
         }
-        /// <summary>
-        /// Get favorite list by user id 
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+    
         [HttpGet("{id}")]
         public async Task<ActionResult<List<FavoriteViewModel>>> GetFavoritesByUserId(string id)
         {
@@ -47,11 +39,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Get favorite
-        /// </summary>
-        /// <param name="favoriteViewModel"></param>
-        /// <returns></returns>
+     
         [HttpPost("favorite")]
         public async Task<ActionResult<FavoriteViewModel>> GetFavoriteByLotIdAndUserId([FromBody]FavoriteViewModel favoriteViewModel)
         {
@@ -67,11 +55,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Add favorite
-        /// </summary>
-        /// <param name="favoriteViewModel"></param>
-        /// <returns></returns>
+      
         [HttpPost]
         public async Task<ActionResult> AddFavorite(FavoriteViewModel favoriteViewModel)
         {
@@ -86,11 +70,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Delete favorit e by user id and lot id
-        /// </summary>
-        /// <param name="favoriteViewModel"></param>
-        /// <returns></returns>
+      
         [HttpPost("deletepost")]
         public async Task<ActionResult> DeleteFavoriteByUserIdAndLotId(FavoriteViewModel favoriteViewModel)
         {
@@ -105,11 +85,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Delete favorite by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+      
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteFavorite(string id)
         {

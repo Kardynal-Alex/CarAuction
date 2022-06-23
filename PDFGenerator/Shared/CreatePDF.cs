@@ -5,25 +5,14 @@ using PDFGenerator.TemplateGeneratorBodyText;
 
 namespace PDFGenerator.Shared
 {
-    /// <summary>
-    /// Create PDF Class for generating PDF files
-    /// </summary>
     public class CreatePDF
     {
-        /// <summary>
-        /// Converter for convert file to pdf
-        /// </summary>
         private readonly IConverter converter;
         public CreatePDF(IConverter converter)
         {
             this.converter = converter;
         }
-        /// <summary>
-        /// Convert file
-        /// </summary>
-        /// <param name="lot"></param>
-        /// <param name="futureOwnerLot"></param>
-        /// <returns></returns>
+       
         public byte[] CloseLotCreatePDF(LotData lot, UserData futureOwnerLot)
         {
             var globalSettings = new GlobalSettings

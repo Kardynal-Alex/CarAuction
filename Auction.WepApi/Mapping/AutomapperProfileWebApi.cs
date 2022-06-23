@@ -4,14 +4,8 @@ using AutoMapper;
 
 namespace Auction.WepApi.Mapping
 {
-    /// <summary>
-    /// Automapper profile class in web api level
-    /// </summary>
     public class AutomapperProfileWebApi : Profile
     {
-        /// <summary>
-        /// AutomapperProfile ctor
-        /// </summary>
         public AutomapperProfileWebApi()
         {
             CreateMap<LotStateDTO, LotStateViewModel>().ReverseMap();

@@ -4,15 +4,10 @@ using System.Text;
 
 namespace HtmlWorkflow.Extensions
 {
-    /// <summary>
-    /// HTML Extensions class
-    /// </summary>
     public static class HtmlExtension
     {
-        /// <summary>
         /// Return part of HTML document for <h1> attribute
         /// OUTPUT: <h1 class="className" style="style">{text}</h1>
-        /// </summary>
         private static StringBuilder AddHeaderTextElement(this StringBuilder sb, HtmlHelper h1)
         {
             if (!string.IsNullOrEmpty(h1.Text))
@@ -21,45 +16,37 @@ namespace HtmlWorkflow.Extensions
             }
             return sb;
         }
-        /// <summary>
         /// Return part of HTML document for open <div> block
         /// OUTPUT: <div class="className" style="divStyle">
-        /// </summary>
         private static StringBuilder AddOpenDIVElement(this StringBuilder sb, HtmlDivHelper div)
         {
             sb.Append(GetOpenTag(HtmlConstants.DIV, new HtmlHelper { ClassName = div.ClassName, Style = div.Style }));
             return sb;
         }
-        /// <summary>
         /// Return part of HTML document for close </div> block
         /// <result> 
         ///     </div>
         /// </result>
-        /// </summary>
         private static StringBuilder AddCloseDIVElement(this StringBuilder sb)
         {
             sb.Append(HtmlConstants.CloseDIV);
             return sb;
         }
-        /// <summary>
         /// Return part of HTML document for <p> attribute
         /// <result>
         ///     <p class="className" style="divStyle">{text}</p>
         /// </result>
-        /// </summary>
         private static StringBuilder AddTextElement(this StringBuilder sb, HtmlHelper p)
         {
             sb.Append(GetTag(HtmlConstants.P, p));
             return sb;
         }
-        /// <summary>
         /// Return part of HTML document for image block
         /// <result>
         ///     <div className="divClassName" style="divStyle">
         ///         <img src="imagePath" style="ingStyle" className="imgClassName" />
         ///     </div>
         /// </result>
-        /// </summary>
         public static StringBuilder AddImageBlock(this StringBuilder sb, HtmlImgHelper img, HtmlDivHelper div)
         {
             if (!string.IsNullOrEmpty(img.ImagePath))
@@ -74,21 +61,18 @@ namespace HtmlWorkflow.Extensions
             }
             return sb;
         }
-        /// <summary>
         /// Return part of HTML Document for simple text block
         /// <result>
         ///     <div class="classNameDIV" style="divStyle">
         ///         <p class="classNameP" style="pStyle">{text}</p>
         ///     </div>
         /// </result>
-        /// </summary>
         public static StringBuilder AddTextBlock(this StringBuilder sb, HtmlHelper html, HtmlDivHelper div)
         {
             var text = GetTag(HtmlConstants.P, html);
             sb.Append(GetTag(HtmlConstants.DIV, new HtmlHelper { Text = text, ClassName = div.ClassName, Style = div.Style }));
             return sb;
         }
-        /// <summary>
         /// Return part of HTML Document for array of simple  text block
         /// <result>
         ///     <div class="classNameDIV" style="divStyle">
@@ -97,7 +81,6 @@ namespace HtmlWorkflow.Extensions
         ///         <p class="classNamePN" style="pnStyle">{text}</p>
         ///     </div>
         /// </result>
-        /// </summary>
         public static StringBuilder AddArrayOfTextBlock(this StringBuilder sb, HtmlHelper[] items, HtmlDivHelper div)
         {
             sb.AddOpenDIVElement(div);
@@ -108,12 +91,10 @@ namespace HtmlWorkflow.Extensions
             sb.AddCloseDIVElement();
             return sb;
         }
-        /// <summary>
         /// Get Tag
         /// <result>
         ///     <T-Tag class="T-ClassName" style="T-Style">{text}</T-Tag>
         /// </result>
-        /// </summary>
         private static string GetTag(string tag, HtmlHelper html)
         {
             return GetOpenTag(tag, html) + $"{html.Text}" + GetCloseTag(tag);

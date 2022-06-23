@@ -2,7 +2,6 @@
 using Auction.WepApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Auction.BLL.DTO;
 using AutoMapper;
@@ -11,9 +10,6 @@ using Auction.WepApi.Logs;
 
 namespace Auction.WepApi.Controllers
 {
-    /// <summary>
-    /// Account controller
-    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
@@ -27,11 +23,7 @@ namespace Auction.WepApi.Controllers
             this.mapper = mapper;
             this.logger = logger;
         }
-        /// <summary>
-        /// Get user by email
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
+       
         [HttpGet("getuser/{email}")]
         public async Task<ActionResult<UserViewModel>> GetUserByEmail(string email)
         {
@@ -46,11 +38,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// get user by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+      
         [HttpGet("getuserbyid")]
         public async Task<ActionResult<UserViewModel>> GetUserById(string id)
         {
@@ -65,11 +53,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// login user
-        /// </summary>
-        /// <param name="userViewModel"></param>
-        /// <returns></returns>
+       
         [HttpPost("login")]
         public async Task<ActionResult<AuthResponseViewModel>> Login([FromBody]UserViewModel userViewModel)
         {
@@ -86,11 +70,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Two step verification OTP confirmation
-        /// </summary>
-        /// <param name="twoFactorViewModel"></param>
-        /// <returns></returns>
+     
         [HttpPost("twoStepVerification")]
         public async Task<ActionResult<AuthResponseViewModel>> TwoStepVerification([FromBody] TwoFactorViewModel twoFactorViewModel)
         {
@@ -111,11 +91,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Register User
-        /// </summary>
-        /// <param name="userViewModel"></param>
-        /// <returns></returns>
+     
         [HttpPost("register")]
         public async Task<ActionResult<UserViewModel>> Register([FromBody]UserViewModel userViewModel)
         {
@@ -131,12 +107,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest(); 
             }
         }
-        /// <summary>
-        /// For confirmation email
-        /// </summary>
-        /// <param name="email"></param>
-        /// <param name="token"></param>
-        /// <returns></returns>
+       
         [HttpGet("emailConfirmation")]
         public async Task<IActionResult> EmailConfirmation([FromQuery] string email, [FromQuery] string token)
         {
@@ -151,21 +122,14 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// logout
-        /// </summary>
-        /// <returns></returns>
+     
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
             await service.LogoutAsync();
             return Ok();   
         }
-        /// <summary>
-        /// Delete user
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+      
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> Delete(string id)
         {
@@ -180,11 +144,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Forgot password
-        /// </summary>
-        /// <param name="forgotPasswordViewModel"></param>
-        /// <returns></returns>
+       
         [HttpPost("forgotPassword")]
         public async Task<ActionResult> ForgotPassword([FromBody] ForgotPasswordViewModel forgotPasswordViewModel)
         {
@@ -199,11 +159,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Reset Password
-        /// </summary>
-        /// <param name="resetPasswordViewModel"></param>
-        /// <returns></returns>
+      
         [HttpPost("resetPassword")]
         public async Task<ActionResult> ResetPassword([FromBody] ResetPasswordViewModel resetPasswordViewModel)
         {
@@ -218,11 +174,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// facebook login
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+      
         [HttpPost("facebook")]
         public async Task<ActionResult> Facebook([FromBody] FacebookAuthViewModel model)
         {
@@ -241,11 +193,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Google login
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+     
         [HttpPost("google")]
         public async Task<ActionResult> Google([FromBody] GoogleAuthViewModel model)
         {

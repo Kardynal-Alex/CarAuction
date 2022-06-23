@@ -7,17 +7,8 @@ using System.Text;
 
 namespace PDFGenerator.TemplateGeneratorBodyText
 {
-    /// <summary>
-    /// Special class for generating contents of pdf
-    /// </summary>
     public class CloseLotTextInfo
     {
-        /// <summary>
-        /// Geh html string of content pdf file
-        /// </summary>
-        /// <param name="lot"></param>
-        /// <param name="futureOwnerLot"></param>
-        /// <returns></returns>
         public string GetHTMLString(LotData lot, UserData futureOwnerLot)
         {
             StringBuilder sb = new StringBuilder();

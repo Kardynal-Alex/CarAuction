@@ -6,22 +6,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using System;
 
 namespace Auction.DAL.Configure
 {
-    /// <summary>
-    /// Add services connecting wid dal level
-    /// </summary>
     public static class DALDependencies
     {
-        /// <summary>
-        /// Extensions method add services in startup
-        /// </summary>
-        /// <param name="services"></param>
-        /// <param name="Configuration"></param>
-        /// <returns></returns>
         public static IServiceCollection AddDALDependencies(this IServiceCollection services, IConfiguration Configuration)
         {
             string conString = Configuration["ConnectionStrings:DefaultConnection"];

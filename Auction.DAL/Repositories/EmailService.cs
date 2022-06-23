@@ -3,7 +3,6 @@ using Auction.DAL.Interfaces;
 using HtmlWorkflow.Constants;
 using HtmlWorkflow.Extensions;
 using HtmlWorkflow.Models;
-using System;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
@@ -13,9 +12,6 @@ using System.Threading.Tasks;
 
 namespace Auction.DAL.Repositories
 {
-    /// <summary>
-    /// EmailService
-    /// </summary>
     public class EmailService : IEmailService
     {
         private readonly EmailConfiguration EmailConfiguration;
@@ -23,11 +19,7 @@ namespace Auction.DAL.Repositories
         {
             this.EmailConfiguration = EmailConfiguration;
         }
-        /// <summary>
-        /// message fro owner in email
-        /// </summary>
-        /// <param name="askOwner"></param>
-        /// <returns></returns>
+       
         public string AskOwnerMessage(AskOwner askOwner)
         {
             StringBuilder sb = new StringBuilder();
@@ -47,11 +39,7 @@ namespace Auction.DAL.Repositories
               .Append(HtmlConstants.CloseHTML);
             return sb.ToString();
         }
-        /// <summary>
-        /// Send email
-        /// </summary>
-        /// <param name="emailMessage"></param>
-        /// <returns></returns>
+      
         public async Task SendEmailAsync(EmailMessage emailMessage)
         {
             var bodyBuilder = emailMessage.Content;

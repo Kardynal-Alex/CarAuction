@@ -1,9 +1,6 @@
 ﻿
 namespace Auction.BLL.DTO
 {
-    /// <summary>
-    /// GoogleAuthDTO
-    /// </summary>
     public class GoogleAuthDTO
     {
         /// <summary>

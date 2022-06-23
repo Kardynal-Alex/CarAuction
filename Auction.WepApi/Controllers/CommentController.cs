@@ -11,9 +11,6 @@ using System.Threading.Tasks;
 
 namespace Auction.WepApi.Controllers
 {
-    /// <summary>
-    /// Comment Controller
-    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class CommentController : ControllerBase
@@ -27,11 +24,7 @@ namespace Auction.WepApi.Controllers
             this.mapper = mapper;
             this.logger = logger;
         }
-        /// <summary>
-        /// Add comment
-        /// </summary>
-        /// <param name="commentViewModel"></param>
-        /// <returns></returns>
+      
         [HttpPost]
         public async Task<ActionResult> AddComment([FromBody] CommentViewModel commentViewModel)
         {
@@ -46,11 +39,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Get Comments by lot id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+       
         [HttpGet("{id}")]
         public async Task<ActionResult<List<CommentViewModel>>> GetCommentsByLotId(int id)
         {
@@ -65,11 +54,7 @@ namespace Auction.WepApi.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Delete comment
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+       
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteComment(Guid id)
         {

@@ -18,11 +18,7 @@ namespace Auction.BLL.Services
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
         }
-        /// <summary>
-        /// Add favorite
-        /// </summary>
-        /// <param name="favoriteDTO"></param>
-        /// <returns></returns>
+      
         public async Task AddFavoriteAsync(FavoriteDTO favoriteDTO)
         {
             ValidateFavoriteDTO(favoriteDTO);
@@ -30,11 +26,7 @@ namespace Auction.BLL.Services
             await unitOfWork.FavoriteRepository.AddFavoriteAsync(mapper.Map<FavoriteDTO, Favorite>(favoriteDTO));
             await unitOfWork.SaveAsync();
         }
-        /// <summary>
-        /// Delete favorite by lot id and user id
-        /// </summary>
-        /// <param name="favoriteDTO"></param>
-        /// <returns></returns>
+     
         public async Task DeleteFavoriteByLotIdAndUserIdAsync(FavoriteDTO favoriteDTO)
         {
             ValidateFavoriteDTO(favoriteDTO);
@@ -42,11 +34,7 @@ namespace Auction.BLL.Services
             await unitOfWork.FavoriteRepository.DeleteByLotIdAndUserIdAsync(mapper.Map<FavoriteDTO, Favorite>(favoriteDTO));
             await unitOfWork.SaveAsync();
         }
-        /// <summary>
-        /// Delete favorite
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+      
         public async Task DeleteFavoriteAsync(string id)
         {
             Precognitions.StringIsNullOrEmpty(id);
@@ -54,11 +42,7 @@ namespace Auction.BLL.Services
             unitOfWork.FavoriteRepository.DeleteFavorite(id);
             await unitOfWork.SaveAsync();
         }
-        /// <summary>
-        /// get user favorite lots by userid
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+      
         public async Task<List<FavoriteDTO>> GetFavoriteByUserIdAsync(string userId)
         {
             Precognitions.StringIsNullOrEmpty(userId, "Icorect userId");
@@ -66,31 +50,20 @@ namespace Auction.BLL.Services
             var favorites = await unitOfWork.FavoriteRepository.GetFavoriteByUserIdAsync(userId);
             return mapper.Map<List<FavoriteDTO>>(favorites);
         }
-        /// <summary>
-        /// Validate input data for favoriteDTO
-        /// </summary>
-        /// <param name="favoriteDTO"></param>
+      
         private static void ValidateFavoriteDTO(FavoriteDTO favoriteDTO)
         {
             Precognitions.IntIsNotNumberOrNegative(favoriteDTO.LotId);
             Precognitions.StringIsNullOrEmpty(favoriteDTO.UserId, "Incorrect length");
         }
-        /// <summary>
-        /// Delete user favorite lots
-        /// </summary>
-        /// <param name="favoriteDTOs"></param>
-        /// <returns></returns>
+      
         public async Task DeleteInRangeFavoritesAsync(List<FavoriteDTO> favoriteDTOs)
         {
             var favorites = mapper.Map<List<Favorite>>(favoriteDTOs);
             unitOfWork.FavoriteRepository.DeleteInRangeFavorites(favorites);
             await unitOfWork.SaveAsync();
         }
-        /// <summary>
-        /// Get favorite by user id and lot id
-        /// </summary>
-        /// <param name="favoriteDTO"></param>
-        /// <returns></returns>
+       
         public async Task<FavoriteDTO> GetFavoriteByUserIdAndLotIdAsync(FavoriteDTO favoriteDTO)
         {
             ValidateFavoriteDTO(favoriteDTO);
