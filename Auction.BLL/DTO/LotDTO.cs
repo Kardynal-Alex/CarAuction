@@ -11,6 +11,7 @@ namespace Auction.BLL.DTO
         public bool IsSold { get; set; }
         public string Image { get; set; }
         public string Description { get; set; }
+        public CarBrandDTO CarBrand { get; set; }
         public UserDTO User { get; set; }
         public string UserId { get; set; }
         [JsonSchemaDate]

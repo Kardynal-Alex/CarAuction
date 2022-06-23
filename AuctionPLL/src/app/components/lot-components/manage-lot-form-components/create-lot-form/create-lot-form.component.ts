@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
 import { ComponentCanDeactivate } from 'src/app/guards/exit.about.guard';
+import { CarBrandArray, CarBrands } from 'src/app/models/lot-models/car-brand';
 import { Images } from 'src/app/models/lot-models/images';
 import { Lot } from 'src/app/models/lot-models/lot';
 import { AuthService } from 'src/app/services/auth.service';
@@ -36,6 +37,11 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
     this.initForm();
   }
 
+  public CarBrandMapping = CarBrands;
+  public get CarBrands() {
+    return CarBrandArray;
+  }
+
   public lotForm: UntypedFormGroup;
   private initForm() {
     this.lotForm = this.formBuilder.group({
@@ -59,6 +65,7 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
         Validators.pattern('[0-9]{4}'),
         Validators.min(1806)
       ]],
+      carBrand: [null, Validators.required],
       image: [null, Validators.required],
       images: this.formBuilder.array([])
     });
@@ -88,6 +95,7 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
       startDateTime: new Date(Date.now()),
       currentPrice: this.lotForm.controls.startPrice.value,
       year: this.lotForm.controls.year.value,
+      carBrand: this.lotForm.controls.carBrand.value,
       user: null,
       lotState: {
         id: 0,

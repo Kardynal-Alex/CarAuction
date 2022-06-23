@@ -1,5 +1,6 @@
 ﻿using NJsonSchema.Annotations;
 using System;
+using System.Text.Json.Serialization;
 
 namespace Auction.DAL.Entities
 {
@@ -11,6 +12,7 @@ namespace Auction.DAL.Entities
         public bool IsSold { get; set; }
         public string Image { get; set; }
         public string Description { get; set; }
+        public CarBrand CarBrand { get; set; }
         public string UserId { get; set; }
         public User User { get; set; }
         [JsonSchemaDate]

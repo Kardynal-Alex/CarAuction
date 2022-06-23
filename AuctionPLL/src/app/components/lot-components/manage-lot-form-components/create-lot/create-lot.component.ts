@@ -11,6 +11,7 @@ import { ComponentCanDeactivate } from 'src/app/guards/exit.about.guard';
 import { Observable } from 'rxjs';
 import { BaseUrl } from 'src/app/common/constants/urls';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
+import { CarBrand } from 'src/app/models/lot-models/car-brand';
 
 /**
   * @deprecated old form - use create-lot-form with reactive forms
@@ -82,6 +83,7 @@ export class CreateLotComponent implements OnInit, ComponentCanDeactivate {
         currentPrice: form.value.StartPrice,
         year: form.value.Year,
         user: null,
+        carBrand: CarBrand.Audi,
         lotState: {
           id: 0,
           ownerId: userid,

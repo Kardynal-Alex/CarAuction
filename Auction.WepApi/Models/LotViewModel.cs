@@ -11,6 +11,7 @@ namespace Auction.WepApi.Models
         public bool IsSold { get; set; }
         public string Image { get; set; }
         public string Description { get; set; }
+        public CarBrandViewModel CarBrand { get; set; }
         public UserViewModel User { get; set; }
         public string UserId { get; set; }
         [JsonSchemaDate]

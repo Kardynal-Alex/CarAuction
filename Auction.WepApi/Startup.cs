@@ -20,6 +20,7 @@ using System.Threading.Tasks;
 using Auction.DAL.Entities;
 using PDFGenerator.Configure;
 using Microsoft.Extensions.Logging;
+using System.Text.Json.Serialization;
 
 namespace Auction.WepApi
 {
@@ -34,7 +35,10 @@ namespace Auction.WepApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.IgnoreNullValues = true);
+            services.AddControllers().AddJsonOptions(x =>
+            {
+                x.JsonSerializerOptions.IgnoreNullValues = true;
+            });
 
             services.AddCors(options =>
             {

@@ -1,13 +1,20 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
 import { AuthorDescription } from 'src/app/models/author-description';
+import { CarBrandArray, CarBrands } from 'src/app/models/lot-models/car-brand';
 import { Images } from 'src/app/models/lot-models/images';
 import { Lot } from 'src/app/models/lot-models/lot';
 import { AuthService } from 'src/app/services/auth.service';
@@ -18,7 +25,8 @@ import { LotService } from 'src/app/services/lot.service';
 @Component({
   selector: 'app-update-lot-form',
   templateUrl: './update-lot-form.component.html',
-  styleUrls: ['./update-lot-form.component.less'], animations: [
+  styleUrls: ['./update-lot-form.component.less'],
+  animations: [
     trigger('toggle', [
       state('hide', style({
         height: '0px',
@@ -49,6 +57,11 @@ export class UpdateLotFormComponent implements OnInit {
     private authorDescriptionService: AuthorDescriptionService
   ) { }
 
+  public CarBrandMapping = CarBrands;
+  public get CarBrands() {
+    return CarBrandArray;
+  }
+
   public isCollapsedForm = false;
   public isCollapsedAuthorOpinion = !false;
   public saved: boolean = false;
@@ -57,12 +70,12 @@ export class UpdateLotFormComponent implements OnInit {
   ngOnInit(): void {
     this.routeId = this.activateRoute.snapshot.params['id'];
     this.lotService.getLotById(this.routeId)
-      .subscribe(_ => {
+      .subscribe((_) => {
         this.lot = _;
         this.initForm(_);
       });
     this.authorDescriptionService.getAuthorDescriptionByLotId(this.routeId)
-      .subscribe(_ => {
+      .subscribe((_) => {
         this.initAuthorDescriptionForm(_);
       });
   }
@@ -87,6 +100,7 @@ export class UpdateLotFormComponent implements OnInit {
         Validators.pattern('[0-9]{4}'),
         Validators.min(1806)
       ]],
+      carBrand: [lot.carBrand, Validators.required],
       image: [lot.image, Validators.required],
       images: this.formBuilder.array(this.initImages(lot.images))
     });
