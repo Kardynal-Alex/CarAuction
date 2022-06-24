@@ -1,85 +1,34 @@
-import { HttpEventType } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
-import { CommonConstants } from 'src/app/common/constants/common-constants';
 import { ComponentCanDeactivate } from 'src/app/guards/exit.about.guard';
-import { CarBrandArray, CarBrands } from 'src/app/models/lot-models/car-brand';
 import { Images } from 'src/app/models/lot-models/images';
 import { Lot } from 'src/app/models/lot-models/lot';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImagesService } from 'src/app/services/images.service';
 import { LotService } from 'src/app/services/lot.service';
+import { BaseLotFormComponent } from '../base-lot-form/base-lot-form.component';
 
 @Component({
   selector: 'app-create-lot-form',
   templateUrl: './create-lot-form.component.html',
   styleUrls: ['./create-lot-form.component.less']
 })
-export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
-  public get imageArray() {
-    return this.lotForm.get('images') as UntypedFormArray;
-  }
-
+export class CreateLotFormComponent extends BaseLotFormComponent implements OnInit, ComponentCanDeactivate {
   constructor(
-    private toastrService: ToastrService,
-    private lotService: LotService,
+    protected toastrService: ToastrService,
+    protected lotService: LotService,
     private router: Router,
     public formBuilder: UntypedFormBuilder,
     private authService: AuthService,
-    private imagesService: ImagesService
-  ) { }
+    protected imagesService: ImagesService
+  ) {
+    super(lotService, formBuilder, toastrService, imagesService);
+  }
 
-  private saved: boolean = false;
   public ngOnInit(): void {
     this.initForm();
-  }
-
-  public CarBrandMapping = CarBrands;
-  public get CarBrands() {
-    return CarBrandArray;
-  }
-
-  public lotForm: UntypedFormGroup;
-  private initForm() {
-    this.lotForm = this.formBuilder.group({
-      nameLot: [null, [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(35)
-      ]],
-      description: [null, [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(70)
-      ]],
-      startPrice: [null, [
-        Validators.required,
-        Validators.pattern('^(0*[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*)$'),
-        Validators.min(1)
-      ]],
-      year: [null, [
-        Validators.required,
-        Validators.pattern('[0-9]{4}'),
-        Validators.min(1806)
-      ]],
-      carBrand: [null, Validators.required],
-      image: [null, Validators.required],
-      images: this.formBuilder.array([])
-    });
-  }
-
-  public addImage() {
-    if (this.lotService.numbersOfImages !== this.imageArray.controls.length) {
-      this.imageArray.push(new UntypedFormControl(null, [Validators.required]));
-    }
-  }
-
-  public removeImage(index: number) {
-    this.imageArray.removeAt(index);
-    this.lotForm.markAsDirty();
   }
 
   public createLot() {
@@ -127,69 +76,4 @@ export class CreateLotFormComponent implements OnInit, ComponentCanDeactivate {
 
     return images;
   }
-
-  public canDeactivate(): boolean | Observable<boolean> {
-    if (!this.saved) {
-      return confirm('Are you want to leave the page?');
-    } else {
-      return true;
-    }
-  }
-
-  public createImgPath(serverPath: string) {
-    return this.lotService.createImgPath(serverPath);
-  }
-
-  @ViewChild('file') fileInput: any;
-  public uploadMainImage(files: any) {
-    if (files.length === 0)
-      return;
-
-    this.imagesService.uploadMainImage(files)
-      .subscribe((event) => {
-        if (event.type === HttpEventType.Response) {
-          const response = event.body;
-          this.lotForm.controls.image.patchValue(response[CommonConstants.ImageResponsePath]);
-          this.toastrService.success('Photo is uploaded!');
-          this.fileInput.nativeElement.value = '';
-        }
-      });
-  }
-
-  public uploadImages(files: any, index: number) {
-    if (files.length === 0)
-      return;
-
-    this.imagesService.uploadImages(files)
-      .subscribe((event) => {
-        if (event.type === HttpEventType.Response) {
-          const response = event.body;
-          const myForm = this.imageArray.at(index);
-          myForm.patchValue(response[CommonConstants.ImageResponsePath]);
-          this.toastrService.success('Photo is uploaded!');
-        }
-      });
-  }
-
-  public deletePhotoByPath(imagePath: string, index: number) {
-    if (!!imagePath) {
-      this.lotService.deletePhoto(imagePath)
-        .subscribe((_) => {
-          const form = this.imageArray.at(index);
-          form.patchValue(null);
-          this.toastrService.success('Photo is deleted');
-        });
-    }
-  }
-
-  public deleteMainPhoto() {
-    if (!!this.lotForm.controls.image.value) {
-      this.lotService.deletePhoto(this.lotForm.controls.image.value)
-        .subscribe((_) => {
-          this.lotForm.controls.image.patchValue(null);
-          this.toastrService.success('Photo is deleted');
-        });
-    }
-  }
-
 }

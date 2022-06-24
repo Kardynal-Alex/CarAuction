@@ -6,7 +6,7 @@
             </span>
             <span class="title__caption">Update Lot</span>
         </div>
-        <form [formGroup]="lotForm" [@toggle]="isCollapsedForm ? 'hide' : 'show'" *ngIf="!!lotForm?.controls">
+        <form *ngIf="!!lotForm?.controls" [formGroup]="lotForm" [@toggle]="isCollapsedForm ? 'hide' : 'show'">
             <div class="full-width">
                 <div class="has-tooltip">
                     <input type="text" placeholder="Enter name lot" formControlName="nameLot">
