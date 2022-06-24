@@ -15,10 +15,10 @@ import { AdminGuard } from './guards/admin.guard';
 import { TestComponent } from './components/test/test.component';
 import { ExitAboutGuard } from './guards/exit.about.guard';
 
-import { CreateLotComponent } from './components/lot-components/manage-lot-form-components/create-lot/create-lot.component';
+import { CreateLotComponent } from './components/lot-components/manage-lot-form-components/old-static-lot-form/create-lot/create-lot.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ShowLotsComponent } from './components/lot-components/show-lots/show-lots.component';
-import { UpdateLotComponent } from './components/lot-components/manage-lot-form-components/update-lot/update-lot.component';
+import { UpdateLotComponent } from './components/lot-components/manage-lot-form-components/old-static-lot-form/update-lot/update-lot.component';
 import { SoldLotsComponent } from './components/lot-components/sold-lots/sold-lots.component';
 import { ShowLotImagesComponent } from './components/lot-components/bid-page/show-lot-images/show-lot-images.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';

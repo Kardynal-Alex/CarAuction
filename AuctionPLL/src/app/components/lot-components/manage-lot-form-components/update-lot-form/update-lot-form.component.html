@@ -6,7 +6,7 @@
             </span>
             <span class="title__caption">Update Lot</span>
         </div>
-        <form [formGroup]="lotForm" [@toggle]="isCollapsedForm ? 'hide' : 'show'" *ngIf="!!lotForm?.controls">
+        <form *ngIf="!!lotForm?.controls" [formGroup]="lotForm" [@toggle]="isCollapsedForm ? 'hide' : 'show'">
             <div class="full-width">
                 <div class="has-tooltip">
                     <input type="text" placeholder="Enter name lot" formControlName="nameLot">
@@ -50,6 +50,17 @@
                         Enter correct year</p>
                     <p class="tooltip" *ngIf="lotForm.controls.year.errors?.min && lotForm.controls.year.touched">
                         Min value 1806</p>
+                </div>
+            </div>
+            <div class="full-width">
+                <div class="has-tooltip">
+                    <select formControlName="carBrand">
+                        <option *ngFor="let brand of CarBrands" [ngValue]="brand">{{CarBrandMapping[brand]}}
+                        </option>
+                    </select>
+                    <p class="tooltip"
+                        *ngIf="lotForm.controls.carBrand.errors?.required && lotForm.controls.carBrand.touched">
+                        Required field</p>
                 </div>
             </div>
             <div class="image">
