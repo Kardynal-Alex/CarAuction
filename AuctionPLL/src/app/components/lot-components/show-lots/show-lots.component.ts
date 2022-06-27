@@ -153,8 +153,9 @@ export class ShowLotsComponent implements OnInit {
       var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((t % (1000 * 60)) / 1000);
 
-      if (document.getElementById(getTimerId(id)) != null && t >= 0)
-        document.getElementById(getTimerId(id)).innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
+      if (document.getElementById(getTimerId(id)) != null && t >= 0) {
+        document.getElementById(getTimerId(id)).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
       if (t < 0) {
         clearInterval(this.str[id]);
         this.checkLotIfTimerIsExpired(id);

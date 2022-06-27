@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Lot } from 'src/app/models/lot-models/lot';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { LotService } from 'src/app/services/lot.service';
-import { tap } from "rxjs/operators";
+import { tap } from 'rxjs/operators';
 import { Guid } from 'guid-typescript';
 import { Comment } from 'src/app/models/comment';
 import { CommentService } from 'src/app/services/comment.service';
@@ -127,7 +127,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
       return this.toastrService.error(ErrorMessages.Unauthorized);
     }
     if (parsedBid <= this.lot.currentPrice) {
-      return this.toastrService.error('Incorrect input data');
+      return this.toastrService.error(ErrorMessages.IncorrectData);
     }
     if (parsedBid > this.lot.currentPrice) {
       this.lot.currentPrice = parseFloat(bid);
@@ -138,7 +138,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
           this.toastrService.success('Thanks for bid');
           const comment: Comment = {
             id: Guid.create().toString(),
-            author: this.userName + ' ' + this.userSurname,
+            author: `${this.userName} ${this.userSurname}`,
             text: `Bid $ ${parsedBid}`,
             dateTime: new Date(Date.now()),
             lotId: this.id.toString(),
@@ -207,8 +207,9 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
         return;
       }
 
-      if (document.getElementById(getTimerId(id)) != null && t >= 0)
-        document.getElementById(getTimerId(id)).innerHTML = "#Timer " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      if (document.getElementById(getTimerId(id)) != null && t >= 0) {
+        document.getElementById(getTimerId(id)).innerHTML = `#Timer ${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
       if (t < 0) {
         clearInterval(x);
         this.checkLotIfTimerIsExpired(id);

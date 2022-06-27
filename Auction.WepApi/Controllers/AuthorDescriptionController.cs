@@ -3,7 +3,6 @@ using Auction.BLL.Interfaces;
 using Auction.WepApi.Logs;
 using Auction.WepApi.Models;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -25,7 +24,7 @@ namespace Auction.WepApi.Controllers
             this.logger = logger;
         }
        
-        [HttpPost("addAuthorDescription")]
+        [HttpPost]
         public async Task<ActionResult> AddAuthorDescription([FromBody] AuthorDescriptionViewModel authorDescriptionViewModel)
         {
             try
@@ -41,7 +40,7 @@ namespace Auction.WepApi.Controllers
             }
         }
        
-        [HttpPut("updateAuthorDescription")]
+        [HttpPut]
         public async Task<ActionResult> UpdateAuthorDescription([FromBody] AuthorDescriptionViewModel authorDescriptionViewModel)
         {
             try

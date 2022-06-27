@@ -17,7 +17,8 @@ import { CommonConstants } from '../common/constants/common-constants';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = BaseUrl.ApiURL + 'account/';
+  private apiUrl = `${BaseUrl.ApiURL}/account`;
+
   constructor(
     private httpClient: HttpClient,
     private localStorage: LocalStorageService,
@@ -25,32 +26,33 @@ export class AuthService {
   ) { }
 
   public login(login: Login): Observable<Object> {
-    return this.httpClient.post(this.apiUrl + 'login', login);
+    return this.httpClient.post(`${this.apiUrl}/login`, login);
   }
 
   public twoSteplogin(twoFactor: TwoFactor): Observable<Object> {
-    return this.httpClient.post(this.apiUrl + 'twostepverification', twoFactor);
+    return this.httpClient.post(`${this.apiUrl}/twostepverification`, twoFactor);
+
   }
 
   public facebookLogin(facebookLogin: Facebook): Observable<Object> {
-    return this.httpClient.post(this.apiUrl + 'facebook/', facebookLogin);
+    return this.httpClient.post(`${this.apiUrl}/facebook/`, facebookLogin);
   }
 
   public googleLogin(googleLogin: ExternalAuth): Observable<Object> {
-    return this.httpClient.post(this.apiUrl + 'google/', googleLogin);
+    return this.httpClient.post(`${this.apiUrl}/google/`, googleLogin);
   }
 
   public logout(): Observable<Object> {
     this.localStorage.remove(CommonConstants.JWTToken);
-    return this.httpClient.post(this.apiUrl + 'logout', null);
+    return this.httpClient.post(`${this.apiUrl}/logout`, null);
   }
 
   public register(register: Register): Observable<Object> {
-    return this.httpClient.post(this.apiUrl + 'register', register);
+    return this.httpClient.post(`${this.apiUrl}/register`, register);
   }
 
   public getUserById(id: string): Observable<User> {
-    return this.httpClient.get<User>(this.apiUrl + 'getuserbyid/?id=' + id);
+    return this.httpClient.get<User>(`${this.apiUrl}/getuserbyid/?id=${id}`);
   }
 
   public confirmEmail(route: string, token: string, email: string) {
@@ -58,15 +60,15 @@ export class AuthService {
     params = params.append('token', token);
     params = params.append('email', email);
 
-    return this.httpClient.get(this.apiUrl + 'emailconfirmation', { params: params });
+    return this.httpClient.get(`${this.apiUrl}/emailconfirmation`, { params: params });
   }
 
   public forgotPassword(forgotPassword: ForgotPassword): Observable<Object> {
-    return this.httpClient.post(this.apiUrl + 'forgotpassword', forgotPassword);
+    return this.httpClient.post(`${this.apiUrl}/forgotpassword`, forgotPassword);
   }
 
   public resetPassword(resetPassword: ResetPassword): Observable<Object> {
-    return this.httpClient.post(this.apiUrl + 'resetpassword', resetPassword);
+    return this.httpClient.post(`${this.apiUrl}/resetpassword`, resetPassword);
   }
 
   public isAuthenticated(): boolean {

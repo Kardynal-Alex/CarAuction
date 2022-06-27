@@ -9,6 +9,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from "@auth0/angular-jwt";
 import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { LoginGuard } from './guards/login.guard';
 import { AdminGuard } from './guards/admin.guard';
@@ -21,9 +23,7 @@ import { ShowLotsComponent } from './components/lot-components/show-lots/show-lo
 import { UpdateLotComponent } from './components/lot-components/manage-lot-form-components/old-static-lot-form/update-lot/update-lot.component';
 import { SoldLotsComponent } from './components/lot-components/sold-lots/sold-lots.component';
 import { ShowLotImagesComponent } from './components/lot-components/bid-page/show-lot-images/show-lot-images.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonConstants } from './common/constants/common-constants';
-import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonComponentModule } from './common/common-component.module';
 import { AdminModule } from './components/admin-components/admin.module';
 import { LotFormModule } from './components/lot-components/manage-lot-form-components/lot-form.module';
@@ -87,7 +87,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:4200"],
+        allowedDomains: ['localhost:4200'],
         disallowedRoutes: []
       }
     }),
