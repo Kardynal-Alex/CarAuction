@@ -19,7 +19,7 @@ export enum CarBrand {
 export const CarBrands = {
     [CarBrand.Tesla]: 'Tesla',
     [CarBrand.BMW]: 'BMV',
-    [CarBrand.Ferrari]: 'Rerrari',
+    [CarBrand.Ferrari]: 'Ferrari',
     [CarBrand.Ford]: 'Ford',
     [CarBrand.Porsche]: 'Porshe',
     [CarBrand.Honda]: 'Honda',

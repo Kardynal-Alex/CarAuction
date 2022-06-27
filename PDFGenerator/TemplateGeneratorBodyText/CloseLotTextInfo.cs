@@ -2,7 +2,9 @@
 using HtmlWorkflow.Extensions;
 using HtmlWorkflow.Models;
 using PDFGenerator.Models;
+using PDFGenerator.Utils;
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace PDFGenerator.TemplateGeneratorBodyText
@@ -27,12 +29,26 @@ namespace PDFGenerator.TemplateGeneratorBodyText
                new HtmlHelper { Text = $"Small descriptions: {lot.Description}" },
                new HtmlHelper { Text = $"Price to pay: {lot.CurrentPrice} $" }
             }, new HtmlDivHelper { ClassName = "description" });
-            sb.AddArrayOfTextBlock(new HtmlHelper[]
-            {
-                new HtmlHelper { Text = $"Former owner contacts:", ClassName = "owner-contact" },
-                new HtmlHelper { Text = $"~ Email: {lot.User.Email}" },
-                new HtmlHelper { Text = $"~ FullName: {lot.User.Name}  {lot.User.Surname}" }
-            }, new HtmlDivHelper { ClassName = "contacts" });
+          
+            sb.AddTableElement(
+                new List<HtmlHelper[]>
+                {
+                    new HtmlHelper[]
+                    {
+                        new HtmlHelper { Text = "Email to contact" },
+                        new HtmlHelper { Text = $"{lot.User.Email}" }
+                    },
+                    new HtmlHelper[]
+                    {
+                        new HtmlHelper { Text = "Fullname owner" },
+                        new HtmlHelper { Text = $"{lot.User.Name}  {lot.User.Surname}" }
+                    },
+                    new HtmlHelper[]
+                    {
+                        new HtmlHelper { Text = "Car Brand" },
+                        new HtmlHelper { Text = $"{CarBrandUtils.GetCarBrandName(lot.CarBrand)}" }
+                    }
+                }, null, new HtmlHelper { ClassName = "table-info" });
 
             sb.AddImageBlock(
                 new HtmlImgHelper

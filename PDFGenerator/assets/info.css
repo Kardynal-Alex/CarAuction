@@ -36,3 +36,28 @@ body {
 .contacts {
     font-size: 25px;
 }
+
+.table-info {
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 2px solid black;
+    font-size: 30px;
+    border: 2px solid black;
+}
+
+    table tr td,
+    td {
+        padding: 10px 10px 10px 15px;
+    }
+
+tr {
+    border: 2px solid black;
+    padding: 5px;
+}
