@@ -51,11 +51,11 @@ export class CommentsComponent implements OnInit {
   }
 
   public sellerCommnets() {
-    this.filtredComments = this.comments.filter(x => x.userId == this.lot.userId);
+    this.filtredComments = this.comments.filter(x => x.userId === this.lot.userId);
   }
 
   public bidHistory() {
-    this.filtredComments = this.comments.filter(x => x.isBid == true);
+    this.filtredComments = this.comments.filter(x => x.isBid === true);
   }
 
   public createComment(form: NgForm) {
@@ -83,7 +83,7 @@ export class CommentsComponent implements OnInit {
   }
 
   public deleteComment(commentId: string) {
-    this.commentService.deleteVommentById(commentId)
+    this.commentService.deleteCommentById(commentId)
       .subscribe((_) => {
         this.toastrService.success('Comment is deleted!');
         this.getComments(this.id);

@@ -40,7 +40,7 @@ namespace Auction.WepApi.Controllers
             }
         }
      
-        [HttpPost("favorite")]
+        [HttpPost("Favorite")]
         public async Task<ActionResult<FavoriteViewModel>> GetFavoriteByLotIdAndUserId([FromBody]FavoriteViewModel favoriteViewModel)
         {
             try
@@ -71,7 +71,7 @@ namespace Auction.WepApi.Controllers
             }
         }
       
-        [HttpPost("deletepost")]
+        [HttpPost("Delete")]
         public async Task<ActionResult> DeleteFavoriteByUserIdAndLotId(FavoriteViewModel favoriteViewModel)
         {
             try

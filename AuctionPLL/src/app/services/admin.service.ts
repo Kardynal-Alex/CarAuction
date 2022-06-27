@@ -6,16 +6,17 @@ import { BaseUrl } from '../common/constants/urls';
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {
-    private apiUrl = BaseUrl.ApiURL + 'admin/';
+    private apiUrl = `${BaseUrl.ApiURL}/admin`;
+
     constructor(
         private httpClient: HttpClient
     ) { }
 
     public getUsersWithRoleUser(): Observable<User[]> {
-        return this.httpClient.get<User[]>(this.apiUrl + 'users/');
+        return this.httpClient.get<User[]>(`${this.apiUrl}/Users/`);
     }
 
-    public deleteUser(userId: string) {
-        return this.httpClient.delete(this.apiUrl + userId);
+    public deleteUser(userId: string): Observable<Object> {
+        return this.httpClient.delete(`${this.apiUrl}/${userId}`);
     }
 }

@@ -6,26 +6,27 @@ import { BaseUrl } from '../common/constants/urls';
 
 @Injectable({ providedIn: 'root' })
 export class FavoriteService {
-    private apiUrl = BaseUrl.ApiURL + 'favorite/';
+    private apiUrl = `${BaseUrl.ApiURL}/favorite`;
+
     constructor(private httpClient: HttpClient) { }
 
     public addFavorite(favorite: Favorite): Observable<Object> {
-        return this.httpClient.post(this.apiUrl, favorite);
+        return this.httpClient.post(`${this.apiUrl}/`, favorite);
     }
 
     public deleteFavoriteById(id: string): Observable<Object> {
-        return this.httpClient.delete(this.apiUrl + id);
+        return this.httpClient.delete(`${this.apiUrl}/${id}`);
     }
 
     public getUserFavorite(userId: string): Observable<Favorite[]> {
-        return this.httpClient.get<Favorite[]>(this.apiUrl + userId);
+        return this.httpClient.get<Favorite[]>(`${this.apiUrl}/${userId}`);
     }
 
     public getFavoriteByUserIdAndLotId(favorite: Favorite): Observable<Favorite> {
-        return this.httpClient.post<Favorite>(this.apiUrl + 'favorite/', favorite);
+        return this.httpClient.post<Favorite>(`${this.apiUrl}/Favorite/`, favorite);
     }
 
     public deleteFavoriteByUserIdAndLotId(favorite: Favorite): Observable<Object> {
-        return this.httpClient.post(this.apiUrl + 'deletepost', favorite);
+        return this.httpClient.post(`${this.apiUrl}/Delete`, favorite);
     }
 }

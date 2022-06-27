@@ -24,7 +24,7 @@ namespace Auction.WepApi.Controllers
             this.logger = logger;
         }
         
-        [HttpGet("users")]
+        [HttpGet("Users")]
         public ActionResult<List<UserViewModel>> GetUser()
         {
             var user = service.GetUsersWithRoleUser();

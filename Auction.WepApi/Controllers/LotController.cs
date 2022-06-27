@@ -26,7 +26,7 @@ namespace Auction.WepApi.Controllers
             this.logger = logger;
         }
       
-        [HttpGet("getuserlots/{id}")]
+        [HttpGet("GetUserLots/{id}")]
         public async Task<ActionResult<List<LotViewModel>>> GetLotsByUserId(string id)
         {
             try
@@ -41,7 +41,7 @@ namespace Auction.WepApi.Controllers
             }
         }
       
-        [HttpGet("favorites/{id}")]
+        [HttpGet("Favorites/{id}")]
         public async Task<ActionResult<List<LotViewModel>>> GetFavoriteLotsByUserId(string id)
         {
             try
@@ -56,14 +56,14 @@ namespace Auction.WepApi.Controllers
             }
         }
       
-        [HttpGet("getfreshlots")]
+        [HttpGet("GetFreshLots")]
         public async Task<ActionResult<List<LotViewModel>>> GetFreshLots()
         {
             var listDTO = await lotService.GetFreshLots();
             return Ok(mapper.Map<List<LotViewModel>>(listDTO));
         }
        
-        [HttpGet("getsoldlots")]
+        [HttpGet("GetSoldLots")]
         public async Task<ActionResult<List<LotViewModel>>> GetSoldLots()
         {
             var listDTOs = await lotService.GetSoldLotsAsync();
@@ -92,7 +92,7 @@ namespace Auction.WepApi.Controllers
             }
         }
        
-        [HttpGet("userbids/{id}")]
+        [HttpGet("UserBids/{id}")]
         public async Task<ActionResult<List<LotViewModel>>> GetUserBids(string id)
         {
             try
@@ -123,7 +123,7 @@ namespace Auction.WepApi.Controllers
             }
         }
      
-        [HttpPut("closebid")]
+        [HttpPut("CloseBid")]
         public async Task<ActionResult> PutCloseBid([FromBody] LotViewModel lotViewModel)
         {
             try
@@ -139,7 +139,7 @@ namespace Auction.WepApi.Controllers
             }
         }
       
-        [HttpPut("onlydatelot")]
+        [HttpPut("UpdateDateLot")]
         public async Task<ActionResult> UpdateOnlyDateLot([FromBody] LotViewModel lotViewModel)
         {
             try
@@ -186,7 +186,7 @@ namespace Auction.WepApi.Controllers
             }
         }
        
-        [HttpPost("askowner")]
+        [HttpPost("AskOwner")]
         public async Task<ActionResult> AskOwnerSendingEmail([FromBody] AskOwnerViewModel askOwnerViewModel)
         {
             try

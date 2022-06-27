@@ -6,18 +6,19 @@ import { BaseUrl } from '../common/constants/urls';
 
 @Injectable({ providedIn: 'root' })
 export class CommentService {
-    private apiUrl = BaseUrl.ApiURL + 'comment/';
+    private apiUrl = `${BaseUrl.ApiURL}/comment`;
+
     constructor(private httpClient: HttpClient) { }
 
     public addComment(comment: Comment): Observable<Object> {
-        return this.httpClient.post(this.apiUrl, comment);
+        return this.httpClient.post(`${this.apiUrl}/`, comment);
     }
 
     public getCommentsByLotId(lotId: number): Observable<Comment[]> {
-        return this.httpClient.get<Comment[]>(this.apiUrl + lotId);
+        return this.httpClient.get<Comment[]>(`${this.apiUrl}/${lotId}`);
     }
 
-    public deleteVommentById(commentId: string): Observable<Object> {
-        return this.httpClient.delete(this.apiUrl + commentId);
+    public deleteCommentById(commentId: string): Observable<Object> {
+        return this.httpClient.delete(`${this.apiUrl}/${commentId}`);
     }
 }
