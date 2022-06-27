@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.IsAdmin = this.authService.CheckIfIsAdmin();
+    this.IsAdmin = this.authService.checkIfUserIsAdmin();
   }
 }
 //run app with https protocol

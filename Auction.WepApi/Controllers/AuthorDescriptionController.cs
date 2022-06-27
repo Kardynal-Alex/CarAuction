@@ -56,7 +56,7 @@ namespace Auction.WepApi.Controllers
             }
         }
 
-        [HttpGet("getAuthorDescriptionByLotId/{id}")]
+        [HttpGet("GetAuthorDescriptionByLotId/{id}")]
         public async Task<ActionResult<AuthorDescriptionViewModel>> GetUserBids(int id)
         {
             try

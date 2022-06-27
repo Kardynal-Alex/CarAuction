@@ -13,7 +13,7 @@ export class AdminService {
     ) { }
 
     public getUsersWithRoleUser(): Observable<User[]> {
-        return this.httpClient.get<User[]>(`${this.apiUrl}/users/`);
+        return this.httpClient.get<User[]>(`${this.apiUrl}/Users/`);
     }
 
     public deleteUser(userId: string): Observable<Object> {

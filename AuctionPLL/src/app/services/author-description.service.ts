@@ -21,6 +21,6 @@ export class AuthorDescriptionService {
     }
 
     public getAuthorDescriptionByLotId(id: number): Observable<AuthorDescription> {
-        return this.httpClient.get<AuthorDescription>(`${this.apiUrl}/getAuthorDescriptionByLotId/${id}`);
+        return this.httpClient.get<AuthorDescription>(`${this.apiUrl}/GetAuthorDescriptionByLotId/${id}`);
     }
 }

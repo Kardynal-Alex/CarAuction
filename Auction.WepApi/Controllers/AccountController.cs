@@ -39,7 +39,7 @@ namespace Auction.WepApi.Controllers
             }
         }
       
-        [HttpGet("getuserbyid")]
+        [HttpGet("GetUserById")]
         public async Task<ActionResult<UserViewModel>> GetUserById(string id)
         {
             try
@@ -54,7 +54,7 @@ namespace Auction.WepApi.Controllers
             }
         }
        
-        [HttpPost("login")]
+        [HttpPost("Login")]
         public async Task<ActionResult<AuthResponseViewModel>> Login([FromBody]UserViewModel userViewModel)
         {
             try
@@ -71,7 +71,7 @@ namespace Auction.WepApi.Controllers
             }
         }
      
-        [HttpPost("twoStepVerification")]
+        [HttpPost("TwoStepVerification")]
         public async Task<ActionResult<AuthResponseViewModel>> TwoStepVerification([FromBody] TwoFactorViewModel twoFactorViewModel)
         {
             try
@@ -92,7 +92,7 @@ namespace Auction.WepApi.Controllers
             }
         }
      
-        [HttpPost("register")]
+        [HttpPost("Register")]
         public async Task<ActionResult<UserViewModel>> Register([FromBody]UserViewModel userViewModel)
         {
             try
@@ -108,7 +108,7 @@ namespace Auction.WepApi.Controllers
             }
         }
        
-        [HttpGet("emailConfirmation")]
+        [HttpGet("EmailConfirmation")]
         public async Task<IActionResult> EmailConfirmation([FromQuery] string email, [FromQuery] string token)
         {
             try
@@ -123,7 +123,7 @@ namespace Auction.WepApi.Controllers
             }
         }
      
-        [HttpPost("logout")]
+        [HttpPost("Logout")]
         public async Task<IActionResult> Logout()
         {
             await service.LogoutAsync();
@@ -145,7 +145,7 @@ namespace Auction.WepApi.Controllers
             }
         }
        
-        [HttpPost("forgotPassword")]
+        [HttpPost("ForgotPassword")]
         public async Task<ActionResult> ForgotPassword([FromBody] ForgotPasswordViewModel forgotPasswordViewModel)
         {
             try
@@ -160,7 +160,7 @@ namespace Auction.WepApi.Controllers
             }
         }
       
-        [HttpPost("resetPassword")]
+        [HttpPost("ResetPassword")]
         public async Task<ActionResult> ResetPassword([FromBody] ResetPasswordViewModel resetPasswordViewModel)
         {
             try
@@ -175,7 +175,7 @@ namespace Auction.WepApi.Controllers
             }
         }
       
-        [HttpPost("facebook")]
+        [HttpPost("Facebook")]
         public async Task<ActionResult> Facebook([FromBody] FacebookAuthViewModel model)
         {
             try
@@ -194,7 +194,7 @@ namespace Auction.WepApi.Controllers
             }
         }
      
-        [HttpPost("google")]
+        [HttpPost("Google")]
         public async Task<ActionResult> Google([FromBody] GoogleAuthViewModel model)
         {
             try
