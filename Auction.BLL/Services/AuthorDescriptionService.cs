@@ -1,4 +1,4 @@
-﻿using Auction.BLL.DTO;
+﻿using Auction.BLL.DTO.Lot;
 using Auction.BLL.Interfaces;
 using Auction.BLL.Validation;
 using Auction.DAL.Entities;

@@ -1,12 +1,12 @@
 ﻿using Auction.BLL.Interfaces;
-using Auction.WepApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using Auction.BLL.DTO;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
 using Auction.WepApi.Logs;
+using Auction.BLL.DTO.Identity;
+using Auction.WepApi.Models.Identity;
 
 namespace Auction.WepApi.Controllers
 {

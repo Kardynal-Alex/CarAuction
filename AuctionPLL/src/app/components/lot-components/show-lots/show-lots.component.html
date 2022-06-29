@@ -1,28 +1,27 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="sort">
   <button mat-button [matMenuTriggerFor]="sortprice">Sort By Price</button>
   <mat-menu #sortprice="matMenu">
-    <button (click)="sortingData(null,'')" mat-menu-item>Remove filter</button>
-    <button (click)="sortingData(SortViewMode.asc,'currentPrice')" mat-menu-item>Ascending</button>
-    <button (click)="sortingData(SortViewMode.desc,'currentPrice')" mat-menu-item>Descending</button>
+    <button (click)="sortingData(null, FilterConstants.CurrentPrice)" mat-menu-item>Remove filter</button>
+    <button (click)="sortingData(SortViewMode.ASC, FilterConstants.CurrentPrice)" mat-menu-item>Ascending</button>
+    <button (click)="sortingData(SortViewMode.DESC, FilterConstants.CurrentPrice)" mat-menu-item>Descending</button>
   </mat-menu>
   <button mat-button [matMenuTriggerFor]="sortdate">Sort by Date</button>
   <mat-menu #sortdate="matMenu">
-    <button (click)="sortingData(null,'')" mat-menu-item>Remove filter</button>
-    <button (click)="sortingData(SortViewMode.asc,'startDateTime')" mat-menu-item>Ascending</button>
-    <button (click)="sortingData(SortViewMode.desc,'startDateTime')" mat-menu-item>Descending</button>
+    <button (click)="sortingData(null, FilterConstants.StartDateTime)" mat-menu-item>Remove filter</button>
+    <button (click)="sortingData(SortViewMode.ASC, FilterConstants.StartDateTime)" mat-menu-item>Ascending</button>
+    <button (click)="sortingData(SortViewMode.DESC, FilterConstants.StartDateTime)" mat-menu-item>Descending</button>
   </mat-menu>
-  <button mat-button [matMenuTriggerFor]="sortyear">Sort by Date</button>
+  <button mat-button [matMenuTriggerFor]="sortyear">Sort by Year</button>
   <mat-menu #sortyear="matMenu">
-    <button (click)="sortingData(null,'')" mat-menu-item>Remove filter</button>
-    <button (click)="sortingData(SortViewMode.asc,'year')" mat-menu-item>Ascending</button>
-    <button (click)="sortingData(SortViewMode.desc,'year')" mat-menu-item>Descending</button>
+    <button (click)="sortingData(null, FilterConstants.Year)" mat-menu-item>Remove filter</button>
+    <button (click)="sortingData(SortViewMode.ASC, FilterConstants.Year)" mat-menu-item>Ascending</button>
+    <button (click)="sortingData(SortViewMode.DESC, FilterConstants.Year)" mat-menu-item>Descending</button>
   </mat-menu>
 </div>
 <hr>
 <div class="lots">
   <app-mat-spinner *ngIf="!lots?.length" [diameter]="500" [strokeWidth]="50"></app-mat-spinner>
-  <div *ngFor="let lot of lots | sort:sortMode:sortField">
+  <div *ngFor="let lot of lots">
     <div class="card" *ngIf="!lot.isSold">
       <div class="timer">
         <p id="timer-{{lot.id}}"></p>

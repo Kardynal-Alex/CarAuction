@@ -1,14 +1,15 @@
 ﻿using Auction.BLL.Interfaces;
-using Auction.WepApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Auction.BLL.DTO;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
 using Auction.WepApi.Logs;
+using Auction.WepApi.Models.FilterModels;
+using Auction.BLL.DTO.Lot;
+using Auction.WepApi.Models.Lot;
+using Auction.BLL.DTO.FilterModels;
 
 namespace Auction.WepApi.Controllers
 {
@@ -24,6 +25,21 @@ namespace Auction.WepApi.Controllers
             lotService = lotSrvc;
             this.mapper = mapper;
             this.logger = logger;
+        }
+
+        [HttpPost("FetchFiltered")]
+        public async Task<ActionResult<List<LotViewModel>>> FetchFilteredLots([FromBody] PageRequestViewModel pageRequestViewModel)
+        {
+            try
+            {
+                var result = await lotService.FetchFilteredAsync(mapper.Map<PageRequest>(pageRequestViewModel));
+                return Ok(mapper.Map<List<LotViewModel>>(result));
+            }
+            catch (Exception ex)
+            {
+                LogInfo.LogInfoMethod(ex, logger);
+                return BadRequest();
+            }
         }
       
         [HttpGet("GetUserLots/{id}")]

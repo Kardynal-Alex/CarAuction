@@ -1,4 +1,6 @@
 ﻿using Auction.BLL.DTO;
+using Auction.BLL.DTO.Identity;
+using Auction.BLL.DTO.Lot;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;

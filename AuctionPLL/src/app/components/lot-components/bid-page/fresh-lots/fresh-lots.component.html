@@ -11,11 +11,11 @@
                         <h1>{{lt.nameLot}}</h1>
                         <p class="title">{{lt.description}}</p>
                     </div>
-                    <button *ngIf="!lt.isSold;else isSoldBut" (click)="redirectToNewLot(lt.id)">Bid {{lt.currentPrice
-                        | currency}}</button>
+                    <button *ngIf="!lt.isSold;else isSoldBut" (click)="redirectToNewLot(lt.id)">
+                        Bid {{lt.currentPrice | currency}}</button>
                     <ng-template #isSoldBut>
-                        <button class="isSold" style="background: grey;" (click)="redirectToNewLot(lt.id)">Is
-                            sold</button>
+                        <button class="isSold" style="background: grey;" (click)="redirectToNewLot(lt.id)">
+                            Is sold</button>
                     </ng-template>
                 </div>
             </div>

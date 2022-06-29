@@ -1,4 +1,5 @@
-﻿using Auction.BLL.DTO;
+﻿using Auction.BLL.DTO.FilterModels;
+using Auction.BLL.DTO.Lot;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -19,5 +20,6 @@ namespace Auction.BLL.Interfaces
         Task UpdateLotAfterClosingAsync(LotDTO updateLot);
         Task UpdateOnlyDateLotAsync(LotDTO updateLot);
         Task AskOwnerSendingEmailAsync(AskOwnerDTO askOwnerDTO);
+        Task<List<LotDTO>> FetchFilteredAsync(PageRequest pageRequest);
     }
 }

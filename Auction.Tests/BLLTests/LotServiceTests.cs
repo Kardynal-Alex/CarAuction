@@ -1,5 +1,4 @@
-﻿using Auction.BLL.DTO;
-using Auction.BLL.Services;
+﻿using Auction.BLL.Services;
 using Auction.BLL.Validation;
 using Auction.DAL.EF;
 using Auction.DAL.Entities;
@@ -18,6 +17,8 @@ using Auction.Tests.BLLTests;
 using Microsoft.Extensions.Options;
 using DinkToPdf.Contracts;
 using IdentityConstants = Auction.DAL.EF.IdentityConstants;
+using Auction.BLL.DTO.Lot;
+using Auction.BLL.DTO.Identity;
 
 namespace Auction.Tests.BLLTests
 {

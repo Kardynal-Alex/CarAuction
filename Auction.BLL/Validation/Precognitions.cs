@@ -41,5 +41,56 @@ namespace Auction.BLL.Validation
                 throw new AuctionException(message ?? "Guid is not correct");
             }
         }
+
+        public enum CompareOperator
+        {
+            Less,
+            Greater,
+            LessEqual,
+            GreaterEqual,
+            Equal
+        }
+
+        public static void CompareTwoNumbers(int a, int b, CompareOperator @operator)
+        {
+            if (!int.TryParse(a.ToString(), out int _) || !int.TryParse(b.ToString(), out int _))
+                throw new AuctionException("Number is incorrect format");
+
+                switch (@operator)
+            {
+                case CompareOperator.Less:
+                    {
+                        if (a >= b)
+                            throw new AuctionException("Numer a must be < than b");
+                        break;
+                    }
+                case CompareOperator.Greater:
+                    {
+                        if (a <= b)
+                            throw new AuctionException("Numer a must be > than b");
+                        break;
+                    }
+                case CompareOperator.LessEqual:
+                    {
+                        if (a > b)
+                            throw new AuctionException("Numer a must be <= than b");
+                        break;
+                    }
+                case CompareOperator.GreaterEqual:
+                    {
+                        if (a < b)
+                            throw new AuctionException("Numer a must be >= than b");
+                        break;
+                    }
+                case CompareOperator.Equal:
+                    {
+                        if (a != b)
+                            throw new AuctionException("Numbers must be equal");
+                        break;
+                    }
+                default:
+                    throw new AuctionException("Incorect operator");
+            }
+        }
     }
 }

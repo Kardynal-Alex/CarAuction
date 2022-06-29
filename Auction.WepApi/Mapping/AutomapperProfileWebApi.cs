@@ -1,5 +1,11 @@
 ﻿using Auction.BLL.DTO;
+using Auction.BLL.DTO.FilterModels;
+using Auction.BLL.DTO.Identity;
+using Auction.BLL.DTO.Lot;
 using Auction.WepApi.Models;
+using Auction.WepApi.Models.FilterModels;
+using Auction.WepApi.Models.Identity;
+using Auction.WepApi.Models.Lot;
 using AutoMapper;
 
 namespace Auction.WepApi.Mapping
@@ -22,6 +28,8 @@ namespace Auction.WepApi.Mapping
             CreateMap<AuthResponseDTO, AuthResponseViewModel>().ReverseMap();
             CreateMap<TwoFactorDTO, TwoFactorViewModel>().ReverseMap();
             CreateMap<AuthorDescriptionDTO, AuthorDescriptionViewModel>().ReverseMap();
+            CreateMap<PageRequestViewModel, PageRequest>().ReverseMap();
+            CreateMap<ComplexFilterViewModel, ComplexFilter>().ReverseMap();
         }
     }
 }

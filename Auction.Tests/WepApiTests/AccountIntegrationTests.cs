@@ -1,5 +1,4 @@
-﻿using Auction.WepApi.Models;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -13,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Net;
 using Auction.DAL.Entities;
 using AutoMapper;
-
+using Auction.WepApi.Models.Identity;
 
 namespace Auction.Tests.WepApiTests
 {

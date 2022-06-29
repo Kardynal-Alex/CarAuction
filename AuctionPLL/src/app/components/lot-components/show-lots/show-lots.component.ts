@@ -6,10 +6,17 @@ import { FavoriteService } from 'src/app/services/favorite.service';
 import { Favorite } from 'src/app/models/favorite';
 import { AuthService } from 'src/app/services/auth.service';
 import { Guid } from 'guid-typescript';
-import { SortMode } from 'src/app/common/sort-mode';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
 import { getStarId, getTimerId } from 'src/app/utils/element-id.service';
 import { FavoriteConstants } from 'src/app/common/constants/favorite-constants';
+import { SortOrder } from 'src/app/models/filter/sort-order';
+import { FilterService } from 'src/app/services/filter.service';
+
+export class FilterConstants {
+  public static readonly Year = 'year';
+  public static readonly StartDateTime = 'startDateTime';
+  public static readonly CurrentPrice = 'currentPrice';
+}
 
 @Component({
   selector: 'app-show-lots',
@@ -18,24 +25,27 @@ import { FavoriteConstants } from 'src/app/common/constants/favorite-constants';
 })
 export class ShowLotsComponent implements OnInit {
 
-  public get SortViewMode(): typeof SortMode {
-    return SortMode;
+  public get SortViewMode(): typeof SortOrder {
+    return SortOrder;
+  }
+  public get FilterConstants(): typeof FilterConstants {
+    return FilterConstants;
   }
 
   constructor(
     private toastrService: ToastrService,
     private lotService: LotService,
     private favoriteService: FavoriteService,
-    private authService: AuthService
+    private authService: AuthService,
+    private filterService: FilterService
   ) { }
 
   public str = {};
   public userId: string = '';
   public isAuth: boolean = false;
   public lots: Lot[];
+  public filterConstants: FilterConstants;
   public ngOnInit() {
-    this.sortField = '';
-    this.sortMode = null;
     this.isAuth = this.authService.isAuthenticated();
     if (this.isAuth) {
       this.userId = this.authService.getUserIdFromToken();
@@ -62,21 +72,26 @@ export class ShowLotsComponent implements OnInit {
       this.lotService.getAllLots()
         .subscribe((res) => {
           this.lots = res;
-          for (let lot of res) {
-            this.initTimer(lot.id, lot.startDateTime);
-            if (this.isAuth) {
-              this.markStars();
-            }
-          }
+          this.initTimerAndMarkStars(res);
         })
       , 1000);
   }
 
-  public sortMode: SortMode;
-  public sortField: string;
-  public sortingData(sortmode: SortMode, sortfield: string) {
-    this.sortMode = sortmode;
-    this.sortField = sortfield;
+  private initTimerAndMarkStars(lots: Lot[]) {
+    for (let lot of lots) {
+      this.initTimer(lot.id, lot.startDateTime);
+      if (this.isAuth) {
+        this.markStars();
+      }
+    }
+  }
+
+  public sortingData(sortOrder: SortOrder, sortfield: string) {
+    this.filterService.sortingData(sortOrder, sortfield)
+      .subscribe((lots) => {
+        this.lots = lots;
+        this.initTimerAndMarkStars(lots);
+      });
   }
 
   public changeStar(lotId: number) {

@@ -60,6 +60,9 @@ namespace Auction.WepApi
            
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwaggerGen();
+
+            //Use global exeption middleware
+            //services.AddTransient<ExceptionHandlingMiddleware>();
         }
         private void ConfigureAspnetRunServices(IServiceCollection services)
         {
@@ -83,6 +86,8 @@ namespace Auction.WepApi
             {
                 app.UseDeveloperExceptionPage();
             }
+            //Use global exeption middleware
+            //app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseHttpsRedirection();
             app.UseCors(options => options.AllowAnyOrigin()

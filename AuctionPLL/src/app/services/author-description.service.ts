@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseUrl } from '../common/constants/urls';
-import { AuthorDescription } from '../models/author-description';
+import { AuthorDescription } from '../models/lot-models/author-description';
 
 @Injectable({ providedIn: 'root' })
 export class AuthorDescriptionService {

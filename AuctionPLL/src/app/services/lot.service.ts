@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Lot } from '../models/lot-models/lot';
-import { AskOwner } from '../models/ask-owner';
 import { Observable } from 'rxjs';
 import { BaseUrl } from '../common/constants/urls';
+import { AskOwner } from '../models/lot-models/ask-owner';
+import { PageRequest } from '../models/filter/page-request';
 
 @Injectable({ providedIn: 'root' })
 export class LotService {
@@ -47,6 +48,10 @@ export class LotService {
 
     public getSoldLots(): Observable<Lot[]> {
         return this.httpClient.get<Lot[]>(`${this.apiUrl}/GetSoldLots/`);
+    }
+
+    public fetchFiltered(filter: PageRequest): Observable<Lot[]> {
+        return this.httpClient.post<Lot[]>(`${this.apiUrl}/FetchFiltered`, filter);
     }
 
     public updateLot(lot: Lot): Observable<Object> {

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { AskOwner } from 'src/app/models/ask-owner';
+import { AskOwner } from 'src/app/models/lot-models/ask-owner';
 import { AuthService } from 'src/app/services/auth.service';
 import { LotService } from 'src/app/services/lot.service';
 

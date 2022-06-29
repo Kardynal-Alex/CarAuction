@@ -1,4 +1,5 @@
-﻿using Auction.BLL.DTO;
+﻿using Auction.BLL.DTO.FilterModels;
+using Auction.BLL.DTO.Lot;
 using Auction.BLL.Interfaces;
 using Auction.BLL.Validation;
 using Auction.DAL.Entities;
@@ -8,7 +9,9 @@ using DinkToPdf.Contracts;
 using PDFGenerator.Models;
 using PDFGenerator.Shared;
 using System;
+using System.Linq;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Auction.BLL.Services
@@ -159,17 +162,17 @@ namespace Auction.BLL.Services
        
         private static void ValidateLotDTO(LotDTO lotDTO)
         {
-            if (lotDTO.NameLot == null || lotDTO.Image == null || lotDTO.Description == null || lotDTO.UserId == null)
-                throw new AuctionException("Invalid text data");
-
-            if (lotDTO.NameLot.Length == 0 || lotDTO.Description.Length == 0 ||
-                lotDTO.UserId.Length == 0 || lotDTO.Image.Length == 0)
-                throw new AuctionException("Invalid length text data");
+            Precognitions.StringIsNullOrEmpty(lotDTO.NameLot);
+            Precognitions.StringIsNullOrEmpty(lotDTO.Image);
+            Precognitions.StringIsNullOrEmpty(lotDTO.Description);
+            Precognitions.StringIsNullOrEmpty(lotDTO.UserId);
 
             if (!double.TryParse(lotDTO.StartPrice.ToString(), out double startPrice) ||
                 !double.TryParse(lotDTO.CurrentPrice.ToString(), out double currentPrice) ||
-                !double.TryParse(lotDTO.Year.ToString(), out double year))
+                !int.TryParse(lotDTO.Year.ToString(), out int year)) 
+            {
                 throw new AuctionException("Invalid number data");
+            }
 
             if (startPrice <= 0 || currentPrice <= 0 || year <= 0 || startPrice > currentPrice || year.ToString().Length != 4)  
                 throw new AuctionException("Invalid number range data");
@@ -204,6 +207,27 @@ namespace Auction.BLL.Services
             Precognitions.StringIsNullOrEmpty(askOwnerDTO.FullName);
             Precognitions.StringIsNullOrEmpty(askOwnerDTO.UserEmail);
             Precognitions.StringIsNullOrEmpty(askOwnerDTO.Text);
+        }
+
+        // Example of query
+        // SELECT * From dbo.Lots WHERE IsSold=0 AND CarBrand IN(1,0)
+        // ORDER BY Id DESC,StartDateTime DESC
+        public async Task<List<LotDTO>> FetchFilteredAsync(PageRequest pageRequest)
+        {
+            var query = new StringBuilder();
+            query.AppendLine("SELECT * From dbo.Lots WHERE IsSold=0");
+            if (pageRequest.CarBrand.Length > 0)
+            {
+                var brands = pageRequest.CarBrand.Select(_ => (int)_);
+                query.AppendLine($"AND CarBrand IN({string.Join(",", brands)}) ");
+            }
+            if (pageRequest.ComplexFilter.Length > 0)
+            {
+                var orders = pageRequest.ComplexFilter.Select(_ => $"{_.Field} {_.SortOrder} ");
+                query.AppendLine($"ORDER BY {string.Join(",", orders)} ");
+            }
+            var result = await unitOfWork.LotRepository.FetchFilteredAsync(query.ToString());
+            return mapper.Map<List<LotDTO>>(result);
         }
     }
 }
