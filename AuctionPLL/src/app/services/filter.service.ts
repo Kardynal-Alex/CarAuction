@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ComplexFilter } from '../models/filter/complex-filter';
 import { PageRequest } from '../models/filter/page-request';
 import { SortOrder } from '../models/filter/sort-order';
 import { Lot } from '../models/lot-models/lot';
@@ -10,8 +11,7 @@ export class FilterService {
     private filter: PageRequest;
     constructor(private lotService: LotService) {
         this.filter = {
-            carBrand: [0, 1, 2, 3, 4, 5, 6],//use dropdown to use car brand
-            complexFilter: []
+            carBrand: [], complexFilter: []
         };
     }
 
@@ -23,7 +23,11 @@ export class FilterService {
         } else {
             this.changeFilterSortOrder(sortOrder, sortfield);
         }
-        console.log(this.filter);//remove
+        return this.lotService.fetchFiltered(this.filter);
+    }
+
+    public sortByCarBrand(carBrand: any[]): Observable<Lot[]> {
+        this.filter.carBrand = carBrand;
         return this.lotService.fetchFiltered(this.filter);
     }
 
@@ -31,7 +35,7 @@ export class FilterService {
         this.filter.complexFilter.push({
             field: sortfield,
             sortOrder: sortOrder
-        });
+        } as ComplexFilter);
     }
     private removeFilter(sortfield: string) {
         this.filter.complexFilter = this.filter.complexFilter.filter(((_) => _.field !== sortfield));

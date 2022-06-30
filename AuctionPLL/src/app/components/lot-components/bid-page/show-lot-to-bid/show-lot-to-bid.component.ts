@@ -27,6 +27,10 @@ import { AuthorDescription } from 'src/app/models/lot-models/author-description'
   styleUrls: ['./show-lot-to-bid.component.less']
 })
 export class ShowLotToBidComponent implements OnInit, OnDestroy {
+  public get FavoriteConstants(): FavoriteConstants {
+    return FavoriteConstants;
+  }
+
   public id: number;
   constructor(
     private activateRoute: ActivatedRoute,

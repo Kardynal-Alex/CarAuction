@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { LotService } from 'src/app/services/lot.service';
 import { Lot } from '../../../models/lot-models/lot';
@@ -11,6 +11,11 @@ import { getStarId, getTimerId } from 'src/app/utils/element-id.service';
 import { FavoriteConstants } from 'src/app/common/constants/favorite-constants';
 import { SortOrder } from 'src/app/models/filter/sort-order';
 import { FilterService } from 'src/app/services/filter.service';
+import { CarBrandArray, CarBrands } from 'src/app/models/lot-models/car-brand';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/core';
+import { BehaviorSubject } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
 
 export class FilterConstants {
   public static readonly Year = 'year';
@@ -31,6 +36,12 @@ export class ShowLotsComponent implements OnInit {
   public get FilterConstants(): typeof FilterConstants {
     return FilterConstants;
   }
+  public get CarBrands() {
+    return CarBrandArray;
+  }
+  public get FavoriteConstants(): FavoriteConstants {
+    return FavoriteConstants;
+  }
 
   constructor(
     private toastrService: ToastrService,
@@ -44,7 +55,9 @@ export class ShowLotsComponent implements OnInit {
   public userId: string = '';
   public isAuth: boolean = false;
   public lots: Lot[];
+  public runSpinner = new BehaviorSubject<boolean>(false);
   public filterConstants: FilterConstants;
+  public CarBrandMapping = CarBrands;
   public ngOnInit() {
     this.isAuth = this.authService.isAuthenticated();
     if (this.isAuth) {
@@ -68,13 +81,15 @@ export class ShowLotsComponent implements OnInit {
   }
 
   public getLots() {
-    setTimeout(() =>
-      this.lotService.getAllLots()
-        .subscribe((res) => {
-          this.lots = res;
-          this.initTimerAndMarkStars(res);
-        })
-      , 1000);
+    this.lotService.getAllLots()
+      .pipe(tap((_) => this.runSpinner.next(true)), delay(1000))
+      .subscribe((res) => {
+        this.lots = res;
+        this.runSpinner.next(false);
+        this.initTimerAndMarkStars(res);
+      }, () => {
+        this.runSpinner.next(false);
+      })
   }
 
   private initTimerAndMarkStars(lots: Lot[]) {
@@ -86,12 +101,34 @@ export class ShowLotsComponent implements OnInit {
     }
   }
 
-  public sortingData(sortOrder: SortOrder, sortfield: string) {
-    this.filterService.sortingData(sortOrder, sortfield)
+  public sortingData(sortOrder: any, sortfield: string) {
+    this.filterService.sortingData(sortOrder.value, sortfield)
       .subscribe((lots) => {
         this.lots = lots;
         this.initTimerAndMarkStars(lots);
       });
+  }
+
+  public selectCarBrands(isOpened: boolean) {
+    if (!isOpened) {
+      this.filterService.sortByCarBrand(this.multSelectBrand.value)
+        .subscribe((lots) => {
+          this.lots = lots;
+          this.initTimerAndMarkStars(lots);
+        });
+    }
+  }
+
+  private allSelected = false;
+  @ViewChild('multiple') multSelectBrand: MatSelect;
+  public toggleAllSelection() {
+    this.allSelected = !this.allSelected;
+    if (this.allSelected) {
+      this.multSelectBrand.options.forEach((item: MatOption) => item.select());
+    } else {
+      this.multSelectBrand.options.forEach((item: MatOption) => { item.deselect() });
+    }
+    this.multSelectBrand.close();
   }
 
   public changeStar(lotId: number) {
