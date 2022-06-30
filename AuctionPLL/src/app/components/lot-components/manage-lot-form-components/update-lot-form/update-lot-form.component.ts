@@ -8,7 +8,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
-import { AuthorDescription } from 'src/app/models/author-description';
+import { AuthorDescription } from 'src/app/models/lot-models/author-description';
 import { Images } from 'src/app/models/lot-models/images';
 import { Lot } from 'src/app/models/lot-models/lot';
 import { AuthService } from 'src/app/services/auth.service';

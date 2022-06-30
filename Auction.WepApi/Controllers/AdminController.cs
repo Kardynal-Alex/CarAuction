@@ -1,6 +1,6 @@
 ﻿using Auction.BLL.Interfaces;
 using Auction.WepApi.Logs;
-using Auction.WepApi.Models;
+using Auction.WepApi.Models.Identity;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

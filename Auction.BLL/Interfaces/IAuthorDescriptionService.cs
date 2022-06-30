@@ -1,4 +1,4 @@
-﻿using Auction.BLL.DTO;
+﻿using Auction.BLL.DTO.Lot;
 using System.Threading.Tasks;
 
 namespace Auction.BLL.Interfaces

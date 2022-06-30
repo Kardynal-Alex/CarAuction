@@ -89,17 +89,23 @@ namespace Auction.DAL.Repositories
     
         public async Task<List<Lot>> GetUserBidsAsync(string futureOwnerId)
         {
-            var list = from lst1 in context.Lots.Include(x => x.User)
-                       from lst2 in context.LotStates
-                       where lst2.FutureOwnerId == futureOwnerId && lst1.Id == lst2.LotId
-                       && lst2.OwnerId != futureOwnerId
-                       select lst1;
-            return await list.ToListAsync();
+            return await (
+                from lst1 in context.Lots.Include(l => l.User)
+                from lst2 in context.LotStates
+                where lst2.FutureOwnerId == futureOwnerId && lst1.Id == lst2.LotId
+                && lst2.OwnerId != futureOwnerId
+                select lst1
+                ).ToListAsync();
         }
        
         public void UpdateLot(Lot updateLot)
         {
             context.Entry(updateLot).State = EntityState.Modified;
+        }
+
+        public async Task<List<Lot>> FetchFilteredAsync(string query)
+        {
+            return await context.Lots.FromSqlRaw(query).ToListAsync();
         }
     }
 }

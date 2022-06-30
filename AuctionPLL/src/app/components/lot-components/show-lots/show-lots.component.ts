@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { LotService } from 'src/app/services/lot.service';
 import { Lot } from '../../../models/lot-models/lot';
@@ -6,10 +6,22 @@ import { FavoriteService } from 'src/app/services/favorite.service';
 import { Favorite } from 'src/app/models/favorite';
 import { AuthService } from 'src/app/services/auth.service';
 import { Guid } from 'guid-typescript';
-import { SortMode } from 'src/app/common/sort-mode';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
 import { getStarId, getTimerId } from 'src/app/utils/element-id.service';
 import { FavoriteConstants } from 'src/app/common/constants/favorite-constants';
+import { SortOrder } from 'src/app/models/filter/sort-order';
+import { FilterService } from 'src/app/services/filter.service';
+import { CarBrandArray, CarBrands } from 'src/app/models/lot-models/car-brand';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/core';
+import { BehaviorSubject } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
+
+export class FilterConstants {
+  public static readonly Year = 'year';
+  public static readonly StartDateTime = 'startDateTime';
+  public static readonly CurrentPrice = 'currentPrice';
+}
 
 @Component({
   selector: 'app-show-lots',
@@ -18,24 +30,35 @@ import { FavoriteConstants } from 'src/app/common/constants/favorite-constants';
 })
 export class ShowLotsComponent implements OnInit {
 
-  public get SortViewMode(): typeof SortMode {
-    return SortMode;
+  public get SortViewMode(): typeof SortOrder {
+    return SortOrder;
+  }
+  public get FilterConstants(): typeof FilterConstants {
+    return FilterConstants;
+  }
+  public get CarBrands() {
+    return CarBrandArray;
+  }
+  public get FavoriteConstants(): FavoriteConstants {
+    return FavoriteConstants;
   }
 
   constructor(
     private toastrService: ToastrService,
     private lotService: LotService,
     private favoriteService: FavoriteService,
-    private authService: AuthService
+    private authService: AuthService,
+    private filterService: FilterService
   ) { }
 
   public str = {};
   public userId: string = '';
   public isAuth: boolean = false;
   public lots: Lot[];
+  public runSpinner = new BehaviorSubject<boolean>(false);
+  public filterConstants: FilterConstants;
+  public CarBrandMapping = CarBrands;
   public ngOnInit() {
-    this.sortField = '';
-    this.sortMode = null;
     this.isAuth = this.authService.isAuthenticated();
     if (this.isAuth) {
       this.userId = this.authService.getUserIdFromToken();
@@ -58,25 +81,54 @@ export class ShowLotsComponent implements OnInit {
   }
 
   public getLots() {
-    setTimeout(() =>
-      this.lotService.getAllLots()
-        .subscribe((res) => {
-          this.lots = res;
-          for (let lot of res) {
-            this.initTimer(lot.id, lot.startDateTime);
-            if (this.isAuth) {
-              this.markStars();
-            }
-          }
-        })
-      , 1000);
+    this.lotService.getAllLots()
+      .pipe(tap((_) => this.runSpinner.next(true)), delay(1000))
+      .subscribe((res) => {
+        this.lots = res;
+        this.runSpinner.next(false);
+        this.initTimerAndMarkStars(res);
+      }, () => {
+        this.runSpinner.next(false);
+      })
   }
 
-  public sortMode: SortMode;
-  public sortField: string;
-  public sortingData(sortmode: SortMode, sortfield: string) {
-    this.sortMode = sortmode;
-    this.sortField = sortfield;
+  private initTimerAndMarkStars(lots: Lot[]) {
+    for (let lot of lots) {
+      this.initTimer(lot.id, lot.startDateTime);
+      if (this.isAuth) {
+        this.markStars();
+      }
+    }
+  }
+
+  public sortingData(sortOrder: any, sortfield: string) {
+    this.filterService.sortingData(sortOrder.value, sortfield)
+      .subscribe((lots) => {
+        this.lots = lots;
+        this.initTimerAndMarkStars(lots);
+      });
+  }
+
+  public selectCarBrands(isOpened: boolean) {
+    if (!isOpened) {
+      this.filterService.sortByCarBrand(this.multSelectBrand.value)
+        .subscribe((lots) => {
+          this.lots = lots;
+          this.initTimerAndMarkStars(lots);
+        });
+    }
+  }
+
+  private allSelected = false;
+  @ViewChild('multiple') multSelectBrand: MatSelect;
+  public toggleAllSelection() {
+    this.allSelected = !this.allSelected;
+    if (this.allSelected) {
+      this.multSelectBrand.options.forEach((item: MatOption) => item.select());
+    } else {
+      this.multSelectBrand.options.forEach((item: MatOption) => { item.deselect() });
+    }
+    this.multSelectBrand.close();
   }
 
   public changeStar(lotId: number) {

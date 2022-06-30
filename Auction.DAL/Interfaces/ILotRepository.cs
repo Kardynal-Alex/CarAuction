@@ -19,5 +19,6 @@ namespace Auction.DAL.Interfaces
         Task<List<Lot>> GetFreshLots();
         Task<List<Lot>> GetFavoriteLotsByUserIdAsync(string userId);
         Task<List<Lot>> GetSoldLotsAsync();
+        Task<List<Lot>> FetchFilteredAsync(string query);
     }
 }

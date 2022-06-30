@@ -1,4 +1,4 @@
-﻿using Auction.BLL.DTO;
+﻿using Auction.BLL.DTO.Identity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

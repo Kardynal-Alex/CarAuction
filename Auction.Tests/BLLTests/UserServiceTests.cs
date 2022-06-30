@@ -1,5 +1,5 @@
 ﻿using Auction.BLL.Configure;
-using Auction.BLL.DTO;
+using Auction.BLL.DTO.Identity;
 using Auction.BLL.Services;
 using Auction.BLL.Validation;
 using Auction.DAL.EF;
@@ -19,7 +19,7 @@ using IdentityConstants = Auction.DAL.EF.IdentityConstants;
 
 namespace Auction.Tests.BLLTests
 {
-  
+
     [TestFixture]
     public class UserServiceTests
     {

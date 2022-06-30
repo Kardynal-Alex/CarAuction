@@ -1,5 +1,5 @@
 ﻿using Auction.BLL.Configure;
-using Auction.BLL.DTO;
+using Auction.BLL.DTO.Identity;
 using Auction.BLL.Interfaces;
 using Auction.BLL.Validation;
 using Auction.DAL.Entities;

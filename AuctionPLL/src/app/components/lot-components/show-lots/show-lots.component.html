@@ -1,35 +1,47 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="sort">
-  <button mat-button [matMenuTriggerFor]="sortprice">Sort By Price</button>
-  <mat-menu #sortprice="matMenu">
-    <button (click)="sortingData(null,'')" mat-menu-item>Remove filter</button>
-    <button (click)="sortingData(SortViewMode.asc,'currentPrice')" mat-menu-item>Ascending</button>
-    <button (click)="sortingData(SortViewMode.desc,'currentPrice')" mat-menu-item>Descending</button>
-  </mat-menu>
-  <button mat-button [matMenuTriggerFor]="sortdate">Sort by Date</button>
-  <mat-menu #sortdate="matMenu">
-    <button (click)="sortingData(null,'')" mat-menu-item>Remove filter</button>
-    <button (click)="sortingData(SortViewMode.asc,'startDateTime')" mat-menu-item>Ascending</button>
-    <button (click)="sortingData(SortViewMode.desc,'startDateTime')" mat-menu-item>Descending</button>
-  </mat-menu>
-  <button mat-button [matMenuTriggerFor]="sortyear">Sort by Date</button>
-  <mat-menu #sortyear="matMenu">
-    <button (click)="sortingData(null,'')" mat-menu-item>Remove filter</button>
-    <button (click)="sortingData(SortViewMode.asc,'year')" mat-menu-item>Ascending</button>
-    <button (click)="sortingData(SortViewMode.desc,'year')" mat-menu-item>Descending</button>
-  </mat-menu>
+  <mat-form-field appearance="fill">
+    <mat-label>Price</mat-label>
+    <mat-select (selectionChange)="sortingData($event, FilterConstants.CurrentPrice)">
+      <mat-option [value]="null">Empty</mat-option>
+      <mat-option [value]="SortViewMode.ASC">Price asc</mat-option>
+      <mat-option [value]="SortViewMode.DESC">Price desc</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Date creation</mat-label>
+    <mat-select (selectionChange)="sortingData($event, FilterConstants.StartDateTime)">
+      <mat-option [value]="null">Empty</mat-option>
+      <mat-option [value]="SortViewMode.ASC">Date asc</mat-option>
+      <mat-option [value]="SortViewMode.DESC">Date desc</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Price</mat-label>
+    <mat-select (selectionChange)="sortingData($event, FilterConstants.Year)">
+      <mat-option [value]="null">Empty</mat-option>
+      <mat-option [value]="SortViewMode.ASC">Year asc</mat-option>
+      <mat-option [value]="SortViewMode.DESC">Year desc</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Car Brand</mat-label>
+    <mat-select multiple (openedChange)="selectCarBrands($event)" #multiple>
+      <mat-option [value]="-1" (click)="toggleAllSelection()">All items</mat-option>
+      <mat-option *ngFor="let brand of CarBrands" [value]="brand">{{CarBrandMapping[brand]}}</mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 <hr>
 <div class="lots">
-  <app-mat-spinner *ngIf="!lots?.length" [diameter]="500" [strokeWidth]="50"></app-mat-spinner>
-  <div *ngFor="let lot of lots | sort:sortMode:sortField">
+  <app-mat-spinner *ngIf="runSpinner.value" [diameter]="500" [strokeWidth]="50"></app-mat-spinner>
+  <div *ngFor="let lot of lots">
     <div class="card" *ngIf="!lot.isSold">
       <div class="timer">
         <p id="timer-{{lot.id}}"></p>
       </div>
       <img [src]="createImgPath(lot.image)" alt="profile picture">
       <div class="favorite">
-        <a id="star-{{lot.id}}" class="unstar" (click)="changeStar(lot.id)">&#9733;</a>
+        <a id="star-{{lot.id}}" [class]="FavoriteConstants.UNSTAR" (click)="changeStar(lot.id)">&#9733;</a>
       </div>
       <div class="main-block">
         <p bold>{{lot.nameLot}}</p>

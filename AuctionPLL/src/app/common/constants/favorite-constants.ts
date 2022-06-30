@@ -1,4 +1,4 @@
 export class FavoriteConstants {
-    public static STAR = 'star';
-    public static UNSTAR = 'unstar';
+    public static readonly STAR = 'star';
+    public static readonly UNSTAR = 'unstar';
 }

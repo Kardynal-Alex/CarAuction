@@ -15,11 +15,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShowLotImagesComponent } from '../show-lot-images/show-lot-images.component';
 import { AskOwnerFormComponent } from '../ask-owner-form/ask-owner-form.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { AuthorDescription } from 'src/app/models/author-description';
 import { AuthorDescriptionService } from 'src/app/services/author-description.service';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
 import { getStarId, getTimerId } from 'src/app/utils/element-id.service';
 import { FavoriteConstants } from 'src/app/common/constants/favorite-constants';
+import { AuthorDescription } from 'src/app/models/lot-models/author-description';
 
 @Component({
   selector: 'app-show-lot-to-bid',
@@ -27,6 +27,10 @@ import { FavoriteConstants } from 'src/app/common/constants/favorite-constants';
   styleUrls: ['./show-lot-to-bid.component.less']
 })
 export class ShowLotToBidComponent implements OnInit, OnDestroy {
+  public get FavoriteConstants(): FavoriteConstants {
+    return FavoriteConstants;
+  }
+
   public id: number;
   constructor(
     private activateRoute: ActivatedRoute,

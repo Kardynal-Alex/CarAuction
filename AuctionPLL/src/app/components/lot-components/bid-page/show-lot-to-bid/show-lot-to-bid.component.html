@@ -2,7 +2,8 @@
     <div class="col-70">
         <div class="lot" *ngIf="!!lot">
             <div class="header-text">
-                {{lot?.nameLot}} <a class="unstar" id="star-{{lot.id}}" (click)="changeStar(lot.id)">&#9733;</a>
+                {{lot?.nameLot}} <a [class]="FavoriteConstants.UNSTAR" id="star-{{lot.id}}"
+                    (click)="changeStar(lot.id)">&#9733;</a>
             </div>
             <div class="description-text">
                 <p>{{lot?.description}}</p>
