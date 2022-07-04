@@ -71,18 +71,6 @@ export class UpdateLotFormComponent extends BaseLotFormComponent implements OnIn
       });
   }
 
-  private initAuthorDescriptionForm(authorDescription: AuthorDescription) {
-    this.authorDescription = authorDescription;
-    const description = !!authorDescription?.description ? authorDescription?.description : null;
-    this.isNewDescription = !description;
-    this.authorForm = this.formBuilder1.group({
-      description: [description, [
-        Validators.required,
-        Validators.minLength(20)
-      ]]
-    });
-  }
-
   public createAuthorDescription() {
     const description = this.authorForm.controls.description.value;
     if (this.isNewDescription) {
@@ -124,6 +112,26 @@ export class UpdateLotFormComponent extends BaseLotFormComponent implements OnIn
       }, (_) => this.toastrService.error(ErrorMessages.Error));
   }
 
+  public toggleForm() {
+    this.isCollapsedForm = !this.isCollapsedForm;
+  }
+
+  public toggleAuthorOpinion() {
+    this.isCollapsedAuthorOpinion = !this.isCollapsedAuthorOpinion;
+  }
+
+  private initAuthorDescriptionForm(authorDescription: AuthorDescription) {
+    this.authorDescription = authorDescription;
+    const description = !!authorDescription?.description ? authorDescription?.description : null;
+    this.isNewDescription = !description;
+    this.authorForm = this.formBuilder1.group({
+      description: [description, [
+        Validators.required,
+        Validators.minLength(20)
+      ]]
+    });
+  }
+
   private getImages(): Images {
     let images: Images = new Images();
 
@@ -135,14 +143,6 @@ export class UpdateLotFormComponent extends BaseLotFormComponent implements OnIn
     }
 
     return images;
-  }
-
-  public toggleForm() {
-    this.isCollapsedForm = !this.isCollapsedForm;
-  }
-
-  public toggleAuthorOpinion() {
-    this.isCollapsedAuthorOpinion = !this.isCollapsedAuthorOpinion;
   }
 
 }

@@ -18,9 +18,4 @@ export class Lot {
     lotState: LotState;
     images: Images;
     carBrand: CarBrand;
-    constructor(
-        id: number, nameLot: string, startPrice: number, isSold: boolean,
-        image: string, description: string, userId: string, startDatetime: Date,
-        currentPrice: number, year: number, carBrand: CarBrand
-    ) { }
 }

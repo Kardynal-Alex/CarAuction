@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -12,8 +12,10 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
   templateUrl: './two-step-verification.component.html',
   styleUrls: ['./two-step-verification.component.less']
 })
-export class TwoStepVerificationComponent implements OnInit {
+export class TwoStepVerificationComponent {
 
+  private provider: string;
+  private email: string;
   constructor(
     private toastrService: ToastrService,
     private route: ActivatedRoute,
@@ -22,14 +24,10 @@ export class TwoStepVerificationComponent implements OnInit {
     private router: Router
   ) { }
 
-  private provider: string;
-  private email: string;
-  public ngOnInit() { }
-
   public login(form: NgForm) {
     this.provider = this.route.snapshot.queryParams['provider'];
     this.email = this.route.snapshot.queryParams['email'];
-    let twoFactor: TwoFactor = {
+    const twoFactor: TwoFactor = {
       email: this.email,
       provider: this.provider,
       token: form.value.token

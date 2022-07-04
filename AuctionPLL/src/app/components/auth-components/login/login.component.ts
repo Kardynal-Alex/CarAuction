@@ -17,6 +17,9 @@ import { Login } from 'src/app/models/auth-models/login';
 })
 export class LoginComponent implements OnInit {
 
+  public isAuth: boolean = false;
+  public modalOptions: NgbModalOptions;
+  public loginForm: UntypedFormGroup;
   constructor(
     private authService: AuthService,
     private toastrService: ToastrService,
@@ -29,24 +32,14 @@ export class LoginComponent implements OnInit {
     this.initLoginForm();
   }
 
-  public modalOptions: NgbModalOptions;
-  public loginForm: UntypedFormGroup;
   public ngOnInit() {
     this.isAuth = this.authService.isAuthenticated();
-  }
-
-  private initLoginForm() {
-    this.loginForm = this.formBuilder.group({
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.minLength(6)]]
-    });
   }
 
   public ngDoCheck() {
     this.isAuth = this.authService.isAuthenticated();
   }
 
-  public isAuth: boolean = false;
   public login() {
     const loginUser: Login = this.loginForm.value;
     this.authService.login(loginUser)
@@ -92,5 +85,12 @@ export class LoginComponent implements OnInit {
 
   public close() {
     this.activeModal.close();
+  }
+
+  private initLoginForm() {
+    this.loginForm = this.formBuilder.group({
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required, Validators.minLength(6)]]
+    });
   }
 }

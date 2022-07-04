@@ -43,6 +43,16 @@ export class ShowLotsComponent implements OnInit {
     return FavoriteConstants;
   }
 
+  public str = {};
+  public userId: string = '';
+  public isAuth: boolean = false;
+  public lots: Lot[];
+  public runSpinner = new BehaviorSubject<boolean>(false);
+  public filterConstants: FilterConstants;
+  public CarBrandMapping = CarBrands;
+  public favorites: Favorite[];
+  private allSelected = false;
+  @ViewChild('multiple') public multSelectBrand: MatSelect;
   constructor(
     private toastrService: ToastrService,
     private lotService: LotService,
@@ -51,54 +61,12 @@ export class ShowLotsComponent implements OnInit {
     private filterService: FilterService
   ) { }
 
-  public str = {};
-  public userId: string = '';
-  public isAuth: boolean = false;
-  public lots: Lot[];
-  public runSpinner = new BehaviorSubject<boolean>(false);
-  public filterConstants: FilterConstants;
-  public CarBrandMapping = CarBrands;
   public ngOnInit() {
     this.isAuth = this.authService.isAuthenticated();
     if (this.isAuth) {
       this.userId = this.authService.getUserIdFromToken();
     }
     this.getLots();
-  }
-
-  private markStars() {
-    this.favoriteService.getUserFavorite(this.userId)
-      .subscribe((response) => {
-        this.favorites = response;
-        setTimeout(() => {
-          for (let favorite of response) {
-            var x = document.getElementById(getStarId(favorite.lotId));
-            if (x != null)
-              x.className = FavoriteConstants.STAR;
-          }
-        }, 500);
-      });
-  }
-
-  public getLots() {
-    this.lotService.getAllLots()
-      .pipe(tap((_) => this.runSpinner.next(true)), delay(1000))
-      .subscribe((res) => {
-        this.lots = res;
-        this.runSpinner.next(false);
-        this.initTimerAndMarkStars(res);
-      }, () => {
-        this.runSpinner.next(false);
-      })
-  }
-
-  private initTimerAndMarkStars(lots: Lot[]) {
-    for (let lot of lots) {
-      this.initTimer(lot.id, lot.startDateTime);
-      if (this.isAuth) {
-        this.markStars();
-      }
-    }
   }
 
   public sortingData(sortOrder: any, sortfield: string) {
@@ -119,8 +87,10 @@ export class ShowLotsComponent implements OnInit {
     }
   }
 
-  private allSelected = false;
-  @ViewChild('multiple') multSelectBrand: MatSelect;
+  public createImgPath(serverPath: string): string {
+    return this.lotService.createImgPath(serverPath);
+  }
+
   public toggleAllSelection() {
     this.allSelected = !this.allSelected;
     if (this.allSelected) {
@@ -136,7 +106,6 @@ export class ShowLotsComponent implements OnInit {
       this.addToFavorite(lotId) : this.removeFromFavorite(lotId);
   }
 
-  public favorites: Favorite[];
   private addToFavorite(lotId: number) {
     if (this.isAuth) {
       const favorite: Favorite = {
@@ -166,14 +135,11 @@ export class ShowLotsComponent implements OnInit {
       });
   }
 
-  public createImgPath(serverPath: string): string {
-    return this.lotService.createImgPath(serverPath);
-  }
-
   private checkLotIfTimerIsExpired(id: number) {
     var index = this.lots.findIndex(x => x.id == id);
     var lot = this.lots[index];
 
+    return;//remove email sending is not active
     if (lot.startPrice < lot.currentPrice) {
       lot.isSold = true;
       this.lotService.updateLotAfterClosing(lot)
@@ -192,7 +158,7 @@ export class ShowLotsComponent implements OnInit {
     }
   }
 
-  public initTimer(id: number, date: Date) {
+  private initTimer(id: number, date: Date) {
     var dead = new Date(date);
     dead.setDate(dead.getDate() + 15);
     var deadline = new Date(dead).getTime();
@@ -214,6 +180,41 @@ export class ShowLotsComponent implements OnInit {
         return;
       }
     }, 1000);
+  }
+
+  private markStars() {
+    this.favoriteService.getUserFavorite(this.userId)
+      .subscribe((response) => {
+        this.favorites = response;
+        setTimeout(() => {
+          for (let favorite of response) {
+            var x = document.getElementById(getStarId(favorite.lotId));
+            if (x != null)
+              x.className = FavoriteConstants.STAR;
+          }
+        }, 500);
+      });
+  }
+
+  private getLots() {
+    this.lotService.getAllLots()
+      .pipe(tap((_) => this.runSpinner.next(true)), delay(1000))
+      .subscribe((res) => {
+        this.lots = res;
+        this.runSpinner.next(false);
+        this.initTimerAndMarkStars(res);
+      }, () => {
+        this.runSpinner.next(false);
+      });
+  }
+
+  private initTimerAndMarkStars(lots: Lot[]) {
+    lots.forEach((lot) => {
+      this.initTimer(lot.id, lot.startDateTime);
+      if (this.isAuth) {
+        this.markStars();
+      }
+    });
   }
 
 }

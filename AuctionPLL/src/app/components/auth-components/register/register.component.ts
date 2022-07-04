@@ -14,28 +14,19 @@ import { ErrorMessages } from 'src/app/common/constants/error-messages';
   styleUrls: ['./register.component.less']
 })
 export class RegisterComponent implements OnInit {
+
+  public registerForm: UntypedFormGroup;
+  private ONLY_STRING_PATTERN = '[a-zA-Z]*';
   constructor(
     private authService: AuthService,
     private toastrService: ToastrService,
     private modalService: NgbModal,
     private activeModal: NgbActiveModal,
     private formBuilder: UntypedFormBuilder
-  ) {
-    this.initRegisterForm();
-  }
+  ) { }
 
-  public registerForm: UntypedFormGroup;
   public ngOnInit(): void {
-  }
-
-  private ONLY_STRING_PATTERN = '[a-zA-Z]*';
-  private initRegisterForm() {
-    this.registerForm = this.formBuilder.group({
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.minLength(6)]],
-      name: [null, [Validators.required, Validators.pattern(this.ONLY_STRING_PATTERN)]],
-      surname: [null, [Validators.required, Validators.pattern(this.ONLY_STRING_PATTERN)]]
-    });
+    this.initRegisterForm();
   }
 
   public register() {
@@ -64,5 +55,14 @@ export class RegisterComponent implements OnInit {
 
   public close() {
     this.activeModal.close();
+  }
+
+  private initRegisterForm() {
+    this.registerForm = this.formBuilder.group({
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required, Validators.minLength(6)]],
+      name: [null, [Validators.required, Validators.pattern(this.ONLY_STRING_PATTERN)]],
+      surname: [null, [Validators.required, Validators.pattern(this.ONLY_STRING_PATTERN)]]
+    });
   }
 }

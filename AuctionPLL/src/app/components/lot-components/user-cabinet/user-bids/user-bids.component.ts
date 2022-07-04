@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Lot } from 'src/app/models/lot-models/lot';
 import { LotService } from 'src/app/services/lot.service';
-import { tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -11,15 +10,12 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./user-bids.component.less']
 })
 export class UserBidsComponent implements OnInit, OnDestroy {
+
   public lots$ = new BehaviorSubject<Lot[]>([]);
   constructor(
     private lotService: LotService,
     private authService: AuthService
   ) { }
-
-  public getUserId(): string {
-    return this.authService.getUserIdFromToken();
-  }
 
   public ngOnInit(): void {
     const userId = this.getUserId();
@@ -33,6 +29,10 @@ export class UserBidsComponent implements OnInit, OnDestroy {
 
   public createImgPath(serverPath: string): string {
     return this.lotService.createImgPath(serverPath);
+  }
+
+  private getUserId(): string {
+    return this.authService.getUserIdFromToken();
   }
 
 }

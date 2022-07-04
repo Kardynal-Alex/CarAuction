@@ -17,14 +17,14 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class FavoriteLotComponent implements OnInit, OnDestroy {
 
+  public lots$ = new BehaviorSubject<Lot[]>([]);
+  public userId: string;
   constructor(
     private lotService: LotService,
     private favoriteService: FavoriteService,
     private authService: AuthService
   ) { }
 
-  public lots$ = new BehaviorSubject<Lot[]>([]);
-  public userId: string;
   public ngOnInit(): void {
     this.userId = this.authService.getUserIdFromToken();
     this.getLots(this.userId);
@@ -32,11 +32,6 @@ export class FavoriteLotComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.lots$.complete();
-  }
-
-  getLots(userId: string) {
-    this.lotService.getFavoriteUsersLots(userId)
-      .subscribe((_) => this.lots$.next(_));
   }
 
   public createImgPath(serverPath: string) {
@@ -53,6 +48,11 @@ export class FavoriteLotComponent implements OnInit, OnDestroy {
       .subscribe((_) => {
         this.lots$.next(this.lots$.value.filter((x) => x.id != lotId));
       });
+  }
+
+  private getLots(userId: string) {
+    this.lotService.getFavoriteUsersLots(userId)
+      .subscribe((_) => this.lots$.next(_));
   }
 
 }

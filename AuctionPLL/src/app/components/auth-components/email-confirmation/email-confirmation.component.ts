@@ -14,7 +14,8 @@ export class EmailConfirmationComponent implements OnInit {
     private authService: AuthService,
     private route: ActivatedRoute,
     private toastrService: ToastrService,
-    private router: Router) { }
+    private router: Router
+  ) { }
 
   public ngOnInit(): void {
     this.confirmEmail();

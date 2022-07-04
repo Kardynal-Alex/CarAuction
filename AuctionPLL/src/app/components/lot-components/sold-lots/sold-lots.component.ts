@@ -13,9 +13,9 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SoldLotsComponent implements OnInit, OnDestroy {
 
+  public lots$ = new BehaviorSubject<Lot[]>([]);
   constructor(private lotService: LotService) { }
 
-  public lots$ = new BehaviorSubject<Lot[]>([]);
   public ngOnInit() {
     this.getLots();
   }
@@ -24,12 +24,12 @@ export class SoldLotsComponent implements OnInit, OnDestroy {
     this.lots$.complete();
   }
 
-  public getLots() {
-    this.lotService.getSoldLots()
-      .subscribe((_) => this.lots$.next(_));
-  }
-
   public createImgPath(serverPath: string): string {
     return this.lotService.createImgPath(serverPath);
+  }
+
+  private getLots() {
+    this.lotService.getSoldLots()
+      .subscribe((_) => this.lots$.next(_));
   }
 }

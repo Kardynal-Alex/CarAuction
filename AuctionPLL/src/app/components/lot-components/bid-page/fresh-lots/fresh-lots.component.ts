@@ -11,21 +11,15 @@ import { LotService } from 'src/app/services/lot.service';
 })
 export class FreshLotsComponent implements OnInit {
 
+  @Input() public lot: Lot;
+  public lots: Lot[];
   constructor(
     private lotService: LotService,
     private router: Router
   ) { }
 
-  @Input() lot: Lot;
-  public lots: Lot[];
   public ngOnInit() {
     this.getFreshLots();
-  }
-
-  public getFreshLots() {
-    this.lotService.getFreshLots()
-      .pipe(tap((lots) => this.lots = lots))
-      .subscribe();
   }
 
   public createImgPath(serverPath: string): string {
@@ -36,6 +30,12 @@ export class FreshLotsComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate([`/bid/lot/${id}`]);
+  }
+
+  private getFreshLots() {
+    this.lotService.getFreshLots()
+      .pipe(tap((lots) => this.lots = lots))
+      .subscribe();
   }
 
 }

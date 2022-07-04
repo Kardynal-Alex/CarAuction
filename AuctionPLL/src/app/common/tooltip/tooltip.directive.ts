@@ -6,11 +6,11 @@ import { AwesomeTooltipComponent } from './tooltip.component';
 
 @Directive({ selector: '[awesomeTooltip]' })
 export class AwesomeTooltipDirective implements OnInit {
+
     @Input('awesomeTooltip') text = '';
-    private overlayRef: OverlayRef;
     @Input() showToolTip: boolean = true;
     @Input() contentTemplate: TemplateRef<any>;
-
+    private overlayRef: OverlayRef;
     constructor(
         private overlay: Overlay,
         private overlayPositionBuilder: OverlayPositionBuilder,
@@ -33,8 +33,12 @@ export class AwesomeTooltipDirective implements OnInit {
         this.overlayRef = this.overlay.create({ positionStrategy });
     }
 
+    public ngOnDestroy() {
+        this.closeToolTip();
+    }
+
     @HostListener('mouseenter')
-    show() {
+    public show() {
         if (this.overlayRef && !this.overlayRef.hasAttached()) {
             const tooltipRef: ComponentRef<AwesomeTooltipComponent>
                 = this.overlayRef.attach(new ComponentPortal(AwesomeTooltipComponent));
@@ -44,11 +48,7 @@ export class AwesomeTooltipDirective implements OnInit {
     }
 
     @HostListener('mouseout')
-    hide() {
-        this.closeToolTip();
-    }
-
-    ngOnDestroy() {
+    public hide() {
         this.closeToolTip();
     }
 

@@ -13,6 +13,8 @@ import { LoginComponent } from '../auth-components/login/login.component';
 })
 export class MenuComponent implements OnInit {
 
+  public IsAuthenticated: boolean = false;
+  @Input() public IsAdmin: boolean;
   constructor(
     private authService: AuthService,
     private modalService: NgbModal,
@@ -20,8 +22,6 @@ export class MenuComponent implements OnInit {
     private router: Router
   ) { }
 
-  public IsAuthenticated: boolean = false;
-  @Input() IsAdmin: boolean;
   public ngOnInit() {
     this.IsAuthenticated = this.authService.isAuthenticated();
   }

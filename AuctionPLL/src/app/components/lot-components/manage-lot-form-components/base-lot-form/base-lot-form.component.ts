@@ -14,6 +14,7 @@ import { LotService } from "src/app/services/lot.service";
     template: ''
 })
 export abstract class BaseLotFormComponent implements OnInit {
+
     public get imageArray() {
         return this.lotForm.get('images') as UntypedFormArray;
     }
@@ -24,6 +25,7 @@ export abstract class BaseLotFormComponent implements OnInit {
     public saved: boolean = false;
     public CarBrandMapping = CarBrands;
     public lotForm: UntypedFormGroup;
+    @ViewChild('file') public fileInput: any;
     constructor(
         protected lotService: LotService,
         public formBuilder: UntypedFormBuilder,
@@ -75,14 +77,6 @@ export abstract class BaseLotFormComponent implements OnInit {
         this.lotForm.markAsDirty();
     }
 
-    private initImages(images: Images): any[] {
-        const array = [];
-        for (let i = 0; i < this.lotService.numbersOfImages; i++) {
-            array.push(images['image' + (i + 1)]);
-        }
-        return array;
-    }
-
     public canDeactivate(): boolean | Observable<boolean> {
         if (!this.saved) {
             return confirm('Are you want to leave the page?');
@@ -116,7 +110,6 @@ export abstract class BaseLotFormComponent implements OnInit {
         }
     }
 
-    @ViewChild('file') fileInput: any;
     public uploadMainImage(files: any) {
         if (files.length === 0)
             return;
@@ -147,5 +140,12 @@ export abstract class BaseLotFormComponent implements OnInit {
             });
     }
 
+    private initImages(images: Images): any[] {
+        const array = [];
+        for (let i = 0; i < this.lotService.numbersOfImages; i++) {
+            array.push(images['image' + (i + 1)]);
+        }
+        return array;
+    }
 
 }

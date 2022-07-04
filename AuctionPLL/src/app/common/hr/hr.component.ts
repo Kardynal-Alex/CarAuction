@@ -1,15 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-hr',
   templateUrl: './hr.component.html',
   styleUrls: ['./hr.component.less']
 })
-export class HrComponent implements OnInit {
-
+export class HrComponent {
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

@@ -11,6 +11,8 @@ import { LotService } from 'src/app/services/lot.service';
 })
 export class ShowLotImagesComponent implements OnInit {
 
+  public numbers = [];
+  @Input() public lot: Lot;
   constructor(
     private lotService: LotService,
     private activeModal: NgbActiveModal
@@ -20,8 +22,6 @@ export class ShowLotImagesComponent implements OnInit {
     this.numbers = Array.from(Array(this.lotService.numbersOfImages).keys());
   }
 
-  public numbers = [];
-  @Input() lot: Lot;
   public close() {
     this.activeModal.close();
   }

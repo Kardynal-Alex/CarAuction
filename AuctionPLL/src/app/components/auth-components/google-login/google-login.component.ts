@@ -13,7 +13,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class GoogleLoginComponent implements OnInit {
   @ViewChild('loginRef', { static: true }) loginElement: ElementRef;
-  auth2: any;
+  public auth2: any;
   constructor(
     private toastrService: ToastrService,
     private authService: AuthService,

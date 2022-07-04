@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -11,8 +11,10 @@ import { LotService } from 'src/app/services/lot.service';
   templateUrl: './ask-owner-form.component.html',
   styleUrls: ['./ask-owner-form.component.less']
 })
-export class AskOwnerFormComponent implements OnInit {
+export class AskOwnerFormComponent {
 
+  @Input() public ownerEmail: string;
+  public myForm: UntypedFormGroup;
   constructor(
     private toastrService: ToastrService,
     private authService: AuthService,
@@ -27,10 +29,6 @@ export class AskOwnerFormComponent implements OnInit {
     });
   }
 
-  public myForm: UntypedFormGroup;
-  public ngOnInit() { }
-
-  @Input() ownerEmail: string;
   public onSubmit() {
     if (!this.myForm.invalid) {
       const askOwner: AskOwner = {

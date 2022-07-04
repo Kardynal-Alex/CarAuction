@@ -14,7 +14,10 @@ import { getTimerId } from 'src/app/utils/element-id.service';
   styleUrls: ['./user-lots.component.less']
 })
 export class UserLotsComponent implements OnInit, OnDestroy {
+
+  public str = {};
   public lots: Lot[];
+  public emptyText = 'List is empty =)';
   constructor(
     private toastrService: ToastrService,
     private lotService: LotService,
@@ -22,31 +25,14 @@ export class UserLotsComponent implements OnInit, OnDestroy {
     private authService: AuthService
   ) { }
 
-  public getUserId(): string {
-    return this.authService.getUserIdFromToken();
-  }
-
-  public emptyText = 'List is empty =)';
-  public init() {
-    const userId = this.getUserId();
-    this.lotService.getLotsByUserId(userId)
-      .pipe(map((lots) => lots.filter(lot => !lot?.isSold)))
-      .subscribe((response) => {
-        this.lots = response;
-        for (let lot of response) {
-          this.initTimer(lot.id, lot.startDateTime);
-        }
-      });
-  }
-
   public ngOnInit() {
     this.init();
   }
 
   public ngOnDestroy() {
-    for (let lot of this.lots) {
+    this.lots.forEach((lot) => {
       clearInterval(this.str[lot.id]);
-    }
+    });
   }
 
   public deleteLot(id: number) {
@@ -87,19 +73,18 @@ export class UserLotsComponent implements OnInit, OnDestroy {
     return this.lotService.createImgPath(serverPath);
   }
 
-  public str = {};
-  public initTimer(id: number, date: Date) {
-    var dead = new Date(date);
+  private initTimer(id: number, date: Date) {
+    const dead = new Date(date);
     dead.setDate(dead.getDate() + 15);
-    var deadline = new Date(dead).getTime();
+    const deadline = new Date(dead).getTime();
     //deadline=new Date("Jul 2, 2021 09:44:00").getTime();
     this.str[id] = setInterval(() => {
-      var now = new Date().getTime();
-      var t = deadline - now;
-      var days = Math.floor(t / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((t % (1000 * 60)) / 1000);
+      const now = new Date().getTime();
+      const t = deadline - now;
+      const days = Math.floor(t / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((t % (1000 * 60)) / 1000);
 
       document.getElementById(getTimerId(id)).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
       if (t < 0) {
@@ -111,8 +96,8 @@ export class UserLotsComponent implements OnInit, OnDestroy {
   }
 
   private checkLotIfTimerIsExpired(id: number) {
-    var index = this.lots.findIndex(x => x.id == id);
-    var lot = this.lots[index];
+    const index = this.lots.findIndex(x => x.id == id);
+    const lot = this.lots[index];
 
     if (lot.startPrice < lot.currentPrice) {
       this.lots = this.lots.filter(x => x.id != id);
@@ -122,4 +107,21 @@ export class UserLotsComponent implements OnInit, OnDestroy {
       return;
     }
   }
+
+  private getUserId(): string {
+    return this.authService.getUserIdFromToken();
+  }
+
+  private init() {
+    const userId = this.getUserId();
+    this.lotService.getLotsByUserId(userId)
+      .pipe(map((lots) => lots.filter(lot => !lot?.isSold)))
+      .subscribe((response) => {
+        this.lots = response;
+        response.forEach((lot) => {
+          this.initTimer(lot.id, lot.startDateTime);
+        });
+      });
+  }
+
 }

@@ -19,11 +19,6 @@ export class AdminComponent implements OnInit, OnDestroy {
     private confirmationDialogService: ConfirmationDialogService
   ) { }
 
-  public getUsers() {
-    this.adminService.getUsersWithRoleUser()
-      .subscribe((_) => this.users$.next(_));
-  }
-
   public ngOnInit(): void {
     this.getUsers();
   }
@@ -44,4 +39,10 @@ export class AdminComponent implements OnInit, OnDestroy {
           });
       }).catch();
   }
+
+  private getUsers() {
+    this.adminService.getUsersWithRoleUser()
+      .subscribe((_) => this.users$.next(_));
+  }
+
 }

@@ -19,6 +19,13 @@ import { Comment } from '../../../../models/comment';
 })
 export class CommentsComponent implements OnInit {
 
+  @Input() public lot: Lot;
+  @Input() public userId: string;
+  @Input() public comments: Comment[];
+  @Input() public filtredComments: Comment[];
+  public id: number;
+  public userName: string;
+  public userSurname: string;
   constructor(
     private commentService: CommentService,
     private toastrService: ToastrService,
@@ -27,23 +34,9 @@ export class CommentsComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  @Input() lot: Lot;
-  @Input() userId: string;
-  @Input() comments: Comment[];
-  @Input() filtredComments: Comment[];
-  public id: number;
   public ngOnInit() {
     this.id = this.activateRoute.snapshot.params['id'];
     this.getUserId();
-  }
-
-  public getComments(lotId: number) {
-    this.commentService.getCommentsByLotId(lotId)
-      .pipe(tap((comments) => {
-        this.comments = comments;
-        this.filtredComments = comments;
-      }))
-      .subscribe();
   }
 
   public newest() {
@@ -92,15 +85,22 @@ export class CommentsComponent implements OnInit {
       });
   }
 
-  public userName: string;
-  public userSurname: string;
-  public getUserId() {
-    var token = this.localStorage.get(CommonConstants.JWTToken);
+  private getUserId() {
+    const token = this.localStorage.get(CommonConstants.JWTToken);
     if (token != null) {
-      var payload = this.authService.getPayload();
+      const payload = this.authService.getPayload();
       this.userName = payload?.name;
       this.userSurname = payload?.surname;
     }
+  }
+
+  private getComments(lotId: number) {
+    this.commentService.getCommentsByLotId(lotId)
+      .pipe(tap((comments) => {
+        this.comments = comments;
+        this.filtredComments = comments;
+      }))
+      .subscribe();
   }
 
 }

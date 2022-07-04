@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +11,7 @@ import { LoginComponent } from '../login/login.component';
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.less']
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent {
 
   constructor(
     private authService: AuthService,
@@ -19,8 +19,6 @@ export class ForgotPasswordComponent implements OnInit {
     private modalService: NgbModal,
     private activeModal: NgbActiveModal
   ) { }
-
-  public ngOnInit(): void { }
 
   public openLoginForm() {
     this.activeModal.close();

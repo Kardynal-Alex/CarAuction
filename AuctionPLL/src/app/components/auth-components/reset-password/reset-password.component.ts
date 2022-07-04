@@ -13,14 +13,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ResetPasswordComponent implements OnInit {
 
+  private token: string;
+  private email: string;
   constructor(
     private toastrService: ToastrService,
     private authService: AuthService,
     private router: Router,
     private acticeRoute: ActivatedRoute
   ) { }
-  private token: string;
-  private email: string;
 
   public ngOnInit(): void {
     this.token = this.acticeRoute.snapshot.queryParams['token'];
