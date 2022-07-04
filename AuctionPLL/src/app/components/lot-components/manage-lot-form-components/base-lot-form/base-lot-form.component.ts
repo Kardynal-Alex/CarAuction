@@ -1,5 +1,5 @@
 import { HttpEventType } from "@angular/common/http";
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { Observable } from "rxjs";
@@ -13,7 +13,7 @@ import { LotService } from "src/app/services/lot.service";
 @Component({
     template: ''
 })
-export abstract class BaseLotFormComponent implements OnInit {
+export abstract class BaseLotFormComponent {
 
     public get imageArray() {
         return this.lotForm.get('images') as UntypedFormArray;
@@ -32,8 +32,6 @@ export abstract class BaseLotFormComponent implements OnInit {
         protected toastrService: ToastrService,
         protected imagesService: ImagesService
     ) { }
-
-    public ngOnInit() { }
 
     public initForm(lot: Lot = null) {
         this.lotForm = this.formBuilder.group({

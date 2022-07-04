@@ -44,7 +44,7 @@
         <a id="star-{{lot.id}}" [class]="FavoriteConstants.UNSTAR" (click)="changeStar(lot.id)">&#9733;</a>
       </div>
       <div class="main-block">
-        <p bold>{{lot.nameLot}}</p>
+        <p app-bold>{{lot.nameLot}}</p>
         <div class="title">{{lot.description}}</div>
       </div>
       <button routerLink="/bid/lot/{{lot.id}}">Bid {{lot.currentPrice | currency}}</button>

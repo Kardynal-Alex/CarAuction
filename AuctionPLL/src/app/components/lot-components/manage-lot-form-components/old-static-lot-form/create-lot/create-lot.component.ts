@@ -60,7 +60,7 @@ export class CreateLotComponent implements OnInit, ComponentCanDeactivate {
 
   public checkIfAllImagesIsUploaded(): boolean {
     for (let i = 0; i < this.numbers.length; i++) {
-      if (this.images['image' + (i + 1)] == '' || !this.images['image' + (i + 1)]) {
+      if (this.images['image' + (i + 1)] === '' || !this.images['image' + (i + 1)]) {
         return false;
       }
     }
