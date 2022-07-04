@@ -107,11 +107,23 @@
               "devServerTarget": "AuctionPLL:serve:production"
             }
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "4a63268b-d005-4cbf-8c25-c2fcfad273b7"
+    "analytics": "4a63268b-d005-4cbf-8c25-c2fcfad273b7",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

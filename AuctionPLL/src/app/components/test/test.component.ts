@@ -1,8 +1,7 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Images } from 'src/app/models/lot-models/images';
 import { LotService } from 'src/app/services/lot.service';
 
 @Component({
@@ -10,7 +9,7 @@ import { LotService } from 'src/app/services/lot.service';
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.less']
 })
-export class TestComponent implements OnInit {
+export class TestComponent {
 
   get imageArray() {
     return this.imageForm.get('images') as UntypedFormArray;
@@ -35,12 +34,12 @@ export class TestComponent implements OnInit {
 
   }
   numbers = [1, 2, 3];
-  ngOnInit() {
-    /* this.images = {
-      image1: '', image2: '', image3: '', image4: '', image5: '', image6: '', image7: '', image8: '', image9: '', id: 0
-    }; */
-  }
-
+  /*  ngOnInit() {
+     /* this.images = {
+       image1: '', image2: '', image3: '', image4: '', image5: '', image6: '', image7: '', image8: '', image9: '', id: 0
+     }; 
+   }
+  */
   addImage() {
     this.imageArray.push(new UntypedFormControl(null))
     console.log(this.imageForm.value)

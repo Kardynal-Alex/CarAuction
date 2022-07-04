@@ -36,10 +36,6 @@ export class LoginComponent implements OnInit {
     this.isAuth = this.authService.isAuthenticated();
   }
 
-  public ngDoCheck() {
-    this.isAuth = this.authService.isAuthenticated();
-  }
-
   public login() {
     const loginUser: Login = this.loginForm.value;
     this.authService.login(loginUser)

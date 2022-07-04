@@ -45,8 +45,8 @@
                 </div>
             </div>
             <div class="image">
-                <button (click)="deleteMainPhoto()" *ngIf="imagePath!=''">Delete photo</button>
-                <img [src]="createImgPath(imagePath)" *ngIf="imagePath!=''">
+                <button (click)="deleteMainPhoto()" *ngIf="imagePath!==''">Delete photo</button>
+                <img [src]="createImgPath(imagePath)" *ngIf="imagePath!==''">
                 <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)"
                     style="display:none;" multiple required>
                 <button class="btn btn-success" (click)="file.click()" *ngIf="photoIsEmpty">+</button>

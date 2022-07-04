@@ -1,11 +1,11 @@
-import { ComponentRef, Directive, ElementRef, HostListener, Input, OnInit, TemplateRef } from '@angular/core';
+import { ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { Overlay, OverlayPositionBuilder, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 
 import { AwesomeTooltipComponent } from './tooltip.component';
 
 @Directive({ selector: '[awesomeTooltip]' })
-export class AwesomeTooltipDirective implements OnInit {
+export class AwesomeTooltipDirective implements OnInit, OnDestroy {
 
     @Input('awesomeTooltip') text = '';
     @Input() showToolTip: boolean = true;
