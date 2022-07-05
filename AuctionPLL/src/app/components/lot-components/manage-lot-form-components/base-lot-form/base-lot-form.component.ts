@@ -1,14 +1,20 @@
-import { HttpEventType } from "@angular/common/http";
-import { Component, ViewChild } from "@angular/core";
-import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
-import { Observable } from "rxjs";
-import { CommonConstants } from "src/app/common/constants/common-constants";
-import { CarBrandArray, CarBrands } from "src/app/models/lot-models/car-brand";
-import { Images } from "src/app/models/lot-models/images";
-import { Lot } from "src/app/models/lot-models/lot";
-import { ImagesService } from "src/app/services/images.service";
-import { LotService } from "src/app/services/lot.service";
+import { HttpEventType } from '@angular/common/http';
+import { Component, ViewChild } from '@angular/core';
+import {
+    UntypedFormArray,
+    UntypedFormBuilder,
+    UntypedFormControl,
+    UntypedFormGroup,
+    Validators
+} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { CommonConstants } from 'src/app/common/constants/common-constants';
+import { ImagesViewModel } from 'src/app/generated-models/lot-models/images-view-model';
+import { LotViewModel } from 'src/app/generated-models/lot-models/lot-view-model';
+import { ImagesService } from 'src/app/services/images.service';
+import { LotService } from 'src/app/services/lot.service';
+import { CarBrandArray, CarBrands } from 'src/app/utils/car-brand-util';
 
 @Component({
     template: ''
@@ -33,7 +39,7 @@ export abstract class BaseLotFormComponent {
         protected imagesService: ImagesService
     ) { }
 
-    public initForm(lot: Lot = null) {
+    public initForm(lot: LotViewModel = null) {
         this.lotForm = this.formBuilder.group({
             nameLot: [lot?.nameLot ?? null, [
                 Validators.required,
@@ -138,7 +144,7 @@ export abstract class BaseLotFormComponent {
             });
     }
 
-    private initImages(images: Images): any[] {
+    private initImages(images: ImagesViewModel): any[] {
         const array = [];
         for (let i = 0; i < this.lotService.numbersOfImages; i++) {
             array.push(images['image' + (i + 1)]);

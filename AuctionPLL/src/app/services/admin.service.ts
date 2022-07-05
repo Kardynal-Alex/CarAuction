@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../models/auth-models/user';
 import { Observable } from 'rxjs';
 import { BaseUrl } from '../common/constants/urls';
+import { UserViewModel } from '../generated-models/auth-models/user-view-model';
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {
@@ -12,8 +12,8 @@ export class AdminService {
         private httpClient: HttpClient
     ) { }
 
-    public getUsersWithRoleUser(): Observable<User[]> {
-        return this.httpClient.get<User[]>(`${this.apiUrl}/Users/`);
+    public getUsersWithRoleUser(): Observable<UserViewModel[]> {
+        return this.httpClient.get<UserViewModel[]>(`${this.apiUrl}/Users/`);
     }
 
     public deleteUser(userId: string): Observable<Object> {

@@ -1,21 +1,21 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { LotService } from 'src/app/services/lot.service';
-import { Lot } from '../../../models/lot-models/lot';
 import { FavoriteService } from 'src/app/services/favorite.service';
-import { Favorite } from 'src/app/models/favorite';
 import { AuthService } from 'src/app/services/auth.service';
 import { Guid } from 'guid-typescript';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
 import { getStarId, getTimerId } from 'src/app/utils/element-id.service';
 import { FavoriteConstants } from 'src/app/common/constants/favorite-constants';
-import { SortOrder } from 'src/app/models/filter/sort-order';
 import { FilterService } from 'src/app/services/filter.service';
-import { CarBrandArray, CarBrands } from 'src/app/models/lot-models/car-brand';
 import { MatSelect } from '@angular/material/select';
 import { MatOption } from '@angular/material/core';
 import { BehaviorSubject } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
+import { SortOrderViewModel } from 'src/app/generated-models/filter/sort-order-view-model';
+import { CarBrandArray, CarBrands } from 'src/app/utils/car-brand-util';
+import { LotViewModel } from 'src/app/generated-models/lot-models/lot-view-model';
+import { FavoriteViewModel } from 'src/app/generated-models/favorite-view-model';
 
 export class FilterConstants {
   public static readonly Year = 'year';
@@ -30,8 +30,8 @@ export class FilterConstants {
 })
 export class ShowLotsComponent implements OnInit {
 
-  public get SortViewMode(): typeof SortOrder {
-    return SortOrder;
+  public get SortViewMode(): typeof SortOrderViewModel {
+    return SortOrderViewModel;
   }
   public get FilterConstants(): typeof FilterConstants {
     return FilterConstants;
@@ -46,11 +46,11 @@ export class ShowLotsComponent implements OnInit {
   public str = {};
   public userId: string = '';
   public isAuth: boolean = false;
-  public lots: Lot[];
+  public lots: LotViewModel[];
   public runSpinner = new BehaviorSubject<boolean>(false);
   public filterConstants: FilterConstants;
   public CarBrandMapping = CarBrands;
-  public favorites: Favorite[];
+  public favorites: FavoriteViewModel[];
   private allSelected = false;
   @ViewChild('multiple') public multSelectBrand: MatSelect;
   constructor(
@@ -108,7 +108,7 @@ export class ShowLotsComponent implements OnInit {
 
   private addToFavorite(lotId: number) {
     if (this.isAuth) {
-      const favorite: Favorite = {
+      const favorite: FavoriteViewModel = {
         id: Guid.create().toString(),
         userId: this.userId,
         lotId: lotId
@@ -208,7 +208,7 @@ export class ShowLotsComponent implements OnInit {
       });
   }
 
-  private initTimerAndMarkStars(lots: Lot[]) {
+  private initTimerAndMarkStars(lots: LotViewModel[]) {
     lots.forEach((lot) => {
       this.initTimer(lot.id, lot.startDateTime);
       if (this.isAuth) {

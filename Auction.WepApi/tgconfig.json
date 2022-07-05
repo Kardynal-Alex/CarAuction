@@ -1,0 +1,7 @@
+{
+  "generationSpecs": [ "AuctionGenerationSpec" ],
+  "outputPath": "..\\AuctionPLL\\src\\app\\generated-models",
+  "clearOutputDirectory": true,
+  "singleQuotes": "true",
+  "fileHeading": "/* eslint-disable */\n/**\n * This is a TypeGen auto-generated file.\n * Any changes made to this file can be lost when this file is regenerated.\n */\n\n"
+}

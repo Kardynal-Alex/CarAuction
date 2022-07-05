@@ -1,9 +1,11 @@
 ﻿using Auction.WepApi.Models.Identity;
 using NJsonSchema.Annotations;
 using System;
+using TypeGen.Core.TypeAnnotations;
 
 namespace Auction.WepApi.Models.Lot
 {
+    [ExportTsClass]
     public class LotViewModel
     {
         public int Id { get; set; }

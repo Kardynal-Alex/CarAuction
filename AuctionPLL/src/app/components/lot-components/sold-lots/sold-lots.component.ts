@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Lot } from 'src/app/models/lot-models/lot';
 import { LotService } from 'src/app/services/lot.service';
 import { BehaviorSubject } from 'rxjs';
+import { LotViewModel } from 'src/app/generated-models/lot-models/lot-view-model';
 
 @Component({
   selector: 'app-sold-lots',
@@ -13,7 +13,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SoldLotsComponent implements OnInit, OnDestroy {
 
-  public lots$ = new BehaviorSubject<Lot[]>([]);
+  public lots$ = new BehaviorSubject<LotViewModel[]>([]);
   constructor(private lotService: LotService) { }
 
   public ngOnInit() {

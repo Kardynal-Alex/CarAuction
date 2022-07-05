@@ -6,11 +6,11 @@ import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
-import { Lot } from 'src/app/models/lot-models/lot';
+import { CommentViewModel } from 'src/app/generated-models/comment-view-model';
+import { LotViewModel } from 'src/app/generated-models/lot-models/lot-view-model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { Comment } from '../../../../models/comment';
 
 @Component({
   selector: 'app-comments',
@@ -19,10 +19,10 @@ import { Comment } from '../../../../models/comment';
 })
 export class CommentsComponent implements OnInit {
 
-  @Input() public lot: Lot;
+  @Input() public lot: LotViewModel;
   @Input() public userId: string;
-  @Input() public comments: Comment[];
-  @Input() public filtredComments: Comment[];
+  @Input() public comments: CommentViewModel[];
+  @Input() public filtredComments: CommentViewModel[];
   public id: number;
   public userName: string;
   public userSurname: string;
@@ -53,7 +53,7 @@ export class CommentsComponent implements OnInit {
 
   public createComment(form: NgForm) {
     if (this.userId != null) {
-      const comment: Comment = {
+      const comment: CommentViewModel = {
         id: Guid.create().toString(),
         author: `${this.userName} ${this.userSurname}`,
         text: form.value.text,

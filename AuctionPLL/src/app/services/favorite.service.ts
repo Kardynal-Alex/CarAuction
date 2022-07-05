@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Favorite } from '../models/favorite';
 import { Observable } from 'rxjs';
 import { BaseUrl } from '../common/constants/urls';
+import { FavoriteViewModel } from '../generated-models/favorite-view-model';
 
 @Injectable({ providedIn: 'root' })
 export class FavoriteService {
@@ -10,7 +10,7 @@ export class FavoriteService {
 
     constructor(private httpClient: HttpClient) { }
 
-    public addFavorite(favorite: Favorite): Observable<Object> {
+    public addFavorite(favorite: FavoriteViewModel): Observable<Object> {
         return this.httpClient.post(`${this.apiUrl}/`, favorite);
     }
 
@@ -18,15 +18,15 @@ export class FavoriteService {
         return this.httpClient.delete(`${this.apiUrl}/${id}`);
     }
 
-    public getUserFavorite(userId: string): Observable<Favorite[]> {
-        return this.httpClient.get<Favorite[]>(`${this.apiUrl}/${userId}`);
+    public getUserFavorite(userId: string): Observable<FavoriteViewModel[]> {
+        return this.httpClient.get<FavoriteViewModel[]>(`${this.apiUrl}/${userId}`);
     }
 
-    public getFavoriteByUserIdAndLotId(favorite: Favorite): Observable<Favorite> {
-        return this.httpClient.post<Favorite>(`${this.apiUrl}/Favorite/`, favorite);
+    public getFavoriteByUserIdAndLotId(favorite: FavoriteViewModel): Observable<FavoriteViewModel> {
+        return this.httpClient.post<FavoriteViewModel>(`${this.apiUrl}/Favorite/`, favorite);
     }
 
-    public deleteFavoriteByUserIdAndLotId(favorite: Favorite): Observable<Object> {
+    public deleteFavoriteByUserIdAndLotId(favorite: FavoriteViewModel): Observable<Object> {
         return this.httpClient.post(`${this.apiUrl}/Delete`, favorite);
     }
 }

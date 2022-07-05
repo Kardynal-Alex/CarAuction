@@ -8,9 +8,9 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
-import { AuthorDescription } from 'src/app/models/lot-models/author-description';
-import { Images } from 'src/app/models/lot-models/images';
-import { Lot } from 'src/app/models/lot-models/lot';
+import { AuthorDescriptionViewModel } from 'src/app/generated-models/lot-models/author-description-view-model';
+import { ImagesViewModel } from 'src/app/generated-models/lot-models/images-view-model';
+import { LotViewModel } from 'src/app/generated-models/lot-models/lot-view-model';
 import { AuthService } from 'src/app/services/auth.service';
 import { AuthorDescriptionService } from 'src/app/services/author-description.service';
 import { ImagesService } from 'src/app/services/images.service';
@@ -39,9 +39,9 @@ export class UpdateLotFormComponent extends BaseLotFormComponent implements OnIn
 
   public isCollapsedForm = false;
   public isCollapsedAuthorOpinion = !false;
-  public lot: Lot;
+  public lot: LotViewModel;
   public routeId: number;
-  public authorDescription: AuthorDescription;
+  public authorDescription: AuthorDescriptionViewModel;
   public authorForm: UntypedFormGroup;
   public isNewDescription: boolean = false;
   constructor(
@@ -120,7 +120,7 @@ export class UpdateLotFormComponent extends BaseLotFormComponent implements OnIn
     this.isCollapsedAuthorOpinion = !this.isCollapsedAuthorOpinion;
   }
 
-  private initAuthorDescriptionForm(authorDescription: AuthorDescription) {
+  private initAuthorDescriptionForm(authorDescription: AuthorDescriptionViewModel) {
     this.authorDescription = authorDescription;
     const description = !!authorDescription?.description ? authorDescription?.description : null;
     this.isNewDescription = !description;
@@ -132,8 +132,8 @@ export class UpdateLotFormComponent extends BaseLotFormComponent implements OnIn
     });
   }
 
-  private getImages(): Images {
-    let images: Images = new Images();
+  private getImages(): ImagesViewModel {
+    let images: ImagesViewModel = null;
 
     images.id = this.lot.id;
     let index = 0;

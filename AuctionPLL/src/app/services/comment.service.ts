@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Comment } from '../models/comment';
 import { Observable } from 'rxjs';
 import { BaseUrl } from '../common/constants/urls';
+import { CommentViewModel } from '../generated-models/comment-view-model';
 
 @Injectable({ providedIn: 'root' })
 export class CommentService {
@@ -10,12 +10,12 @@ export class CommentService {
 
     constructor(private httpClient: HttpClient) { }
 
-    public addComment(comment: Comment): Observable<Object> {
+    public addComment(comment: CommentViewModel): Observable<Object> {
         return this.httpClient.post(`${this.apiUrl}/`, comment);
     }
 
-    public getCommentsByLotId(lotId: number): Observable<Comment[]> {
-        return this.httpClient.get<Comment[]>(`${this.apiUrl}/${lotId}`);
+    public getCommentsByLotId(lotId: number): Observable<CommentViewModel[]> {
+        return this.httpClient.get<CommentViewModel[]>(`${this.apiUrl}/${lotId}`);
     }
 
     public deleteCommentById(commentId: string): Observable<Object> {

@@ -2,16 +2,15 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { Lot } from 'src/app/models/lot-models/lot';
 import { LotService } from 'src/app/services/lot.service';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { Images } from 'src/app/models/lot-models/images';
 import { ComponentCanDeactivate } from 'src/app/guards/exit.about.guard';
 import { Observable } from 'rxjs';
 import { BaseUrl } from 'src/app/common/constants/urls';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
-import { CarBrand } from 'src/app/models/lot-models/car-brand';
+import { ImagesViewModel } from 'src/app/generated-models/lot-models/images-view-model';
+import { LotViewModel } from 'src/app/generated-models/lot-models/lot-view-model';
 
 /**
   * @deprecated old form - use create-lot-form with reactive forms
@@ -45,7 +44,7 @@ export class CreateLotComponent implements OnInit, ComponentCanDeactivate {
     return payload.id;
   }
 
-  public images: Images;
+  public images: ImagesViewModel;
 
   public photoIsEmpty: boolean;
   public deleteMainPhoto() {
@@ -71,7 +70,7 @@ export class CreateLotComponent implements OnInit, ComponentCanDeactivate {
   public createLot(form: NgForm) {
     if (this.photoIsEmpty == false && this.checkIfAllImagesIsUploaded()) {
       const userid = this.getUserId();
-      const lot: Lot = {
+      const lot: LotViewModel = {
         id: 0,
         nameLot: form.value.NameLot,
         startPrice: form.value.StartPrice,
@@ -83,7 +82,7 @@ export class CreateLotComponent implements OnInit, ComponentCanDeactivate {
         currentPrice: form.value.StartPrice,
         year: form.value.Year,
         user: null,
-        carBrand: CarBrand.Audi,
+        carBrand: 0,
         lotState: {
           id: 0,
           ownerId: userid,

@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Lot } from 'src/app/models/lot-models/lot';
 import { LotService } from 'src/app/services/lot.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { BehaviorSubject } from 'rxjs';
+import { LotViewModel } from 'src/app/generated-models/lot-models/lot-view-model';
 
 @Component({
   selector: 'app-user-bids',
@@ -11,7 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserBidsComponent implements OnInit, OnDestroy {
 
-  public lots$ = new BehaviorSubject<Lot[]>([]);
+  public lots$ = new BehaviorSubject<LotViewModel[]>([]);
   constructor(
     private lotService: LotService,
     private authService: AuthService

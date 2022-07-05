@@ -1,5 +1,8 @@
-﻿namespace Auction.WepApi.Models.Identity
+﻿using TypeGen.Core.TypeAnnotations;
+
+namespace Auction.WepApi.Models.Identity
 {
+    [ExportTsClass]
     public class TwoFactorViewModel
     {
         public string Email { get; set; }

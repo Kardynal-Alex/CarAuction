@@ -3,10 +3,10 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import { LotService } from 'src/app/services/lot.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Lot } from 'src/app/models/lot-models/lot';
 import { ComponentCanDeactivate } from 'src/app/guards/exit.about.guard';
 import { Observable } from 'rxjs';
 import { BaseUrl } from 'src/app/common/constants/urls';
+import { LotViewModel } from 'src/app/generated-models/lot-models/lot-view-model';
 
 /**
   * @deprecated old form - use update-lot-form with reactive forms
@@ -17,7 +17,7 @@ import { BaseUrl } from 'src/app/common/constants/urls';
   styleUrls: ['./update-lot.component.less']
 })
 export class UpdateLotComponent implements OnInit, ComponentCanDeactivate {
-  public lot: Lot;
+  public lot: LotViewModel;
   constructor(
     private toastrService: ToastrService,
     private lotService: LotService,

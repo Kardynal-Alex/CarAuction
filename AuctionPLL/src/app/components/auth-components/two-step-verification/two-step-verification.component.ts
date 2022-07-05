@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
-import { TwoFactor } from 'src/app/models/auth-models/two-factor';
+import { TwoFactorViewModel } from 'src/app/generated-models/auth-models/two-factor-view-model';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
@@ -27,7 +27,7 @@ export class TwoStepVerificationComponent {
   public login(form: NgForm) {
     this.provider = this.route.snapshot.queryParams['provider'];
     this.email = this.route.snapshot.queryParams['email'];
-    const twoFactor: TwoFactor = {
+    const twoFactor: TwoFactorViewModel = {
       email: this.email,
       provider: this.provider,
       token: form.value.token
