@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
-import { Facebook } from 'src/app/models/auth-models/facebook';
+import { FacebookAuthViewModel } from 'src/app/generated-models/auth-models/facebook-auth-view-model';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
@@ -44,9 +44,9 @@ export class FacebookLoginComponent implements OnInit {
   public submitLogin() {
     FB.login((response) => {
       if (response.authResponse) {
-        const facebookLogin: Facebook = {
+        const facebookLogin: FacebookAuthViewModel = {
           accessToken: response.authResponse['accessToken']
-        }
+        };
         this.authService.facebookLogin(facebookLogin)
           .subscribe((response) => {
             this.toastrService.success('Login successfully');

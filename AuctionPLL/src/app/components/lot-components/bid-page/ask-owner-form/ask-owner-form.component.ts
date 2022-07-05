@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { AskOwner } from 'src/app/models/lot-models/ask-owner';
+import { AskOwnerViewModel } from 'src/app/generated-models/lot-models/ask-owner-view-model';
 import { AuthService } from 'src/app/services/auth.service';
 import { LotService } from 'src/app/services/lot.service';
 
@@ -31,7 +31,7 @@ export class AskOwnerFormComponent {
 
   public onSubmit() {
     if (!this.myForm.invalid) {
-      const askOwner: AskOwner = {
+      const askOwner: AskOwnerViewModel = {
         ownerEmail: this.ownerEmail,
         text: this.myForm.controls.text.value,
         fullName: this.myForm.controls.fullName.value,

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ImagesViewModel } from 'src/app/generated-models/lot-models/images-view-model';
+import { LotViewModel } from 'src/app/generated-models/lot-models/lot-view-model';
 import { ComponentCanDeactivate } from 'src/app/guards/exit.about.guard';
-import { Images } from 'src/app/models/lot-models/images';
-import { Lot } from 'src/app/models/lot-models/lot';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImagesService } from 'src/app/services/images.service';
 import { LotService } from 'src/app/services/lot.service';
@@ -33,7 +33,7 @@ export class CreateLotFormComponent extends BaseLotFormComponent implements OnIn
 
   public createLot() {
     const userId = this.authService.getUserIdFromToken();
-    const lot: Lot = {
+    const lot: LotViewModel = {
       id: 0,
       nameLot: this.lotForm.controls.nameLot.value,
       startPrice: this.lotForm.controls.startPrice.value,
@@ -65,8 +65,8 @@ export class CreateLotFormComponent extends BaseLotFormComponent implements OnIn
       });
   }
 
-  private getImages(): Images {
-    let images: Images = new Images();
+  private getImages(): ImagesViewModel {
+    let images: ImagesViewModel = null;
 
     let index = 0;
     for (let image of this.lotForm.controls.images.value) {

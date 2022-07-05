@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { ForgotPassword } from 'src/app/models/auth-models/forgot-password';
+import { ForgotPasswordViewModel } from 'src/app/generated-models/auth-models/forgot-password-view-model';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginComponent } from '../login/login.component';
 
@@ -26,7 +26,7 @@ export class ForgotPasswordComponent {
   }
 
   public resetPassForm(form: NgForm) {
-    const forgotPass: ForgotPassword = {
+    const forgotPass: ForgotPasswordViewModel = {
       email: form.value.email,
       clientURI: `${window.location.href.includes('https')
         ? 'https' : 'http'}://localhost:4200/auction/auth/resetpassword`

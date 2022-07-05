@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
-import { ResetPassword } from 'src/app/models/auth-models/reset-password';
+import { ResetPasswordViewModel } from 'src/app/generated-models/auth-models/reset-password-view-model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   public resetPassword(form: NgForm) {
-    const resetPass: ResetPassword = {
+    const resetPass: ResetPasswordViewModel = {
       password: form.value.newPassword,
       token: this.token,
       email: this.email

@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ComplexFilter } from '../models/filter/complex-filter';
-import { PageRequest } from '../models/filter/page-request';
-import { SortOrder } from '../models/filter/sort-order';
-import { Lot } from '../models/lot-models/lot';
+import { ComplexFilterViewModel } from '../generated-models/filter/complex-filter-view-model';
+import { PageRequestViewModel } from '../generated-models/filter/page-request-view-model';
+import { SortOrderViewModel } from '../generated-models/filter/sort-order-view-model';
+import { LotViewModel } from '../generated-models/lot-models/lot-view-model';
 import { LotService } from './lot.service';
 
 @Injectable({ providedIn: 'root' })
 export class FilterService {
-    private filter: PageRequest;
+    private filter: PageRequestViewModel;
     constructor(private lotService: LotService) {
         this.filter = {
             carBrand: [], complexFilter: []
         };
     }
 
-    public sortingData(sortOrder: SortOrder, sortfield: string): Observable<Lot[]> {
+    public sortingData(sortOrder: SortOrderViewModel, sortfield: string): Observable<LotViewModel[]> {
         if (sortOrder == null) {
             this.removeFilter(sortfield);
         } else if (this.filter.complexFilter.filter((_) => _.field === sortfield).length === 0) {
@@ -26,21 +26,21 @@ export class FilterService {
         return this.lotService.fetchFiltered(this.filter);
     }
 
-    public sortByCarBrand(carBrand: any[]): Observable<Lot[]> {
+    public sortByCarBrand(carBrand: any[]): Observable<LotViewModel[]> {
         this.filter.carBrand = carBrand;
         return this.lotService.fetchFiltered(this.filter);
     }
 
-    private addFilter(sortOrder: SortOrder, sortfield: string) {
+    private addFilter(sortOrder: SortOrderViewModel, sortfield: string) {
         this.filter.complexFilter.push({
             field: sortfield,
             sortOrder: sortOrder
-        } as ComplexFilter);
+        } as ComplexFilterViewModel);
     }
     private removeFilter(sortfield: string) {
         this.filter.complexFilter = this.filter.complexFilter.filter(((_) => _.field !== sortfield));
     }
-    private changeFilterSortOrder(sortOrder: SortOrder, sortfield: string) {
+    private changeFilterSortOrder(sortOrder: SortOrderViewModel, sortfield: string) {
         var index = this.filter.complexFilter.findIndex((_) => _.field === sortfield);
         this.filter.complexFilter[index].sortOrder = sortOrder;
     }

@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { User } from 'src/app/models/auth-models/user';
 import { AdminService } from '../../../services/admin.service';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
 import { BehaviorSubject } from 'rxjs';
 import { ConfirmationDialogService } from 'src/app/common/confirmation-dialog/confirmation-dialog.service';
+import { UserViewModel } from 'src/app/generated-models/auth-models/user-view-model';
 
 @Component({
   selector: 'app-admin',
@@ -12,7 +12,7 @@ import { ConfirmationDialogService } from 'src/app/common/confirmation-dialog/co
   styleUrls: ['./admin.component.less']
 })
 export class AdminComponent implements OnInit, OnDestroy {
-  public users$ = new BehaviorSubject<User[]>([]);
+  public users$ = new BehaviorSubject<UserViewModel[]>([]);
   constructor(
     private adminService: AdminService,
     private toastrService: ToastrService,

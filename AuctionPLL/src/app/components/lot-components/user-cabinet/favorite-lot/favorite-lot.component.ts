@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Lot } from 'src/app/models/lot-models/lot';
 import { AuthService } from 'src/app/services/auth.service';
 import { FavoriteService } from 'src/app/services/favorite.service';
 import { LotService } from 'src/app/services/lot.service';
-import { Favorite } from 'src/app/models/favorite';
 import { Guid } from 'guid-typescript';
 import { BehaviorSubject } from 'rxjs';
+import { LotViewModel } from 'src/app/generated-models/lot-models/lot-view-model';
+import { FavoriteViewModel } from 'src/app/generated-models/favorite-view-model';
 
 @Component({
   selector: 'app-favorite-lot',
@@ -17,7 +17,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class FavoriteLotComponent implements OnInit, OnDestroy {
 
-  public lots$ = new BehaviorSubject<Lot[]>([]);
+  public lots$ = new BehaviorSubject<LotViewModel[]>([]);
   public userId: string;
   constructor(
     private lotService: LotService,
@@ -39,7 +39,7 @@ export class FavoriteLotComponent implements OnInit, OnDestroy {
   }
 
   public removeFromFavorite(lotId: number) {
-    const favorite: Favorite = {
+    const favorite: FavoriteViewModel = {
       id: Guid.create().toString(),
       userId: this.userId,
       lotId: lotId

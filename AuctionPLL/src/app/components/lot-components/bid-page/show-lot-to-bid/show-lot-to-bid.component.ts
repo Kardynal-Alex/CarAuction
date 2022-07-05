@@ -1,14 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Lot } from 'src/app/models/lot-models/lot';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { LotService } from 'src/app/services/lot.service';
 import { tap } from 'rxjs/operators';
 import { Guid } from 'guid-typescript';
-import { Comment } from 'src/app/models/comment';
 import { CommentService } from 'src/app/services/comment.service';
-import { Favorite } from 'src/app/models/favorite';
 import { FavoriteService } from 'src/app/services/favorite.service';
 import { CommonConstants } from 'src/app/common/constants/common-constants';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,7 +16,10 @@ import { AuthorDescriptionService } from 'src/app/services/author-description.se
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
 import { getStarId, getTimerId } from 'src/app/utils/element-id.service';
 import { FavoriteConstants } from 'src/app/common/constants/favorite-constants';
-import { AuthorDescription } from 'src/app/models/lot-models/author-description';
+import { AuthorDescriptionViewModel } from 'src/app/generated-models/lot-models/author-description-view-model';
+import { LotViewModel } from 'src/app/generated-models/lot-models/lot-view-model';
+import { FavoriteViewModel } from 'src/app/generated-models/favorite-view-model';
+import { CommentViewModel } from 'src/app/generated-models/comment-view-model';
 
 @Component({
   selector: 'app-show-lot-to-bid',
@@ -32,11 +32,11 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
   }
 
   public id: number;
-  public lot: Lot;
-  public favorite: Favorite;
-  public comments: Comment[];
-  public filtredComments: Comment[];
-  public authorDescription: AuthorDescription;
+  public lot: LotViewModel;
+  public favorite: FavoriteViewModel;
+  public comments: CommentViewModel[];
+  public filtredComments: CommentViewModel[];
+  public authorDescription: AuthorDescriptionViewModel;
   public userId: string;
   public userName: string;
   public userSurname: string;
@@ -93,7 +93,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
       this.lotService.updateLot(this.lot)
         .subscribe((_) => {
           this.toastrService.success('Thanks for bid');
-          const comment: Comment = {
+          const comment: CommentViewModel = {
             id: Guid.create().toString(),
             author: `${this.userName} ${this.userSurname}`,
             text: `Bid $ ${parsedBid}`,
@@ -121,7 +121,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
 
   private addToFavorite(lotId: number) {
     if (this.userId.length > 0) {
-      const favorite: Favorite = {
+      const favorite: FavoriteViewModel = {
         id: Guid.create().toString(),
         userId: this.userId,
         lotId: lotId
@@ -206,9 +206,13 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
       });
   }
 
-  private initFavorite(lot: Lot) {
+  private initFavorite(lot: LotViewModel) {
     if (this.userId?.length > 0) {
-      const favor = new Favorite(null, this.userId, lot.id);
+      const favor: FavoriteViewModel = {
+        id: null,
+        userId: this.userId,
+        lotId: lot.id
+      };
       this.favoriteService.getFavoriteByUserIdAndLotId(favor)
         .subscribe((response) => {
           this.favorite = response;

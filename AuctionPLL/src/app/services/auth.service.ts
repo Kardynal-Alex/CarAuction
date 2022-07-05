@@ -3,17 +3,17 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Login } from '../models/auth-models/login';
 import { Register } from '../models/auth-models/register';
 import { LocalStorageService } from '../services/local-storage.service';
-import { User } from '../models/auth-models/user';
 import { CustomEncoder } from '../services/customer-encoder';
-import { ForgotPassword } from '../models/auth-models/forgot-password';
-import { ResetPassword } from '../models/auth-models/reset-password';
-import { Facebook } from '../models/auth-models/facebook';
 import { ExternalAuth } from '../models/auth-models/external-auth';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { TwoFactor } from '../models/auth-models/two-factor';
 import { Observable } from 'rxjs';
 import { BaseUrl } from '../common/constants/urls';
 import { CommonConstants } from '../common/constants/common-constants';
+import { UserViewModel } from '../generated-models/auth-models/user-view-model';
+import { ForgotPasswordViewModel } from '../generated-models/auth-models/forgot-password-view-model';
+import { FacebookAuthViewModel } from '../generated-models/auth-models/facebook-auth-view-model';
+import { ResetPasswordViewModel } from '../generated-models/auth-models/reset-password-view-model';
+import { TwoFactorViewModel } from '../generated-models/auth-models/two-factor-view-model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -29,12 +29,12 @@ export class AuthService {
     return this.httpClient.post(`${this.apiUrl}/Login`, login);
   }
 
-  public twoSteplogin(twoFactor: TwoFactor): Observable<Object> {
+  public twoSteplogin(twoFactor: TwoFactorViewModel): Observable<Object> {
     return this.httpClient.post(`${this.apiUrl}/TwoStepVerification`, twoFactor);
 
   }
 
-  public facebookLogin(facebookLogin: Facebook): Observable<Object> {
+  public facebookLogin(facebookLogin: FacebookAuthViewModel): Observable<Object> {
     return this.httpClient.post(`${this.apiUrl}/Facebook/`, facebookLogin);
   }
 
@@ -51,8 +51,8 @@ export class AuthService {
     return this.httpClient.post(`${this.apiUrl}/Register`, register);
   }
 
-  public getUserById(id: string): Observable<User> {
-    return this.httpClient.get<User>(`${this.apiUrl}/GetUserById/?id=${id}`);
+  public getUserById(id: string): Observable<UserViewModel> {
+    return this.httpClient.get<UserViewModel>(`${this.apiUrl}/GetUserById/?id=${id}`);
   }
 
   public confirmEmail(route: string, token: string, email: string) {
@@ -63,11 +63,11 @@ export class AuthService {
     return this.httpClient.get(`${this.apiUrl}/EmailConfirmation`, { params: params });
   }
 
-  public forgotPassword(forgotPassword: ForgotPassword): Observable<Object> {
+  public forgotPassword(forgotPassword: ForgotPasswordViewModel): Observable<Object> {
     return this.httpClient.post(`${this.apiUrl}/ForgotPassword`, forgotPassword);
   }
 
-  public resetPassword(resetPassword: ResetPassword): Observable<Object> {
+  public resetPassword(resetPassword: ResetPasswordViewModel): Observable<Object> {
     return this.httpClient.post(`${this.apiUrl}/ResetPassword`, resetPassword);
   }
 

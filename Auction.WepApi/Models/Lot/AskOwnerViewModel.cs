@@ -1,5 +1,8 @@
-﻿namespace Auction.WepApi.Models.Lot
+﻿using TypeGen.Core.TypeAnnotations;
+
+namespace Auction.WepApi.Models.Lot
 {
+    [ExportTsClass]
     public class AskOwnerViewModel
     {
         public string OwnerEmail { get; set; }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Lot } from 'src/app/models/lot-models/lot';
+import { LotViewModel } from 'src/app/generated-models/lot-models/lot-view-model';
 import { LotService } from 'src/app/services/lot.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { LotService } from 'src/app/services/lot.service';
 export class ShowLotImagesComponent implements OnInit {
 
   public numbers = [];
-  @Input() public lot: Lot;
+  @Input() public lot: LotViewModel;
   constructor(
     private lotService: LotService,
     private activeModal: NgbActiveModal

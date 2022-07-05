@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Lot } from 'src/app/models/lot-models/lot';
 import { LotService } from 'src/app/services/lot.service';
 import { ConfirmationDialogService } from 'src/app/common/confirmation-dialog/confirmation-dialog.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ErrorMessages } from 'src/app/common/constants/error-messages';
 import { map } from 'rxjs/operators';
 import { getTimerId } from 'src/app/utils/element-id.service';
+import { LotViewModel } from 'src/app/generated-models/lot-models/lot-view-model';
 
 @Component({
   selector: 'app-user-lots',
@@ -16,7 +16,7 @@ import { getTimerId } from 'src/app/utils/element-id.service';
 export class UserLotsComponent implements OnInit, OnDestroy {
 
   public str = {};
-  public lots: Lot[];
+  public lots: LotViewModel[];
   public emptyText = 'List is empty =)';
   constructor(
     private toastrService: ToastrService,
@@ -51,7 +51,7 @@ export class UserLotsComponent implements OnInit, OnDestroy {
       }).catch();
   }
 
-  public endBid(lotEnd: Lot) {
+  public endBid(lotEnd: LotViewModel) {
     this.confirmationDialogService.confirm('Please confirm', 'Do you really want to ... ?')
       .then((confirmed) => {
         if (confirmed) {

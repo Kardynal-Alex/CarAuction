@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
-import { Lot } from 'src/app/models/lot-models/lot';
+import { LotViewModel } from 'src/app/generated-models/lot-models/lot-view-model';
 import { LotService } from 'src/app/services/lot.service';
 
 @Component({
@@ -11,8 +11,8 @@ import { LotService } from 'src/app/services/lot.service';
 })
 export class FreshLotsComponent implements OnInit {
 
-  @Input() public lot: Lot;
-  public lots: Lot[];
+  @Input() public lot: LotViewModel;
+  public lots: LotViewModel[];
   constructor(
     private lotService: LotService,
     private router: Router

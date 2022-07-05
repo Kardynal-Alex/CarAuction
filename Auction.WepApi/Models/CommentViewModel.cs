@@ -1,8 +1,10 @@
 ﻿using NJsonSchema.Annotations;
 using System;
+using TypeGen.Core.TypeAnnotations;
 
 namespace Auction.WepApi.Models
 {
+    [ExportTsClass]
     public class CommentViewModel
     {
         public Guid Id { get; set; }
