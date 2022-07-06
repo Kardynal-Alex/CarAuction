@@ -1,6 +1,6 @@
 import { CarBrandViewModel } from '../generated-models/lot-models/car-brand-view-model';
 
-export const CarBrands = {
+export const CarBrandsMapping = {
     [CarBrandViewModel.Tesla]: 'Tesla',
     [CarBrandViewModel.BMW]: 'BMV',
     [CarBrandViewModel.Ferrari]: 'Ferrari',

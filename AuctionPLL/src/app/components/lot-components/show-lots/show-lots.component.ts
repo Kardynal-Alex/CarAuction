@@ -13,7 +13,7 @@ import { MatOption } from '@angular/material/core';
 import { BehaviorSubject } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 import { SortOrderViewModel } from 'src/app/generated-models/filter/sort-order-view-model';
-import { CarBrandArray, CarBrands } from 'src/app/utils/car-brand-util';
+import { CarBrandArray, CarBrandsMapping } from 'src/app/utils/car-brand-util';
 import { LotViewModel } from 'src/app/generated-models/lot-models/lot-view-model';
 import { FavoriteViewModel } from 'src/app/generated-models/favorite-view-model';
 
@@ -49,7 +49,7 @@ export class ShowLotsComponent implements OnInit {
   public lots: LotViewModel[];
   public runSpinner = new BehaviorSubject<boolean>(false);
   public filterConstants: FilterConstants;
-  public CarBrandMapping = CarBrands;
+  public CarBrandMapping = CarBrandsMapping;
   public favorites: FavoriteViewModel[];
   private allSelected = false;
   @ViewChild('multiple') public multSelectBrand: MatSelect;

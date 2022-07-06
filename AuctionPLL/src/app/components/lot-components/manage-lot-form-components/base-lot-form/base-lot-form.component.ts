@@ -14,7 +14,7 @@ import { ImagesViewModel } from 'src/app/generated-models/lot-models/images-view
 import { LotViewModel } from 'src/app/generated-models/lot-models/lot-view-model';
 import { ImagesService } from 'src/app/services/images.service';
 import { LotService } from 'src/app/services/lot.service';
-import { CarBrandArray, CarBrands } from 'src/app/utils/car-brand-util';
+import { CarBrandArray, CarBrandsMapping } from 'src/app/utils/car-brand-util';
 
 @Component({
     template: ''
@@ -29,7 +29,7 @@ export abstract class BaseLotFormComponent {
     }
 
     public saved: boolean = false;
-    public CarBrandMapping = CarBrands;
+    public CarBrandMapping = CarBrandsMapping;
     public lotForm: UntypedFormGroup;
     @ViewChild('file') public fileInput: any;
     constructor(
