@@ -12,7 +12,9 @@
                 <div class="main-img">
                     <img [src]="createImgPath(lot.image)" alt="main-picture">
                     <div class="timer">
-                        <p class="time" id="timer-{{lot.id}}"></p>
+                        <cd-timer class="time" countdown="true" [startTime]="getTime()"
+                            (onComplete)="onComplete(this.lot.id)">
+                        </cd-timer>
                     </div>
                 </div>
                 <div class="flex-images">

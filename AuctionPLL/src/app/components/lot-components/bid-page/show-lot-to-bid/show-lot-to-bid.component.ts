@@ -146,6 +146,25 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
       });
   }
 
+  public onComplete(id: number) {
+    this.checkLotIfTimerIsExpired(id);
+  }
+
+  public getTime(): number {
+    const d1 = new Date(Date.now());
+    const d2 = new Date(Date.now());
+    d1.setDate(d1.getDate() + 10)
+    d2.setDate(d2.getDate() - 10)
+    return this.getDifferenceInSeconds(d1, d2);
+  }
+
+  private getDifferenceInSeconds(dateA, dateB): number {
+    const diffInMs = Math.abs(dateB - dateA);
+    return diffInMs / 1000;
+  }
+  /** 
+    @depricated
+  **/
   private initTimer(id: number, date: Date) {
     const dead = new Date(date);
     dead.setDate(dead.getDate() + 15);
@@ -189,7 +208,7 @@ export class ShowLotToBidComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         this.lot = response;
         if (!this.lot.isSold) {
-          this.initTimer(this.id, this.lot.startDateTime);
+          //this.initTimer(this.id, this.lot.startDateTime);
           this.initFavorite(response);
         } else {
           setTimeout(() => {

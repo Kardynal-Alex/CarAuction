@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
+import { CdTimerModule } from "angular-cd-timer";
 import { CommonComponentModule } from "src/app/common/common-component.module";
 import { SortPipe } from "src/app/pipes/sort.pipe";
 import { AskOwnerFormComponent } from "./ask-owner-form/ask-owner-form.component";
@@ -33,7 +34,8 @@ const appRoutes: Routes = [
         CommonComponentModule,
         CommonModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        CdTimerModule
     ],
     providers: [],
     declarations: [

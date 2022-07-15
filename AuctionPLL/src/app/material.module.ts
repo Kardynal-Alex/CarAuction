@@ -4,6 +4,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { CdTimerModule } from "angular-cd-timer";
 
 @NgModule({
     exports: [
@@ -11,11 +12,13 @@ import { MatSelectModule } from '@angular/material/select';
         MatTooltipModule,
         MatMenuModule,
         MatInputModule,
-        MatSelectModule
+        MatSelectModule,
+        CdTimerModule
     ],
     imports: [
         MatInputModule,
-        MatSelectModule
+        MatSelectModule,
+        CdTimerModule
     ]
 })
 export class AngularMaterialModule { }
